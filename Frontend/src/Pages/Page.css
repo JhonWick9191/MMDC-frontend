@@ -1,0 +1,694 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+input {
+    border-radius: 5px;
+
+}
+
+.user-login {
+    background-color: #E6E7E8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+}
+
+.login-register-user-child {
+    background-color: white;
+    border-radius: 10px;
+    padding: 2%;
+    width: 35%;
+}
+
+.buttons {
+
+    display: flex;
+
+}
+
+.buttons button {
+    width: 50%;
+    padding: 0.5%;
+}
+
+.login {
+    border: 2px solid #F05624;
+}
+
+.regs {
+    border: 1px solid #F05624;
+}
+
+.google-or-faceBookOptions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btns.active {
+    background: #F05624;
+    color: #fff;
+}
+
+.btns.color {
+    background: #F05624;
+    color: black;
+}
+
+/* login section */
+
+.main-login-section {
+    width: 100%;
+    border: 1px solid red;
+    margin-top: 6%;
+    padding: 5%;
+    background-color: #E6E7E8;
+    border: 1px solid #E6E7E8;
+    border-radius: 5px;
+
+}
+
+.google {
+    padding: 1%;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.facebook {
+    padding: 1%;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.google button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.google button svg {
+    font-size: 1.2rem;
+}
+
+.facebook button svg {
+    fill: #0863F7;
+}
+
+.facebook button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+}
+
+.or-class {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.login-form {
+    border: 1px solid black;
+    border-radius: 2px;
+
+}
+
+.wrapper-login {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main-wrapper {
+    background-color: #E6E7E8;
+    width: 100%;
+    padding: 5%;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 2%;
+    background-color: white;
+}
+
+.submit-button {
+    padding: 2%;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F05624;
+    color: white;
+}
+
+.submit-button button {
+    text-align: center;
+
+}
+
+.new-user {
+    text-align: center;
+}
+
+.new-user p {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.new-user a {
+    color: blue;
+    border-bottom: 2px solid #F05624;
+}
+
+.new-user a:hover {
+    cursor: pointer;
+}
+
+/*--------------------------------------------------------------------------signup for user------------------------------------------------------------------------------*/
+
+.signup-with-two-inputs {
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.first-name-signup input {
+    border: 1px solid black;
+    background-color: white;
+    padding: 5px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.last-name-signup input {
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;
+    width: 100%;
+    background-color: white;
+}
+
+.signup-password-section {
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.choose-password input {
+    width: 100%;
+    border: 1px solid black;
+
+    padding: 5px;
+    background-color: white;
+
+}
+
+.confrim-password input {
+
+    width: 100%;
+    border: 1px solid black;
+    padding: 5px;
+    background-color: white;
+
+}
+
+
+/*--------------------------------------------------------------------------------------------------Product details css start------------------------------------------------------------*/
+
+
+.product-deatils-main-section {
+
+    display: flex;
+    margin-top: 2%;
+    justify-content: space-between;
+
+}
+
+.left-section-our-products-section {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+}
+
+.colors h1 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+
+
+.product-image-mid {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-images-products {
+
+    background-color: #EAEAEA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
+}
+
+.mid-image {
+    width: 24.5%;
+    background-color: #E6E7E8;
+    padding: 5%;
+}
+
+.main-images-products img {
+    width: 90%;
+}
+
+.right-product-section {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-name {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.product-brand {
+    font-size: 1rem;
+}
+
+.price {}
+
+.price p {
+    display: flex;
+
+    align-items: center;
+}
+
+.colors {
+
+    width: 40%;
+
+}
+
+.colors ul {
+
+    display: flex;
+    gap: 10px;
+
+}
+
+.red {
+    
+    padding: 10px;
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+    background-color: rgb(212, 174, 174);
+}
+
+.yellow {
+    padding: 10px;
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+    background-color: rgb(215, 215, 186);
+
+}
+
+.orange {
+    padding: 10px;
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+    background-color: rgb(227, 227, 37);
+
+}
+
+.brown {
+    padding: 10px;
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+    background-color: rgb(220, 220, 178);
+}
+
+.wrapper-main-counter {
+    width: 20%;
+    gap: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-items: center;
+
+}
+
+.quantity {    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.decrement-button{
+    padding: 1px;
+    width: 20%;   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.decrement-button button{
+    font-size: 1.3rem;
+    padding: 3px;
+}
+
+.decrement-button button svg{
+    fill: #F05624;
+}
+
+
+
+
+
+
+.increment-button{
+    padding: 1px;
+    width: 20%;   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.increment-button button{    
+    font-size: 1.3rem;
+    padding: 3px;
+}
+
+.increment-button button svg{
+    fill: #F05624;
+}
+.carts-buttons {
+
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.cart-btn {
+
+    width: 48%;
+
+}
+
+.cart-btn button {
+
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #F05624;
+    color: white
+}
+
+/*--------------------------------------------------------------------------------------------------- empty cart css sections ------------------------------------------------------- */
+
+
+.main-empty-cart-container {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.gif-and-content {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+}
+
+.image-gif {
+
+    width: 50%;
+}
+
+.papular-categories-cart {
+
+    text-align: center;
+    width: 30%;
+
+}
+
+.shop-now {
+    border: 2px solid #F05624;
+    width: 30%;
+    background-color: #F05624;
+    border-radius: 5px;
+    color: white;
+}
+
+.content-add-to-cart h1 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.section-inside-papular-cat {
+
+    background-color: #E6E7E8;
+    border-radius: 5px;
+    padding: 2%;
+
+}
+
+.buttons-papular-catogryes {
+    display: grid;
+    padding: 2%;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+
+    width: 80%;
+    margin: auto;
+
+}
+
+.buttons-papular-catogryes button {
+    border: 1px solid gray;
+    background-color: white;
+    font-size: .9rem;
+    font-weight: 100;
+    border-radius: 2px;
+
+
+}
+
+/* --------------------------------------------------------------------------------------------Empty cart css ends ---------------------------------------------------------------------- */
+
+
+/* --------------------------------------------------------------------------Main cart section starts-------------------------------------------------------------------------------------- */
+.main-wrapper-cart-items{
+    display: flex;
+}
+.top-class-for-add-to-cart {
+    display: flex;
+    padding: 2%;
+    justify-content: space-between;
+}
+
+.main-cart-section-image {    
+    background-color: #E6E7E8;
+    border-radius: 3px;
+    padding: 2%;
+    display: flex;    
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+
+.product-image {
+    width: 20%;
+    display: flex;
+}
+
+.right-side-section {
+    background-color: #EAEAEA;
+    padding: 1%;
+   text-align: center;
+    margin-top: 1%;
+    border-radius: 5px;
+    width: 35%;
+    height: 60%;
+    
+}
+
+.product-details {  
+    border-radius: 2px;
+    background-color: white;
+    padding: 1%;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;   
+}
+
+.buttons-cart-page {    
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.remove-itme button {  
+    display: flex;
+    align-items: center;
+}
+
+.remove-itme {
+    border: 1px solid red;    
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.remove-itme button svg {
+    font-size: 2rem;
+    color: #F05624;
+}
+
+.btn-add-to-cart {
+    border: 2px solid #F05624;
+    background-color: #F05624;
+    border-radius: 5px;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.product-details-with-heading-price{    
+    display: flex;
+    justify-content: space-between;  
+}
+
+.total-money{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+.product-price {
+    text-align: left;
+}
+
+.product-price p{
+    display: flex;
+    text-align: right;  
+  align-items: center;
+    gap: 5px;
+}
+
+.billing-deatils-css{
+    border-radius: 5px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 2%;
+}
+
+.button-add-to-cart{
+    border: 1px solid red;
+    background-color: #F05624;
+    border-radius: 2px;
+    color: white;
+    text-align: center;
+ 
+}
+
+
+
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------------------------------------Wishlist css start---------------------------------------------------------*/
+.wrapper-wishlist-items{
+   
+    display: grid;
+    grid-template-columns:repeat(5,1fr);
+    padding: 2%;
+    gap: 10px;
+}
+
+.wishlist-items{
+    border: 1px solid gray;
+    width: 100%;
+    
+}
+.image-product {
+    position: relative;
+}
+.cross-on-image{
+    
+    
+    position: absolute;
+    right:5%;
+    top: 5%;
+}
+.cross-on-image{
+    z-index: 1000;
+    transform: rotate(46deg);
+}
+
+.cross-on-image button{
+    font-size: 1.2rem;
+}
+
+.cross-on-image button svg{
+    fill: white;
+    color: white;
+}
+
+.add-to-cart-wishlist{
+  
+    background-color: #F05624;
+    color: white;
+    padding: 1%;
+  text-align: center;
+}
+
+.product-details-on-wishlist{
+    padding: 5px;
+}
+/*--------------------------------------------------------------------------------------------Wishlist css ends-----------------------------------------------------------*/

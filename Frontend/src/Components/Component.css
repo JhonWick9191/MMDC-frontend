@@ -1,0 +1,1280 @@
+/* Adii css  */
+
+@import "tailwindcss";
+
+* {
+    padding: 0%;
+    margin: 0%;
+
+}
+
+/* global-css */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: "Abel", sans-serif;
+
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+/* path css  */
+
+.path {
+
+    font-size: 15px;
+    font-weight: 600;
+
+}
+
+.padding {
+    padding: 2%;
+}
+
+p {
+    font-family: "Abel", sans-serif;
+}
+
+button {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+ul li {
+    font-family: "Abel", sans-serif;
+
+}
+
+.main-sectionHeading {
+    text-align: center;
+
+
+}
+
+.main-sectionHeading h1 {
+    font-weight: 900;
+    font-size: 2rem;
+}
+
+/*---------------------------------------------------------------------------Nav bar css start---------------------------------------------------------------------  */
+
+
+.wrapper-class-main-nav-bar {
+    padding: 1.2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 4px -2px rgba(101, 99, 99, 0.3);
+}
+
+.main-logo {
+
+    width: 15%;
+}
+
+.main-logo .main-logo-img {
+    width: 100%;
+    height: 50px;
+    object-fit: cover;
+}
+
+.search-bar {
+    position: relative;
+    display: flex;
+    width: 40%;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-bar-main {
+    border: 1px solid red;
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.secrch-icon {
+    position: absolute;
+    top: 55%;
+    transform: translateY(-50%);
+    right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.secrch-icon i svg {
+    font-weight: 900;
+    font-size: 1.6rem;
+
+}
+
+.top-right-side-section {
+    width: 15%;
+    display: flex;
+    gap: 15px;
+}
+
+.top-right-side-section .main-profile-section {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    text-align: center;
+    list-style: none;
+
+}
+
+.main-profile-section li {
+    position: relative;
+
+}
+
+.main-profile-section p {
+    background-color: #F05624;
+
+    color: white;
+    top: -50%;
+    right: -10%;
+    padding: 2px;
+    height: 20px;
+    width: 20px;
+
+    border-radius: 100%;
+    font-size: .6rem;
+    position: absolute;
+}
+
+.top-right-side-section .main-profile-section svg {
+    display: flex;
+    color: #221F20;
+    border-radius: 100%;
+    font-size: 2rem;
+    padding: 5px;
+    background-color: #F05624;
+    color: white;
+}
+
+.top-right-side-section .hamburger-icon {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.top-right-side-section .hamburger-icon svg {
+    display: flex;
+    color: #221F20;
+    border-radius: 100%;
+    font-size: 2rem;
+    padding: 5px;
+    color: white;
+}
+
+.items-listing-catogeryes {
+    border: 1px solid black;
+    padding: 2%;
+
+}
+
+.main-profile-section li svg {
+    transition: transform 0.6s ease, background-color 0.6s ease, color 0.6s ease;
+
+}
+
+.main-profile-section li svg:hover {
+    transform: scale(1.3);
+    background-color: white;
+    color: #F05624;
+
+}
+
+/* .main-profile-section  li img{
+    width: 50%;
+} */
+
+
+/*---------------------------------------------------------------------------hamburger css starts-------------------------------------------------------------------------------------------------*/
+
+
+.main-class-nav-bar {
+
+    background-color: rgba(190, 182, 182, 0.5);
+    height: 100vh;
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    z-index: 9999;
+
+}
+
+.mobile-navbar {
+   
+    right: 0px;
+    position: absolute;
+    width: 40%;
+    background-color: white;
+}
+
+.hamburger-top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1%;
+
+}
+
+.hamburger-logo {
+    width: 33%;
+}
+
+.hamburger-logo img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.signup-login-buttons {
+
+    width: 30%;
+    background-color: #F05624;
+    color: white;
+    border-radius: 5px;
+   
+    gap: 10px;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.hamburger-btn {
+    padding: 5px;
+    width: 100%;
+}
+
+.login-button-hamburger button {
+    padding: 5px;
+    width: 100%;
+}
+
+.cross-icon {
+
+    padding: 5px;
+    display: flex;
+}
+
+.cross-icon svg {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.listng-items-for-products {
+    padding: 2%;
+}
+
+.main-listing-items-categories ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 2%;
+}
+
+.hamburger-top-section {
+
+    background-color: white;
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.3);
+}
+
+.main-listing-items-categories h1 {
+
+    font-weight: 800;
+    border-bottom: 1px solid black;
+}
+
+.main-listing-items-categories ul li {
+    border-bottom: 1px dotted black;
+    color: rgb(54, 52, 52);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.main-listing-items-categories h1 {
+    font-weight: 600;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.more-buttons h1 {
+    font-weight: 600;
+    font-size: 17px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.page-lists ul {
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.page-lists ul li {
+      color: rgb(54, 52, 52);
+    font-size: 1rem;
+    font-weight: 600;
+    border-bottom: 1px dotted black;
+}
+
+.listng-items-for-products{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/*---------------------------------------------------------------------------Hamburger css ends----------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------Nav bar css ends------------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------main poster section----------------------------------------------------------------------*/
+/* Container styling */
+.slider-container {
+
+    overflow: hidden;
+    margin: auto;
+}
+
+.slider-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider-image {
+    width: 100%;
+    height: 80vh;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.dots-container {
+
+    text-align: center;
+    margin-top: 10px;
+}
+
+.dot {
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: #F05624;
+}
+
+
+
+/*---------------------------------------------------------------------------main poster ends-------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------Catogryes section start-----------------------------------------------------------------*/
+
+.Categories {
+
+    padding: 0% 2%;
+}
+
+.Categories h1 {
+    text-align: center;
+}
+
+.main-display-seaction {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.catogries-images {
+
+    margin-top: 5%;
+
+
+}
+
+/* .overlay{
+    border-radius: 10px;
+    height: 250px;
+    width: 100%;
+ background: #0f0e0e66;
+    position: absolute;
+} */
+
+.catogries-images img {
+
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.catogries-images:hover img {
+    transform: scale(1.04);
+}
+
+.catogries-name p {
+    text-align: center;
+    margin-top: 5%;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/*------------------------------------------------------------------------------Catogryes Section ends-----------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------ Top 10 products css start------------------------------------------------------------- */
+
+.margin-and-padding-main {
+    margin-top: 5%;
+}
+
+.top-products-main-content {
+    padding: 0% 2% 0% 2%;
+
+
+    position: relative;
+    justify-content: space-between;
+}
+
+.topTenItems-images {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease;
+    /* 0.5s slow smooth transition */
+    will-change: transform;
+}
+
+.main-image-with-number {
+    border-radius: 10px;
+    z-index: 10;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 300px;
+
+}
+
+.tranding-products-of-us {
+    z-index: 10;
+    position: relative;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.tranding-products-of-us:hover {
+    transform: scale(1.03);
+    cursor: pointer;
+}
+
+
+.topTenItems-images img {
+    position: relative;
+    z-index: 20;
+    height: 100%;
+    width: 100%;
+    border-radius: 3px;
+    transition: opacity 0.8s ease;
+}
+
+.number p {
+    font-size: 5rem;
+    font-weight: 900;
+    position: absolute;
+    top: 68%;
+    left: -10%;
+    color: #F05624;
+    z-index: 1;
+
+    transform: translate(1%, 0%);
+    font-family: "Monoton", sans-serif;
+    font-weight: 100;
+
+    font-style: normal;
+
+}
+
+.priviousimage {
+    position: absolute;
+    top: 45%;
+    left: 5%;
+
+}
+
+.nextImage {
+    position: absolute;
+    right: 5%;
+    top: 45%;
+
+}
+
+.priviousimage button {
+    position: absolute;
+    border: 1px solid #F67E36;
+    background-color: #F67E36;
+    color: white;
+    font-size: 1.5rem;
+    padding: 10px;
+    border-radius: 100%;
+    z-index: 11;
+
+    display: flex;
+    align-items: center;
+}
+
+.nextImage button {
+    position: absolute;
+    border: 1px solid #F67E36;
+    background-color: #F67E36;
+    color: white;
+    font-size: 1.5rem;
+    padding: 10px;
+    border-radius: 100%;
+    z-index: 11;
+    right: 2%;
+    top: 45%;
+    display: flex;
+    align-items: center;
+}
+
+
+/*------------------------------------------------------------------------------- Top 10 Products end -------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------Tranding Products Starts---------------------------------------------------------------------*/
+
+.rating-and-discount {
+
+    position: absolute;
+    margin: auto;
+    padding: 2%;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    top: 3%;
+    left: 3%;
+}
+
+.margin-top-for-inside-continers {
+    margin-top: 2%;
+}
+
+.rating {
+    z-index: 30;
+    background-color: #F05624;
+    border-radius: 2px;
+    color: white;
+    width: 30%;
+
+
+
+}
+
+.rating ul {
+
+
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    font-size: .8rem;
+
+
+}
+
+.rating ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.rating ul span {
+    display: flex;
+}
+
+.rating ul span svg {
+    fill: white;
+
+    font-size: .8rem;
+
+}
+
+.discount ul {
+    list-style: none;
+}
+
+.discount {
+    z-index: 30;
+    background-color: #F05624;
+    border-radius: 2px;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 0px;
+    font-size: .8rem;
+
+}
+
+
+.items-buttons-for-chaging-the-screen {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    /* relative for absolute child positioning */
+}
+
+.items-buttons-for-chaging-the-screen button {
+    margin: 6px;
+    background: white;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    justify-content: center;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: gray;
+    display: flex;
+    position: relative;
+    font-size: 14px;
+    font-weight: 600;
+    width: 50%;
+
+
+}
+
+.items-buttons-for-chaging-the-screen button:hover {
+    border: 1px solid #F05624;
+    background-color: white;
+    color: #221F20;
+
+}
+
+.items-buttons-for-chaging-the-screen button::after {
+    content: '';
+    display: block;
+    width: 100%;
+    position: absolute;
+    left: 0%;
+    top: 100%;
+    transform: translate(0%, 300%);
+    bottom: 100%;
+    background: transparent;
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+    overflow: hidden;
+    color: red;
+
+}
+
+.items-buttons-for-chaging-the-screen button:hover::after,
+.items-buttons-for-chaging-the-screen .active-btn::after {
+    border: 2px solid #F05624;
+    position: absolute;
+
+}
+
+
+.items-buttons-for-chaging-the-screen button:hover {
+    color: black;
+}
+
+.product-name-model-name-price {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+.product-name-model-name-price:hover {
+    transform: scale(1.1);
+
+}
+
+.dotted-border {
+    border-bottom: 1px dotted black;
+}
+
+.model-descripction p {
+    font-size: 18px;
+    font-weight: 800;
+    color: #333;
+}
+
+
+
+.trending-products-images {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+
+}
+
+.trending-products-images-main-inside {
+
+    display: flex;
+    gap: 10px;
+}
+
+.trending-products-images-main-inside img {
+    width: 100%;
+    object-fit: cover;
+}
+
+
+
+
+/*---------------------------------------------------------------------------------Tranding Products Ends-----------------------------------------------------------------*/
+
+
+/*---------------------------------------------------------------------------------our communinty sections css start------------------------------------------------------ */
+
+.our-community-rells-section {
+    padding: 2%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+}
+
+.our-community-reels-and-content {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+.our-community-rells-section {
+    overflow: hidden;
+}
+
+.main-rells-sections {
+    overflow: hidden;
+}
+
+.main-rells-sections video {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+
+}
+
+.main-image-with-video {
+    border-radius: 10px;
+    z-index: 10;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+}
+
+.privious-video {
+    position: absolute;
+    z-index: 100;
+    top: 50%;
+    left: 5%;
+
+
+}
+
+.next-video {
+    position: absolute;
+    z-index: 100;
+    top: 50%;
+    right: 5%;
+    /* border: 1px solid red; */
+}
+
+.privious-video button {
+    position: absolute;
+    border: 1px solid #F67E36;
+    background-color: #F67E36;
+    color: white;
+    font-size: 1.5rem;
+    padding: 10px;
+    border-radius: 100%;
+    z-index: 11;
+    left: 5%;
+    top: 45%;
+    display: flex;
+    align-items: center;
+}
+
+.select-none {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.next-video button {
+    position: absolute;
+    border: 1px solid #F67E36;
+    background-color: #F67E36;
+    color: white;
+    font-size: 1.5rem;
+    padding: 10px;
+    border-radius: 100%;
+    z-index: 11;
+    right: 5%;
+    top: 45%;
+    display: flex;
+    align-items: center;
+}
+
+
+
+/* tailwinds css */
+
+
+
+
+
+
+/*----------------------------------------------------------------------------------our community section css ends----------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------Footer section------------------------------------------------------------------------- */
+
+.main-footer-class {
+    border-top: 2px solid white;
+    background-color: #000000;
+    color: white;
+    display: flex;
+    padding: 2%;
+    justify-content: space-between;
+}
+
+.footer-left {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.logo img {
+    width: 80%;
+}
+
+
+.footer-heading {
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.social-media-links ul {
+    display: flex;
+    gap: 15px;
+    width: 90%;
+    margin: auto;
+}
+
+.social-media-links ul li {
+
+    background-color: #F05624;
+    padding: 5px;
+    border-radius: 100%;
+}
+
+.social-media-links ul li svg {
+    fill: white;
+    font-size: 1.6rem;
+}
+
+.footer-mid {
+    width: 20%;
+    display: flex;
+
+    justify-content: space-between;
+}
+
+.footer-right {
+    width: 30%;
+}
+
+.footer-image img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+
+
+.para-content {
+    width: 90%;
+    margin: auto;
+}
+
+
+
+.input-feilds input {
+    width: 100%;
+}
+
+.copy-right {
+    align-items: center;
+    justify-content: center;
+    padding: 1%;
+    font-weight: 600;
+    color: #221F20;
+}
+
+.input-feilds {
+    background-color: #bbb;
+    position: relative;
+}
+
+.input-feild-content {
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+}
+
+
+
+.icon {
+    border: 1px solid red;
+    position: absolute;
+}
+
+.sign-up-button {}
+
+.signUp {
+    border: 1px solid #F05624;
+    width: 40%;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    border-radius: 5px;
+    background-color: #F05624;
+}
+
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+
+/*----------------------------------------------------------------------------------------------RESPONSIVE CSS STARTS HERE ----------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*-----------------------------------------------------------------------------------------------Navbar css starts--------------------------------------------------------------------------------------------------------------*/
+/* mobile breakpoint */
+@media screen and (max-width: 600px) {
+
+    .mobile-navbar{
+        width: 90%;
+        height: 100vh;
+    }
+
+    .main-listing-items-categories ul{
+        gap: 5px;
+        margin-top: 5px;
+    }
+    .main-listing-items-categories ul li {
+        font-size: 1rem;
+    }
+    .page-lists ul {
+        margin-top: 5px;
+    }
+    .page-lists ul li {
+        font-size: 1rem;
+    }
+
+    .hamburger-btn{
+        font-size: 11px;
+    }
+    .page-lists ul{
+        gap: 1px;
+    }
+    .wrapper-class-main-nav-bar {
+        border: 2px solid white;
+    }
+
+    .main-logo {
+        width: 40%;
+    }
+
+    .search-bar {
+        display: none;
+    }
+
+    .top-right-side-section {
+        width: 30%;
+    }
+
+    .top-right-side-section .main-profile-section svg {
+        font-size: 1.6rem;
+    }
+
+    .main-sectionHeading h1 {
+        font-size: 1.4rem;
+    }
+
+    .main-display-seaction {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3px;
+    }
+
+    .topTenItems-images {
+        border: 2px solid red;
+        height: 100% !important;
+    }
+
+    .items-buttons-for-chaging-the-screen {
+        width: 100%;
+    }
+
+    .hide-from-mobile {
+        display: none;
+    }
+
+    .trending-products-images {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3px;
+    }
+
+    .main-relative-wrapper {
+        border: 1px solid red;
+        height: 80px;
+    }
+
+    .items-buttons-for-chaging-the-screen {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .items-buttons-for-chaging-the-screen button {
+        border: 1px solid red;
+        width: 98%;
+        padding: 2px;
+        border-radius: 0px;
+        font-weight: 500;
+        font-size: 11px;
+        width: 85%;
+    }
+
+    .main-profile-section p {
+        height: 16px;
+        width: 16px;
+        top: -37%;
+    }
+
+    .main-logo .main-logo-img {
+        height: 36px;
+    }
+
+    .rating ul {
+        padding: 0px;
+    }
+
+    .discount {
+        font-size: 11px;
+        width: 50%;
+
+    }
+
+    .rating ul span svg {
+        font-size: 11px;
+
+    }
+
+    .model-name p {
+
+        font-size: 13px;
+
+    }
+
+    .model-descripction p {
+        font-size: 14px;
+    }
+
+    .main-footer-class {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .footer-left {
+        width: 100%;
+    }
+
+    .social-media-links ul {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer-mid {
+        width: 90%;
+        margin-top: 5%;
+        padding: 5%;
+    }
+
+    .footer-right {
+
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+
+        justify-content: space-between;
+        margin-top: 5%;
+    }
+
+    .right-content {
+        width: 70%;
+        padding: 5%;
+    }
+
+    .signUp {
+        width: 100%;
+        font-size: 11px;
+        padding: 5px;
+
+    }
+
+    /*-------------------------------------------------------------------------------------cart page---------------------------------------------------------------------------*/
+
+    .main-wrapper-cart-items {
+        flex-direction: column;
+    }
+
+    .right-side-section {
+        width: 100% !important;
+    }
+
+    .product-image {
+        width: 50% !important;
+    }
+
+    .product-details-with-heading-price {
+        flex-direction: column;
+    }
+
+    .remove-itme button svg {
+        font-size: 1.4rem;
+    }
+
+    .buttons-cart-page {
+        flex-direction: column-reverse;
+        gap: 3px;
+    }
+
+    .cart-btn {
+        width: 100% !important;
+    }
+
+    .remove-itme {
+        width: 100% !important;
+    }
+
+    .cart-btn button {
+        font-size: 12px;
+    }
+
+    .remove-itme button svg {
+        padding: 0px;
+        font-size: 1.4rem !important;
+    }
+
+    .product-heading p {
+        font-size: 13px;
+
+    }
+
+    .product-model-number p {
+        font-size: 11px;
+    }
+
+    .product-price p {
+        font-size: 12px;
+        font-weight: 600;
+        gap: 1px !important;
+    }
+
+    .main-quantity p {
+        font-size: 14px;
+    }
+
+    .decrement-button button {
+        font-size: 14px !important;
+    }
+
+    .increment-button button {
+        font-size: 14px !important;
+    }
+
+    .billing-deatils-css {
+        gap: 5px !important;
+    }
+
+    .total-money p {
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .right-side-section h1 {
+        font-weight: 800;
+
+    }
+}
+
+
+/*---------------------------------------------------------------------------------------------------less then 340px screen size---------------------------------------------------------*/
+
+@media screen and (max-width: 340px){
+    .top-right-side-section{
+        width: 35%;
+    }
+        .main-profile-section p{
+            top: -20%;
+        }
+    .signup-login-buttons {
+        width: 40%;
+    }
+    .main-listing-items-categories h1{
+        font-size: 18px;
+    }
+
+    .main-listing-items-categories ul li{
+        font-size: 1rem;
+    }
+    .page-lists ul{
+        gap: 5px;
+    }
+    .page-lists ul li {
+        font-size:1rem;
+    }
+    
+}
