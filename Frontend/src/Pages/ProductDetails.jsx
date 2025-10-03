@@ -40,13 +40,29 @@ export default function ProductDeatils() {
     }
 
     // function for add to cart and remove to cart 
+
         const Cart = useSelector((state) => state.Cart || []);
         const WishList =  useSelector((state) => state.WishList )
         const dispatch = useDispatch()
+        const token = useSelector((state)=> state.auth.token);
+        const user = useSelector((state)=> state.auth.user);
+        console.log("This is message comes form product detilas ")
+        console.log(user)
 
+        console.log(user)
+
+        console.log("This is the product detials page")
+        console.log(`${token} is present in the product details`)
+
+        
     function addToCart(){
+        if(token === null){
+
+          toast.error("For Add to Cart you Have to login first")
+        }else{
         dispatch(add(productDetails))
-        toast.success("Ade")
+        toast.success("Added To the Cart ")
+        }
      
     }
 
@@ -113,7 +129,7 @@ export default function ProductDeatils() {
 
                         <div className="price">
                             <p><span>< FaIndianRupeeSign /></span>Price {productDetails.price*count}</p>
-                            <p><span>< FaIndianRupeeSign /></span>DP {productDetails.price*count}</p>
+                            {/* <p><span>< FaIndianRupeeSign /></span>DP {productDetails.price*count}</p> */}
 
                             <p>Price incl. of all Taxes</p>
                         </div>
@@ -163,7 +179,10 @@ export default function ProductDeatils() {
                               {
 
                                 // if cart have some product which have same id contain with the clicked product define some condition 
-                                Cart.some((product) => product.id == productDetails.id) ? (<button onClick={removeToCart}>Remove to Cart </button>) : (<button onClick= {addToCart}>Add to cart </button>)
+                                Cart.some((product) => product.id == productDetails.id) ? (<button onClick={removeToCart}>Remove to Cart </button>)
+                                 :
+                                  (<button onClick= {addToCart}>Add to cart </button>)
+                                
                               }
                             </div>
 

@@ -7,10 +7,8 @@ input {
     border-radius: 5px;
 
 }
-
 .user-login {
     background-color: #E6E7E8;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,16 +16,13 @@ input {
 }
 
 .login-register-user-child {
-    background-color: white;
-    border-radius: 10px;
+    background-color: white;    
     padding: 2%;
     width: 35%;
 }
 
 .buttons {
-
     display: flex;
-
 }
 
 .buttons button {
@@ -59,6 +54,12 @@ input {
 }
 
 /* login section */
+
+.main-signup-form-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 .main-login-section {
     width: 100%;
@@ -204,19 +205,16 @@ input {
 }
 
 .signup-password-section {
-
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 
 .choose-password input {
     width: 100%;
     border: 1px solid black;
-
     padding: 5px;
     background-color: white;
-
 }
 
 .confrim-password input {

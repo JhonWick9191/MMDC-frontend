@@ -3,6 +3,8 @@ import { GiGuitar } from "react-icons/gi";
 import { IoStar } from "react-icons/io5";
 import { Navigate, useNavigate } from "react-router-dom";
 
+
+
 const catogeryesProducts = [
     {
         id: 1,
@@ -195,11 +197,16 @@ const buttons = [
     "More Products "
 ];
 
+// geting tokens for varify this user is exist or not 
+
+
+
 export default function OurProducts() {
 
     const [topProducts] = useState(catogeryesProducts);
     const [activeIndex, setActiveIndex] = useState(null);
     const  Navigate = useNavigate();
+
 
     return (
         <>

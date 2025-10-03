@@ -16,6 +16,9 @@ import Login from "./Pages/Login";
 import ProductDeatils from "./Pages/ProductDetails";
 import CartPage from "./Pages/CartPage";
 import WishList from "./Pages/WishListPage";
+import Profile from "./Pages/ProfilePage";
+import VendorProfile from "./Pages/UserProfile";
+import AdminProfile from "./Pages/AdminProfile";
 
 // toast container
 
@@ -35,19 +38,31 @@ function App() {
   }, [location.pathname])
   return (
     <>
+    <div>
+
+  
     <NavBar/>
           <ToastContainer />
-    {loading && <LoadingScreen/>}   
+       {loading && <LoadingScreen/>}   
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login/>}/>  
         <Route path="/productDetails" element={<ProductDeatils/>} />
         <Route path="/cartDeatils" element={<CartPage/>} />
         <Route path="/wishlistProduct" element={<WishList/>} />
-        
+        <Route path="/profile" element={<Profile />} />
+         <Route path="/isadminProfile" element={<AdminProfile/>} />
+        <Route path="/isVendorProfile" element={<VendorProfile/>}/>         
       </Routes>
-
       <Footer/>
+
+        </div>
+
+        <div>
+      
+        </div>
+
+
     
 </>  );
 }

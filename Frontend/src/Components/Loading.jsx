@@ -15,7 +15,7 @@ function LoadingScreen  () {
       zIndex: 1000,
     }}>
       <img 
-        src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1758090715/Loading_mdzrzx.gif" 
+        src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1759493729/Guitar-ani_1_ilhhxa.gif" 
         alt="Loading..." 
         style={{ width: '300px', height: '300px' }}
       />

@@ -1,4 +1,4 @@
-import React, { useState  ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { CgProfile } from "react-icons/cg";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
@@ -9,6 +9,10 @@ import { useSelector } from "react-redux";
 import { RxCross2 } from "react-icons/rx";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { Tuple } from "@reduxjs/toolkit";
+import { setToken } from "../Redux/Slice/AuthSlice";
+import { setUser } from "../Redux/Slice/AuthSlice";
+import { useDispatch } from "react-redux";
+import Profile from "../Pages/ProfilePage";
 
 // Categories with submenu, "Other" has [null]
 
@@ -17,16 +21,24 @@ export default function NavBar() {
     const Cart = useSelector((state) => state.Cart)
     const Wishlist = useSelector((state) => state.Wishlist)
 
+    // getting tokens and profile of user
+    // const dispatch = useDispatch()
+    const token = useSelector((state) => state.auth.token)
+    const User = useSelector((state) => state.auth.user)
+    console.log("The login in nav is null ")
+    console.log(User)
+
+    // console user    
 
     const CartLength = Cart.length
     const Navigate = useNavigate();
 
     // importing use navegiate 
-    
+
 
     // handle hamburger button
 
-    const [hamburger, setHamburger] = useState(true)
+    const [hamburger, setHamburger] = useState(false)
     const [moreButton, setMoreButton] = useState(true)
 
 
@@ -45,20 +57,26 @@ export default function NavBar() {
         setHamburger(false)
     }
 
+
+
+    console.log(token)
+    // console.log(User.first_name)
+
+
     // when my mobile nav is open then it will not srcoll down 
 
-      useEffect(() => {
+    useEffect(() => {
 
-    if (hamburger) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-   
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [hamburger]);
+        if (hamburger) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, [hamburger]);
 
     return (
         <>
@@ -89,9 +107,11 @@ export default function NavBar() {
                     </div>
                     <div className="top-right-side-section">
                         <ul className="main-profile-section">
-                            <li onClick={() => Navigate("/login")}>
-                                <CgProfile />
-                            </li>
+
+
+
+
+
                             <li onClick={() => Navigate("/wishlistProduct")}>
                                 {
                                     Wishlist.length > 0 ? (
@@ -113,6 +133,20 @@ export default function NavBar() {
                                 <IoCartOutline />
 
                             </li>
+                            <li className="profile-logo-in-list">
+                                {token && User ? (
+                                    <img
+                                        onClick={() => Navigate("/profile")}
+                                        src={User.image || "https://via.placeholder.com/40"}
+                                        alt="logo not found"
+                                    />
+                                ) : (
+                                    <span onClick={() => Navigate("/login")}>
+                                        <CgProfile />
+                                    </span>
+                                )}
+                            </li>
+
                             <li onClick={handleHamburger} className="hamburger-icon">
                                 <RxHamburgerMenu />
                             </li>
@@ -138,8 +172,18 @@ export default function NavBar() {
 
                                     <div className="signup-login-buttons">
                                         <div className="sign-up-button-hamburger">
-                                            <button className="sign-up hamburger-btn" onClick={()=> { handleCross() ,Navigate("/login")}}>
-                                                Login / Register
+                                            <button className="sign-up hamburger-btn" onClick={() => { handleCross(), Navigate("/login") }}>
+                                                  {token && User ? (
+                                    <img
+                                        onClick={() => Navigate("/profile")}
+                                        src={User.image || "https://via.placeholder.com/40"}
+                                        alt="logo not found"
+                                    />
+                                ) : (
+                                    <span onClick={() => Navigate("/login")}>
+                                        <CgProfile />
+                                    </span>
+                                )}
                                             </button>
                                         </div>
 
@@ -172,17 +216,17 @@ export default function NavBar() {
 
                                         {
                                             moreButton ? (
-                                                  <div className="page-lists">
+                                                <div className="page-lists">
                                                     <ul>
-                                                        <li onClick={()=>{handleHamburger , Navegate("/")}}>Home </li>
+                                                        <li onClick={() => { handleHamburger, Navegate("/") }}>Home </li>
                                                         <li>About Us </li>
                                                         <li>Contact Us </li>
                                                         <li>Track Your Order </li>
                                                     </ul>
                                                 </div>
                                             ) : null
-                                              
-            
+
+
                                         }
                                     </div>
 

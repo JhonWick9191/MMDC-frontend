@@ -1,18 +1,20 @@
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux";
 import { FaCirclePlus} from "react-icons/fa6";
-import { add  } from "../Redux/Slice/Slice";
-
+import { add } from "../Redux/Slice/Slice";
 import { removeFromWishlist } from "../Redux/Slice/WishListSlice";
 import { toast } from "react-toastify";
 
 export default function WishList(){
+
      const WishList = useSelector((state)=>state.Wishlist)
      const dispatch = useDispatch()
 
-     function removeToWistlist(){
-        
-     }
+     const token = useSelector((state)=> state.auth.token)
+
+    
+
+    
      
     return(
         <>
@@ -54,7 +56,15 @@ export default function WishList(){
 
                 </div>
                   <div className="add-to-cart-wishlist">
-                        <button onClick={()=>dispatch(add(items))}>Add to Cart</button>
+                        <button onClick={()=>{
+                          if(token === null){
+                             toast.error("For Add to Cart you Have to login first")
+
+                          }else{  
+                          toast.success("Item is Added to your cart ")                        
+                          dispatch(add(items))
+                          }
+                        }}>Add to Cart</button>
                     </div>
                </div>
             </div>
