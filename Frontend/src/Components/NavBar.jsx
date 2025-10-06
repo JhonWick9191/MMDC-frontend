@@ -23,12 +23,15 @@ export default function NavBar() {
 
     // getting tokens and profile of user
     // const dispatch = useDispatch()
+
     const token = useSelector((state) => state.auth.token)
     const User = useSelector((state) => state.auth.user)
-    console.log("The login in nav is null ")
+    // console.log("The login in nav is null ")
+
+    // console.log for getting user details 
     console.log(User)
 
-    // console user    
+ 
 
     const CartLength = Cart.length
     const Navigate = useNavigate();
@@ -59,7 +62,7 @@ export default function NavBar() {
 
 
 
-    console.log(token)
+    // console.log(token)
     // console.log(User.first_name)
 
 
@@ -134,10 +137,10 @@ export default function NavBar() {
 
                             </li>
                             <li className="profile-logo-in-list">
-                                {token && User ? (
+                                { User ? (
                                     <img
                                         onClick={() => Navigate("/profile")}
-                                        src={User.image || "https://via.placeholder.com/40"}
+                                        src={User.image}
                                         alt="logo not found"
                                     />
                                 ) : (
@@ -173,17 +176,17 @@ export default function NavBar() {
                                     <div className="signup-login-buttons">
                                         <div className="sign-up-button-hamburger">
                                             <button className="sign-up hamburger-btn" onClick={() => { handleCross(), Navigate("/login") }}>
-                                                  {token && User ? (
-                                    <img
-                                        onClick={() => Navigate("/profile")}
-                                        src={User.image || "https://via.placeholder.com/40"}
-                                        alt="logo not found"
-                                    />
-                                ) : (
-                                    <span onClick={() => Navigate("/login")}>
-                                        <CgProfile />
-                                    </span>
-                                )}
+                                                {token && User ? (
+                                                    <img
+                                                        onClick={() => Navigate("/profile")}
+                                                        src={User.image || "https://via.placeholder.com/40"}
+                                                        alt="logo not found"
+                                                    />
+                                                ) : (
+                                                    <span onClick={() => Navigate("/login")}>
+                                                        <CgProfile />
+                                                    </span>
+                                                )}
                                             </button>
                                         </div>
 

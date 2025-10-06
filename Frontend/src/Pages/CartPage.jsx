@@ -18,7 +18,11 @@ export default function CartPage() {
   // Cart total adjust using product.quantity
   const cartTotal = Cart.reduce((total, item) => total + item.price * (item.quantity || 1), 0);
 
+// function for place order 
 
+function placeOerderHandler(){
+  console.log(Cart)
+}
 
   return (
     <>
@@ -104,7 +108,7 @@ export default function CartPage() {
                 <p>{cartTotal}</p>
               </div>
               <div className="button-add-to-cart">
-                <button>Place Order</button>
+                <button onClick={placeOerderHandler}>Place Order</button>
               </div>
             </div>
           </div>

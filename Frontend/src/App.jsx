@@ -6,6 +6,7 @@ import LoadingScreen from "./Components/Loading";
 import {useLocation}  from "react-router-dom";
 import { useState ,useEffect } from "react";
 
+
 // components 
 
 import NavBar from "./Components/NavBar";
@@ -25,6 +26,14 @@ import AdminProfile from "./Pages/AdminProfile";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 function App() {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
@@ -36,11 +45,13 @@ function App() {
     }, 1000); 
     return () => clearTimeout(timer);
   }, [location.pathname])
+
+  // for scroll to top function
   return (
     <>
     <div>
 
-  
+   <ScrollToTop />
     <NavBar/>
           <ToastContainer />
        {loading && <LoadingScreen/>}   

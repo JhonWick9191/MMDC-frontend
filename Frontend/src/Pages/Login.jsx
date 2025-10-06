@@ -119,6 +119,7 @@ export default function () {
                 headers: {
                     "Content-Type": "application/json"
                 },
+                  credentials: "include", 
                 body: JSON.stringify({...signupForm , role:"Vendor"})
             })
 
@@ -133,8 +134,9 @@ export default function () {
             }
 
             // set the signupdata into local storage 
-            localStorage.setItem("token" ,JSON.stringify(data.token))
-            localStorage.setItem("user" , JSON.stringify(data.existingUser))
+            
+            // localStorage.setItem("token" ,JSON.stringify(data.token))
+            // localStorage.setItem("user" , JSON.stringify(data.existingUser))
 
             // save this data to redux 
 
