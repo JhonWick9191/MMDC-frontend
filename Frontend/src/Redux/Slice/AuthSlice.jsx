@@ -10,7 +10,7 @@ function parseJSONSafe(item) {
 }
 
 const initialState = {
-  // token: parseJSONSafe(localStorage.getItem("token")),
+  token: parseJSONSafe(localStorage.getItem("token")),
   user: parseJSONSafe(localStorage.getItem("user")),
 };
 

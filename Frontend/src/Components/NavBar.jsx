@@ -12,7 +12,8 @@ import { Tuple } from "@reduxjs/toolkit";
 import { setToken } from "../Redux/Slice/AuthSlice";
 import { setUser } from "../Redux/Slice/AuthSlice";
 import { useDispatch } from "react-redux";
-import Profile from "../Pages/ProfilePage";
+// import Profile from "../Pages/ProfilePage";
+import Profile from "../Pages/UserPorfilePages/ProfilePage";
 
 // Categories with submenu, "Other" has [null]
 
@@ -110,10 +111,6 @@ export default function NavBar() {
                     </div>
                     <div className="top-right-side-section">
                         <ul className="main-profile-section">
-
-
-
-
 
                             <li onClick={() => Navigate("/wishlistProduct")}>
                                 {

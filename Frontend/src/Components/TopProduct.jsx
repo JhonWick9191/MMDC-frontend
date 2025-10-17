@@ -3,96 +3,63 @@ import { GrNext } from "react-icons/gr";
 import { GiGuitar } from "react-icons/gi";
 import { IoStar } from "react-icons/io5";
 import { GrPrevious } from "react-icons/gr";
+import { useNavigate } from "react-router-dom";
 
-
+// this is present on the top of categoryes 
 const catogeryesProducts = [
     {
         id: 1,
-        name: "Acoustic Drum",
+        name: "Effect",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666738/Untitled_design_5_1_lydd7q.jpg",
-        model: "Model Name",
-        discripction: "discripction",
-        rating: "4",
-        price: "1000",
-        save: "20 %"
+       
     },
     {
         id: 2,
-        name: "Studio Moniter",
+        name: "Guitar",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666738/download_rmyqgs.jpg",
-        model: "Model Name",
-        discripction: "discripction",
-        rating: "4",
-        price: "1000",
-        save: "20 %"
+       
 
     },
     {
         id: 3,
         name: "Accessories",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666737/2020s_NS_Design_WAV_4_Electric_Violin_Amber_Burst_1_uwrbzc.jpg",
-        model: "Model Name",
-        discripction: "discripction",
-        rating: "4",
-        price: "1000",
-        save: "20%"
+        
     },
 
     {
         id: 4,
-        name: "Amp Rxtico",
+        name: "Ukulele",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666737/Untitled_design_3_axzwoh.jpg",
-        model: "Model Name",
-        discripction: "discripction",
-        rating: "4",
-        price: "1000",
-        save: "20%"
+        
 
     },
     {
         id: 5,
-        name: "Electric Guitars",
+        name: "Amplifiers",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666739/Souldier_Hendrix_2__Guitar_Strap___Reverb_i9zcxh.jpg",
-        model: "Model Name",
-        discripction: "discripction",
-        rating: "4",
-        price: "1000",
-        save: "20%"
+       
     },
 
     {
         id: 6,
         name: "Bass Guitars",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666740/Untitled_design_8_1_ggdncm.jpg",
-        model: "Model Name",
-        discripction: "discripction",
-        rating: "4",
-        price: "1000",
-        save: "20%"
+       
 
     },
     {
         id: 7,
         name: "Mixers",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666740/Untitled_design_4_1_pqvyzs.jpg",
-
-
-        model: "Model Name",
-        discripction: "discripction",
-        rating: "4",
-        price: "1000",
-        save: "20%"
+      
 
     },
     {
         id: 8,
         name: "Acoustic Guitars",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666740/Untitled_design_6_kna0dx.jpg",
-        model: "Model Name",
-        discripction: "discripction",
-        rating: "4",
-        price: "1000",
-        save: "20%"
+      
 
     },
     {
@@ -100,22 +67,14 @@ const catogeryesProducts = [
         name: "Controller",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666740/Untitled_design_7_1_a91fnh.jpg",
 
-        model: "Model Name",
-        discripction: "discripction",
-        rating: "4",
-        price: "1000",
-        save: "20%"
+    
 
     },
     {
         id: 10,
         name: "Acoustic Drum",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666738/Untitled_design_5_1_lydd7q.jpg",
-        model: "Model Name",
-        discripction: "discripction",
-        rating: "4",
-        price: "1000",
-        save: "20 %"
+       
     },
 
 ];
@@ -185,6 +144,7 @@ const buttons = [
 // smooth sroll function 
 
 export default function TopProducts() {
+  const Navigate = useNavigate()
 
     const [topProducts] = useState(catogeryesProducts);
     const [currentIndexImage, setCurrentIndexImage] = useState(0);
@@ -209,7 +169,14 @@ export default function TopProducts() {
     }
 
   
+   function ClickHandler(items){
+    console.log("Button is clicked ")
+    console.log(items)
+    Navigate(`/products?type=${items}`);
+    // nevigate to Product Categoryes like Accessoires , Guitars , etc 
+    
 
+   }
     // Tranding products 
 
     const [activeIndex, setActiveIndex] = useState(null);
@@ -224,10 +191,13 @@ export default function TopProducts() {
 
                     <div className="Categories">
 
-
+                       
                         <div className="main-display-seaction">
+                      
+
+                     
                             {catogeryesProducts.map((items) => (
-                                <div className="main-catogries" key={items.id}>
+                                <div className="main-catogries" key={items.id} onClick={() => ClickHandler(items.name)}>
                                     <div className="catogries-images">
                                         <img src={items.image} />
                                         <div className="overlay"></div>
@@ -239,6 +209,7 @@ export default function TopProducts() {
                                 </div>
                             ))
                             }
+                                   
                         </div>
                     </div>
                 </div>

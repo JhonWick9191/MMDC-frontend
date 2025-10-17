@@ -17,9 +17,13 @@ import Login from "./Pages/Login";
 import ProductDeatils from "./Pages/ProductDetails";
 import CartPage from "./Pages/CartPage";
 import WishList from "./Pages/WishListPage";
-import Profile from "./Pages/ProfilePage";
-import VendorProfile from "./Pages/UserProfile";
+import FilterProductByCategoryes from "./Pages/ProductCategory";
 import AdminProfile from "./Pages/AdminProfile";
+
+//importing UserProfile pages 
+import Profile from "./Pages/UserPorfilePages/ProfilePage";
+import VendorProfile from "./Pages/UserPorfilePages/ProfilePage";
+import BuyProduct from "./Pages/UserPorfilePages/BuyProducts";
 
 // toast container
 
@@ -62,8 +66,10 @@ function App() {
         <Route path="/cartDeatils" element={<CartPage/>} />
         <Route path="/wishlistProduct" element={<WishList/>} />
         <Route path="/profile" element={<Profile />} />
-         <Route path="/isadminProfile" element={<AdminProfile/>} />
-        <Route path="/isVendorProfile" element={<VendorProfile/>}/>         
+        <Route path="/isadminProfile" element={<AdminProfile/>} />
+        <Route path="/isVendorProfile" element={<VendorProfile/>}/> 
+        <Route path="/yourProducts" element={<BuyProduct/>}  /> 
+        <Route path="/products" element={<FilterProductByCategoryes/>} />
       </Routes>
       <Footer/>
 

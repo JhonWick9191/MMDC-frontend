@@ -260,8 +260,8 @@ input {
 }
 
 .main-images-products {
-
-    background-color: #EAEAEA;
+    height: 25rem;
+    border: 1px solid black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -269,24 +269,93 @@ input {
 }
 
 .mid-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
     width: 24.5%;
-    background-color: #E6E7E8;
-    padding: 5%;
+    background-color: white;
+
+}
+.main-poster-category{
+    
+    height: 300px;
+
+}
+.main-poster-category img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.mid-image img{
+    border: 1px solid black;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+
 }
 
 .main-images-products img {
     width: 90%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.right-product-section {
-    width: 48%;
+.filter-and-type-section{
+   
+    padding: 2%;
+    align-items: center;
+    margin: auto;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
 }
 
+
+.filter{
+    border: 1px solid red;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+
+
+}
+
+.cate{
+    border: 1px solid red;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+   
+}
+.cate button{
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
+
+}
+.filter button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
+   
+
+}
+.right-product-section {
+    width: 48%;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+
+}
+
 .product-name {
-    font-size: 2rem;
+    font-size: 1.3rem;
     font-weight: 700;
 }
 
@@ -689,3 +758,86 @@ input {
     padding: 5px;
 }
 /*--------------------------------------------------------------------------------------------Wishlist css ends-----------------------------------------------------------*/
+
+
+/* -----------------------------------------------------------------------Products Filter Category section css starts ---------------------------------------------------- */
+
+.listing-on-categoryes{
+position: absolute;
+top: 0px;
+width: 100%;
+ background-color: rgba(190, 182, 182, 0.5);
+z-index: 9999;
+
+}
+.listing-product-category{
+    background-color: white;
+    width: 40%;
+  border-top-right-radius: 50px ;
+    height: 100vh;
+    justify-content: space-between;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.cate-list-highlight:hover{
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.listing-products-price:hover{
+    background-color: #F05624;
+    color: white;
+}
+.main-heading-product-categoryes{
+    display: flex;
+    justify-content: space-between;
+    
+    padding-bottom: 2%;
+}
+
+.cross-section-categoryes button{
+
+    padding: 20%;
+    border-radius: 100%;
+}
+
+.lsiting-felx-class{
+    display: grid;
+    grid-template-columns: repeat(2 ,1fr);
+}
+
+.main-heading-product-categoryes-out-border{
+    padding: 2% 0%;
+
+}
+
+.text p{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.main-class-listing-list{
+
+   
+    
+}
+
+.pricing-listing{
+ 
+    display: grid;
+    gap: 10px;
+    text-align: center;
+    grid-template-columns:repeat(2,1fr);
+}
+
+.pricing-listing li {
+    border: 1px solid red;
+    font-weight: 700;
+    border-radius: 1px;
+    
+}
+

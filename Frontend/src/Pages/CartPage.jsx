@@ -5,7 +5,7 @@ import { FaIndianRupeeSign } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { FaCirclePlus, FaCircleMinus } from "react-icons/fa6";
 import { incrementQuantity, decrementQuantity, remove } from "../Redux/Slice/Slice";
-import { addToWishlist , removeFromWishlist } from "../Redux/Slice/WishListSlice";
+import { addToWishlist, removeFromWishlist } from "../Redux/Slice/WishListSlice";
 import { toast } from "react-toastify";
 
 
@@ -13,45 +13,99 @@ export default function CartPage() {
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const Cart = useSelector((state) => state.Cart);
- 
+
+
+
+  // console.log cart items 
+  console.log(Cart)
 
   // Cart total adjust using product.quantity
-  const cartTotal = Cart.reduce((total, item) => total + item.price * (item.quantity || 1), 0);
+  const cartTotal = Cart.reduce((total, item) => total + item.Product_price * (item.quantity || 1), 0);
 
-// function for place order 
+  console.log(cartTotal)
 
-function placeOerderHandler(){
-  console.log(Cart)
-}
+  // function for place order 
+
+  const orderData = {
+    products: Cart,
+    totalAmount: cartTotal,
+
+  }
+
+  console.log(orderData)
+
+  const BASE_URL = import.meta.env.VITE_MAIN_API_ROUTE;
+  async function placeOerderHandler() {
+
+    try {
+
+      const responce = await fetch(`${BASE_URL}/orderPlaces`, {
+
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify(orderData),
+
+      })
+
+      const data = await responce.json();
+
+      if (data.success) {
+        toast.success("Order Placed Successfully!");
+        console.log("ORDER RESPONSE:", data);
+      } else {
+        toast.error(data.message || "Order Failed");
+        console.log("ORDER ERROR:", data);
+      }
+
+
+    } catch (error) {
+      console.log(error)
+      console.log("Getting error while sending order details ")
+
+    }
+
+  }
 
   return (
     <>
       {Cart.length > 0 ? (
         <div className="main-wrapper-cart-items">
-          
+
           <div >
             {Cart.map((item) => (
               <div className="top-class-for-add-to-cart" key={item.id}>
                 <div className="main-cart-section-image">
-                  <div className="product-image">
-                    <img src={item.image} alt={item.name} />
+                  <div className="product-image" key={Cart.id}>
+                    <img src={item.cartImage} alt={item.name} />
                   </div>
                   <div className="product-details">
                     <div className="product-details-with-heading-price">
                       <div className="d-p">
                         <div className="product-heading">
-                          <p>{item.name}</p>
+                          <p>{item.Brand_Name}</p>
                         </div>
                         <div className="product-model-number">
-                          <p>{item.model}</p>
+                          <p>{item.Model_number
+                          }</p>
+                        </div>
+                        <div className="product-model-number">
+                          <p>{item.Product_Category
+                          }</p>
+                        </div>
+                        <div className="product-model-number">
+                          <p>{item.Product_Name
+                          }</p>
                         </div>
                       </div>
                       <div className="pricing">
                         <div className="product-price">
-                          <p><span><FaIndianRupeeSign /></span> Price - {item.price * (item.quantity || 1)}</p>
+                          <p><span><FaIndianRupeeSign /></span> Price - {item.Product_price * (item.quantity || 1)}</p>
                         </div>
                         <div className="product-price">
-                          <p><span><FaIndianRupeeSign /></span>DP - {item.price * (item.quantity || 1)}</p>
+                          <p><span><FaIndianRupeeSign /></span>DP - {item.Vendor_price * (item.quantity || 1)}</p>
                         </div>
                       </div>
                     </div>
@@ -75,10 +129,10 @@ function placeOerderHandler(){
                     <hr />
                     <div className="buttons-cart-page">
                       <div className="remove-itme">
-                        <button onClick={() => dispatch(remove(item.id), toast.warn(`${item.name} is deleted from the wishlist `))}><MdDeleteForever /></button>
+                        <button onClick={() => dispatch(remove(item._id), toast.warn(`${item.name} is deleted from the wishlist `))}><MdDeleteForever /></button>
                       </div>
                       <div className="cart-btn">
-                        <button onClick={()=>dispatch(addToWishlist(item), toast.success(`${item.name} Added to the wishlist `))}><span><FaHeart /></span> Wishlist</button>
+                        <button onClick={() => dispatch(addToWishlist(item), toast.success(`${item.name} Added to the wishlist `))}><span><FaHeart /></span> Wishlist</button>
                       </div>
                     </div>
                   </div>
@@ -94,10 +148,11 @@ function placeOerderHandler(){
               <div className="total-money">
                 <p>Cart Total (Excl. of all taxes)</p>
                 <p>{cartTotal}</p>
+                
               </div>
               <div className="total-money">
                 <p>GST</p>
-                <p>--</p>
+                <p>18% per Product</p>
               </div>
               <div className="total-money">
                 <p>Shouping Charge</p>

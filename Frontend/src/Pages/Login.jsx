@@ -42,6 +42,7 @@ export default function () {
             const responce = await fetch(`${BASE_URL}/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
+                credentials:"include",
                 body: JSON.stringify(LoginFormData),
             })
             const data = await responce.json();
@@ -68,14 +69,16 @@ export default function () {
             Navigate("/")
 
             if (data.token) {
+
                 //  Save to localStorage
-                localStorage.setItem("token", JSON.stringify(data.token));
-                localStorage.setItem("user", JSON.stringify(data.isExistingUser));
+                // localStorage.setItem("token", JSON.stringify(data.token));
+                // localStorage.setItem("user", JSON.stringify(data.isExistingUser));
 
                 //  Save to Redux
                 dispatch(setToken(data.token));
+                // console.log(data.token)
                 dispatch(setUser(data.isExistingUser))
-                console.log(data.isExistingUser)
+                // console.log(data.isExistingUser)
                 console.log("You are logged in");
                
 
@@ -134,7 +137,7 @@ export default function () {
             }
 
             // set the signupdata into local storage 
-            
+
             // localStorage.setItem("token" ,JSON.stringify(data.token))
             // localStorage.setItem("user" , JSON.stringify(data.existingUser))
 
