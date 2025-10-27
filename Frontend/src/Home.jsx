@@ -1,7 +1,7 @@
 
 import MainPoster from "./Components/MainPoster"
 import TopProducts from "./Components/TopProduct"
-import OurProducts from "./Components/OurProducts"
+import OurProducts from "./Components/OurTraindingProducts"
 
 
 export default function Home(){

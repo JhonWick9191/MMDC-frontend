@@ -23,6 +23,15 @@ button:hover {
     cursor: pointer;
 }
 
+.brand-name-p p{
+    font-size: 13px;
+}
+
+.model-name p{
+    font-size: 16px;
+    font-weight: 600;
+}
+
 /* path css  */
 
 .path {
@@ -58,14 +67,20 @@ ul li {
 
 .main-sectionHeading h1 {
     font-weight: 900;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
+
+
 
 /*---------------------------------------------------------------------------Nav bar css start---------------------------------------------------------------------  */
 
 
 .wrapper-class-main-nav-bar {
+background-color: white;
+    width: 100%;
     padding: 1.2%;
+    z-index: 999;
+    position: fixed;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -214,12 +229,21 @@ ul li {
 }
 
 .mobile-navbar {
-   
+
     right: 0px;
     position: absolute;
     width: 40%;
     background-color: white;
 }
+.profile-view-button{
+    border: 2px solid black;
+  
+}
+.profile-view-button img{
+    width: 100%;
+}
+
+
 
 .hamburger-top-section {
     display: flex;
@@ -241,14 +265,20 @@ ul li {
 
 .signup-login-buttons {
 
-    width: 30%;
+    
     background-color: #F05624;
     color: white;
     border-radius: 5px;
-   
+
     gap: 10px;
     justify-content: space-between;
     font-size: 12px;
+}
+
+.profile-image-user-mob{
+    border: 2px solid red;
+    width: 10%;
+    
 }
 
 .hamburger-btn {
@@ -328,30 +358,32 @@ ul li {
 }
 
 .page-lists ul li {
-      color: rgb(54, 52, 52);
+    color: rgb(54, 52, 52);
     font-size: 1rem;
     font-weight: 600;
     border-bottom: 1px dotted black;
 }
 
-.listng-items-for-products{
+.listng-items-for-products {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.profile-logo-in-list{
-    
+.profile-logo-in-list {
+
     border-radius: 100%;
     height: 30px;
     width: 30px;
-    
+
 }
-.profile-logo-in-list img{
+
+.profile-logo-in-list img {
     height: 100%;
     width: 100%;
     border-radius: 100%;
 }
+
 /*---------------------------------------------------------------------------Hamburger css ends----------------------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------Nav bar css ends------------------------------------------------------------------------*/
 
@@ -369,10 +401,15 @@ ul li {
 }
 
 .slider-image {
+    
     width: 100%;
     height: 80vh;
     flex-shrink: 0;
     object-fit: cover;
+}
+
+.margin-top-5{
+    margin-top: 5%;
 }
 
 .dots-container {
@@ -457,7 +494,7 @@ ul li {
 /*------------------------------------------------------------------------------ Top 10 products css start------------------------------------------------------------- */
 
 .margin-and-padding-main {
-    margin-top: 5%;
+    margin-top: 2.5%;
 }
 
 .top-products-main-content {
@@ -693,7 +730,7 @@ ul li {
     width: 100%;
     position: absolute;
     left: 0%;
-    top: 100%;
+    top: 50%;
     transform: translate(0%, 300%);
     bottom: 100%;
     background: transparent;
@@ -863,6 +900,29 @@ ul li {
     align-items: center;
 }
 
+.clear-filer-section{
+  
+  margin: 2%;
+
+}
+
+.clear-filer-section{
+    border: 1px solid red;
+    width: 6%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+
+}
+
+.clear-filer-section button{
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+}
 
 
 /* tailwinds css */
@@ -877,6 +937,7 @@ ul li {
 /*------------------------------------------------------------------------------------Footer section------------------------------------------------------------------------- */
 
 .main-footer-class {
+    margin-top: 5%;
     border-top: 2px solid white;
     background-color: #000000;
     color: white;
@@ -1000,50 +1061,53 @@ ul li {
 
 /* product categoryes css  */
 
-.main-category-products{
-
+.main-category-products {
+    position: relative;
+    justify-content: center;
+    align-items: center;
     padding: 0% 2%;
     display: grid;
-
+    position: relative;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    
 }
 
-.product-Categories-inside-category-folder{
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    
-    border: 1px solid #999496;
-    padding: 1%;
-    height: 500px;
+.product-Categories-inside-category-folder {
    
-}
-
-.filter-product-para-text{
-    
-    height: 30%;
+    padding: 1%;
+    height: 450px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 5px;
+
 }
 
-.filter-product-image{
-    padding-bottom: 2%;
-    border-bottom: 1px dotted black;
-height:70%;
-display: flex;
-align-items: center;
+.filter-product-para-text {
+     
+     padding: 1%;
+    display: flex;
+    flex-direction: column;
+    
+}
 
-   
+.filter-product-image {
+    padding: 2%;
+    border: 1px solid black;
+    height: 300px;
+    display: flex;
+    align-items: center;
+
+
 
 }
 
 .filter-product-image img {
     display: flex;
     align-items: center;
-    justify-content: center;   
-    
+    justify-content: center;
+    width: 100%;
     object-fit: cover;
-    
+
 }
 
 
@@ -1055,31 +1119,36 @@ align-items: center;
 /* mobile breakpoint */
 @media screen and (max-width: 600px) {
 
-    .mobile-navbar{
+    .mobile-navbar {
         width: 90%;
         height: 100vh;
     }
 
-    .main-listing-items-categories ul{
+    .main-listing-items-categories ul {
         gap: 5px;
         margin-top: 5px;
     }
+
     .main-listing-items-categories ul li {
         font-size: 1rem;
     }
+
     .page-lists ul {
         margin-top: 5px;
     }
+
     .page-lists ul li {
         font-size: 1rem;
     }
 
-    .hamburger-btn{
+    .hamburger-btn {
         font-size: 11px;
     }
-    .page-lists ul{
+
+    .page-lists ul {
         gap: 1px;
     }
+
     .wrapper-class-main-nav-bar {
         border: 2px solid white;
     }
@@ -1308,33 +1377,145 @@ align-items: center;
         font-weight: 800;
 
     }
+
+
+    .main-category-products {
+        grid-template-columns: repeat(2, 1fr);
+        height: 100%;
+        padding: 0% 0.5%;
+        gap: 2px;
+    }
+
+    .product-Categories-inside-category-folder {
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .filter-product-image {
+        height: 100%;
+    }
+
+    .filter-product-para-text {
+        height: 60%;
+        justify-content: center;
+        gap: 2px;
+    }
+
+    .filter {
+        width: 45% !important;
+    }
+
+    .cate {
+        width: 45% !important;
+    }
+
+    .filter button {
+        padding: 1% !important;
+        font-size: 11px;
+    }
+
+    .cate button {
+        font-size: 11px;
+        padding: 1% !important;
+    }
+
+    .listing-product-category {
+        width: 90% !important;
+        gap: 1px !important;
+        border-top-right-radius: 20px !important;
+    }
+
+    .text p {
+        font-size: .8rem;
+    }
+
+    .main-heading-product-categoryes {
+        align-items: center;
+
+        padding-bottom: 0%;
+    }
+
+    .cate-list-highlight {
+        font-size: .8rem;
+    }
+
+    .pricing-listing li {
+        font-size: .8rem;
+    }
 }
 
 
 /*---------------------------------------------------------------------------------------------------less then 340px screen size---------------------------------------------------------*/
 
-@media screen and (max-width: 340px){
-    .top-right-side-section{
+@media screen and (max-width: 340px) {
+    .top-right-side-section {
         width: 35%;
     }
-        .main-profile-section p{
-            top: -20%;
-        }
+
+    .main-profile-section p {
+        top: -20%;
+    }
+
     .signup-login-buttons {
         width: 40%;
     }
-    .main-listing-items-categories h1{
+
+    .main-listing-items-categories h1 {
         font-size: 18px;
     }
 
-    .main-listing-items-categories ul li{
+    .main-listing-items-categories ul li {
         font-size: 1rem;
     }
-    .page-lists ul{
+
+    .page-lists ul {
         gap: 5px;
     }
+
     .page-lists ul li {
-        font-size:1rem;
+        font-size: 1rem;
     }
+
+
+
+    .product-deatils-main-section{
+        
+        flex-direction: column;
+    }
+
+    .left-section-our-products-section{
+        width: 100% !important; 
+    }
+
+    .mid-image {
+        height:70px !important ;
+    }
+
+    .right-product-section{
+        width: 100% !important;
     
+    }
+
+    .main-images-products{
+        height: 20rem !important;
+    }
+
+.cart-btn button{
+    width: 98% !important ;
 }
+
+.product-name {
+    font-size: 1rem !important;
+}
+.right-product-section {
+    gap: 2px !important;
+}
+.cart-discripction p{
+    font-size: 14px !important;
+    text-align: justify;
+}
+}
+

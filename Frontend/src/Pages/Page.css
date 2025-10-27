@@ -7,6 +7,10 @@ input {
     border-radius: 5px;
 
 }
+
+.main-logo .main-logo-img:hover{
+    cursor: pointer;
+}
 .user-login {
     background-color: #E6E7E8;
     display: flex;
@@ -255,9 +259,8 @@ input {
 .product-image-mid {
 
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    gap: 5px;
+    align-items: center;}
 
 .main-images-products {
     height: 25rem;
@@ -317,7 +320,6 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
 
 
 }
@@ -328,11 +330,11 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 4px;
+    
    
 }
 .cate button{
-        display: flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     padding: 5%;
@@ -840,4 +842,142 @@ z-index: 9999;
     border-radius: 1px;
     
 }
+
+.main-category-products{
+    position: relative;    
+    height: 100%;
+}
+
+
+.text-in-center-for-all-class{
+   
+    z-index: 999;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+     top: 10%;
+    height: 100px;
+    border: 2px solid red;
+ 
+}
+
+
+
+
+.sub-child{
+    border: 2px solid;
+}
+
+.no-product-found{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 2%;
+}
+.no-product-found img{
+
+    width: 25%;
+}
+
+.image-in-not-found{
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.go-back-buttons{
+    border-radius: 5px;
+    width: 10%;
+    text-align: center;
+    background-color: #F05624;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    justify-content: center;
+    color: white;
+}
+
+.go-back-buttons button{
+    width: 100%;
+}
+
+
+
+
+/*----------------------------------------------------------------------------animations------------------------------------------------------------------------------------------*/
+
+/*  animations for card open smoothly */
+
+/* Smooth transition for product grid */
+.fade-container {
+ 
+  gap: 1rem;
+  justify-content: center;
+  transition: opacity 0.5s ease;
+}
+
+/* Hide state */
+.fade-out {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+/* Show state with slide-up animation */
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  animation: slideUp 0.6s ease both;
+}
+
+/* Card-specific animation so each product appears with a slight delay */
+.product-card {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: slideUp 0.6s ease forwards;
+}
+
+/* Staggered animation for each card (appears one by one smoothly) */
+.product-card:nth-child(1) { animation-delay: 0.05s; }
+.product-card:nth-child(2) { animation-delay: 0.1s; }
+.product-card:nth-child(3) { animation-delay: 0.15s; }
+.product-card:nth-child(4) { animation-delay: 0.2s; }
+.product-card:nth-child(5) { animation-delay: 0.25s; }
+.product-card:nth-child(6) { animation-delay: 0.3s; }
+.product-card:nth-child(7) { animation-delay: 0.35s; }
+.product-card:nth-child(8) { animation-delay: 0.4s; }
+.product-card:nth-child(9) { animation-delay: 0.45s; }
+.product-card:nth-child(10) { animation-delay: 0.5s; }
+.product-card:nth-child(11) { animation-delay: 0.55s; }
+.product-card:nth-child(12) { animation-delay: 0.6s; }
+
+/* Keyframes for slide-up animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effect for product cards */
+.product-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+  transform: scale(1);
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Smooth hover animation for cards */
+
+
 

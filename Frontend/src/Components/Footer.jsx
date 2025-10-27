@@ -15,11 +15,8 @@ export default function Footer() {
 
                 <footer>
                     <div className="wrapper-footer">
-                        <div className="footer-image">
-                            <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1757937493/bg_torn_white_ho0iag.jpg"/>
-                             {/* <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1757937549/bg_torn_vfmjwg.jpg"/> */}
-                        </div>
-                         <TextHoverEffect text="MMDC" />
+                        
+                         {/* <TextHoverEffect text="MMDC" /> */}
                         
                         <div className="main-footer-class">
                             <div className="footer-left">

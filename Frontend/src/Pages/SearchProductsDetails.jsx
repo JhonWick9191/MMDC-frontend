@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { add, remove } from "../Redux/Slice/Slice";
 import { addToWishlist } from "../Redux/Slice/WishListSlice";
 
-export default function ProductDeatils() {
+export default function SearchProductDetails() {
     const location = useLocation();
     const navigate = useNavigate();
 

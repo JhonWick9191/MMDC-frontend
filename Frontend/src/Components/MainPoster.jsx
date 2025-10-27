@@ -81,7 +81,7 @@ export default function MainPoster() {
         {PosterImage.map((item) => (
           <img
             key={item.id}
-            className="slider-image"
+            className="slider-image margin-top-5"
             src={item.image}
             alt={`poster-${item.id}`}
             draggable={false}

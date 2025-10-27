@@ -1,32 +1,40 @@
-import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSearch } from "../Context/SearchContaxt";
 import { IoIosColorFilter } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
 
-function FilterProductByCategoryes() {
-    const Navigate = useNavigate()
-    const location = useLocation();
-    const [products, setProducts] = useState([]);
+export default function SearchProducts() {
+    const { searchResults, searchQuery } = useSearch();
+    const Navigate = useNavigate();
+
+    const [showSideBar, setSideBar] = useState(false);
+    const [selectedFilter, setSelectedFilter] = useState(null);
+    const [showMessage, setShowMessage] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    const queryParams = new URLSearchParams(location.search);
-    const type = queryParams.get("type");
+    // Sidebar handlers
+    const handleCross = () => {
+        setSideBar(false);
+        document.body.style.overflow = "auto";
+    };
 
-    const [showSideBar, setSideBar] = useState(false)
-    const [selectedFilter, setSelectedFilter] = useState(null);
+    const openSidebar = () => {
+        setSideBar(true);
+        document.body.style.overflow = "hidden";
+        window.scrollTo(0, 0);
+    };
 
-    // Category count
-    const categoryCount = products.reduce((acc, item) => {
+    // Category & Brand count
+    const categoryCount = searchResults?.reduce((acc, item) => {
         acc[item.Product_Category] = (acc[item.Product_Category] || 0) + 1;
         return acc;
-    }, {});
+    }, {}) || {};
 
-    // Brand count
-    const brandCount = products.reduce((acc, item) => {
+    const brandCount = searchResults?.reduce((acc, item) => {
         acc[item.Brand_Name] = (acc[item.Brand_Name] || 0) + 1;
         return acc;
-    }, {});
+    }, {}) || {};
 
     // Price Ranges
     const priceRanges = [
@@ -37,113 +45,94 @@ function FilterProductByCategoryes() {
         { label: "15000 - 20000", min: 15000, max: 20000 },
         { label: "20000 - 25000", min: 20000, max: 25000 },
         { label: "25000 - 50000", min: 25000, max: 50000 },
-        { label: "50000 - 55000", min: 50000, max: 55000 },
-        { label: "55000 - 60000", min: 55000, max: 60000 },
-        { label: "60000 - 65000", min: 60000, max: 65000 },
-        { label: "65000 - 70000", min: 65000, max: 70000 },
-        { label: "More than 70000", min: 70000, max: Infinity },
+        { label: "More than 50000", min: 50000, max: Infinity },
     ];
 
-
-
-    // handel cross butoon
-
-    function handleCross() {
-        setSideBar(false)
-        console.log("cross is clicked")
-        document.body.style.overflow = "auto";
-
-    }
-
-    // Filtered products
+    // Filter products
     const filteredProducts = selectedFilter
-        ? products.filter(item => {
-            if (selectedFilter.type === "category") {
-                return item.Product_Category === selectedFilter.value;
-            } else if (selectedFilter.type === "brand") {
-                return item.Brand_Name === selectedFilter.value;
-            } else if (selectedFilter.type === "price") {
-
+        ? searchResults.filter((item) => {
+            if (selectedFilter.type === "category") return item.Product_Category === selectedFilter.value;
+            if (selectedFilter.type === "brand") return item.Brand_Name === selectedFilter.value;
+            if (selectedFilter.type === "price") {
                 const price = parseInt(String(item.Product_price || "0").replace(/,/g, ""));
                 return price >= selectedFilter.min && price <= selectedFilter.max;
             }
             return true;
         })
-        : products;
+        : searchResults;
 
-    function productTypeDisplay() {
-        setSideBar(true)
-        document.body.style.overflow = "hidden";
-        window.scrollTo(0, 0);
+    // Remove auto-redirect, just handle empty searchResults
+    if (loading && searchResults) setLoading(false);
+
+    if (loading) return <p style={{ padding: "20px" }}>Loading search results...</p>;
+
+    if (!loading && (!searchResults || searchResults.length === 0)) {
+        return (
+            <div className="no-product-found">
+                <div className="image-in-not-found">
+                    <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1760685581/Neutral_Aesthetic_Simple_Quote_Instagram_Post_byfeti.gif" alt="No Products" />
+                </div>
+                <div className="text-image-not-found">
+                    <p>No products found for "{searchQuery}"</p>
+                </div>
+                <div className="go-back-buttons">
+                    <button onClick={() => Navigate("/")}>HOME</button>
+                </div>
+            </div>
+        );
     }
 
-    useEffect(() => {
-        if (type) {
-            fetchProducts();
-        }
-    }, [type]);
+    // for sending the product to product details 
 
-    const fetchProducts = async () => {
-        try {
-            const res = await fetch(`http://localhost:4100/api/v1/categoryProduct?type=${type}`);
-            const data = await res.json();
-            setProducts(data.message || []);
-        } catch (error) {
-            console.error("Error while fetching products", error);
-        } finally {
-            setLoading(false);
-        }
-    };
 
-    
 
     return (
         <>
+            {/* Poster / Banner */}
             <div className="main-poster-category">
-                <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1760441526/guitar_1_o9t0sw.jpg" />
+                <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1760441526/guitar_1_o9t0sw.jpg" alt="Search Banner" />
             </div>
 
+            {/* Filter and Total */}
             <div className="filter-and-type-section">
                 <div className="filter">
-                    <button onClick={productTypeDisplay}><span><IoIosColorFilter /></span>Fiter</button>
+                    <button onClick={openSidebar}>
+                        <span><IoIosColorFilter /></span>Filter
+                    </button>
                 </div>
-
                 <div className="cate">
-                    <button> {products.length} <span>Results</span> </button>
+                    <button>
+                         {filteredProducts.length} <span>Results </span>
+                    </button>
                 </div>
             </div>
 
+            {/* Sidebar */}
             <div className="side-bar-on-product-category-page">
                 {showSideBar && (
                     <div className="listing-on-categoryes">
-
                         <div className="listing-product-category">
                             <div className="main-heading-product-categoryes">
-                                <div className="text">
-                                    <p>FILTER</p>
-                                </div>
-
+                                <div className="text"><p>FILTER</p></div>
                                 <div className="cross-section-categoryes">
                                     <button onClick={handleCross}><RxCross1 /></button>
                                 </div>
                             </div>
-                            <hr className="border-1 border-red-500"></hr>
+                            <hr className="border-1 border-red-500" />
 
-                            {/* Product Categories */}
+                            {/* Categories */}
                             <div className="main-class-listing-list">
                                 <div className="main-heading-product-categoryes-out-border">
-                                    <div className="text">
-                                        <p>PRODUCT CATEGORYES</p>
-                                    </div>
+                                    <div className="text"><p>PRODUCT CATEGORYES</p></div>
                                 </div>
                                 <ul className="lsiting-felx-class">
                                     {Object.entries(categoryCount).map(([category, count], index) => (
-                                        <li className="cate-list-highlight"
+                                        <li
                                             key={index}
+                                            className="cate-list-highlight"
                                             onClick={() => {
                                                 setSelectedFilter({ type: "category", value: category });
-                                                setSideBar(false); // sidebar close
-                                                document.body.style.overflow = "auto"; // scroll wapas enable
+                                                handleCross();
                                             }}
                                         >
                                             {category} ({count})
@@ -152,14 +141,12 @@ function FilterProductByCategoryes() {
                                 </ul>
                             </div>
 
-                            <hr className="border-1 border-red-500"></hr>
+                            <hr className="border-1 border-red-500" />
 
                             {/* Brands */}
                             <div className="main-brands-category">
                                 <div className="main-heading-product-categoryes-out-border">
-                                    <div className="text">
-                                        <p>BRANDS </p>
-                                    </div>
+                                    <div className="text"><p>BRANDS</p></div>
                                 </div>
                                 <ul>
                                     {Object.entries(brandCount).map(([brand, count], index) => (
@@ -167,8 +154,7 @@ function FilterProductByCategoryes() {
                                             key={index}
                                             onClick={() => {
                                                 setSelectedFilter({ type: "brand", value: brand });
-                                                setSideBar(false);
-                                                document.body.style.overflow = "auto";
+                                                handleCross();
                                             }}
                                         >
                                             {brand} ({count})
@@ -177,14 +163,12 @@ function FilterProductByCategoryes() {
                                 </ul>
                             </div>
 
-                            <hr className="border-1 border-red-500"></hr>
+                            <hr className="border-1 border-red-500" />
 
-                            {/* Price Filter */}
+                            {/* Price */}
                             <div className="main-brands-category">
                                 <div className="main-heading-product-categoryes-out-border">
-                                    <div className="text">
-                                        <p>PRICE</p>
-                                    </div>
+                                    <div className="text"><p>PRICE</p></div>
                                 </div>
                                 <ul className="pricing-listing">
                                     {priceRanges.map((range, index) => (
@@ -193,8 +177,7 @@ function FilterProductByCategoryes() {
                                             key={index}
                                             onClick={() => {
                                                 setSelectedFilter({ type: "price", min: range.min, max: range.max });
-                                                setSideBar(false); // sidebar close
-                                                document.body.style.overflow = "auto"; // page scroll enable
+                                                handleCross();
                                             }}
                                         >
                                             {range.label}
@@ -202,48 +185,49 @@ function FilterProductByCategoryes() {
                                     ))}
                                 </ul>
                             </div>
-
                         </div>
                     </div>
                 )}
             </div>
 
-            {/* Clear Filter Button */}
+            {/* Clear Filter */}
             {selectedFilter && (
                 <div className="clear-filer-section filter">
                     <button onClick={() => setSelectedFilter(null)}>Clear Filter</button>
                 </div>
-               
             )}
 
+            {/* Products */}
             <div className="main-category-products">
                 {filteredProducts.length > 0 ? (
                     filteredProducts.map((item) => (
-                        <div className="product-Categories-inside-category-folder"
+                        <div
                             key={item.product_id || item._id}
-                            onClick={() => Navigate("/productDetails", { state: item })}>
+                            className="product-Categories-inside-category-folder"
+                            onClick={() => {
+                                Navigate(`/SearchproductDetails`, { state: item });
+                                console.log("Navigated!", item);
+                            }}
 
-                           
-
+                        >
                             <div className="filter-product-image">
-                                <img src={item.image_01} alt={item.name} />
+                                <img src={item.image_01} alt={item.Product_Name } />
                             </div>
 
                             <div className="filter-product-para-text">
                                 {/* <div className="model-name dotted-border">
-                                    <p>#{item.Model_number}</p>
+                                    <p>#{item.Model_number || "N/A"}</p>
                                 </div> */}
-                                <div className="brand-name-p dotted-border">
-                                    <p>{item.Brand_Name.toUpperCase()}</p>
+                                <div className="model-name dotted-border">
+                                    <p>{(item.Brand_Name || "Unknown").toUpperCase()}</p>
                                 </div>
-                                {/* <div className="model-descripction  dotted-border">
-                                    <p>{item.Product_Category}</p>
+                                {/* <div className="model-descripction dotted-border">
+                                    <p>{item.Product_Category || "N/A"}</p>
                                 </div> */}
                                 <div className="model-name">
-                                    <p>{item.Product_Name.toUpperCase()}</p>
+                                    <p>{(item.Product_Name || "Unnamed Product").toUpperCase()}</p>
                                 </div>
                             </div>
-
                         </div>
                     ))
                 ) : (
@@ -253,5 +237,3 @@ function FilterProductByCategoryes() {
         </>
     );
 }
-
-export default FilterProductByCategoryes;

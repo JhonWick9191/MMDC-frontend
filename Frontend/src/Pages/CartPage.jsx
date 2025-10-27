@@ -119,7 +119,7 @@ export default function CartPage() {
                           <button onClick={() => dispatch(decrementQuantity(item.id))}><FaCircleMinus /></button>
                         </div>
                         <div className="value">
-                          <p>{item.quantity || 1}</p>
+                          <p>{item.Product_Quantity ||  10}</p>
                         </div>
                         <div className="increment-button">
                           <button onClick={() => dispatch(incrementQuantity(item.id))}><FaCirclePlus /></button>

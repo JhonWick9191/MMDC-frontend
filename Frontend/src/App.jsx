@@ -3,32 +3,34 @@ import Home from "./Home";
 import "./Components/Component.css";
 import "./Pages/Page.css";
 import LoadingScreen from "./Components/Loading";
-import {useLocation}  from "react-router-dom";
-import { useState ,useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-
-// components 
-
+// Components
 import NavBar from "./Components/NavBar";
-import Footer from "./Components/Footer"
+import Footer from "./Components/Footer";
 
-// importing pages 
+// Pages
 import Login from "./Pages/Login";
 import ProductDeatils from "./Pages/ProductDetails";
 import CartPage from "./Pages/CartPage";
 import WishList from "./Pages/WishListPage";
 import FilterProductByCategoryes from "./Pages/ProductCategory";
 import AdminProfile from "./Pages/AdminProfile";
+import SearchProducts from "./Pages/SearchProductPage";
+import SearchProductDetails from "./Pages/SearchProductsDetails";
 
-//importing UserProfile pages 
+// User Profile Pages
 import Profile from "./Pages/UserPorfilePages/ProfilePage";
 import VendorProfile from "./Pages/UserPorfilePages/ProfilePage";
 import BuyProduct from "./Pages/UserPorfilePages/BuyProducts";
 
-// toast container
+// Toast
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// ✅ Import Context
+import { useSearch } from "./Context/SearchContaxt"
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -42,46 +44,50 @@ function App() {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
 
-   useEffect(() => {
+  const { isSearching, searchResults } = useSearch(); // ✅ Get data from context
+
+  useEffect(() => {
     setLoading(true);
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1000); 
+    }, 1000);
     return () => clearTimeout(timer);
-  }, [location.pathname])
+  }, [location.pathname]);
 
-  // for scroll to top function
   return (
     <>
-    <div>
+      <div>
+        <ScrollToTop />
+        <NavBar />
+        <ToastContainer />
+        {loading && <LoadingScreen />}
 
-   <ScrollToTop />
-    <NavBar/>
-          <ToastContainer />
-       {loading && <LoadingScreen/>}   
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login/>}/>  
-        <Route path="/productDetails" element={<ProductDeatils/>} />
-        <Route path="/cartDeatils" element={<CartPage/>} />
-        <Route path="/wishlistProduct" element={<WishList/>} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/isadminProfile" element={<AdminProfile/>} />
-        <Route path="/isVendorProfile" element={<VendorProfile/>}/> 
-        <Route path="/yourProducts" element={<BuyProduct/>}  /> 
-        <Route path="/products" element={<FilterProductByCategoryes/>} />
-      </Routes>
-      <Footer/>
+        {/* ✅ When searching, show only Search results */}
+        {isSearching ? (
+          <SearchProducts products={searchResults} />
+        ) : (
+          <>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="SearchproductDetails" element={<SearchProductDetails />} />
+              <Route path="/productDetails" element={<ProductDeatils />} />
+              <Route path="/cartDeatils" element={<CartPage />} />
+              <Route path="/wishlistProduct" element={<WishList />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/isadminProfile" element={<AdminProfile />} />
+              <Route path="/isVendorProfile" element={<VendorProfile />} />
+              <Route path="/yourProducts" element={<BuyProduct />} />
+              <Route path="/products" element={<FilterProductByCategoryes />} />
+              <Route path="/searchProducts" element={<SearchProducts />} />
+            </Routes>
+          </>
+        )}
 
-        </div>
-
-        <div>
-      
-        </div>
-
-
-    
-</>  );
+        <Footer />
+      </div>
+    </>
+  );
 }
 
 export default App;
