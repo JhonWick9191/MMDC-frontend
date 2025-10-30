@@ -82,7 +82,7 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="relative mb-10">
+    <nav className="relative">
       <div className="wrapper-class-main-nav-bar">
         {/* Logo */}
         <div className="main-logo">

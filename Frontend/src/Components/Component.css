@@ -78,7 +78,10 @@ ul li {
 .wrapper-class-main-nav-bar {
 background-color: white;
     width: 100%;
-    padding: 1.2%;
+    padding-left: 1.2%;
+    padding-right: 1.2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
     z-index: 999;
     position: fixed;
     display: flex;
@@ -110,8 +113,12 @@ background-color: white;
 .search-bar-main {
     border: 1px solid red;
     width: 100%;
-    padding: 10px;
-    border-radius: 20px;
+    padding: 8px;
+    border-radius: 50px;
+}
+
+.search-bar input{
+    font-size: 14px;
 }
 
 .secrch-icon {
@@ -409,7 +416,7 @@ background-color: white;
 }
 
 .margin-top-5{
-    margin-top: 5%;
+    margin-top: 6%;
 }
 
 .dots-container {
@@ -506,10 +513,10 @@ background-color: white;
 }
 
 .topTenItems-images {
+    border: 2px solid re;
     display: flex;
     gap: 20px;
-    transition: transform 0.5s ease;
-    /* 0.5s slow smooth transition */
+     transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
     will-change: transform;
 }
 
@@ -700,11 +707,12 @@ background-color: white;
 .items-buttons-for-chaging-the-screen button {
     margin: 6px;
     background: white;
+    border: 1px solid white;
     align-items: center;
     padding: 5px;
     border-radius: 5px;
     justify-content: center;
-    border: none;
+
     outline: none;
     cursor: pointer;
     color: gray;
@@ -730,7 +738,7 @@ background-color: white;
     width: 100%;
     position: absolute;
     left: 0%;
-    top: 50%;
+    top: 100%;
     transform: translate(0%, 300%);
     bottom: 100%;
     background: transparent;
@@ -744,7 +752,7 @@ background-color: white;
 
 .items-buttons-for-chaging-the-screen button:hover::after,
 .items-buttons-for-chaging-the-screen .active-btn::after {
-    border: 2px solid #F05624;
+    border: 1px solid #F05624;
     position: absolute;
 
 }

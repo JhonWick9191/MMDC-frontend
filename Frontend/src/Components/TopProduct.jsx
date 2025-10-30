@@ -11,55 +11,55 @@ const catogeryesProducts = [
         id: 1,
         name: "Effect",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666738/Untitled_design_5_1_lydd7q.jpg",
-       
+
     },
     {
         id: 2,
         name: "Guitar",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666738/download_rmyqgs.jpg",
-       
+
 
     },
     {
         id: 3,
         name: "Accessories",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666737/2020s_NS_Design_WAV_4_Electric_Violin_Amber_Burst_1_uwrbzc.jpg",
-        
+
     },
 
     {
         id: 4,
         name: "Ukulele",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666737/Untitled_design_3_axzwoh.jpg",
-        
+
 
     },
     {
         id: 5,
         name: "Amplifiers",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666739/Souldier_Hendrix_2__Guitar_Strap___Reverb_i9zcxh.jpg",
-       
+
     },
 
     {
         id: 6,
-        name: "Bass Guitars",
+        name: "Pro Audio",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666740/Untitled_design_8_1_ggdncm.jpg",
-       
+
 
     },
     {
         id: 7,
         name: "Mixers",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666740/Untitled_design_4_1_pqvyzs.jpg",
-      
+
 
     },
     {
         id: 8,
         name: "Acoustic Guitars",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666740/Untitled_design_6_kna0dx.jpg",
-      
+
 
     },
     {
@@ -67,14 +67,14 @@ const catogeryesProducts = [
         name: "Controller",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666740/Untitled_design_7_1_a91fnh.jpg",
 
-    
+
 
     },
     {
         id: 10,
         name: "Acoustic Drum",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666738/Untitled_design_5_1_lydd7q.jpg",
-       
+
     },
 
 ];
@@ -132,19 +132,12 @@ const ourCommunityVideos = [
 ]
 
 
-const buttons = [
-    "Acoustic Guitar ",
-    "Acoustic Guitar ",
-    "Acoustic Guitar ",
-    "Acoustic Guitar ",
-    "Acoustic Guitar ",
-    "More Products "
-];
+
 
 // smooth sroll function 
 
 export default function TopProducts() {
-  const Navigate = useNavigate()
+    const Navigate = useNavigate()
 
     const [topProducts] = useState(catogeryesProducts);
     const [currentIndexImage, setCurrentIndexImage] = useState(0);
@@ -168,15 +161,15 @@ export default function TopProducts() {
 
     }
 
-  
-   function ClickHandler(items){
-    console.log("Button is clicked ")
-    console.log(items)
-    Navigate(`/products?type=${items}`);
-    // nevigate to Product Categoryes like Accessoires , Guitars , etc 
-    
 
-   }
+    function ClickHandler(items) {
+        console.log("Button is clicked ")
+        console.log(items)
+        Navigate(`/products?type=${items}`);
+        // nevigate to Product Categoryes like Accessoires , Guitars , etc 
+
+
+    }
     // Tranding products 
 
     const [activeIndex, setActiveIndex] = useState(null);
@@ -191,11 +184,11 @@ export default function TopProducts() {
 
                     <div className="Categories">
 
-                       
-                        <div className="main-display-seaction">
-                      
 
-                     
+                        <div className="main-display-seaction">
+
+
+
                             {catogeryesProducts.map((items) => (
                                 <div className="main-catogries" key={items.id} onClick={() => ClickHandler(items.name)}>
                                     <div className="catogries-images">
@@ -209,7 +202,7 @@ export default function TopProducts() {
                                 </div>
                             ))
                             }
-                                   
+
                         </div>
                     </div>
                 </div>
@@ -222,26 +215,45 @@ export default function TopProducts() {
                     <div className="main-sectionHeading">
                         <h1>TOP 10 PRODUCTS OF THE WEEK</h1>
                     </div>
-                    <div className="top-products-main-content">
+
+                    <div className="top-products-main-content" style={{ overflow: "hidden" }}>
                         <div className="priviousimage">
-                            <button onClick={priviousImageFunction}><GrPrevious /></button>
+
+                            {/* if current image lenght is == 0 then  < not show same for next button  */}
+                            {currentIndexImage <= 0 ? null : (
+                                <button onClick={priviousImageFunction}>
+                                    <GrPrevious />
+                                </button>
+                            )}
                         </div>
-                        <div className={`topTenItems-images ${translateClass}`}>
-                            {
-                                topProducts.slice(currentIndexImage, currentIndexImage + visibleCount).map((topProductsItems) => (
-                                    <div className="main-image-with-number" key={topProductsItems.id}>
-                                        <div className="main-image-top-ten">
-                                            <img src={topProductsItems.image} alt={topProductsItems.name} />
-                                            <div className="number">
-                                                <p>{topProductsItems.id}</p>
-                                            </div>
+
+                        {/* ✅ Sliding container */}
+                        <div
+                            className="topTenItems-images"
+                            style={{
+                                transform: `translateX(-${currentIndexImage * (114 / visibleCount)}%)`,
+                            }}
+                        >
+                            {topProducts.map((item) => (
+                                <div className="main-image-with-number" key={item.id} style={{ flex: `0 0 ${100 / visibleCount}%` }}>
+                                    <div className="main-image-top-ten">
+                                        <img src={item.image} alt={item.name} />
+                                        <div className="number">
+                                            <p>{item.id}</p>
                                         </div>
                                     </div>
-                                ))
-                            }
+                                </div>
+                            ))}
                         </div>
+
                         <div className="nextImage">
-                            <button onClick={nextImageFunction}><GrNext /></button>
+                            <div className="nextImage">
+                                {currentIndexImage >= topProducts.length - visibleCount ? null : (
+                                    <button onClick={nextImageFunction}>
+                                        <GrNext />
+                                    </button>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -250,15 +262,15 @@ export default function TopProducts() {
 
             {/* ------------------------------------------------------------------------------------- Best Sellar section Trandig Products -----------------------------------------------------------------------------------------------------------------*/}
 
-        
 
-        
+
+
 
 
             {/*--------------------------------------------------------------------------------------- Our Community section---------------------------------------------------------------------------------------------------------------------------------*/}
 
 
-            <section className="hide-from-mobile">
+            {/* <section className="hide-from-mobile">
                 <div className="margin-and-padding-main">
                     <div className="main-sectionHeading ">
                         <h1>OUR COMMUNITY</h1>
@@ -272,7 +284,7 @@ export default function TopProducts() {
                                 ourCommunityVideos.slice(currentIndexImage, currentIndexImage + visibleCount).map((video) => (
                                     <div className="main-image-with-video " key={video.id}>
                                         <div className="main-rells-sections">
-                                            <video src={video.video} controls muted playsInline loading="lazy"  />
+                                            <video src={video.video} controls muted playsInline loading="lazy" />
                                         </div>
                                     </div>
                                 ))
@@ -283,7 +295,7 @@ export default function TopProducts() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
 
             {/*--------------------------------------------------------------------------------------- our community section ends-----------------------------------------------------------------------------------------------------------------------------*/}

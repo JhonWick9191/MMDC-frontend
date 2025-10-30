@@ -912,9 +912,9 @@ z-index: 9999;
 /*  animations for card open smoothly */
 
 /* Smooth transition for product grid */
-.fade-container {
- 
-  gap: 1rem;
+.fade-container { 
+    margin-top: 2%;
+  gap:5px;
   justify-content: center;
   transition: opacity 0.5s ease;
 }
@@ -972,9 +972,18 @@ z-index: 9999;
 
 .product-card:hover {
   transform: scale(1);
-
+  border: .5px solid black;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
+
+.product-card:hover img{
+    border: none;
+}
+
+.filter-product-image:hover img {
+    border: none;
+}
+    
 
 
 /* Smooth hover animation for cards */
