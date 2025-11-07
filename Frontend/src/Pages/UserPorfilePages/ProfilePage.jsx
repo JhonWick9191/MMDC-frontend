@@ -37,6 +37,8 @@ function Profile(){
     return(
 
         <>
+    <div className="main-wrapper-for-profile-page">
+         
    
     {
         user.role === "Admin" ? (
@@ -46,7 +48,7 @@ function Profile(){
             <VendorProfile  data={user}/>
         )
     }
-
+  </div> 
         </>
             
     )

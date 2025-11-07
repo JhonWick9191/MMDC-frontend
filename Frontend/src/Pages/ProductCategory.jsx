@@ -87,6 +87,7 @@ function FilterProductByCategoryes() {
         try {
             const res = await fetch(`http://localhost:4100/api/v1/categoryProduct?type=${type}`);
             const data = await res.json();
+            console.log(data)
             setProducts(data.message || []);
         } catch (error) {
             console.error("Error while fetching products", error);
@@ -104,11 +105,11 @@ function FilterProductByCategoryes() {
             </div>
 
             <div className="filter-and-type-section">
-                <div className="filter">
+                <div className="filter btn2 liquid">
                     <button onClick={productTypeDisplay}><span><IoIosColorFilter /></span>Fiter</button>
                 </div>
 
-                <div className="cate">
+                <div className="cate btn2 liquid">
                     <button> {products.length} <span>Results</span> </button>
                 </div>
             </div>
@@ -230,17 +231,16 @@ function FilterProductByCategoryes() {
                             </div>
 
                             <div className="filter-product-para-text">
-                                {/* <div className="model-name dotted-border">
-                                    <p>#{item.Model_number}</p>
-                                </div> */}
+                              
                                 <div className="brand-name-p dotted-border">
                                     <p>{item.Brand_Name.toUpperCase()}</p>
                                 </div>
-                                {/* <div className="model-descripction  dotted-border">
-                                    <p>{item.Product_Category}</p>
-                                </div> */}
+                                
                                 <div className="model-name">
-                                    <p>{item.Product_Name.toUpperCase()}</p>
+                                    <p>{item.Product_Name?.toUpperCase()}</p>
+                                </div>
+                                <div className="btn2 liquid">
+                                    <button>View Deatils </button>
                                 </div>
                             </div>
 

@@ -95,14 +95,14 @@ export default function SearchProducts() {
 
             {/* Filter and Total */}
             <div className="filter-and-type-section">
-                <div className="filter">
+                <div className="filter  ">
                     <button onClick={openSidebar}>
-                        <span><IoIosColorFilter /></span>Filter
+                        <span><IoIosColorFilter /></span>Filter 
                     </button>
                 </div>
-                <div className="cate">
+                <div className="cate" >
                     <button>
-                         {filteredProducts.length} <span>Results </span>
+                         {filteredProducts.length}  <span>  Results </span>
                     </button>
                 </div>
             </div>
@@ -192,7 +192,7 @@ export default function SearchProducts() {
 
             {/* Clear Filter */}
             {selectedFilter && (
-                <div className="clear-filer-section filter">
+                <div className="clear-filer-section filter btn liquid">
                     <button onClick={() => setSelectedFilter(null)}>Clear Filter</button>
                 </div>
             )}

@@ -57,7 +57,7 @@ const catogeryesProducts = [
     },
     {
         id: 8,
-        name: "Acoustic Guitars",
+        name: "Drum Accessories",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666740/Untitled_design_6_kna0dx.jpg",
 
 
@@ -178,8 +178,18 @@ export default function TopProducts() {
         <>
             <section >
                 <div className="margin-and-padding-main">
-                    <div className="main-sectionHeading">
-                        <h1>CATEGORIES</h1>
+                       <div className="line-with-text width-80-for-line">
+                        <div className="left-line w-20">
+                            <hr></hr>
+                        </div>
+
+                        <div className="text-heading">
+                            <h2 className="main-heading-recom">OUR CATEGORYS</h2>
+                        </div>
+
+                        <div className="right-line">
+                            <hr></hr>
+                        </div>
                     </div>
 
                     <div className="Categories">
@@ -212,8 +222,18 @@ export default function TopProducts() {
 
             <section className="hide-from-mobile">
                 <div className="margin-and-padding-main">
-                    <div className="main-sectionHeading">
-                        <h1>TOP 10 PRODUCTS OF THE WEEK</h1>
+                    <div className="line-with-text width-80-for-line">
+                        <div className="left-line w-20">
+                            <hr></hr>
+                        </div>
+
+                        <div className="text-heading">
+                            <h2 className="main-heading-recom">TOP 10 PRODUCTS</h2>
+                        </div>
+
+                        <div className="right-line">
+                            <hr></hr>
+                        </div>
                     </div>
 
                     <div className="top-products-main-content" style={{ overflow: "hidden" }}>

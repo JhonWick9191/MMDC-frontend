@@ -1,0 +1,50 @@
+.main-wrapper-for-profile-page{
+    padding: 2%;
+}
+.main-profile-page-user-profile{
+    border: 2px solid red; 
+
+}
+.main-wrapper-profile-page{
+    border: 2px solid red;
+}
+
+.main-wrapper-for-user-profile{
+    display: flex;
+    width: 100%;
+    border: 2px solid black ;
+    justify-content: space-between;
+}
+
+.main-content-right-side-product-user{
+    border: 2px solid red;
+    width: 80%;
+    padding: 2%;
+}
+
+.side-bar-buttons{
+    border: 2px solid red;
+    width: 19%;
+    padding: 2%;
+}
+
+.products-lists-for-user-profile{
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.main-wrapper-for-user-order-products{
+    border: 2px solid red;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 5px;
+}
+
+.images-for-products-under-profile img{
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}

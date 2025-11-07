@@ -17,8 +17,8 @@ function Profile(){
 
     function lougoutHander(){
 
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("user");
 
     dispatch(setToken(null));
     dispatch(setUser(null));

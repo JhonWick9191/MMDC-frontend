@@ -2,6 +2,8 @@ import { useDispatch } from "react-redux"
 import { setToken ,setUser } from "../../Redux/Slice/AuthSlice"
 import { useNavigate } from "react-router-dom"
 import SideBadr from "./SideBarUserProfile"
+
+import "./UserProfile.css"
 export default function VendorProfile(){
 
     const dispatch = useDispatch()
@@ -24,18 +26,13 @@ export default function VendorProfile(){
         <>
         <div className="main-dashboard-page">
 
-            <div className="">
+            <div className="side-bar-for-user-profile">
                 <SideBadr/>
-            </div>
-
-            <div>
-                
-            </div>
+            </div>          
 
         </div>
         
-        <h1>This is Vendor Profile </h1>
-        <button onClick={logoutHandler}>Log out </button>
+      
         </>
     )
 }

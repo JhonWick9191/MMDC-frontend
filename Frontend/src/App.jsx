@@ -23,7 +23,7 @@ import SearchProductDetails from "./Pages/SearchProductsDetails";
 // User Profile Pages
 import Profile from "./Pages/UserPorfilePages/ProfilePage";
 import VendorProfile from "./Pages/UserPorfilePages/ProfilePage";
-import BuyProduct from "./Pages/UserPorfilePages/BuyProducts";
+
 
 // Toast
 import { ToastContainer } from "react-toastify";
@@ -76,8 +76,7 @@ function App() {
               <Route path="/wishlistProduct" element={<WishList />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/isadminProfile" element={<AdminProfile />} />
-              <Route path="/isVendorProfile" element={<VendorProfile />} />
-              <Route path="/yourProducts" element={<BuyProduct />} />
+              <Route path="/isVendorProfile" element={<VendorProfile />} />        
               <Route path="/products" element={<FilterProductByCategoryes />} />
               <Route path="/searchProducts" element={<SearchProducts />} />
             </Routes>

@@ -23,7 +23,7 @@ export default function OurTandingProducts() {
 
   async function fetchProductsByType(type) {
     try {
-      setFade(true); // 🔹 Start fade-out animation
+      setFade(true);
       setLoading(true);
 
       const res = await fetch(`${BASE_URL}/searchProducts?q=${encodeURIComponent(type)}`);
@@ -38,7 +38,7 @@ export default function OurTandingProducts() {
         }
         setLoading(false);
         setFade(false); // 🔹 Trigger fade-in
-      }, 400);
+      }, 1000);
     } catch (err) {
       console.error("Error fetching products:", err);
       setFilteredProducts([]);
@@ -63,9 +63,19 @@ export default function OurTandingProducts() {
     <section>
       <div className="margin-and-padding-main">
         <div className="our-tranding-products">
-          <div className="main-sectionHeading">
-            <h1>OUR TRENDING PRODUCTS</h1>
-          </div>
+            <div className="line-with-text width-80-for-line">
+            <div className="left-line w-20">
+              <hr></hr>
+            </div>
+
+            <div className="text-heading">
+                  <h2 className="main-heading-recom">TRENDING PRODUCTS</h2>
+            </div>
+
+            <div className="right-line">
+             <hr></hr>
+            </div>
+        </div>
 
           {/* CATEGORY BUTTONS */}
           <div className="items-buttons-for-chaging-the-screen">
@@ -82,46 +92,44 @@ export default function OurTandingProducts() {
 
           {/* PRODUCTS SECTION */}
           {loading && (
-            <p className="text-center text-gray-500 py-6"></p>
+            <p className="loading-gif-on-product-change">
+            <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1762344049/video_1_wjtbit.gif"/>
+            </p>
           )}
 
           {!loading && (
             <div className={`main-category-products fade-container ${fade ? "fade-out" : "fade-in"}`}>
-              {filteredProducts.length > 0 ? (
-                filteredProducts.map((item) => (
-                  <div
-                    className="product-Categories-inside-category-folder product-card"
-                    key={item._id || item.product_id}
-                    onClick={() => Navigate("/productDetails", { state: item })}
-                  >
-                    <div className="filter-product-image">
-                      <img
-                        src={
-                          item.image_01 ||
-                          item.Image_URL ||
-                          "https://via.placeholder.com/200?text=No+Image"
-                        }
-                        alt={item.Product_Name || "Product"}
-                      />
-                    </div>
+               {filteredProducts.length > 0 ? (
+                    filteredProducts.map((item) => (
+                        <div className="product-Categories-inside-category-folder"
+                            key={item.product_id || item._id}
+                            onClick={() => Navigate("/productDetails", { state: item })}>
 
-                    <div className="filter-product-para-text">
-                      {item.Brand_Name && (
-                        <div className="brand-name-p dotted-border">
-                          <p>{item.Brand_Name.toUpperCase()}</p>
+                           
+
+                            <div className="filter-product-image">
+                                <img src={item.image_01} alt={item.name} />
+                            </div>
+
+                            <div className="filter-product-para-text">
+                              
+                                <div className="brand-name-p dotted-border">
+                                    <p>{item.Brand_Name.toUpperCase()}</p>
+                                </div>
+                                
+                                <div className="model-name">
+                                    <p>{item.Product_Name?.toUpperCase()}</p>
+                                </div>
+                                <div className="btn2 liquid">
+                                    <button>View Deatils </button>
+                                </div>
+                            </div>
+
                         </div>
-                      )}
-                      {item.Product_Name && (
-                        <div className="model-name">
-                          <p>{item.Product_Name.toUpperCase()}</p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p>No products found.</p>
-              )}
+                    ))
+                ) : (
+                    <p>No products found.</p>
+                )}
             </div>
           )}
         </div>
