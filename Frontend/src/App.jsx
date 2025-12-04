@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 // Components
 import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
+import TurstedByBrands from "./Components/TurstedByBrsnds";
 
 // Pages
 import Login from "./Pages/Login";
@@ -16,7 +17,7 @@ import ProductDeatils from "./Pages/ProductDetails";
 import CartPage from "./Pages/CartPage";
 import WishList from "./Pages/WishListPage";
 import FilterProductByCategoryes from "./Pages/ProductCategory";
-import AdminProfile from "./Pages/AdminProfile";
+import AdminProfile from "../src/Pages/AminProfilePages/AdminProfile"
 import SearchProducts from "./Pages/SearchProductPage";
 import SearchProductDetails from "./Pages/SearchProductsDetails";
 
@@ -82,9 +83,10 @@ function App() {
             </Routes>
           </>
         )}
-
+        <TurstedByBrands />
         <Footer />
       </div>
+       
     </>
   );
 }

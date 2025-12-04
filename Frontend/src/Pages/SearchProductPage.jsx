@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useSearch } from "../Context/SearchContaxt";
 import { IoIosColorFilter } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
+import { GoHome } from "react-icons/go";
+import { IoMdHeartEmpty } from "react-icons/io";
 
 export default function SearchProducts() {
     const { searchResults, searchQuery } = useSearch();
@@ -61,6 +63,8 @@ export default function SearchProducts() {
         })
         : searchResults;
 
+        console.log(filteredProducts)
+
     // Remove auto-redirect, just handle empty searchResults
     if (loading && searchResults) setLoading(false);
 
@@ -84,28 +88,48 @@ export default function SearchProducts() {
 
     // for sending the product to product details 
 
+    const searchParams = new URLSearchParams(location.search)
+    let types = searchParams.get("type")
 
+    function productTypeDisplay() {
+        setSideBar(true)
+        document.body.style.overflow = "hidden";
+        window.scrollTo(0, 0);
+    }
 
     return (
         <>
             {/* Poster / Banner */}
-            <div className="main-poster-category">
-                <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1760441526/guitar_1_o9t0sw.jpg" alt="Search Banner" />
+            <div className="path-page">
+                <ul>
+                    <li><GoHome /> /  </li>
+                    <li>{location.pathname.toUpperCase().replace("/", " ")} /  </li>
+                    <li></li>
+                    <li>{types}</li>
+                </ul>
+                <p className="path-heading">
+                    {types}
+                </p>
+            </div>
+
+            <hr className="color_2"></hr>
+            <div className="filter-and-type-section">
+                <div className="filter btn2 liquid">
+                    <button onClick={productTypeDisplay}><span><svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" fill="none"><rect width="18" height="1.5" y="2.5" fill="#191A1F" rx=".75"></rect><circle cx="10.5" cy="3" r="1.75" fill="#fff" stroke="#191A1F" stroke-width="1.5"></circle><rect width="18" height="1.5" y="7.5" fill="#191A1F" rx=".75"></rect><circle cx="5.5" cy="8" r="1.75" fill="#fff" stroke="#191A1F" stroke-width="1.5"></circle><rect width="18" height="1.5" y="12.5" fill="#191A1F" rx=".75"></rect><circle cx="11.5" cy="13" r="1.75" fill="#fff" stroke="#191A1F" stroke-width="1.5"></circle></svg></span>Fiter</button>
+                </div>
+
+                <div className="left-side-buttons-filter ">
+
+                    <div className="cate">
+                        <p>{filteredProducts.length} <span>  Results</span></p>
+                    </div>
+
+                </div>
+
             </div>
 
             {/* Filter and Total */}
-            <div className="filter-and-type-section">
-                <div className="filter  ">
-                    <button onClick={openSidebar}>
-                        <span><IoIosColorFilter /></span>Filter 
-                    </button>
-                </div>
-                <div className="cate" >
-                    <button>
-                         {filteredProducts.length}  <span>  Results </span>
-                    </button>
-                </div>
-            </div>
+           
 
             {/* Sidebar */}
             <div className="side-bar-on-product-category-page">
@@ -198,42 +222,156 @@ export default function SearchProducts() {
             )}
 
             {/* Products */}
+
             <div className="main-category-products">
-                {filteredProducts.length > 0 ? (
-                    filteredProducts.map((item) => (
-                        <div
-                            key={item.product_id || item._id}
-                            className="product-Categories-inside-category-folder"
-                            onClick={() => {
-                                Navigate(`/SearchproductDetails`, { state: item });
-                                console.log("Navigated!", item);
-                            }}
+                <div className="filter-with-products">
+                    <div className="listing-on-categoryes">
 
-                        >
-                            <div className="filter-product-image">
-                                <img src={item.image_01} alt={item.Product_Name } />
-                            </div>
-
-                            <div className="filter-product-para-text">
-                                {/* <div className="model-name dotted-border">
-                                    <p>#{item.Model_number || "N/A"}</p>
-                                </div> */}
-                                <div className="model-name dotted-border">
-                                    <p>{(item.Brand_Name || "Unknown").toUpperCase()}</p>
+                        <div className="listing-product-category">
+                            <div className="main-heading-product-categoryes">
+                                <div className="text">
+                                    <p>FILTER</p>
                                 </div>
-                                {/* <div className="model-descripction dotted-border">
-                                    <p>{item.Product_Category || "N/A"}</p>
-                                </div> */}
-                                <div className="model-name">
-                                    <p>{(item.Product_Name || "Unnamed Product").toUpperCase()}</p>
+
+                                <div className="cross-section-categoryes">
+                                    <button onClick={handleCross}><RxCross1 /></button>
                                 </div>
                             </div>
+                            <hr className="border-1 border-red-500"></hr>
+
+                            {/* Product Categories */}
+                            <div className="main-class-listing-list">
+                                <div className="main-heading-product-categoryes-out-border">
+                                    <div className="text">
+                                        <p>PRODUCT CATEGORYES</p>
+                                    </div>
+                                </div>
+                                <ul className="lsiting-felx-class">
+                                    {Object.entries(categoryCount).map(([category, count], index) => (
+                                        <li className="cate-list-highlight"
+                                            key={index}
+                                            onClick={() => {
+                                                setSelectedFilter({ type: "category", value: category });
+                                                setSideBar(false); // sidebar close
+                                                document.body.style.overflow = "auto"; // scroll wapas enable
+                                            }}
+                                        >
+                                            {category} ({count})
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            <hr className="border-1 border-red-500"></hr>
+
+                            {/* Brands */}
+                            <div className="main-brands-category">
+                                <div className="main-heading-product-categoryes-out-border">
+                                    <div className="text">
+                                        <p>BRANDS </p>
+                                    </div>
+                                </div>
+                                <ul className="brand-listing">
+                                    {Object.entries(brandCount).map(([brand, count], index) => (
+                                        <li
+                                            key={index}
+                                            onClick={() => {
+                                                setSelectedFilter({ type: "brand", value: brand });
+                                                setSideBar(false);
+                                                document.body.style.overflow = "auto";
+                                            }}
+                                        >
+                                            {brand} ({count})
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            <hr className="border-1 border-red-500"></hr>
+
+                            {/* Price Filter */}
+                            <div className="main-brands-category">
+                                <div className="main-heading-product-categoryes-out-border">
+                                    <div className="text">
+                                        <p>PRICE</p>
+                                    </div>
+                                </div>
+                                <ul className="pricing-listing">
+                                    {priceRanges.map((range, index) => (
+                                        <li
+                                            className="listing-products-price"
+                                            key={index}
+                                            onClick={() => {
+                                                setSelectedFilter({ type: "price", min: range.min, max: range.max });
+                                                setSideBar(false); // sidebar close
+                                                document.body.style.overflow = "auto"; // page scroll enable
+                                            }}
+                                        >
+                                            {range.label}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
                         </div>
-                    ))
-                ) : (
-                    <p>No products found.</p>
-                )}
+                    </div>
+                </div>
+                <div className="products-cato">
+                    {filteredProducts.length > 0 ? (
+                        filteredProducts.map((item) => (
+                            <div className="product-Categories-inside-category-folder"
+                                key={item.product_id || item._id}
+                                onClick={() => Navigate("/productDetails", { state: item })}>
+
+
+
+                                <div className="filter-product-image">
+                                    <img
+                                        src={item.image_01}
+                                        alt={item.name}
+                                        onMouseEnter={(e) => (e.currentTarget.src = item.image_02)}
+                                        onMouseLeave={(e) => (e.currentTarget.src = item.image_01)}
+                                    />
+
+                                    <div className="overlay-products">
+
+                                        <div className="overlay-buttons">
+
+                                            <div className="wishlist-overlay">
+                                                <buttons onClick={(event) => { dispatch(addToWishlist(item)); event.stopPropagation(); toast.success(` Added to the wishlist`); }}><IoMdHeartEmpty /></buttons>
+                                            </div>
+
+                                            <div className="btn2 liquid  overlay-view-details ">
+                                                <button >View Deatils </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div className="filter-product-para-text">
+
+                                    <div className="brand-name-p dotted-border">
+                                        <p>{item.Brand_Name}</p>
+                                    </div>
+
+                                    <div className="model-name">
+                                        <p>{item.Product_Name}</p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        ))
+                    ) : (
+                        <p>No products found.</p>
+                    )}
+                </div>
             </div>
+
         </>
     );
 }

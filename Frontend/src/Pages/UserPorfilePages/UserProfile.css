@@ -1,10 +1,7 @@
 .main-wrapper-for-profile-page{
     padding: 2%;
 }
-.main-profile-page-user-profile{
-    border: 2px solid red; 
 
-}
 .main-wrapper-profile-page{
     border: 2px solid red;
 }
@@ -12,24 +9,45 @@
 .main-wrapper-for-user-profile{
     display: flex;
     width: 100%;
-    border: 2px solid black ;
+ 
     justify-content: space-between;
 }
 
 .main-content-right-side-product-user{
-    border: 2px solid red;
+       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     width: 80%;
-    padding: 2%;
+    padding: 1%;
+    border-radius: 10px;
 }
 
 .side-bar-buttons{
-    border: 2px solid red;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     width: 19%;
-    padding: 2%;
+    height: 190px;
+    border-radius: 10px;
+    padding: 1%;
+}
+.main-profile-page-user-profile ul li:hover{
+    cursor: pointer;
+    font-weight: 900;
 }
 
+.mt-6{
+    margin-top: 10px;
+}
+.width-100{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
 .products-lists-for-user-profile{
-    border: 2px solid black;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    height: 400px;
+    justify-content: space-between;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,7 +55,7 @@
 }
 
 .main-wrapper-for-user-order-products{
-    border: 2px solid red;
+    
     display: grid;
     grid-template-columns: repeat(4,1fr);
     gap: 5px;
@@ -47,4 +65,70 @@
     height: 200px;
     width: 200px;
     object-fit: cover;
+}
+
+.main-pending-class-page{
+  
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+}
+
+.pending-users{
+    margin-top: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 2%;
+    width: 100%;
+        transition:background-color  0.5s ease;
+
+}
+.pending-users:hover {
+   
+    background-color: gray;
+    color: white;
+    border: none;
+}
+.buttons-main-approve{
+ 
+    display: flex;
+    gap: 10px;
+}
+.button-approve{
+   
+    width: 100%;
+}
+.red-back{
+    background-color: red;
+    color: white;
+    font-weight: 700;
+       transition: transform .5s;
+}
+.red-back:hover{
+     transform: scale(1.1);
+}
+
+.back-green{
+    background-color: rgb(149, 198, 50);
+    color: white;
+     transition: transform .5s;
+}
+
+.back-green:hover{
+
+    transform: scale(1.1);
+
+}
+
+@media screen and (max-width: 600px){
+    .main-wrapper-for-user-profile{
+        flex-direction: column;
+        gap: 10px;
+    }
+    .side-bar-buttons {
+        width: 100%;
+    }
+    .main-content-right-side-product-user{
+        width: 100%;
+    }
 }

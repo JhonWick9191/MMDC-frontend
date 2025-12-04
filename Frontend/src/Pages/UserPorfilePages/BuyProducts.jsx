@@ -70,7 +70,7 @@ export default function BuyProduct() {
         displayedOrders.map((order) => (
           <div
             key={order._id}
-            className="border p-4 mb-4 rounded-lg shadow-sm bg-gray-50"
+            className=" p-4 mb-4 rounded-lg shadow-sm bg-gray-50"
           >
             <div className="main-wrapper-for-user-order-products">
               {order.products.map((product, index) => (
@@ -87,7 +87,7 @@ export default function BuyProduct() {
                     <p>Price: ₹{product.Product_price}</p>
                     <p>Quantity: {product.quantity}</p>
                   </div>
-                  <div className="btn">
+                  <div className="btn width-100">
                     <button
                       onClick={() => deleteProduct(order._id, product._id)}
                     >

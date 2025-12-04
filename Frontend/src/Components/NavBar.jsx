@@ -81,6 +81,63 @@ export default function NavBar() {
     Navigate("/searchProducts");
   };
 
+  // code for go to the products with there categoryes 
+
+  const categoeryesProducts = [
+    {
+      id: 1,
+      name: "Effect"
+    },
+    {
+      id: 2,
+      name: "Guitar",
+
+    },
+    {
+      id: 3,
+      name: "Accessories",
+    },
+    {
+      id: 4,
+      name: "Ukulele",
+
+    },
+    {
+      id: 5,
+      name: "Amplifiers",
+    },
+    {
+      id: 6,
+      name: "Pro Audio"
+    },
+    {
+      id: 7,
+      name: "Mixers",
+    },
+    {
+      id: 8,
+      name: "Drum Accessories",
+    },
+    {
+      id: 9,
+      name: "Controller",
+    },
+    {
+      id: 10,
+      name: "Acoustic Drum",
+    }
+
+
+  ]
+
+
+  function ClickHandler(items) {
+    console.log("Button is clicked ")
+    console.log(items)
+    // nevigate to Product Categoryes like Accessoires , Guitars , etc 
+    Navigate(`/products?type=${items}`);
+  }
+
   return (
     <nav className="relative">
       <div className="wrapper-class-main-nav-bar">
@@ -164,23 +221,20 @@ export default function NavBar() {
 
               <div className="signup-login-buttons">
                 <div className="sign-up-button-hamburger">
-                  <button
-                    className="sign-up hamburger-btn"
-                    onClick={() => {
-                      handleCross();
-                      Navigate("/login");
-                    }}
-                  >
-                    {token && User ? (
+                  <li className="profile-logo-in-list">
+                    {User ? (
                       <img
-                        className="profile-image-user-mob"
-                        src={User.image || "https://via.placeholder.com/40"}
-                        alt="profile"
+                        onClick={() => { Navigate("/profile"), handleCross() }}
+                        src={User.image}
+                        alt="user"
                       />
                     ) : (
-                      <CgProfile />
+                      <span onClick={() => Navigate("/login")}>
+                        <CgProfile />
+                      </span>
                     )}
-                  </button>
+                  </li>
+
                 </div>
               </div>
             </div>
@@ -190,11 +244,18 @@ export default function NavBar() {
                 <h1>
                   Our Products <span><RiArrowDropDownLine /></span>
                 </h1>
-                <ul>
-                  <li>Guitar</li>
-                  <li>Drums</li>
-                  <li>Keyboards</li>
-                </ul>
+
+                {categoeryesProducts.map((items) => (
+                  <div className="" key={items.id} onClick={() => ClickHandler(items.name)}>
+
+
+                    <div className="catogries-nam">
+                      <p>{items.name.toUpperCase()}</p>
+                    </div>
+                  </div>
+                ))
+                }
+
               </div>
 
               <div className="more-buttons">
@@ -208,7 +269,7 @@ export default function NavBar() {
                       <li onClick={() => { handleCross(); Navigate("/"); }}>Home</li>
                       <li>About Us</li>
                       <li>Contact Us</li>
-                      <li>Track Your Order</li>
+                      <li>My Account </li>
                     </ul>
                   </div>
                 )}

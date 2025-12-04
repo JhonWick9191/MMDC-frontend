@@ -98,6 +98,7 @@ export default function () {
         phone_number: "",
         password: "",
         confrim_password: "",
+        gst_number:"",
        
 
     })
@@ -204,7 +205,7 @@ export default function () {
                                         <div className="first-name-signup">
                                             <input
                                                 type="text"
-                                                placeholder="First Name "
+                                                placeholder="First Name *"
                                                 name="first_name"
                                                 value={signupForm.first_name}
                                                 onChange={signupChangeHandler}
@@ -214,7 +215,7 @@ export default function () {
                                         <div className="last-name-signup">
                                             <input
                                                 type="text"
-                                                placeholder="Last Name"
+                                                placeholder="Last Name *"
                                                 name="last_name"
                                                 value={signupForm.last_name}
                                                 onChange={signupChangeHandler}
@@ -225,7 +226,7 @@ export default function () {
 
                                     <div className="confrim-password gst-number">
                                         <input type="text"
-                                            placeholder="Enter Your Email id"
+                                            placeholder="Enter Email Id *"
                                             name="email"
                                             value={signupForm.email}
                                             onChange={signupChangeHandler}
@@ -237,7 +238,7 @@ export default function () {
                                         <div className="choose-password">
                                             <input
                                                 type="text"
-                                                placeholder="Choose Your Password "
+                                                placeholder="Choose Password *"
                                                 name="password"
                                                 value={signupForm.password}
                                                 onChange={signupChangeHandler}
@@ -247,7 +248,7 @@ export default function () {
                                         <div className="confrim-password">
                                             <input
                                                 type="text"
-                                                placeholder="Cofrim Password"
+                                                placeholder="Cofrim Password *"
                                                 name="confrim_password"
                                                 onChange={signupChangeHandler}
                                             />
@@ -257,13 +258,16 @@ export default function () {
 
                                     <div className="confrim-password gst-number">
                                         <input type="text"
-                                            placeholder="Enter Your GST NO. *"
+                                            placeholder="Enter GST NO *"
+                                            name="gst_number"
+                                            value={signupForm.gst_number}
+                                            onChange={signupChangeHandler}
                                         />
                                     </div>
 
                                     <div className="confrim-password mobile-number">
                                         <input type="number"
-                                            placeholder="Enter Your Mobile.no"
+                                            placeholder="Enter  Mobile.no"
                                             onChange={signupChangeHandler}
                                             name="phone_number"
                                             value={signupForm.phone_number}

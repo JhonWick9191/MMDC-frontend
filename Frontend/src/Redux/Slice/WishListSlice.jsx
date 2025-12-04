@@ -8,13 +8,14 @@ const WishlistSlice = createSlice({
   initialState,
   reducers: {
     addToWishlist: (state, action) => {
-      const index = state.findIndex(item => item.id === action.payload.id);
+      const index = state.findIndex(item => item._id === action.payload._id);
       if (index === -1) {
         state.push(action.payload);
       }
     },
     removeFromWishlist: (state, action) => {
-      return state.filter(item => item.id !== action.payload);
+      console.log("Wishlist is clicked")
+      return state.filter(item => item._id !== action.payload._id);
     }
   }
 });

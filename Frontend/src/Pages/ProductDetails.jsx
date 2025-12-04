@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { add, remove } from "../Redux/Slice/Slice";
 import { addToWishlist } from "../Redux/Slice/WishListSlice";
 import LoadingScreen from "../Components/Loading";
+import { IoMdHeartEmpty } from "react-icons/io";
 // css is in page.css
 export default function ProductDetails() {
   const { productId } = useParams();
@@ -163,8 +164,16 @@ export default function ProductDetails() {
     toast.success("Deleted");
   }
 
+ 
+
   return (
     <div className="padding">
+      <div className="black-border">
+
+
+        <marquee>
+          Prices are subject to change without prior notice. Please confirm pricing with your designated Sales Manager before placing an order.</marquee>
+      </div>
       <div className="path">
         <p>HOME / {productDetails.Product_Name?.toUpperCase()}</p>
         <hr />
@@ -198,7 +207,7 @@ export default function ProductDetails() {
           <hr />
           <div className="price">
             <p>
-              <FaIndianRupeeSign /> Price {productDetails.Product_price * count}
+              <FaIndianRupeeSign /> MRP {(productDetails.Product_price * count).toLocaleString("en-IN")}
             </p>
             <p>Price incl. of all Taxes</p>
           </div>
@@ -226,7 +235,7 @@ export default function ProductDetails() {
 
           {isOutOfStock && (
             <p style={{ color: "red", fontWeight: 600, margin: "1rem 0" }}>
-              Sorry, this product is currently out of stock.
+              Sorry, this product is currently out of stock will be restored soon .
             </p>
           )}
 
@@ -266,40 +275,69 @@ export default function ProductDetails() {
               </button>
             </div>
           </div>
-          <hr />
+          <hr className="none" />
           <div className="cart-discripction">
             <h1 className="product-name">Description</h1>
             <p>{productDetails.Product_Discripction}</p>
           </div>
         </div>
+
+
+        <div className="carts-buttons sticky">
+          <div className="cart-btn">
+            {Cart.some((product) => product.id === productDetails._id) ? (
+              <button onClick={removeToCart}>Remove from Cart</button>
+            ) : (
+              <button
+                onClick={addToCart}
+                disabled={isOutOfStock || isLimitExceeded}
+                style={{
+                  backgroundColor: isOutOfStock || isLimitExceeded ? "#ccc" : undefined,
+                  cursor: isOutOfStock || isLimitExceeded ? "not-allowed" : "pointer",
+                }}
+              >
+                Add to Cart
+              </button>
+            )}
+          </div>
+          <div className="cart-btn">
+            <button
+              onClick={() => {
+                dispatch(addToWishlist(productDetails));
+                toast.success(`${productDetails.Product_Name} is added to the WishList`);
+              }}
+            >
+              <FaHeart /> Wishlist
+            </button>
+          </div>
+        </div>
       </div>
-    
+
       {/* 🔹 Recommended Products Section */}
       <div className="recommendations-section" style={{ marginTop: "2rem" }}>
         <div className="line-with-text">
-            <div className="left-line">
-              <hr></hr>
-            </div>
+          <div className="left-line">
+            <hr></hr>
+          </div>
 
-            <div className="text-heading">
-                  <h2 className="main-heading-recom">Recommended Products</h2>
-            </div>
+          <div className="text-heading">
+            <h2 className="main-heading-recom">Recommended Products</h2>
+          </div>
 
-            <div className="right-line">
-             <hr></hr>
-            </div>
+          <div className="right-line">
+            <hr></hr>
+          </div>
         </div>
-      
+
         {loadingRecommendations ? (
           <LoadingScreen />
         ) : recommendations.length === 0 ? (
           <p >No recommendations found.</p>
         ) : (
           <div
-            className="main-category-products"
-            
+            className="main-category-products_2"
           >
-            
+
             {recommendations.map((item) => (
               <div
                 key={item._id || item.product_id}
@@ -308,27 +346,41 @@ export default function ProductDetails() {
                   navigate("/productDetails", { state: item });
                   window.scrollTo({ top: 0, behavior: "smooth" }); // 🔹 Scroll to top on click
                 }}
-              
+
               >
                 <div className="filter-product-image">
-                    
-                <img  src={item.image_01} alt={item.Product_Name}
-                />
+
+                  <img src={item.image_01} alt={item.Product_Name}
+                  />
+
+                  <div className="overlay-products">
+
+                    <div className="overlay-buttons">
+
+                      <div className="wishlist-overlay">
+                        <button onClick={(event) => { dispatch(addToWishlist(item)); event.stopPropagation(); toast.success(`${item.Product_Name} added to the wishlist`); }}><IoMdHeartEmpty /></button>
+                      </div>
+
+                      <div className="btn2 liquid  overlay-view-details ">
+                        <button >View Deatils </button>
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
-                   <div className="filter-product-para-text">
-                              
-                                <div className="brand-name-p dotted-border">
-                                    <p>{item.Brand_Name.toUpperCase()}</p>
-                                </div>
-                                
-                                <div className="model-name">
-                                    <p>{item.Product_Name?.toUpperCase()}</p>
-                                </div>
-                                <div className="btn2 liquid">
-                                    <button>View Deatils </button>
-                                </div>
-                            </div>
-               
+                <div className="filter-product-para-text">
+
+                  <div className="brand-name-p dotted-border">
+                    <p>{item.Brand_Name.toUpperCase()}</p>
+                  </div>
+
+
+                  <div className="model-name">
+                    <p>{item.Product_Name?.toUpperCase()}</p>
+                  </div>
+                  
+                </div>
+
               </div>
             ))}
           </div>

@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { IoMdHeartEmpty } from "react-icons/io";
+import { addToWishlist } from "../Redux/Slice/WishListSlice";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function OurTandingProducts() {
   const Navigate = useNavigate();
@@ -8,17 +11,19 @@ export default function OurTandingProducts() {
   const [activeIndex, setActiveIndex] = useState(null);
   const [loading, setLoading] = useState(false);
   const [fade, setFade] = useState(false);
+  const dispatch = useDispatch();
 
   const BASE_URL =
     import.meta.env.VITE_MAIN_API_ROUTE || "http://localhost:4100/api/v1";
 
   const buttons = [
-    "Acoustic Guitar",
-    "Electric Guitar",
-    "Bass Guitar",
+    "Acoustic Guitars",
+    "Electric Guitars",
+    "Bass Guitars",
     "Drums",
-    "Mixers",
-    "More Products",
+    "Pro Audio",
+    "Controllers",
+    "Effects",
   ];
 
   async function fetchProductsByType(type) {
@@ -32,7 +37,7 @@ export default function OurTandingProducts() {
       // Small delay for smooth transition
       setTimeout(() => {
         if (res.ok && data.success) {
-          setFilteredProducts(data.data.slice(0, 12)); // Only 12 products
+          setFilteredProducts(data.data.slice(0, 15)); // Only 12 products
         } else {
           setFilteredProducts([]);
         }
@@ -58,78 +63,137 @@ export default function OurTandingProducts() {
       setActiveIndex(0);
     }
   }, []);
+  function handleButton() {
+    console.log("Add to wishlist button is clicked")
+  }
+
+
+
+  // wishlist 
+
+
+
 
   return (
     <section>
       <div className="margin-and-padding-main">
         <div className="our-tranding-products">
-            <div className="line-with-text width-80-for-line">
+          <div className="line-with-text width-80-for-line">
             <div className="left-line w-20">
               <hr></hr>
             </div>
 
             <div className="text-heading">
-                  <h2 className="main-heading-recom">TRENDING PRODUCTS</h2>
+              <h2 className="main-heading-recom">TRENDING PRODUCTS</h2>
             </div>
 
             <div className="right-line">
-             <hr></hr>
+              <hr></hr>
             </div>
-        </div>
+          </div>
 
           {/* CATEGORY BUTTONS */}
+
           <div className="items-buttons-for-chaging-the-screen">
             {buttons.map((label, idx) => (
               <button
                 key={idx}
                 onClick={() => handleCategoryClick(label, idx)}
-                className={activeIndex === idx ? "active-btn" : ""}
+                className="blob-btn"
               >
                 {label}
+                <span className="blob-btn__inner">
+                  <span className="blob-btn__blobs">
+                    <span className="blob-btn__blob"></span>
+                    <span className="blob-btn__blob"></span>
+                    <span className="blob-btn__blob"></span>
+                    <span className="blob-btn__blob"></span>
+                  </span>
+                </span>
               </button>
             ))}
+
+            {/* SVG Filter — keep only one copy in your app */}
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style={{ display: "none" }}>
+              <defs>
+                <filter id="goo">
+                  <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
+                  <feColorMatrix
+                    in="blur"
+                    mode="matrix"
+                    values="1 0 0 0 0  
+                      0 1 0 0 0  
+                      0 0 1 0 0  
+                      0 0 0 21 -7"
+                    result="goo"
+                  ></feColorMatrix>
+                  <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
+                </filter>
+              </defs>
+            </svg>
           </div>
 
           {/* PRODUCTS SECTION */}
           {loading && (
             <p className="loading-gif-on-product-change">
-            <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1762344049/video_1_wjtbit.gif"/>
+              <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1763116242/transition_dpgnur.gif" />
             </p>
           )}
 
           {!loading && (
-            <div className={`main-category-products fade-container ${fade ? "fade-out" : "fade-in"}`}>
-               {filteredProducts.length > 0 ? (
-                    filteredProducts.map((item) => (
-                        <div className="product-Categories-inside-category-folder"
-                            key={item.product_id || item._id}
-                            onClick={() => Navigate("/productDetails", { state: item })}>
+            <div className={`main-category-products_2 fade-container ${fade ? "fade-out" : "fade-in"}`}>
+              {filteredProducts.length > 0 ? (
+                filteredProducts.map((item) => (
+                  <div className="product-Categories-inside-category-folder"
+                    key={item.product_id || item._id}
+                    onClick={() => Navigate("/productDetails", { state: item })}>
 
-                           
 
-                            <div className="filter-product-image">
-                                <img src={item.image_01} alt={item.name} />
-                            </div>
 
-                            <div className="filter-product-para-text">
-                              
-                                <div className="brand-name-p dotted-border">
-                                    <p>{item.Brand_Name.toUpperCase()}</p>
-                                </div>
-                                
-                                <div className="model-name">
-                                    <p>{item.Product_Name?.toUpperCase()}</p>
-                                </div>
-                                <div className="btn2 liquid">
-                                    <button>View Deatils </button>
-                                </div>
-                            </div>
+                    <div className="filter-product-image">
+                      <img
+                        src={item.image_01}
+                        alt={item.name}
+                        onMouseEnter={(e) => (e.currentTarget.src = item.image_02)}
+                        onMouseLeave={(e) => (e.currentTarget.src = item.image_01)}
+                      />
 
+                      <div className="overlay-products">
+
+                        <div className="overlay-buttons">
+
+                          <div className="wishlist-overlay">
+                            <buttons onClick={(event) => { dispatch(addToWishlist(item)); event.stopPropagation(); toast.success(`${item.Product_Name} added to the wishlist`); }}><IoMdHeartEmpty /></buttons>
+                          </div>
+
+                          <div className="btn2 liquid  overlay-view-details ">
+                            <button onClick={handleButton}>View Deatils </button>
+                          </div>
                         </div>
-                    ))
-                ) : (
-                    <p>No products found.</p>
-                )}
+
+                      </div>
+
+
+
+                    </div>
+
+                    <div className="filter-product-para-text">
+
+                      <div className="brand-name-p dotted-border">
+                        <p>{item.Brand_Name.toUpperCase()}</p>
+                      </div>
+
+                      <div className="model-name">
+                        <p>{item.Product_Name?.toUpperCase()}</p>
+                      </div>
+
+                    </div>
+
+                  </div>
+                ))
+              ) : (
+                <p>No products found.</p>
+              )}
             </div>
           )}
         </div>

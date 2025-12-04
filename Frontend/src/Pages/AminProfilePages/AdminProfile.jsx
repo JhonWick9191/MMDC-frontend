@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
-import { setToken ,setUser } from "../Redux/Slice/AuthSlice";
+import { setToken ,setUser } from "../../Redux/Slice/AuthSlice";
 import { useNavigate } from "react-router-dom";
+import SideBadr from "./SideProfileAdmin";
 export default function AdminProfile(){
     const Navigate = useNavigate()
      const dispatch = useDispatch()
@@ -9,8 +10,8 @@ export default function AdminProfile(){
         
         // remove the user form local storage 
 
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
+        // localStorage.removeItem("token");
+        // localStorage.removeItem("user");
 
         //dispatch the new value to the redux
 
@@ -23,8 +24,9 @@ export default function AdminProfile(){
     }
     return(
         <>
-        <h1> This is admin Profile page </h1>
-        <button onClick={logoutHandler}>Lougout </button>
+
+        <SideBadr/>
+        
         </>
     )
 }

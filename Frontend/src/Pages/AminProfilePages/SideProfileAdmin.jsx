@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import BuyProduct from "./BuyProducts";
+// import BuyProduct from "./UserOrderDeatils";
+import TotalBrands from "./TotalBrandProducts";
 import { setToken, setUser } from "../../Redux/Slice/AuthSlice";
 import { useDispatch } from "react-redux";
+import AdminNotifiaction from "./AdminNotification";
 export default function SideBadr() {
   const Nevigate = useNavigate();
   const User = useSelector((state) => state.auth.user);
@@ -30,37 +32,38 @@ export default function SideBadr() {
             <div className="main-profile-page-user-profile">
               <ul>
                 <li>{User.first_name} {User.last_name}</li>
-                <hr></hr>
                 <li>{User.email}</li>
-                  <hr></hr>
               </ul>
             </div>
 
-            <div className="main-profile-page-user-profile">
+            <div>
               <ul>
-                <li onClick={() => setActiveContent("orders")}>Orders</li>
-                  <hr></hr>
+                 <li onClick={() => setActiveContent("Total Products")}>Total Products </li>
+                {/* <li onClick={() => setActiveContent("orders")}>Orders</li> */}
                 <li onClick={() => setActiveContent("notifications")}>Notifications</li>
-                  <hr></hr>
                 <li onClick={() => setActiveContent("faq")}>FAQ</li>
-                  <hr></hr>
               </ul>
             </div>
 
-            <div className="signUp mt-6">
+            <div className="user-profile-buttons">
               <button onClick={logoutHandler}>Log out</button>
-
+           
             </div>
           </nav>
         </div>
 
         {/* Step 3: Conditionally render content based on activeContent */}
         <div className="main-content-right-side-product-user">
-          {activeContent === "orders" && (
+          {
+            activeContent === "Total Products" &&(
+                <TotalBrands/>
+            )
+          }
+          {/* {activeContent === "orders" && (
             <BuyProduct/>
-          )}
+          )} */}
           {activeContent === "notifications" && (
-            <h1>Notifications</h1> // Replace or expand as needed
+           <AdminNotifiaction/>
           )}
           {activeContent === "faq" && (
             <h1>FAQ</h1>

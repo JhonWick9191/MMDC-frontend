@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { setToken } from "../../Redux/Slice/AuthSlice";
 import { setUser } from "../../Redux/Slice/AuthSlice";
 import { useNavigate } from "react-router-dom";
-import AdminProfile from "../AdminProfile";
+import AdminProfile from "../AminProfilePages/AdminProfile";
 import VendorProfile from "./UserProfile";
 
 function Profile(){

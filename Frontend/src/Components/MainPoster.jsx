@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const PosterImage = [
-  { id: 1, image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757337859/11111_eoy6fh.jpg" },
-  { id: 2, image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757337859/11111_eoy6fh.jpg" },
-  { id: 3, image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757337859/11111_eoy6fh.jpg" },
-  { id: 4, image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757337859/11111_eoy6fh.jpg" },
+  { id: 1, image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1762935467/banner_vfnbdo.png" },
+  { id: 2, image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1762951748/banner_2_zae1l4.png" },
+  { id: 3, image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1763034168/4_va7zw4.png" },
+  { id: 4, image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1763029634/3_lam3yf.png" },
 ];
 
 export default function MainPoster() {
@@ -17,7 +17,7 @@ export default function MainPoster() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % PosterImage.length);
-    }, 3000);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 

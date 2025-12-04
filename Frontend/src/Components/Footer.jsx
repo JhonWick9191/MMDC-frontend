@@ -6,106 +6,188 @@ import { CiTwitter } from "react-icons/ci";
 import { CiLinkedin } from "react-icons/ci";
 import { MdCopyright } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
 export default function Footer() {
+    const Navigate = useNavigate()
+    const categoeryesProducts = [
+        {
+            id: 1,
+            name: "Effect"
+        },
+        {
+            id: 2,
+            name: "Guitar",
+
+        },
+        {
+            id: 3,
+            name: "Accessories",
+        },
+        {
+            id: 4,
+            name: "Ukulele",
+
+        },
+        {
+            id: 5,
+            name: "Amplifiers",
+        },
+        {
+            id: 6,
+            name: "Pro Audio"
+        },
+        {
+            id: 7,
+            name: "Mixers",
+        },
+        {
+            id: 8,
+            name: "Drum Accessories",
+        },
+        {
+            id: 9,
+            name: "Controller",
+        },
+        {
+            id: 10,
+            name: "Acoustic Drum",
+        }
+
+
+    ]
+    function ClickHandler(items) {
+        console.log("Button is clicked ")
+        console.log(items)
+        // nevigate to Product Categoryes like Accessoires , Guitars , etc 
+        Navigate(`/products?type=${items}`);
+    }
 
     return (
         <>
-        <section>
+            <section>
 
 
                 <footer>
                     <div className="wrapper-footer">
-                        
-                         {/* <TextHoverEffect text="MMDC" /> */}
-                        
+
+                        <div className="logo-main-footer">
+
+                            <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1757939573/00-music_morelogo-white_w5mjoi.png"></img>
+
+                        </div>
+
+
+
                         <div className="main-footer-class">
-                            <div className="footer-left">
 
-                                <div className="logo">
 
-                                    <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1757939573/00-music_morelogo-white_w5mjoi.png"></img>
+                            <div className="footer-mid">
+
+                                <div>
+
+                                    <h1 className="footer-heading">OUR PRODUCTS </h1>
+
+                                    {categoeryesProducts.map((items) => (
+                                        <div className="" key={items.id} onClick={() => ClickHandler(items.name)}>
+
+
+                                            <div className="catogries-nam">
+                                                <p>{items.name.toUpperCase()}</p>
+                                            </div>
+                                        </div>
+                                    ))
+                                    }
+
 
                                 </div>
+
+                                <div>
+
+                                    <h1 className="footer-heading">PAGES </h1>
+
+                                    <ul className="footer-pages-links">
+
+                                        <li>Home</li>
+                                        <li>About us </li>
+                                        <li>Term's And Condition's </li>
+                                        <li>My Account </li>
+                                    </ul>
+                                </div>
+                                <div className="">
+                                    <h1 className="footer-heading">Need Help</h1>
+                                    <ul>
+                                        <li>Contact us </li>
+                                        <li>FAQs </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+
+                            <div className="footer-right">
+
+
+                                <div className="right-content">
+                                    <div className="para-content-para">                                    
+                                    <p>Get updates on our latest products and sales</p>
+                                    </div>
+
+                                    <div className="sign-up-button">
+
+                                    <button className="signUp">
+                                        Signup Now
+                                    </button>
+
+                                </div>
+
+                                   
+                                </div>
+
+                                
 
                                 <div className="para-content">
 
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, error!</p>
+                                    <p>We are a leading music products distribution company in India, offering high-quality products from renowned international brands all in one place. Our mission is to bring the best musical instruments and accessories to artists and music lovers across the country.</p>
 
                                 </div>
 
+
                                 <div className="social-media-links">
+
+                                    <p>JOIN OUR COMMUNITY </p>
                                     <ul>
-                                        <li> <CiFacebook/> </li>
-                                         <li> <CiInstagram/> </li>
-                                          <li><CiTwitter/></li>
-                                           <li><CiLinkedin/></li>
+                                        <li> <CiFacebook /> </li>
+                                        <li> <CiInstagram /> </li>
+                                        <li><CiTwitter /></li>
+                                        <li><CiLinkedin /></li>
                                     </ul>
 
                                 </div>
 
-                            </div>
-
-                            <div className="footer-mid">
-
-                                     <div>     
-
-                                    <h1 className="footer-heading">Need Help</h1>                  
-
-                                 <ul>
-
-                                    <li>Contact Us</li>
-                                     <li>Track Order</li>
-                                      <li>FAQs</li>
-                                       <li>My Account</li>
-                                </ul>
-                                  </div>
-                                <div className="">                                
-                                 <h1 className="footer-heading">Need Help</h1>
-                                <ul>
-                                    <li>About Us </li>
-                                     <li>Carrers</li>
-                                      
-                                </ul>
-
-                                </div>
-
-                           
-
-                            </div>
-
-                            <div className="footer-right">
-
-                                <div className="right-content">
-                                    <p>Stay in the loop with our weekly newsletter</p>
-                                </div>
-
                                 <div>
-                                <div className="sign-up-button">
 
-                                    <button className="signUp">
-                                        Signup Now 
-                                    </button>
-                                   
-                                </div>
                                 </div>
 
-                          
 
-                             
+
+
 
                             </div>
-                            
+
                         </div>
 
-                         
+                        <div className="main-copy-right-class copy-right">
+                            <h1 className="text-black  text-center flex items-center gap-1 "><b><MdCopyright /></b>2025 MUSIC AND MORE . ALL RIGHT RESEREVED</h1>
+                        </div>
 
-                         <h1 className="text-black copy-right text-center flex items-center gap-1 "><b><MdCopyright /></b>COPYRIGHT 2025 - 2026</h1>
+
+
 
                     </div>
                 </footer>
             </section>
-           
-            
+
+
         </>
     )
 

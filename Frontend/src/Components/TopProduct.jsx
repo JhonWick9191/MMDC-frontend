@@ -9,27 +9,27 @@ import { useNavigate } from "react-router-dom";
 const catogeryesProducts = [
     {
         id: 1,
-        name: "Effect",
+        name: "Effects",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666738/Untitled_design_5_1_lydd7q.jpg",
 
     },
     {
         id: 2,
-        name: "Guitar",
-        image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666738/download_rmyqgs.jpg",
+        name: "Guitars",
+        image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1762931734/guitar_cjm03t.png",
 
 
     },
     {
         id: 3,
         name: "Accessories",
-        image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666737/2020s_NS_Design_WAV_4_Electric_Violin_Amber_Burst_1_uwrbzc.jpg",
+        image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1762931660/Accessories_nbowzd.png",
 
     },
 
     {
         id: 4,
-        name: "Ukulele",
+        name: "Ukuleles",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666737/Untitled_design_3_axzwoh.jpg",
 
 
@@ -37,7 +37,7 @@ const catogeryesProducts = [
     {
         id: 5,
         name: "Amplifiers",
-        image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666739/Souldier_Hendrix_2__Guitar_Strap___Reverb_i9zcxh.jpg",
+        image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1762931660/Amplifier_zhdmzo.png",
 
     },
 
@@ -50,30 +50,30 @@ const catogeryesProducts = [
     },
     {
         id: 7,
-        name: "Mixers",
-        image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666740/Untitled_design_4_1_pqvyzs.jpg",
+        name: "Pino and Keyboard",
+        image: "",
 
 
     },
     {
         id: 8,
-        name: "Drum Accessories",
+        name: "Drums And Accessories",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666740/Untitled_design_6_kna0dx.jpg",
 
 
     },
     {
         id: 9,
-        name: "Controller",
-        image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666740/Untitled_design_7_1_a91fnh.jpg",
+        name: "Harmonica",
+        image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1762931660/Hermonica_q92ezh.png",
 
 
 
     },
     {
         id: 10,
-        name: "Acoustic Drum",
-        image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666738/Untitled_design_5_1_lydd7q.jpg",
+        name: "Drums",
+        image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1762931660/Drums_pdn4y2.png",
 
     },
 
@@ -147,17 +147,13 @@ export default function TopProducts() {
 
     function priviousImageFunction() {
         if (currentIndexImage === 0) return;
-
         setCurrentIndexImage((prevIndex) => prevIndex - 1);
 
     }
 
     function nextImageFunction() {
         if (currentIndexImage + visibleCount >= ourCommunityVideos.length) return;
-
-        setCurrentIndexImage((prevIndex) => prevIndex + 1);
-
-
+            setCurrentIndexImage((prevIndex) => prevIndex + 1);
 
     }
 
@@ -165,14 +161,11 @@ export default function TopProducts() {
     function ClickHandler(items) {
         console.log("Button is clicked ")
         console.log(items)
-        Navigate(`/products?type=${items}`);
         // nevigate to Product Categoryes like Accessoires , Guitars , etc 
-
-
+        Navigate(`/products?type=${items}`); 
     }
     // Tranding products 
 
-    const [activeIndex, setActiveIndex] = useState(null);
     const translateClass = `translate-${currentIndexImage * 20}`;
     return (
         <>
@@ -184,7 +177,7 @@ export default function TopProducts() {
                         </div>
 
                         <div className="text-heading">
-                            <h2 className="main-heading-recom">OUR CATEGORYS</h2>
+                            <h2 className="main-heading-recom">OUR CATEGORIES</h2>
                         </div>
 
                         <div className="right-line">
@@ -228,7 +221,7 @@ export default function TopProducts() {
                         </div>
 
                         <div className="text-heading">
-                            <h2 className="main-heading-recom">TOP 10 PRODUCTS</h2>
+                            <h2 className="main-heading-recom">NEW ARRIVALS</h2>
                         </div>
 
                         <div className="right-line">
@@ -290,7 +283,7 @@ export default function TopProducts() {
             {/*--------------------------------------------------------------------------------------- Our Community section---------------------------------------------------------------------------------------------------------------------------------*/}
 
 
-            {/* <section className="hide-from-mobile">
+             <section className="hide-from-mobile">
                 <div className="margin-and-padding-main">
                     <div className="main-sectionHeading ">
                         <h1>OUR COMMUNITY</h1>
@@ -315,7 +308,7 @@ export default function TopProducts() {
                         </div>
                     </div>
                 </div>
-            </section> */}
+            </section> 
 
 
             {/*--------------------------------------------------------------------------------------- our community section ends-----------------------------------------------------------------------------------------------------------------------------*/}
