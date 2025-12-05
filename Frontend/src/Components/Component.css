@@ -1176,25 +1176,18 @@ background-color: white;
     background-color: #26282D;
 }
 
-.logo-main-footer{
-   
-    
+.logo-main-footer{  
     display: flex;
     justify-content: center;
     justify-items: center;
-    padding: 2%;
- 
-    
-
+    padding: 2%; 
 }
 
 .logo-main-footer img{
     width: 20%;
 }
 
-.main-footer-class {
-    
-  
+.main-footer-class {  
     color: white;
     display: flex;
     padding:0% 2% 2% 2%;
@@ -1574,6 +1567,34 @@ display: none;
 
 /*-----------------------------------------------------------------------------------------------Navbar css starts--------------------------------------------------------------------------------------------------------------*/
 /* mobile breakpoint */
+
+@media screen and (min-width: 650px) and (max-width: 900px){
+    .main-logo{
+        width: 23%;
+    }
+    .top-right-side-section{
+        width: 20%;
+    }
+    .main-heading-recom{
+        font-size: 1rem !important;
+    }
+    .main-display-seaction{
+        grid-template-columns: repeat(3,1fr);
+    }
+    .main-image-with-number{
+        height: 100%;
+    }
+    .number p{
+        top:38%;
+    }
+   
+    .hide-from-mobile{
+        display: none;
+    }
+
+    
+    
+}
 @media screen and (max-width: 600px) {
 
     .button-oh-mobile-at-cart{

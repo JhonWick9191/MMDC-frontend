@@ -36,10 +36,7 @@ export default function CartPage() {
       const response = await fetch(`${BASE_URL}/orderPlaces`,{
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-        
-           
-
+          "Content-Type": "application/json",      
         },
         credentials: "include",
         body: JSON.stringify(orderData),

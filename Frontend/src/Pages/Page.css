@@ -1243,6 +1243,20 @@ input {
 
 /* Smooth hover animation for cards */
 
+@media screen and (min-width: 650px) and (max-width: 900px){
+    .main-category-products_2{
+        grid-template-columns: repeat(3,1fr) !important;
+    }
+
+    .filter-with-products{
+        width: 30%;
+    }
+    .products-cato{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+}
+
 @media screen and (max-width: 600px) {
 
     .login-register-user-child{
