@@ -622,8 +622,9 @@ background-color: white;
 .profile-logo-in-list {
 
     border-radius: 100%;
-    height: 30px;
-    width: 30px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
 
 }
 
@@ -2043,7 +2044,16 @@ display: none;
 
 /*---------------------------------------------------------------------------------------------------less then 340px screen size---------------------------------------------------------*/
 
-@media screen and (max-width: 340px) {
+@media screen and (max-width: 400px) {
+    .items-buttons-for-chaging-the-screen{
+       
+    }
+    .items-buttons-for-chaging-the-screen button{
+        width: 95%;
+    }
+    .slider-image{
+        height: 80vh;
+    }
     .top-right-side-section {
         width: 45%;
     }
