@@ -75,6 +75,9 @@ useEffect(() => {
       const res = await fetch(`${BASE_URL}/me`, {
         method: "GET",
         credentials: "include",
+          headers: {
+          "Cache-Control": "no-cache"  // ✅ fresh request har baar
+        },
       });
       const data = await res.json();
       setMeDebug(data); // ✅ UI me dikhane ke liye
