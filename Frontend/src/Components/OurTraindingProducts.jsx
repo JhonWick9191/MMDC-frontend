@@ -163,7 +163,7 @@ export default function OurTandingProducts() {
                         <div className="overlay-buttons">
 
                           <div className="wishlist-overlay">
-                            <buttons onClick={(event) => { dispatch(addToWishlist(item)); event.stopPropagation(); toast.success(`${item.Product_Name} added to the wishlist`); }}><IoMdHeartEmpty /></buttons>
+                            <button onClick={(event) => { dispatch(addToWishlist(item)); event.stopPropagation(); toast.success(`${item.Product_Name} added to the wishlist`); }}><IoMdHeartEmpty /></button>
                           </div>
 
                           <div className="btn2 liquid  overlay-view-details ">

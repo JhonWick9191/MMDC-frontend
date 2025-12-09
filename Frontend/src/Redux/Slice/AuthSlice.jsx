@@ -10,8 +10,8 @@ function parseJSONSafe(item) {
 }
 
 const initialState = {
-  token: parseJSONSafe(localStorage.getItem("token")),
-  user: parseJSONSafe(localStorage.getItem("user")),
+  token: null, // ab localStorage se nahi le rahe
+  user: null,  // ab localStorage se nahi le rahe
 };
 
 const authSlice = createSlice({
@@ -19,20 +19,10 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setToken(state, action) {
-      state.token = action.payload;
-      if (action.payload) {
-        localStorage.setItem("token", JSON.stringify(action.payload));
-      } else {
-        localStorage.removeItem("token");
-      }
+      state.token = action.payload; // Redux state me hi save
     },
     setUser(state, action) {
-      state.user = action.payload;
-      if (action.payload) {
-        localStorage.setItem("user", JSON.stringify(action.payload));
-      } else {
-        localStorage.removeItem("user");
-      }
+      state.user = action.payload; // Redux state me hi save
     },
   },
 });

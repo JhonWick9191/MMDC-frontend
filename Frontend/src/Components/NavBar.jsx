@@ -12,8 +12,15 @@ import { useSearch } from "../Context/SearchContaxt";
 export default function NavBar() {
   const Cart = useSelector((state) => state.Cart);
   const Wishlist = useSelector((state) => state.Wishlist);
-  const token = useSelector((state) => state.auth.token);
+  // const token = useSelector((state) => state.auth.token);
   const User = useSelector((state) => state.auth.user);
+  useEffect(() => {
+  console.log("Redux user changed:", User);
+}, [User]);
+
+
+
+
 
   const Navigate = useNavigate();
   const [hamburger, setHamburger] = useState(false);
@@ -181,7 +188,7 @@ export default function NavBar() {
             </li>
 
             <li className="profile-logo-in-list">
-              {User ? (
+              {User? (
                 <img
                   onClick={() => Navigate("/profile")}
                   src={User.image || "https://via.placeholder.com/40"}
@@ -193,6 +200,7 @@ export default function NavBar() {
                 </span>
               )}
             </li>
+
 
             <li onClick={handleHamburger} className="hamburger-icon">
               <RxHamburgerMenu />
@@ -221,19 +229,18 @@ export default function NavBar() {
 
               <div className="signup-login-buttons">
                 <div className="sign-up-button-hamburger">
-                  <li className="profile-logo-in-list">
-                    {User ? (
-                      <img
-                        onClick={() => { Navigate("/profile"), handleCross() }}
-                        src={User.image}
-                        alt="user"
-                      />
-                    ) : (
-                      <span onClick={() => Navigate("/login")}>
-                        <CgProfile />
-                      </span>
-                    )}
-                  </li>
+                  {User? (
+                    <img
+                      onClick={() => Navigate("/profile")}
+                      src={User.image}
+                      alt="user"
+                    />
+                  ) : (
+                    <span onClick={() => Navigate("/login")}>
+                      <CgProfile />
+                    </span>
+                  )}
+
 
                 </div>
               </div>

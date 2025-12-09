@@ -15,6 +15,7 @@ export default function ProductDetails() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  console.log(token)
   const Cart = useSelector((state) => state.Cart || []);
 
   const initialProduct = location.state || null;
@@ -22,6 +23,32 @@ export default function ProductDetails() {
   const [count, setCount] = useState(1);
   const [recommendations, setRecommendations] = useState([]);
   const [loadingRecommendations, setLoadingRecommendations] = useState(true);
+
+  // taking the user for login 
+
+  // ✅ ProductDetails.jsx me ye useEffect add karo (line 20 ke baad)
+const user = useSelector((state) => state.auth.user);
+console.log(user)
+useEffect(() => {
+  // Agar token nahi hai to /me call karo
+  if (!token && !user) {
+    async function fetchCurrentUser() {
+      try {
+        const res = await fetch(`${BASE_URL}/me`, {
+          method: "GET",
+          credentials: "include",
+        });
+        const data = await res.json();
+        if (data.success && data.user) {
+          dispatch(setUser(data.user));
+        }
+      } catch (error) {
+        console.log("No user session in ProductDetails");
+      }
+    }
+    fetchCurrentUser();
+  }
+}, []); // Empty dependency - sirf component mount pe
 
   // 🔹 Fetch product details if not present
   useEffect(() => {
@@ -151,7 +178,7 @@ export default function ProductDetails() {
 
   function addToCart() {
     if (isOutOfStock || isLimitExceeded) return;
-    if (!token) {
+    if (!user) {
       toast.error("For Add to Cart you have to login first");
       return;
     }

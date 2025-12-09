@@ -25,11 +25,15 @@ import SearchProductDetails from "./Pages/SearchProductsDetails";
 import Profile from "./Pages/UserPorfilePages/ProfilePage";
 import VendorProfile from "./Pages/UserPorfilePages/ProfilePage";
 
+import { useDispatch } from "react-redux";
+import { setUser } from "./Redux/Slice/AuthSlice";
+
+import { useSelector } from "react-redux";
 
 // Toast
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+const BASE_URL = import.meta.env.VITE_MAIN_API_ROUTE;
 // ✅ Import Context
 import { useSearch } from "./Context/SearchContaxt"
 
@@ -41,7 +45,12 @@ function ScrollToTop() {
   return null;
 }
 
+
+
 function App() {
+  const User = useSelector((state) => state.auth.user);
+
+  const dispatch = useDispatch()
   const location = useLocation();
   const [loading, setLoading] = useState(false);
 
@@ -54,6 +63,36 @@ function App() {
     }, 1000);
     return () => clearTimeout(timer);
   }, [location.pathname]);
+
+  // 
+
+// ✅ Replace your existing useEffect with this ONLY
+useEffect(() => {
+  async function fetchCurrentUser() {
+    try {
+      const res = await fetch(`${BASE_URL}/me`, {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = await res.json();
+      
+      if (data.success && data.user) {
+        dispatch(setUser(data.user));
+      } else {
+        dispatch(setUser(null));
+      }
+    } catch (error) {
+      console.log("No active user session");
+      dispatch(setUser(null));
+    }
+  }
+
+  fetchCurrentUser();
+}, [location.pathname, dispatch]); // ✅ Changed dependency: location.pathname instead of User
+
+
+
+
 
   return (
     <>

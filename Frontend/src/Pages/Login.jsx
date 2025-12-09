@@ -35,60 +35,51 @@ export default function () {
     // async function for login 
 
     async function loginUserDetials(event) {
-
         event.preventDefault();
 
         try {
             const responce = await fetch(`${BASE_URL}/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                credentials:"include",
+                credentials: "include",
                 body: JSON.stringify(LoginFormData),
             })
             const data = await responce.json();
-            // console.log(responce)
-
-            // after login get token 
-
+            console.log(data.token)
 
             console.log("You are loged in this is from login.jex ")
             console.log(data.isExistingUser)
-
-            // this message comes from backend as responce 
-
             console.log(data.message)
-            // if token is present then 
-
 
             if (data.success) {
-                toast.success(data.message); // green success message
+                toast.success(data.message);
+
+                if (data.token) {
+                    console.log(data)
+
+
+                    // ✅ Save to Redux
+                    dispatch(setToken(data.token));
+                    dispatch(setUser(data.isExistingUser))
+                    console.log(userData)
+                    console.log("You are logged in");
+
+                    // ✅ Full page reload + home page redirect
+                    // Complete page reload karega
+
+                }
+
             } else {
-                toast.error(data.message); // red error message
+                toast.error(data.message);
             }
 
             Navigate("/")
 
-            if (data.token) {
-
-                //  Save to localStorage
-                // localStorage.setItem("token", JSON.stringify(data.token));
-                // localStorage.setItem("user", JSON.stringify(data.isExistingUser));
-
-                //  Save to Redux
-                dispatch(setToken(data.token));
-                // console.log(data.token)
-                dispatch(setUser(data.isExistingUser))
-                // console.log(data.isExistingUser)
-                console.log("You are logged in");
-               
-
-            }
-
         } catch (error) {
             console.log(error);
-
         }
     }
+
     // login form data function state ends here 
 
     const [signupForm, setSignupForm] = useState({
@@ -98,8 +89,8 @@ export default function () {
         phone_number: "",
         password: "",
         confrim_password: "",
-        gst_number:"",
-       
+        gst_number: "",
+
 
     })
 
@@ -123,14 +114,14 @@ export default function () {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                  credentials: "include", 
-                body: JSON.stringify({...signupForm , role:"Vendor"})
+                credentials: "include",
+                body: JSON.stringify({ ...signupForm, role: "Vendor" })
             })
 
             const data = await responce.json();
             console.log(data)
 
-            
+
             if (data.success) {
                 toast.success(data.message); // green success message
             } else {
@@ -148,7 +139,7 @@ export default function () {
             dispatch(setUser(data.isExistingUser))
 
             // nevigate to the home page 
-             Navigate("/")
+            Navigate("/")
 
 
         } catch (error) {

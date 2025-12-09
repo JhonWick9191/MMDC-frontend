@@ -8,6 +8,7 @@ import { incrementQuantity, decrementQuantity, remove } from "../Redux/Slice/Sli
 import { addToWishlist } from "../Redux/Slice/WishListSlice";
 import { toast } from "react-toastify";
 import { BsExclamationOctagon } from "react-icons/bs";
+
 import { FaShippingFast } from "react-icons/fa";
 import { AiFillInsurance } from "react-icons/ai";
 import { AiOutlineCheck } from "react-icons/ai";
@@ -36,7 +37,8 @@ export default function CartPage() {
       const response = await fetch(`${BASE_URL}/orderPlaces`,{
         method: "POST",
         headers: {
-          "Content-Type": "application/json",      
+          "Content-Type": "application/json",
+
         },
         credentials: "include",
         body: JSON.stringify(orderData),
