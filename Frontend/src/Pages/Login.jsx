@@ -34,51 +34,48 @@ export default function () {
 
     // async function for login 
 
-    async function loginUserDetials(event) {
-        event.preventDefault();
+async function loginUserDetials(event) {
+  event.preventDefault();
 
-        try {
-            const responce = await fetch(`${BASE_URL}/login`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
-                body: JSON.stringify(LoginFormData),
-            })
-            const data = await responce.json();
-            console.log(data.token)
+  try {
+    const responce = await fetch(`${BASE_URL}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify(LoginFormData),
+    });
+    const data = await responce.json();
 
-            console.log("You are loged in this is from login.jex ")
-            console.log(data.isExistingUser)
-            console.log(data.message)
+    console.log("Login response:", data);
 
-            if (data.success) {
-                toast.success(data.message);
+    if (data.success) {
+      toast.success(data.message);
 
-                if (data.token) {
-                    console.log(data)
+      if (data.token) {
+        // ✅ User data safely lo
+        const userData = data.isExistingUser || data.user || null;
+        console.log("User data from login:", userData);
 
+        // ✅ Save to Redux
+        dispatch(setToken(data.token));
+        dispatch(setUser(userData));
+        console.log("You are logged in");
 
-                    // ✅ Save to Redux
-                    dispatch(setToken(data.token));
-                    dispatch(setUser(data.isExistingUser))
-                    console.log(userData)
-                    console.log("You are logged in");
-
-                    // ✅ Full page reload + home page redirect
-                    // Complete page reload karega
-
-                }
-
-            } else {
-                toast.error(data.message);
-            }
-
-            Navigate("/")
-
-        } catch (error) {
-            console.log(error);
-        }
+        // ✅ Full page reload + home redirect (phone + desktop dono pe stable)
+        window.location.href = "/";
+        return; // yahan return kar do taaki niche Navigate("/") na chale
+      } else {
+        toast.error("Login successful but token missing");
+      }
+    } else {
+      toast.error(data.message);
     }
+  } catch (error) {
+    console.log("Login error:", error);
+    toast.error("Login failed, please try again");
+  }
+}
+
 
     // login form data function state ends here 
 
