@@ -67,6 +67,8 @@ function App() {
   // 
 
 // ✅ Replace your existing useEffect with this ONLY
+const [meDebug, setMeDebug] = useState(null);
+
 useEffect(() => {
   async function fetchCurrentUser() {
     try {
@@ -75,20 +77,21 @@ useEffect(() => {
         credentials: "include",
       });
       const data = await res.json();
-      
+      setMeDebug(data); // ✅ UI me dikhane ke liye
+
       if (data.success && data.user) {
         dispatch(setUser(data.user));
       } else {
         dispatch(setUser(null));
       }
     } catch (error) {
-      console.log("No active user session");
+      setMeDebug({ success: false, error: String(error) });
       dispatch(setUser(null));
     }
   }
 
   fetchCurrentUser();
-}, [location.pathname, dispatch]); // ✅ Changed dependency: location.pathname instead of User
+}, [location.pathname, dispatch]);
 
 
 

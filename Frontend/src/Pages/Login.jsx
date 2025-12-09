@@ -62,8 +62,9 @@ async function loginUserDetials(event) {
         console.log("You are logged in");
 
         // ✅ Full page reload + home redirect (phone + desktop dono pe stable)
-        window.location.href = "/";
+       Navigate("/")
         return; // yahan return kar do taaki niche Navigate("/") na chale
+
       } else {
         toast.error("Login successful but token missing");
       }
