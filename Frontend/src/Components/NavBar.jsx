@@ -188,7 +188,7 @@ export default function NavBar() {
             </li>
 
             <li className="profile-logo-in-list">
-              {User && User.image ?  (
+              {User ? (
                 <img
                   onClick={() => Navigate("/profile")}
                   src={User.image || "https://via.placeholder.com/40"}

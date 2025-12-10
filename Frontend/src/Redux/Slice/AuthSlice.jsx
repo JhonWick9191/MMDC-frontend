@@ -1,13 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // Safe JSON parse function
-function parseJSONSafe(item) {
-  try {
-    return item ? JSON.parse(item) : null;
-  } catch (e) {
-    return null;
-  }
-}
+
 
 const initialState = {
   token: null, // ab localStorage se nahi le rahe

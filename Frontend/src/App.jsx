@@ -69,28 +69,38 @@ function App() {
 // ✅ Replace your existing useEffect with this ONLY
 const [meDebug, setMeDebug] = useState(null);
 
+
+
 useEffect(() => {
-  const timer = setTimeout(async () => {
+  let cancelled = false;
+
+  async function fetchMe() {
     try {
       const res = await fetch(`${BASE_URL}/me`, {
         method: "GET",
         credentials: "include",
       });
       const data = await res.json();
+      if (cancelled) return;
+
       setMeDebug(data);
 
       if (data.success && data.user) {
-        dispatch(setUser(data.user));
+        dispatch(setUser(data.user));  // reload ke baad yahi Redux fill karega
       }
-      // ✅ else me kuch mat karo
     } catch (error) {
+      if (cancelled) return;
       setMeDebug({ success: false, error: String(error) });
-      // ✅ catch me bhi setUser(null) mat karo
     }
-  }, 1000); // ✅ 1 second delay
+  }
 
-  return () => clearTimeout(timer);
-}, [location.pathname, dispatch]);
+  fetchMe();
+
+  return () => {
+    cancelled = true;
+  };
+}, [dispatch]);
+
 
 
 
@@ -100,6 +110,23 @@ useEffect(() => {
   return (
     <>
       <div>
+        {/* {meDebug && (
+  <pre style={{
+    position: "fixed",
+    bottom: 0,
+    left: 0,
+    background: "rgba(0,0,0,0.8)",
+    color: "#0f0",
+    fontSize: "10px",
+    padding: "4px 6px",
+    maxHeight: "40vh",
+    overflow: "auto",
+    zIndex: 9999,
+  }}>
+    {JSON.stringify(meDebug, null, 2)}
+  </pre>
+)} */}
+
         <ScrollToTop />
         <NavBar />
         <ToastContainer />
