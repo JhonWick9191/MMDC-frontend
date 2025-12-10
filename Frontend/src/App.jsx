@@ -70,31 +70,28 @@ function App() {
 const [meDebug, setMeDebug] = useState(null);
 
 useEffect(() => {
-  async function fetchCurrentUser() {
+  const timer = setTimeout(async () => {
     try {
       const res = await fetch(`${BASE_URL}/me`, {
         method: "GET",
         credentials: "include",
-          headers: {
-          "Cache-Control": "no-cache"  // ✅ fresh request har baar
-        },
       });
       const data = await res.json();
-      setMeDebug(data); // ✅ UI me dikhane ke liye
+      setMeDebug(data);
 
       if (data.success && data.user) {
         dispatch(setUser(data.user));
-      } else {
-        dispatch(setUser(null));
       }
+      // ✅ else me kuch mat karo
     } catch (error) {
       setMeDebug({ success: false, error: String(error) });
-      dispatch(setUser(null));
+      // ✅ catch me bhi setUser(null) mat karo
     }
-  }
+  }, 1000); // ✅ 1 second delay
 
-  fetchCurrentUser();
+  return () => clearTimeout(timer);
 }, [location.pathname, dispatch]);
+
 
 
 

@@ -38,8 +38,8 @@ export default function CartPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-
         },
+        
         credentials: "include",
         body: JSON.stringify(orderData),
       });
