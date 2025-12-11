@@ -71,7 +71,9 @@
 .product-Categories-inside-category-folder:hover .filter-product-image img {
   transform: scale(1.1);
   transition: transform 0.5s ease;
+ 
 }
+
 
 /* global-css */
 
@@ -1958,6 +1960,7 @@ display: none;
         flex-direction: column;
         justify-content: space-between;
         width: 100%;
+        
     }
 
     .filter-product-image {

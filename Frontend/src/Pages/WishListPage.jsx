@@ -4,14 +4,17 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { add } from "../Redux/Slice/Slice";
 import { removeFromWishlist } from "../Redux/Slice/WishListSlice";
 import { toast } from "react-toastify";
-
+import { setUser } from "../Redux/Slice/AuthSlice";
 export default function WishList() {
 
   const WishList = useSelector((state) => state.Wishlist)
   console.log("the products in wishlist ", WishList)
   const dispatch = useDispatch()
 
-  const token = useSelector((state) => state.auth.token)
+const token = useSelector((state) => state.auth.token);
+const user  = useSelector((state) => state.auth.user);
+
+console.log(user)
 
 
   return (
@@ -56,7 +59,7 @@ export default function WishList() {
                   </div>
                   <div className="add-to-cart-wishlist">
                     <button onClick={() => {
-                      if (token === null) {
+                      if (user === null) {
                         toast.error("For Add to Cart you Have to login first")
 
                       } else {

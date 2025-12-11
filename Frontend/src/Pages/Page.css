@@ -928,6 +928,10 @@ input {
     display: block;
 
 }
+/* .main-category-products_2:hover > :not(:hover){
+    filter: blur(5px);
+    opacity: 0.5;
+} */
 
 .color {
     border-bottom: 0.5px solid #9f9999;
