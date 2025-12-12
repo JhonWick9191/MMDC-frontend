@@ -1258,6 +1258,8 @@ input {
     .products-cato{
         grid-template-columns: repeat(2, 1fr);
     }
+
+ 
     
 }
 
@@ -1360,4 +1362,14 @@ input {
     .main-category-products_2{
         grid-template-columns: repeat(2,1fr);
     }
+       .product-image {
+    width: 10%;
+    
+  
+    align-items: center;
+    justify-content: center;
+}
+   .product-image img{
+    width: 100%;
+   }
 }
