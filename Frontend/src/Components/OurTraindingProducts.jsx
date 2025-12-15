@@ -14,7 +14,7 @@ export default function OurTandingProducts() {
   const dispatch = useDispatch();
 
   const BASE_URL =
-    import.meta.env.VITE_MAIN_API_ROUTE || "http://localhost:4100/api/v1";
+    import.meta.env.VITE_MAIN_API_ROUTE ;
 
   const buttons = [
     "Acoustic Guitars",
@@ -36,13 +36,14 @@ export default function OurTandingProducts() {
 
       // Small delay for smooth transition
       setTimeout(() => {
+        console.log(data)
         if (res.ok && data.success) {
-          setFilteredProducts(data.data.slice(0, 15)); // Only 12 products
+          setFilteredProducts(data.data.slice(0, 15)); // Only 15 products
         } else {
           setFilteredProducts([]);
         }
         setLoading(false);
-        setFade(false); // 🔹 Trigger fade-in
+        setFade(false); 
       }, 1000);
     } catch (err) {
       console.error("Error fetching products:", err);
@@ -55,7 +56,10 @@ export default function OurTandingProducts() {
   function handleCategoryClick(type, index) {
     setActiveIndex(index);
     fetchProductsByType(type);
+    console.log(type)
+    
   }
+  
 
   useEffect(() => {
     if (buttons.length > 0) {
@@ -66,14 +70,7 @@ export default function OurTandingProducts() {
   function handleButton() {
     console.log("Add to wishlist button is clicked")
   }
-
-
-
   // wishlist 
-
-
-
-
   return (
     <section>
       <div className="margin-and-padding-main">
@@ -192,7 +189,7 @@ export default function OurTandingProducts() {
                   </div>
                 ))
               ) : (
-                <p>No products found.</p>
+                <p>Sorry </p>
               )}
             </div>
           )}

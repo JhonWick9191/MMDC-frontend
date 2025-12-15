@@ -94,7 +94,7 @@ function FilterProductByCategoryes() {
 
     const fetchProducts = async () => {
         try {
-            const res = await fetch(`https://mmdc-backend-final-100.onrender.com/api/v1/categoryProduct?type=${type}`);
+            const res = await fetch(`http://localhost:4100/api/v1/categoryProduct?type=${type}`);
             const data = await res.json();
             console.log(data)
             setProducts(data.message || []);

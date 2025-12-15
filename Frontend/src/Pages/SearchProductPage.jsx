@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSearch } from "../Context/SearchContaxt";
 import { IoIosColorFilter } from "react-icons/io";
@@ -15,6 +15,8 @@ export default function SearchProducts() {
     const [showMessage, setShowMessage] = useState(false);
     const [loading, setLoading] = useState(true);
 
+
+   
     // Sidebar handlers
     const handleCross = () => {
         setSideBar(false);
@@ -37,6 +39,9 @@ export default function SearchProducts() {
         acc[item.Brand_Name] = (acc[item.Brand_Name] || 0) + 1;
         return acc;
     }, {}) || {};
+
+    // loading icon while loading 
+ 
 
     // Price Ranges
     const priceRanges = [
