@@ -96,6 +96,7 @@ function FilterProductByCategoryes() {
         try {
             const res = await fetch(`http://localhost:4100/api/v1/categoryProduct?type=${type}`);
             const data = await res.json();
+            console.log("Product Category data ")
             console.log(data)
             setProducts(data.message || []);
         } catch (error) {

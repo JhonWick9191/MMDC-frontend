@@ -93,11 +93,11 @@ export default function NavBar() {
   const categoeryesProducts = [
     {
       id: 1,
-      name: "Effect"
+      name: "Effects"
     },
     {
       id: 2,
-      name: "Guitar",
+      name: "Guitars",
 
     },
     {
@@ -106,7 +106,7 @@ export default function NavBar() {
     },
     {
       id: 4,
-      name: "Ukulele",
+      name: "Ukuleles",
 
     },
     {
@@ -119,19 +119,20 @@ export default function NavBar() {
     },
     {
       id: 7,
-      name: "Mixers",
+      name: "PINO AND KEYBOARD",
     },
     {
       id: 8,
-      name: "Drum Accessories",
+      name: "Drums and  Accessories",
+    },
+    
+    {
+      id: 9,
+      name: "Drums",
     },
     {
       id: 9,
-      name: "Controller",
-    },
-    {
-      id: 10,
-      name: "Acoustic Drum",
+      name: "Harmonica",
     }
 
 
@@ -142,7 +143,8 @@ export default function NavBar() {
     console.log("Button is clicked ")
     console.log(items)
     // nevigate to Product Categoryes like Accessoires , Guitars , etc 
-    Navigate(`/products?type=${items}`);
+    Navigate(`/products?type=${encodeURIComponent(items)}`);
+    handleCross()
   }
 
   return (

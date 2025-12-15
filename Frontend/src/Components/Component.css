@@ -2048,7 +2048,9 @@ display: none;
     }
 }
 
-
+.sign-up-button-hamburger img{
+    border-radius: 100%;
+}
 /*---------------------------------------------------------------------------------------------------less then 340px screen size---------------------------------------------------------*/
 
 @media screen and (max-width: 400px) {
