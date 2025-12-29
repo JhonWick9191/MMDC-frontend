@@ -8,6 +8,7 @@ import { add, remove } from "../Redux/Slice/Slice";
 import { addToWishlist } from "../Redux/Slice/WishListSlice";
 import LoadingScreen from "../Components/Loading";
 import { IoMdHeartEmpty } from "react-icons/io";
+
 // css is in page.css
 export default function ProductDetails() {
   const { productId } = useParams();
@@ -24,31 +25,34 @@ export default function ProductDetails() {
   const [recommendations, setRecommendations] = useState([]);
   const [loadingRecommendations, setLoadingRecommendations] = useState(true);
 
+  // NEW: fromUrl (filter page ka URL)
+  const fromUrl = location.state?.from || "/FilterProductByCategoryes?type=guitar";
+
   // taking the user for login 
 
   // ✅ ProductDetails.jsx me ye useEffect add karo (line 20 ke baad)
-const user = useSelector((state) => state.auth.user);
-console.log(user)
-useEffect(() => {
-  // Agar token nahi hai to /me call karo
-  if (!token && !user) {
-    async function fetchCurrentUser() {
-      try {
-        const res = await fetch(`${BASE_URL}/me`, {
-          method: "GET",
-          credentials: "include",
-        });
-        const data = await res.json();
-        if (data.success && data.user) {
-          dispatch(setUser(data.user));
+  const user = useSelector((state) => state.auth.user);
+  console.log(user)
+  useEffect(() => {
+    // Agar token nahi hai to /me call karo
+    if (!token && !user) {
+      async function fetchCurrentUser() {
+        try {
+          const res = await fetch(`${BASE_URL}/me`, {
+            method: "GET",
+            credentials: "include",
+          });
+          const data = await res.json();
+          if (data.success && data.user) {
+            dispatch(setUser(data.user));
+          }
+        } catch (error) {
+          console.log("No user session in ProductDetails");
         }
-      } catch (error) {
-        console.log("No user session in ProductDetails");
       }
+      fetchCurrentUser();
     }
-    fetchCurrentUser();
-  }
-}, []); // Empty dependency - sirf component mount pe
+  }, []); // Empty dependency - sirf component mount pe
 
   // 🔹 Fetch product details if not present
   useEffect(() => {
@@ -191,17 +195,33 @@ useEffect(() => {
     toast.success("Deleted");
   }
 
- 
-
   return (
     <div className="padding">
       <div className="black-border">
-
-
         <marquee>
-          Prices are subject to change without prior notice. Please confirm pricing with your designated Sales Manager before placing an order.</marquee>
+          Prices are subject to change without prior notice. Please confirm pricing with your designated Sales Manager before placing an order.
+        </marquee>
       </div>
+
+      {/* NEW: Back button + path */}
       <div className="path">
+        {/* <button
+          onClick={() => {
+            if (location.state?.from) {
+              navigate(fromUrl); // jahan se aaya tha (Fender filtered page)
+            } else {
+              navigate(-1); // normal browser back
+            }
+          }}
+          style={{
+            marginRight: "1rem",
+            padding: "0.25rem 0.75rem",
+            cursor: "pointer",
+          }}
+        >
+          ← Back
+        </button> */}
+
         <p>HOME / {productDetails.Product_Name?.toUpperCase()}</p>
         <hr />
       </div>
@@ -209,7 +229,7 @@ useEffect(() => {
       <div className="product-deatils-main-section">
         <div className="left-section-our-products-section">
           <div className="main-images-products">
-            <img src={mainImage} alt="Selected product" />
+            <img src={mainImage} alt="Selected product" loading="lazy" />
           </div>
           <div className="product-image-mid">
             {images.map((img, idx) => (
@@ -309,7 +329,6 @@ useEffect(() => {
           </div>
         </div>
 
-
         <div className="carts-buttons sticky">
           <div className="cart-btn">
             {Cart.some((product) => product.id === productDetails._id) ? (
@@ -359,55 +378,55 @@ useEffect(() => {
         {loadingRecommendations ? (
           <LoadingScreen />
         ) : recommendations.length === 0 ? (
-          <p >No recommendations found.</p>
+          <p>No recommendations found.</p>
         ) : (
-          <div
-            className="main-category-products_2"
-          >
-
+          <div className="main-category-products_2">
             {recommendations.map((item) => (
               <div
                 key={item._id || item.product_id}
                 className="product-Categories-inside-category-folder"
                 onClick={() => {
-                  navigate("/productDetails", { state: item });
+                  navigate("/productDetails", {
+                    state: {
+                      ...item,
+                      from: location.state?.from || fromUrl,
+                    },
+                  });
                   window.scrollTo({ top: 0, behavior: "smooth" }); // 🔹 Scroll to top on click
                 }}
-
               >
                 <div className="filter-product-image">
-
-                  <img src={item.image_01} alt={item.Product_Name}
-                  />
+                  <img src={item.image_01} alt={item.Product_Name} />
 
                   <div className="overlay-products">
-
                     <div className="overlay-buttons">
-
                       <div className="wishlist-overlay">
-                        <button onClick={(event) => { dispatch(addToWishlist(item)); event.stopPropagation(); toast.success(`${item.Product_Name} added to the wishlist`); }}><IoMdHeartEmpty /></button>
+                        <button
+                          onClick={(event) => {
+                            dispatch(addToWishlist(item));
+                            event.stopPropagation();
+                            toast.success(`${item.Product_Name} added to the wishlist`);
+                          }}
+                        >
+                          <IoMdHeartEmpty />
+                        </button>
                       </div>
 
                       <div className="btn2 liquid  overlay-view-details ">
-                        <button >View Deatils </button>
+                        <button>View Deatils </button>
                       </div>
                     </div>
-
                   </div>
                 </div>
                 <div className="filter-product-para-text">
-
                   <div className="brand-name-p dotted-border">
                     <p>{item.Brand_Name.toUpperCase()}</p>
                   </div>
 
-
                   <div className="model-name">
                     <p>{item.Product_Name?.toUpperCase()}</p>
                   </div>
-                  
                 </div>
-
               </div>
             ))}
           </div>

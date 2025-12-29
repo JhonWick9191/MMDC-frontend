@@ -109,23 +109,7 @@ useEffect(() => {
 
   return (
     <>
-      <div>
-        {/* {meDebug && (
-  <pre style={{
-    position: "fixed",
-    bottom: 0,
-    left: 0,
-    background: "rgba(0,0,0,0.8)",
-    color: "#0f0",
-    fontSize: "10px",
-    padding: "4px 6px",
-    maxHeight: "40vh",
-    overflow: "auto",
-    zIndex: 9999,
-  }}>
-    {JSON.stringify(meDebug, null, 2)}
-  </pre>
-)} */}
+      <div>  
 
         <ScrollToTop />
         <NavBar />

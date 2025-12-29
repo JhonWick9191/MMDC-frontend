@@ -1,8 +1,6 @@
 export default function TrustedByBrands() {
   const companiesLogo = [
   { logo: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1762517391/Fender_logo_rc6c4k.png" },
-
-
   { logo: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1762517391/0_Logo_Cordoba_Blue_Cordoba_with_Arches-large_m9yjcu.png" },
   { logo: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1762517390/296-2962465_schecter-guitar-reasearch-schecter-guitar-research-logo_qhbku9.jpg" },
   { logo: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1762517390/800px-Martin_guitar_logo_eoe0u3.png" },
@@ -85,7 +83,7 @@ export default function TrustedByBrands() {
 
                 <div class="flex marquee-inner will-change-transform  wrape-copmanies-logo">
                     {[ ...companiesLogo].map((company, index) => (
-                        <img key={index} className="mx-11" src={company.logo} alt={company.name} />
+                        <img key={index} className="mx-11" src={company.logo} alt={company.name} loading="lazy" />
                     ))}
                 </div>
 

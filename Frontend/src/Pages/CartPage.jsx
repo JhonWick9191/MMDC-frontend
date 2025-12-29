@@ -78,7 +78,7 @@ export default function CartPage() {
                 <div className="main-cart-section-image">
                   <div className="main-wrapper-class-cart-image">
                   <div className="product-image">
-                    <img src={item.cartImage} alt={item.Product_Name} />
+                    <img src={item.cartImage} alt={item.Product_Name} loading="lazy" />
                   </div>
 
                   </div>

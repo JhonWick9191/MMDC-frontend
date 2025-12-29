@@ -10,86 +10,6 @@ import { useSelector } from "react-redux";
 import { useSearch } from "../Context/SearchContaxt";
 
 export default function NavBar() {
-  const Cart = useSelector((state) => state.Cart);
-  const Wishlist = useSelector((state) => state.Wishlist);
-  // const token = useSelector((state) => state.auth.token);
-  const User = useSelector((state) => state.auth.user);
-  useEffect(() => {
-  console.log("Redux user changed:", User);
-}, [User]);
-
-
-
-
-
-  const Navigate = useNavigate();
-  const [hamburger, setHamburger] = useState(false);
-  const [moreButton, setMoreButton] = useState(true);
-
-  // ✅ Search Context
-  const { searchQuery, setSearchQuery, handleSearch } = useSearch();
-
-  // ✅ Auto Typing Placeholder State
-  const [placeholder, setPlaceholder] = useState("What are you looking for?");
-  const words = ["Guitar", "Drums", "Keyboard", "Piano", "Mixers", "Microphone"];
-
-  useEffect(() => {
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let currentWord = words[wordIndex];
-
-    const typeEffect = () => {
-      if (!isDeleting) {
-        // Typing forward
-        charIndex++;
-        setPlaceholder(`What are you looking for? ${currentWord.substring(0, charIndex)}`);
-        if (charIndex === currentWord.length) {
-          isDeleting = true;
-          setTimeout(typeEffect, 1000); // pause before deleting
-          return;
-        }
-      } else {
-        // Deleting backward
-        charIndex--;
-        setPlaceholder(`What are you looking for? ${currentWord.substring(0, charIndex)}`);
-        if (charIndex === 0) {
-          isDeleting = false;
-          wordIndex = (wordIndex + 1) % words.length;
-          currentWord = words[wordIndex];
-        }
-      }
-      setTimeout(typeEffect, isDeleting ? 70 : 120);
-    };
-
-    const timeout = setTimeout(typeEffect, 1000);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = hamburger ? "hidden" : "auto";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [hamburger]);
-
-  const handleHamburger = () => setHamburger(true);
-  const handleCross = () => setHamburger(false);
-  const handleMore = () => setMoreButton(!moreButton);
-
-  // ✅ Enter press search
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") handleSearchClick();
-  };
-
-  // ✅ Click search icon
-  const handleSearchClick = () => {
-    handleSearch();
-    Navigate("/searchProducts");
-  };
-
-  // code for go to the products with there categoryes 
-
   const categoeryesProducts = [
     {
       id: 1,
@@ -125,7 +45,7 @@ export default function NavBar() {
       id: 8,
       name: "Drums and  Accessories",
     },
-    
+
     {
       id: 9,
       name: "Drums",
@@ -137,6 +57,100 @@ export default function NavBar() {
 
 
   ]
+
+  const Cart = useSelector((state) => state.Cart);
+  const Wishlist = useSelector((state) => state.Wishlist);
+  // const token = useSelector((state) => state.auth.token);
+  const User = useSelector((state) => state.auth.user);
+  useEffect(() => {
+    console.log("Redux user changed:", User);
+  }, [User]);
+
+  const Navigate = useNavigate();
+  const [hamburger, setHamburger] = useState(false);
+  const [moreButton, setMoreButton] = useState(true);
+
+  // ✅ Search Context
+  const { searchQuery, setSearchQuery, handleSearch } = useSearch();
+
+  const [searchHistory, setSearchHistory] = useState([]);
+  const [showHistory, setShowHistory] = useState(false);
+
+
+
+  // ✅ Auto Typing Placeholder State
+  const [placeholder, setPlaceholder] = useState("What are you looking for?");
+  const words = ["Guitar", "Drums", "Keyboard", "Piano", "Mixers", "Microphone"];
+
+  useEffect(() => {
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let currentWord = words[wordIndex];
+
+    const typeEffect = () => {
+      if (!isDeleting) {
+        // Typing forward
+        charIndex++;
+        setPlaceholder(`What are you looking for? ${currentWord.substring(0, charIndex)}`);
+        if (charIndex === currentWord.length) {
+          isDeleting = true;
+          setTimeout(typeEffect, 1000); // pause before deleting
+          return;
+        }
+      } else {
+        // Deleting backward
+        charIndex--;
+        setPlaceholder(`What are you looking for? ${currentWord.substring(0, charIndex)}`);
+        if (charIndex === 0) {
+          isDeleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+          currentWord = words[wordIndex];
+        }
+      }
+      setTimeout(typeEffect, isDeleting ? 80 : 200);
+    };
+
+    const timeout = setTimeout(typeEffect, 1000);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = hamburger ? "hidden" : "auto";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [hamburger]);
+
+  const handleHamburger = () => { console.log("The hamburger is clicked "), setHamburger(true) };
+  const handleCross = () => setHamburger(false);
+  const handleMore = () => setMoreButton(!moreButton);
+
+  //  Enter press search
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") handleSearchClick();
+  };
+
+  //  Searching Products Function 
+  const handleSearchClick = () => {
+    const q = searchQuery?.trim();
+    if (q) {
+      setSearchHistory(prev => {
+        const withoutDup = prev.filter(item => item !== q);
+        return [q, ...withoutDup].slice(0, 10); // max 10
+      });
+    }
+    
+    handleSearch();
+
+    Navigate("/searchProducts");
+    setSearchQuery("")
+  };
+
+
+
+  // code for go to the products with there categoryes 
+
 
 
   function ClickHandler(items) {
@@ -170,11 +184,20 @@ export default function NavBar() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleKeyDown}
+            onFocus={() => setShowHistory(true)}
+            onBlur={() => {
+              // thoda delay taaki click register ho jaye
+              setTimeout(() => setShowHistory(false), 150);
+            }}
           />
-          {/* <div className="search-icon" onClick={handleSearchClick}>
-            <VscSearch />
-          </div> */}
+
+          <button className="search-icon" onClick={handleSearchClick}>
+            <img src="https://pub-b88455fc17c04e63a0f32324fc1620df.r2.dev/animations/mmdcSearch-icon.gif" />
+          </button>
         </div>
+
+
+
 
         {/* Right Section */}
         <div className="top-right-side-section">
@@ -212,81 +235,102 @@ export default function NavBar() {
       </div>
 
       {/* Mobile Menu */}
-      {hamburger && (
-        <div className="main-class-nav-bar">
-          <div className="mobile-navbar">
-            <div className="hamburger-top-section">
-              <div className="cross-icon">
-                <button onClick={handleCross}>
-                  <RxCross2 />
-                </button>
+      <div className="animation-on-navbar">
+        {hamburger && (
+          <div className="main-class-nav-bar">
+            <div className="mobile-navbar">
+              <div className="hamburger-top-section">
+                <div className="cross-icon">
+                  <button onClick={handleCross}>
+                    <RxCross2 />
+                  </button>
+                </div>
+
+                <div className="hamburger-logo">
+                  <img
+                    src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1757570443/00-music_morelogo-1_g8wl3f.png"
+                    alt="logo"
+                  />
+                </div>
+
+                <div className="signup-login-buttons">
+                  <div className="sign-up-button-hamburger">
+                    {User ? (
+                      <img
+                        onClick={() => Navigate("/profile")}
+                        src={User.image}
+                        alt="user"
+                      />
+                    ) : (
+                      <span onClick={() => Navigate("/login")}>
+                        <CgProfile />
+                      </span>
+                    )}
+
+
+                  </div>
+                </div>
               </div>
 
-              <div className="hamburger-logo">
-                <img
-                  src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1757570443/00-music_morelogo-1_g8wl3f.png"
-                  alt="logo"
-                />
-              </div>
+              <div className="listng-items-for-products">
+                <div className="main-listing-items-categories">
+                  <h1>
+                    Our Products <span><RiArrowDropDownLine /></span>
+                  </h1>
 
-              <div className="signup-login-buttons">
-                <div className="sign-up-button-hamburger">
-                  {User? (
-                    <img
-                      onClick={() => Navigate("/profile")}
-                      src={User.image}
-                      alt="user"
-                    />
-                  ) : (
-                    <span onClick={() => Navigate("/login")}>
-                      <CgProfile />
-                    </span>
+                  {categoeryesProducts.map((items) => (
+                    <div className="" key={items.id} onClick={() => ClickHandler(items.name)}>
+
+
+                      <div className="catogries-nam">
+                        <p>{items.name.toUpperCase()}</p>
+                      </div>
+                    </div>
+                  ))
+                  }
+
+                </div>
+
+                <div className="more-buttons">
+                  <h1>
+                    More <span onClick={handleMore}><RiArrowDropDownLine /></span>
+                  </h1>
+
+                  {moreButton && (
+                    <div className="page-lists">
+                      <ul>
+                        <li onClick={() => { handleCross(); Navigate("/"); }}>Home</li>
+                        <li>About Us</li>
+                        <li>Contact Us</li>
+                        <li>My Account </li>
+                      </ul>
+                    </div>
                   )}
-
-
                 </div>
               </div>
             </div>
-
-            <div className="listng-items-for-products">
-              <div className="main-listing-items-categories">
-                <h1>
-                  Our Products <span><RiArrowDropDownLine /></span>
-                </h1>
-
-                {categoeryesProducts.map((items) => (
-                  <div className="" key={items.id} onClick={() => ClickHandler(items.name)}>
-
-
-                    <div className="catogries-nam">
-                      <p>{items.name.toUpperCase()}</p>
-                    </div>
-                  </div>
-                ))
-                }
-
-              </div>
-
-              <div className="more-buttons">
-                <h1>
-                  More <span onClick={handleMore}><RiArrowDropDownLine /></span>
-                </h1>
-
-                {moreButton && (
-                  <div className="page-lists">
-                    <ul>
-                      <li onClick={() => { handleCross(); Navigate("/"); }}>Home</li>
-                      <li>About Us</li>
-                      <li>Contact Us</li>
-                      <li>My Account </li>
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </div>
           </div>
+        )}
+      </div>
+      {showHistory && searchHistory.length > 0 && (
+        <div className="search-history">
+          <ul>
+            {searchHistory.map((item, idx) => (
+              <li
+                key={idx}
+                onMouseDown={(e) => e.preventDefault()} // blur se bachane ke liye
+                onClick={() => {
+                  setSearchQuery(item);
+                  handleSearchClick();
+                }}
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
+
     </nav>
   );
 }

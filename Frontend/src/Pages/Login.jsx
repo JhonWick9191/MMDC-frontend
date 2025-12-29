@@ -173,7 +173,7 @@ async function loginUserDetials(event) {
 
                     {registerToggle ? (
                         <div className="main-login-section">
-                            <div className="google-or-faceBookOptions">
+                            {/* <div className="google-or-faceBookOptions">
                                 <div className="google">
                                     <button>
                                         <span><FcGoogle /></span> Google
@@ -187,7 +187,7 @@ async function loginUserDetials(event) {
                             </div>
                             <div className="or-class">
                                 <p>-OR-</p>
-                            </div>
+                            </div> */}
                             <div className="wrapper-login">
                                 <form className="main-signup-form-form" onSubmit={signupHandler}>
                                     <div className="signup-with-two-inputs">
@@ -294,7 +294,7 @@ async function loginUserDetials(event) {
                     ) : loginToggle ? (
                         // Default login form
                         <div className="main-login-section">
-                            <div className="google-or-faceBookOptions">
+                            {/* <div className="google-or-faceBookOptions">
                                 <div className="google">
                                     <button>
                                         <span><FcGoogle /></span> Google
@@ -308,7 +308,7 @@ async function loginUserDetials(event) {
                             </div>
                             <div className="or-class">
                                 <p>-OR-</p>
-                            </div>
+                            </div> */}
                             <div className="wrapper-login">
                                 <form onSubmit={loginUserDetials} className="main-signup-form-form">
                                     <div className="login-form">

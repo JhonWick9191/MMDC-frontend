@@ -68,7 +68,7 @@ export default function SearchProductDetails() {
                     <div className="product-image-mid">
                         {images.map((img, idx) => (
                             <div className="mid-image" key={idx} onClick={() => setMainImage(img)}>
-                                <img src={img} alt={`Product ${idx + 1}`} />
+                                <img src={img} alt={`Product ${idx + 1}`} loading="lazy" />
                             </div>
                         ))}
                     </div>

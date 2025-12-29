@@ -29,7 +29,7 @@ console.log(user)
               <div className="wishlist-items" key={items.product_id}>
                 <div className="wishlist-product">
                   <div className="image-product">
-                    <img src={items.image_01} />
+                    <img src={items.image_01} loading="lazy"/>
 
 
                     <div className="cross-on-image">

@@ -18,6 +18,7 @@ function LoadingScreen  () {
         src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1759493729/Guitar-ani_1_ilhhxa.gif" 
         alt="Loading..." 
         style={{ width: '300px', height: '300px' }}
+        loading="lazy"
       />
     </div>
   );

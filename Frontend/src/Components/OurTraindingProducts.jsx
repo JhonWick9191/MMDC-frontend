@@ -133,7 +133,7 @@ export default function OurTandingProducts() {
           {/* PRODUCTS SECTION */}
           {loading && (
             <p className="loading-gif-on-product-change">
-              <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1763116242/transition_dpgnur.gif" />
+              <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1763116242/transition_dpgnur.gif"  loading="lazy"/>
             </p>
           )}
 
@@ -151,6 +151,7 @@ export default function OurTandingProducts() {
                       <img
                         src={item.image_01}
                         alt={item.name}
+                        loading="lazy"
                         onMouseEnter={(e) => (e.currentTarget.src = item.image_02)}
                         onMouseLeave={(e) => (e.currentTarget.src = item.image_01)}
                       />
@@ -164,7 +165,7 @@ export default function OurTandingProducts() {
                           </div>
 
                           <div className="btn2 liquid  overlay-view-details ">
-                            <button onClick={handleButton}>View Deatils </button>
+                            <button onClick={handleButton}>View Details </button>
                           </div>
                         </div>
 

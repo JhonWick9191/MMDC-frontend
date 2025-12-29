@@ -10,7 +10,7 @@
 }
 
 .btn2 {
-    padding: 5px;
+  padding: 5px;
   position: relative;
   display: flex;
   align-items: center;
@@ -18,16 +18,50 @@
   text-align: center;
    background-color: #F05624;
   color: black;  
-
   background-color: green;
-  cursor: pointer;
-  
+  cursor: pointer;  
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
 .text-heading{
     width: 23%;
+}
+
+.decrement{
+
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 5%;
+    position: absolute;   
+    z-index: 999;   
+    color: white;
+
+}
+
+.decrement svg{
+    font-size: 2rem;
+   font-weight: 900;
+}
+
+.increment {
+    position: absolute;    
+    display: flex;
+   
+   z-index: 9;
+   right: 5%;
+   align-items: center;
+   justify-content: center;
+    
+   height: 100%;
+   color: white;
+    
+}
+
+.increment svg{
+    font-size: 2rem;
 }
 
 .path-page{
@@ -106,6 +140,25 @@ button:hover {
     
 }
 
+.search-icon{
+   position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+   right: 0px;
+    bottom: 0px;
+   
+   background-color: white;
+  border: 1.5px solid red;
+    
+}
+
+
+.search-icon img{
+    
+    height: 100%;
+}
   .width-80-for-line{
     width: 96%;
     margin: auto;
@@ -177,6 +230,47 @@ button:hover {
   cursor: pointer;
   border-radius: 30px;
 }
+
+/* search history css for desktop  */
+.search-history {
+    z-index: 1000;
+  
+  position: absolute;
+  background-color: white;
+  width: 40%;
+  left: 30%;
+  border-radius: 10px;
+  padding: 1%;
+  top: 70%;
+  margin-top: 4px;
+  font-size: 14px;
+   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+}
+
+.search-history ul {
+  list-style: none;
+  
+  
+}
+
+.search-history li {
+  cursor: pointer;
+   font-size: 1rem;
+  
+   padding: 2px;
+   font-weight: 800;
+}
+
+.search-history li:hover {
+ 
+ 
+  background-color: #E0E0E0;
+  font-size: 1.2rem;
+  
+}
+
+
+
 
 .blob-btn:before {
   content: "";
@@ -347,14 +441,20 @@ background-color: white;
     width: 40%;
     justify-content: center;
     align-items: center;
+
     gap: 10px;
+    
 }
 
 .search-bar-main {
-    border: 1px solid red;
+    border: 1.5px solid red;
     width: 100%;
     padding: 8px;
-    border-radius: 50px;
+    
+}
+.search-bar-main:focus{
+    outline: none;
+    border-color:red ;
 }
 
 .search-bar input{
@@ -465,7 +565,7 @@ background-color: white;
 
 
 .main-class-nav-bar {
-
+   
     background-color: rgba(190, 182, 182, 0.5);
     height: 100vh;
     position: absolute;
@@ -476,13 +576,21 @@ background-color: white;
 }
 
 .mobile-navbar {
+  border: 2px solid red;
+  position: fixed;      /* fixed is usually better for navs */
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100vh;
+  background-color: white;
+  
 
-    right: 0px;
-    position: absolute;
-    width: 40%;
-    height: 100vh;
-    background-color: white;
+  
 }
+
+/* When you want to show it, add this class */
+
+
 .profile-view-button{
     border: 2px solid black;
   
@@ -665,8 +773,10 @@ background-color: white;
 /*---------------------------------------------------------------------------main poster section----------------------------------------------------------------------*/
 /* Container styling */
 .slider-container {
-
+    position: relative;
     overflow: hidden;
+    display: flex;
+    
     margin: auto;
 }
 
@@ -734,9 +844,21 @@ background-color: white;
 
 }
 
+.new-animations-logo{
+   
+    top: 5px;
+    left: 0px;
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    z-index: 6;
+    
+}
+
 .overlay-products{
     top: 0px;
-    left: 0px;    
+    left: 0px;   
+    z-index: 10; 
     height: 100%;
     width: 100%;
     background: rgba(49, 47, 47, 0.15); /* Light shine */
@@ -796,6 +918,7 @@ background-color: white;
     display: flex;
     align-items: center;
     height: 300px;
+    
 
 }
 
@@ -814,7 +937,7 @@ background-color: white;
 
 .topTenItems-images img {
     position: relative;
-    z-index: 20;
+    z-index: 1;
     height: 100%;
     width: 100%;
     border-radius: 3px;
@@ -1045,6 +1168,15 @@ background-color: white;
 
 
 /*---------------------------------------------------------------------------------our communinty sections css start------------------------------------------------------ */
+.overlay-products-top-ten{
+    border: 1px solid red;
+    position: absolute;
+    background: rgba(49, 47, 47, 0.15);
+    backdrop-filter: blur(0px) saturate(150%);
+    height: 250px;
+    top: 0px;
+    width: 250px;
+}
 
 .our-community-rells-section {
     padding: 2%;
@@ -1374,15 +1506,20 @@ display: none;
     right: 10px;
     top: 10px;
     opacity: 9999;
+     background: #C3C3C3;
+    padding: 2%;
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
    
 }
 
-.wishlist-overlay{
-    
-    background: #C3C3C3;
-    padding: 2%;
-    border-radius: 100%;
-}
+
 .wishlist-overlay svg{
     font-size:1rem;
     color: white;

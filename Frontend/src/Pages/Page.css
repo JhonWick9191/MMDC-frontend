@@ -5,10 +5,7 @@
 }
 
 
-input {
-    border-radius: 5px;
 
-}
 
 .main-logo .main-logo-img:hover {
     cursor: pointer;
@@ -300,7 +297,7 @@ input {
 .mid-image img {
     border: 1px solid black;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     width: 100%;
 
 }
@@ -1204,7 +1201,15 @@ input {
     font-weight: 700;
 
 }
+.main-wrapper-class-cart-image {
+    width: 30%;
+    border: 1px solid black;
+     border-radius: 10%;
+}
 
+.main-wrapper-class-cart-image img{
+    border-radius: 10%;
+}
 .left-line {
     width: 41%;
 
@@ -1275,19 +1280,20 @@ input {
 }
 
 @media screen and (max-width: 600px) {
-    
-   .value{
-    font-size: 11px;
-   }
+
+    .value {
+        font-size: 11px;
+    }
+
     .on-mobile-active {
         display: flex;
-        
+
         align-items: center;
         justify-content: space-between;
     }
 
     .main-wrapper-class-cart-image {
-
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1297,7 +1303,7 @@ input {
         height: auto;
     }
 
-    .main-pricing{
+    .main-pricing {
         display: flex;
         justify-content: space-between;
     }
@@ -1337,22 +1343,25 @@ input {
         gap: 4px;
     }
 
-    .not-shown{
+    .not-shown {
         display: none;
     }
-    
-     .product-details p {
-        
+
+    .product-details p {
+
         font-weight: 600;
-     }
+    }
+
     .cart-btn button {
         padding: 3px;
         width: 99%;
     }
-.product-details {
-    padding: 2%;
-    justify-content: space-around;
-}
+
+    .product-details {
+        padding: 2%;
+        justify-content: space-around;
+    }
+
     .carts-buttons {
         display: none;
     }
@@ -1391,38 +1400,26 @@ input {
         font-size: 1rem;
 
     }
-
-
     .left-side-buttons-filter {
         width: 50%;
     }
-
     .filter {
         display: flex;
-
     }
-
     .filter-with-products {
         display: none;
     }
-
     .products-cato {
         width: 100%;
         grid-template-columns: repeat(2, 1fr);
     }
-
     .main-category-products_2 {
         grid-template-columns: repeat(2, 1fr);
     }
-
     .product-image {
-
-
-
         align-items: center;
         justify-content: center;
     }
-
     .product-image img {
         width: 100%;
     }
