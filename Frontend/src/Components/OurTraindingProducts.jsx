@@ -20,10 +20,9 @@ export default function OurTandingProducts() {
     "Acoustic Guitars",
     "Electric Guitars",
     "Bass Guitars",
-    "Drums",
-    "Pro Audio",
-    "Controllers",
-    "Effects",
+    "MPC",    
+    "Controller",
+    "Keyboard",
   ];
 
   async function fetchProductsByType(type) {

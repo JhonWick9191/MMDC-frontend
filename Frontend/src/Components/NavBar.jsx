@@ -35,23 +35,23 @@ export default function NavBar() {
     },
     {
       id: 6,
-      name: "Pro Audio"
+      name: "PRO AUDIO AND STUDIO"
     },
     {
       id: 7,
-      name: "PINO AND KEYBOARD",
+      name: "PIANOS AND KEYBOARDS",
     },
     {
       id: 8,
-      name: "Drums and  Accessories",
+      name: "DRUMS AND DRUM ACCESSORIES",
     },
 
     {
       id: 9,
-      name: "Drums",
+      name: "PROFESSIONAL AUDIOS",
     },
     {
-      id: 9,
+      id: 10,
       name: "Harmonica",
     }
 
@@ -140,7 +140,7 @@ export default function NavBar() {
         return [q, ...withoutDup].slice(0, 10); // max 10
       });
     }
-    
+
     handleSearch();
 
     Navigate("/searchProducts");
@@ -235,83 +235,88 @@ export default function NavBar() {
       </div>
 
       {/* Mobile Menu */}
-      <div className="animation-on-navbar">
-        {hamburger && (
-          <div className="main-class-nav-bar">
-            <div className="mobile-navbar">
-              <div className="hamburger-top-section">
-                <div className="cross-icon">
-                  <button onClick={handleCross}>
-                    <RxCross2 />
-                  </button>
-                </div>
-
-                <div className="hamburger-logo">
-                  <img
-                    src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1757570443/00-music_morelogo-1_g8wl3f.png"
-                    alt="logo"
-                  />
-                </div>
-
-                <div className="signup-login-buttons">
-                  <div className="sign-up-button-hamburger">
-                    {User ? (
-                      <img
-                        onClick={() => Navigate("/profile")}
-                        src={User.image}
-                        alt="user"
-                      />
-                    ) : (
-                      <span onClick={() => Navigate("/login")}>
-                        <CgProfile />
-                      </span>
-                    )}
-
-
-                  </div>
-                </div>
+      <div className="mobile-menu-container">
+        {/* for if navbar is true then show main-class-nav-bar perfrom .show  css will do else " " */}
+        <div className={`main-class-nav-bar ${hamburger ? "show" :""}`}>
+          {/* in this line mobile-navbar hamburger is ture then mobile-navbar add with open css  */}
+          <div className={`mobile-navbar ${hamburger ? "open" :""}`}>
+            <div className="hamburger-top-section">
+              <div className="cross-icon">
+                <button onClick={handleCross}>
+                  <RxCross2 />
+                </button>
               </div>
 
-              <div className="listng-items-for-products">
-                <div className="main-listing-items-categories">
-                  <h1>
-                    Our Products <span><RiArrowDropDownLine /></span>
-                  </h1>
+              <div className="hamburger-logo">
+                <img
+                  src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1757570443/00-music_morelogo-1_g8wl3f.png"
+                  alt="logo"
+                />
+              </div>
 
-                  {categoeryesProducts.map((items) => (
-                    <div className="" key={items.id} onClick={() => ClickHandler(items.name)}>
-
-
-                      <div className="catogries-nam">
-                        <p>{items.name.toUpperCase()}</p>
-                      </div>
-                    </div>
-                  ))
-                  }
-
-                </div>
-
-                <div className="more-buttons">
-                  <h1>
-                    More <span onClick={handleMore}><RiArrowDropDownLine /></span>
-                  </h1>
-
-                  {moreButton && (
-                    <div className="page-lists">
-                      <ul>
-                        <li onClick={() => { handleCross(); Navigate("/"); }}>Home</li>
-                        <li>About Us</li>
-                        <li>Contact Us</li>
-                        <li>My Account </li>
-                      </ul>
-                    </div>
+              <div className="signup-login-buttons">
+                <div className="sign-up-button-hamburger">
+                  {User ? (
+                    <img
+                      onClick={() => Navigate("/profile")}
+                      src={User.image}
+                      alt="user"
+                    />
+                  ) : (
+                    <span onClick={() => Navigate("/login")}>
+                      <CgProfile />
+                    </span>
                   )}
                 </div>
               </div>
             </div>
+
+            <div className="listng-items-for-products">
+              <div className="main-listing-items-categories">
+                <h1>
+                  Our Products <span><RiArrowDropDownLine /></span>
+                </h1>
+
+                {categoeryesProducts.map((items) => (
+                  <div key={items.id} onClick={() => ClickHandler(items.name)}>
+                    <div className="catogries-nam">
+                      <p>{items.name.toUpperCase()}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="more-buttons">
+                <h1>
+                  More <span onClick={handleMore}><RiArrowDropDownLine /></span>
+                </h1>
+
+                {moreButton && (
+                  <div className="page-lists">
+                    <ul>
+                      <li onClick={() => { handleCross(); Navigate("/"); }}>Home</li>
+                      <li>About Us</li>
+                      <li>Contact Us</li>
+                      <li>
+                        {User ? (
+                          <button onClick={() => { handleCross(); Navigate("/profile"); }}>
+                            My Account
+                          </button>
+                        ) : (
+                          <button onClick={() => { handleCross(); Navigate("/login"); }}>
+                            Login
+                          </button>
+                        )}
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
-        )}
+        </div>
       </div>
+
       {showHistory && searchHistory.length > 0 && (
         <div className="search-history">
           <ul>

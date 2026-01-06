@@ -9,52 +9,54 @@ import { CiSearch } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 export default function Footer() {
     const Navigate = useNavigate()
-    const categoeryesProducts = [
-        {
-            id: 1,
-            name: "Effect"
-        },
-        {
-            id: 2,
-            name: "Guitar",
+     const categoeryesProducts = [
+    {
+      id: 1,
+      name: "Effects"
+    },
+    {
+      id: 2,
+      name: "Guitars",
 
-        },
-        {
-            id: 3,
-            name: "Accessories",
-        },
-        {
-            id: 4,
-            name: "Ukulele",
+    },
+    {
+      id: 3,
+      name: "Accessories",
+    },
+    {
+      id: 4,
+      name: "Ukuleles",
 
-        },
-        {
-            id: 5,
-            name: "Amplifiers",
-        },
-        {
-            id: 6,
-            name: "Pro Audio"
-        },
-        {
-            id: 7,
-            name: "Mixers",
-        },
-        {
-            id: 8,
-            name: "Drum Accessories",
-        },
-        {
-            id: 9,
-            name: "Controller",
-        },
-        {
-            id: 10,
-            name: "Acoustic Drum",
-        }
+    },
+    {
+      id: 5,
+      name: "Amplifiers",
+    },
+    {
+      id: 6,
+      name: "PRO AUDIO AND STUDIO"
+    },
+    {
+      id: 7,
+      name: "PIANOS AND KEYBOARDS",
+    },
+    {
+      id: 8,
+      name: "DRUMS AND DRUM ACCESSORIES",
+    },
+
+    {
+      id: 9,
+      name: "PROFESSIONAL AUDIOS",
+    },
+    {
+      id: 10,
+      name: "Harmonica",
+    }
 
 
-    ]
+  ]
+
     function ClickHandler(items) {
         console.log("Button is clicked ")
         console.log(items)

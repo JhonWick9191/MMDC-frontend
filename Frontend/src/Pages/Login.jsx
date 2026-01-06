@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setToken, setUser } from "../Redux/Slice/AuthSlice";
 import { toast, ToastContainer } from "react-toastify"
+import { FaRegEye } from "react-icons/fa6";
+import { FaRegEyeSlash } from "react-icons/fa6";
 
 const BASE_URL = import.meta.env.VITE_MAIN_API_ROUTE;
 
@@ -34,48 +36,48 @@ export default function () {
 
     // async function for login 
 
-async function loginUserDetials(event) {
-  event.preventDefault();
+    async function loginUserDetials(event) {
+        event.preventDefault();
 
-  try {
-    const responce = await fetch(`${BASE_URL}/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(LoginFormData),
-    });
-    const data = await responce.json();
+        try {
+            const responce = await fetch(`${BASE_URL}/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify(LoginFormData),
+            });
+            const data = await responce.json();
 
-    console.log("Login response:", data);
+            console.log("Login response:", data);
 
-    if (data.success) {
-      toast.success(data.message);
+            if (data.success) {
+                toast.success(data.message);
 
-      if (data.token) {
-        // ✅ User data safely lo
-        const userData = data.isExistingUser || data.user || null;
-        console.log("User data from login:", userData);
+                if (data.token) {
+                    // ✅ User data safely lo
+                    const userData = data.isExistingUser || data.user || null;
+                    console.log("User data from login:", userData);
 
-        // ✅ Save to Redux
-        dispatch(setToken(data.token));
-        dispatch(setUser(userData));
-        console.log("You are logged in");
+                    // ✅ Save to Redux
+                    dispatch(setToken(data.token));
+                    dispatch(setUser(userData));
+                    console.log("You are logged in");
 
-        // ✅ Full page reload + home redirect (phone + desktop dono pe stable)
-       Navigate("/")
-        return; // yahan return kar do taaki niche Navigate("/") na chale
+                    // ✅ Full page reload + home redirect (phone + desktop dono pe stable)
+                    Navigate("/")
+                    return; // yahan return kar do taaki niche Navigate("/") na chale
 
-      } else {
-        toast.error("Login successful but token missing");
-      }
-    } else {
-      toast.error(data.message);
+                } else {
+                    toast.error("Login successful but token missing");
+                }
+            } else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            console.log("Login error:", error);
+            toast.error("Login failed, please try again");
+        }
     }
-  } catch (error) {
-    console.log("Login error:", error);
-    toast.error("Login failed, please try again");
-  }
-}
 
 
     // login form data function state ends here 
@@ -122,6 +124,7 @@ async function loginUserDetials(event) {
 
             if (data.success) {
                 toast.success(data.message); // green success message
+                Navigate("/")
             } else {
                 toast.error(data.message); // red error message
             }
@@ -137,7 +140,7 @@ async function loginUserDetials(event) {
             dispatch(setUser(data.isExistingUser))
 
             // nevigate to the home page 
-            Navigate("/")
+
 
 
         } catch (error) {
@@ -150,9 +153,30 @@ async function loginUserDetials(event) {
         setLoginToggle(false);
     }
 
+    function handleLoginToggel(){
+        setRegisterToggle(false);
+         setLoginToggle(true);
+    }
+
     function handleLogin() {
         setRegisterToggle(false);
         setLoginToggle(true);
+    }
+
+    // handle eyes 
+
+    const [passwordEye, setPasswordEye] = useState(false);
+
+
+    function hideChoosePassword() {
+        setPasswordEye(pre => !pre)
+    }
+
+    const [ConfirmpasswordEye, setConfrimPasswordEye] = useState(false);
+
+
+    function hideConfrimPassword() {
+        setConfrimPasswordEye(pre => !pre)
     }
 
 
@@ -226,21 +250,32 @@ async function loginUserDetials(event) {
                                     <div className="signup-password-section">
                                         <div className="choose-password">
                                             <input
-                                                type="text"
+                                                type={passwordEye ? "password" : "text"}
                                                 placeholder="Choose Password *"
                                                 name="password"
                                                 value={signupForm.password}
                                                 onChange={signupChangeHandler}
                                             />
+
+                                            <button type="button" className="eye" onClick={hideChoosePassword}>
+                                                {
+                                                    passwordEye ? <FaRegEyeSlash /> : <FaRegEye />
+                                                }
+                                            </button>
                                         </div>
 
-                                        <div className="confrim-password">
+                                        <div className="choose-password">
                                             <input
-                                                type="text"
+                                                type={ConfirmpasswordEye ? "password" : "text"}
                                                 placeholder="Cofrim Password *"
                                                 name="confrim_password"
                                                 onChange={signupChangeHandler}
                                             />
+                                            <button type="button" className="eye" onClick={hideConfrimPassword}>
+                                                {
+                                                    ConfirmpasswordEye ? <FaRegEyeSlash /> : <FaRegEye />
+                                                }
+                                            </button>
                                         </div>
 
                                     </div>
@@ -256,7 +291,8 @@ async function loginUserDetials(event) {
 
                                     <div className="confrim-password mobile-number">
                                         <input type="number"
-                                            placeholder="Enter  Mobile.no"
+                                            className="mobile-number-inside"
+                                            placeholder="Enter  Mobile.no +91 *"
                                             onChange={signupChangeHandler}
                                             name="phone_number"
                                             value={signupForm.phone_number}
@@ -284,7 +320,7 @@ async function loginUserDetials(event) {
                                     </div>
                                     <div className="new-user">
                                         <p>
-                                            Already have a account  ? <a onClick={handleRegister}>Login</a>
+                                            Already have a account  ? <a onClick={handleLoginToggel}>Login</a>
                                         </p>
                                     </div>
                                 </form>
@@ -322,13 +358,19 @@ async function loginUserDetials(event) {
                                         />
                                     </div>
 
-                                    <div className="login-form">
-                                        <input type="text"
+                                    <div className="login-form choose-password border-10">
+                                        <input
+                                            type={ConfirmpasswordEye ? "password" : "text"}
                                             placeholder="Enter Your password"
                                             name="password"
                                             onChange={chanHandler}
                                             value={LoginFormData.password}
                                         />
+                                        <button type="button" className="eye" onClick={hideConfrimPassword}>
+                                            {
+                                                ConfirmpasswordEye ? <FaRegEyeSlash /> : <FaRegEye />
+                                            }
+                                        </button>
                                     </div>
                                     <div className="submit-button">
                                         <button type="submit">Proceed</button>

@@ -17,8 +17,10 @@
     "@tsparticles/slim": "^3.9.1",
     "clsx": "^2.1.1",
     "dotenv": "^17.2.3",
+    "dotted-map": "^2.2.3",
     "framer-motion": "^12.23.24",
-    "motion": "^12.23.12",
+    "motion": "^12.0.0-alpha.2",
+    "next-themes": "^0.4.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-icons": "^5.5.0",
@@ -26,8 +28,9 @@
     "react-router-dom": "^7.9.1",
     "react-toastify": "^11.0.5",
     "surge": "^0.24.6",
-    "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^4.1.13"
+    "tailwind-merge": "^3.4.0",
+    "tailwindcss": "^4.1.13",
+    "world-map": "^0.0.9"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",

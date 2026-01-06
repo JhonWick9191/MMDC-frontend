@@ -316,7 +316,7 @@ function FilterProductByCategoryes() {
                             <hr className="border-1 border-red-500"></hr>
 
                             {/* Price Filter */}
-                            <div className="main-brands-category">
+                            {/* <div className="main-brands-category">
                                 <div className="main-heading-product-categoryes-out-border">
                                     <div className="text">
                                         <p>PRICE</p>
@@ -339,7 +339,7 @@ function FilterProductByCategoryes() {
                                         </li>
                                     ))}
                                 </ul>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 )}
@@ -375,7 +375,7 @@ function FilterProductByCategoryes() {
                             <div className="main-class-listing-list">
                                 <div className="main-heading-product-categoryes-out-border">
                                     <div className="text">
-                                        <p>PRODUCT CATEGORYES</p>
+                                        <p>PRODUCT CATEGORIES</p>
                                     </div>
                                 </div>
                                 <ul className="lsiting-felx-class">
@@ -430,7 +430,7 @@ function FilterProductByCategoryes() {
                             <hr className="border-1 border-red-500"></hr>
 
                             {/* Price Filter */}
-                            <div className="main-brands-category">
+                            {/* <div className="main-brands-category">
                                 <div className="main-heading-product-categoryes-out-border">
                                     <div className="text">
                                         <p>PRICE</p>
@@ -453,7 +453,7 @@ function FilterProductByCategoryes() {
                                         </li>
                                     ))}
                                 </ul>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

@@ -44,26 +44,7 @@ export default function TrustedByBrands() {
     return (
 
         <>
-            <style>{`
-                .marquee-inner {
-                    animation: marqueeScroll 15s linear infinite;
-                }
-
-                .marquee-inner-testimonials {
-                    animation: marqueeScroll 35s linear infinite;
-                }
-
-                @keyframes marqueeScroll {
-                    0% {
-                        transform: translateX(0%);
-                    }
-
-                    100% {
-                        transform: translateX(-50%);
-                    }
-                }
-            `}
-            </style>
+         
             
                     <div className="line-with-text width-80-for-line">
                         <div className="left-line w-20">

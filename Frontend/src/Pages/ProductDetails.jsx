@@ -8,7 +8,8 @@ import { add, remove } from "../Redux/Slice/Slice";
 import { addToWishlist } from "../Redux/Slice/WishListSlice";
 import LoadingScreen from "../Components/Loading";
 import { IoMdHeartEmpty } from "react-icons/io";
-
+import { FiMinusCircle } from "react-icons/fi";
+import { FiPlusCircle } from "react-icons/fi";
 // css is in page.css
 export default function ProductDetails() {
   const { productId } = useParams();
@@ -180,15 +181,47 @@ export default function ProductDetails() {
     if (!disableIncrement) setCount(count + 1);
   }
 
+
+  // ✅ STATE (top of component)
+  const [isAdding, setIsAdding] = useState(false);
+
+  // ✅ BUTTON
+  <div className="cart-btn">
+    <button
+      onClick={addToCart}
+      disabled={isAdding || isOutOfStock || isLimitExceeded}
+      style={{
+        backgroundColor: isAdding || isOutOfStock || isLimitExceeded ? "#ccc" : undefined,
+        cursor: isAdding || isOutOfStock || isLimitExceeded ? "not-allowed" : "pointer",
+      }}
+    >
+      {isAdding ? "Adding..." : "Add to Cart"}
+    </button>
+  </div>
+
+  // ✅ FUNCTION
   function addToCart() {
-    if (isOutOfStock || isLimitExceeded) return;
-    if (!user) {
-      toast.error("For Add to Cart you have to login first");
-      return;
-    }
-    dispatch(add({ ...productDetails, cartImage: mainImage, quantity: count }));
-    toast.success("Added To the Cart");
+    setIsAdding(true);
+
+    setTimeout(() => {
+      if (isOutOfStock || isLimitExceeded) {
+        toast.error("Out of stock!");
+        setIsAdding(false);
+        return;
+      }
+
+      if (!user) {
+        toast.error("Please login first");
+        setIsAdding(false);
+        return;
+      }
+
+      dispatch(add({ ...productDetails, cartImage: mainImage, quantity: count }));
+      toast.success("✅ Added to Cart!");
+      setIsAdding(false);
+    }, 1000);
   }
+
 
   function removeToCart() {
     dispatch(remove(productDetails._id));
@@ -199,28 +232,13 @@ export default function ProductDetails() {
     <div className="padding">
       <div className="black-border">
         <marquee>
-          Prices are subject to change without prior notice. Please confirm pricing with your designated Sales Manager before placing an order.
+          Prices are subject to change without prior notice. Please confirm pricing with your designated Sales Manager before placing orders.
         </marquee>
       </div>
 
-      {/* NEW: Back button + path */}
+
       <div className="path">
-        {/* <button
-          onClick={() => {
-            if (location.state?.from) {
-              navigate(fromUrl); // jahan se aaya tha (Fender filtered page)
-            } else {
-              navigate(-1); // normal browser back
-            }
-          }}
-          style={{
-            marginRight: "1rem",
-            padding: "0.25rem 0.75rem",
-            cursor: "pointer",
-          }}
-        >
-          ← Back
-        </button> */}
+
 
         <p>HOME / {productDetails.Product_Name?.toUpperCase()}</p>
         <hr />
@@ -250,6 +268,7 @@ export default function ProductDetails() {
             <p className="product-name">{productDetails.Product_Name}</p>
             <p className="product-brand">{productDetails.Brand_Name}</p>
             <p className="model-number">{productDetails.Model_number}</p>
+             <p className="model-number">{productDetails.Product_Category}</p>
           </div>
           <hr />
           <div className="price">
@@ -266,7 +285,7 @@ export default function ProductDetails() {
               </div>
               <div className="decrement-button">
                 <button onClick={decrement} disabled={count <= 1 || isOutOfStock}>
-                  -
+                  < FiMinusCircle />
                 </button>
               </div>
               <div className="value">
@@ -274,7 +293,7 @@ export default function ProductDetails() {
               </div>
               <div className="increment-button">
                 <button onClick={increment} disabled={disableIncrement}>
-                  +
+                  <FiPlusCircle />
                 </button>
               </div>
             </div>
@@ -296,21 +315,20 @@ export default function ProductDetails() {
 
           <div className="carts-buttons">
             <div className="cart-btn">
-              {Cart.some((product) => product.id === productDetails._id) ? (
-                <button onClick={removeToCart}>Remove from Cart</button>
-              ) : (
-                <button
-                  onClick={addToCart}
-                  disabled={isOutOfStock || isLimitExceeded}
-                  style={{
-                    backgroundColor: isOutOfStock || isLimitExceeded ? "#ccc" : undefined,
-                    cursor: isOutOfStock || isLimitExceeded ? "not-allowed" : "pointer",
-                  }}
-                >
-                  Add to Cart
-                </button>
-              )}
+              <button
+                onClick={addToCart}
+                disabled={isAdding || isOutOfStock || isLimitExceeded}
+                style={{
+                  backgroundColor: isAdding || isOutOfStock || isLimitExceeded ? "#ccc" : undefined,
+                  cursor: isAdding || isOutOfStock || isLimitExceeded ? "not-allowed" : "pointer",
+                }}
+              >
+                {isAdding ? (<div className="loading-on-add-to-cart">
+                 <p>Loading ... </p>
+                </div>) : "Add to Cart"}
+              </button>
             </div>
+
             <div className="cart-btn">
               <button
                 onClick={() => {

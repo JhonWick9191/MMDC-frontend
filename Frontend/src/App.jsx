@@ -20,7 +20,7 @@ import FilterProductByCategoryes from "./Pages/ProductCategory";
 import AdminProfile from "../src/Pages/AminProfilePages/AdminProfile"
 import SearchProducts from "./Pages/SearchProductPage";
 import SearchProductDetails from "./Pages/SearchProductsDetails";
-
+import ContactUs from "./Pages/ContactUs";
 // User Profile Pages
 import Profile from "./Pages/UserPorfilePages/ProfilePage";
 import VendorProfile from "./Pages/UserPorfilePages/ProfilePage";
@@ -133,6 +133,8 @@ useEffect(() => {
               <Route path="/isVendorProfile" element={<VendorProfile />} />        
               <Route path="/products" element={<FilterProductByCategoryes />} />
               <Route path="/searchProducts" element={<SearchProducts />} />
+              <Route path="/contactUs" element={<ContactUs/>} />
+
             </Routes>
           </>
         )}

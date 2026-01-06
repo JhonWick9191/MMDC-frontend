@@ -7,7 +7,7 @@ const catogeryesProducts = [
     {
         id: 1,
         name: "Effects",
-        image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666738/Untitled_design_5_1_lydd7q.jpg",
+        image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/categoriesPosters/effects.jpg",
     },
     {
         id: 2,
@@ -31,17 +31,17 @@ const catogeryesProducts = [
     },
     {
         id: 6,
-        name: "Pro Audio",
+        name: "Pro Audio and Studio",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666740/Untitled_design_8_1_ggdncm.jpg",
     },
     {
         id: 7,
-        name: "Pino and Keyboard",
+        name: "Pianos and keyboards",
         image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/Piano%20and%20keyboard.png",
     },
     {
         id: 8,
-        name: "Drums And Accessories",
+        name: "Drums and Drum Accessories",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666740/Untitled_design_6_kna0dx.jpg",
     },
     {
@@ -51,8 +51,8 @@ const catogeryesProducts = [
     },
     {
         id: 10,
-        name: "Drums",
-        image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1762931660/Drums_pdn4y2.png",
+        name: "Professional Audio",
+        image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/categoriesPosters/pa.jpg",
     },
 ];
 
@@ -225,7 +225,7 @@ export default function TopProducts() {
                                         style={{ flex: `0 0 ${100 / visibleCount}%` }}
                                     >
                                         <div className="main-image-top-ten">
-                                            {/* ✅ SAFE IMAGE */}
+                                    
                                            
                                             <button  onClick={()=> Navigate("/productDetails", { state: item })} >
                                            <div className="filter-product-image">
@@ -285,8 +285,12 @@ export default function TopProducts() {
             
              <section className="hide-from-mobile">
                 <div className="margin-and-padding-main">
-                    <div className="main-sectionHeading ">
-                        <h1>OUR COMMUNITY</h1>
+                    <div className="line-with-text width-80-for-line">
+                        <div className="left-line w-20"><hr /></div>
+                        <div className="text-heading">
+                            <h2 className="main-heading-recom">OUR COMMUNITY</h2>
+                        </div>
+                        <div className="right-line"><hr /></div>
                     </div>
                     <div className="our-community-reels-and-content">
                         
