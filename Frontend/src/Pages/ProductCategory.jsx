@@ -1,7 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { IoIosColorFilter } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { GoHome } from "react-icons/go";
@@ -9,6 +8,8 @@ import { RiArrowDownSLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { addToWishlist } from "../Redux/Slice/WishListSlice";
 import { toast } from "react-toastify";
+import { IoChevronDown } from "react-icons/io5";
+
 
 function FilterProductByCategoryes() {
     const dispatch = useDispatch();
@@ -34,47 +35,44 @@ function FilterProductByCategoryes() {
         return acc;
     }, {});
 
-    // Price Ranges
-    const priceRanges = [
-        { label: "1000 - 5000", min: 1000, max: 5000 },
-        { label: "5000 - 10000", min: 5000, max: 10000 },
-        { label: "10000 - 12000", min: 10000, max: 12000 },
-        { label: "12000 - 15000", min: 12000, max: 15000 },
-        { label: "15000 - 20000", min: 15000, max: 20000 },
-        { label: "20000 - 25000", min: 20000, max: 25000 },
-        { label: "25000 - 50000", min: 25000, max: 50000 },
-        { label: "50000 - 55000", min: 50000, max: 55000 },
-        { label: "55000 - 60000", min: 55000, max: 60000 },
-        { label: "60000 - 65000", min: 60000, max: 65000 },
-        { label: "65000 - 70000", min: 65000, max: 70000 },
-        { label: "More than 70000", min: 70000, max: Infinity },
-    ];
 
+
+    const [productFilterLoading, setProductFilterLoading] = useState(false)
     // NEW: helper – filter state + URL update
     function applyFilter(filter) {
-        setSelectedFilter(filter);
-        setSideBar(false);
-        document.body.style.overflow = "auto";
+        setProductFilterLoading(true)
+        setTimeout(() => {
 
-        const params = new URLSearchParams(location.search);
+            setSelectedFilter(filter);
+            setSideBar(false);
+            document.body.style.overflow = "auto";
 
-        if (filter.type === "brand") {
-            params.set("brand", filter.value);
-            params.delete("priceMin");
-            params.delete("priceMax");
-            params.delete("subCategory");
-        } else if (filter.type === "category") {
-            params.set("subCategory", filter.value);
-            params.delete("brand");
-            params.delete("priceMin");
-            params.delete("priceMax");
-        } else if (filter.type === "price") {
-            params.set("priceMin", filter.min);
-            params.set("priceMax", filter.max);
-        }
+            const params = new URLSearchParams(location.search);
 
-        Navigate(`${location.pathname}?${params.toString()}`, { replace: false });
+            if (filter.type === "brand") {
+                params.set("brand", filter.value);
+                params.delete("priceMin");
+                params.delete("priceMax");
+                params.delete("subCategory");
+            } else if (filter.type === "category") {
+                params.set("subCategory", filter.value);
+                params.delete("brand");
+                params.delete("priceMin");
+                params.delete("priceMax");
+            } else if (filter.type === "price") {
+                params.set("priceMin", filter.min);
+                params.set("priceMax", filter.max);
+            }
+
+
+
+            Navigate(`${location.pathname}?${params.toString()}`, { replace: false });
+            setProductFilterLoading(false)
+        }, 2000)
+
     }
+
+   
 
     // handel cross butoon
     function handleCross() {
@@ -86,18 +84,18 @@ function FilterProductByCategoryes() {
     // Filtered products
     const filteredProducts = selectedFilter
         ? products.filter((item) => {
-              if (selectedFilter.type === "category") {
-                  return item.Product_Category === selectedFilter.value;
-              } else if (selectedFilter.type === "brand") {
-                  return item.Brand_Name === selectedFilter.value;
-              } else if (selectedFilter.type === "price") {
-                  const price = parseInt(
-                      String(item.Product_price || "0").replace(/,/g, "")
-                  );
-                  return price >= selectedFilter.min && price <= selectedFilter.max;
-              }
-              return true;
-          })
+            if (selectedFilter.type === "category") {
+                return item.Product_Category === selectedFilter.value;
+            } else if (selectedFilter.type === "brand") {
+                return item.Brand_Name === selectedFilter.value;
+            } else if (selectedFilter.type === "price") {
+                const price = parseInt(
+                    String(item.Product_price || "0").replace(/,/g, "")
+                );
+                return price >= selectedFilter.min && price <= selectedFilter.max;
+            }
+            return true;
+        })
         : products;
 
     const [showSideBar, setSideBar] = useState(false); // show side bar section
@@ -155,6 +153,54 @@ function FilterProductByCategoryes() {
     // for geting location of the page
     const searchParams = new URLSearchParams(location.search);
     let types = searchParams.get("type");
+
+    // functions for adding A-z And price high to low 
+    // Price heigh to low sorting function 
+
+     // function for handleside filer section A-Z
+    const [SideFilterSection, setSideFilterSection] = useState(false)
+    function handleSideFilterSection() {
+        setSideFilterSection(pre => !pre)
+        console.log("The side Filter button is clicked")
+
+    }
+
+    const [isPriceHighTolow, setisPriceHighTolow] = useState(false)
+
+    // filter product with sorting 
+
+    let sortedFilterProducts = [...filteredProducts]
+
+    if (isPriceHighTolow) {
+        sortedFilterProducts.sort((a, b) => {
+            const priceA = parseInt(String(a.Product_price || "0").replace(/,/g, ""));
+            const priceB = parseInt(String(b.Product_price || "0").replace(/,/g, ""));
+            return priceB - priceA; // High to Low
+        })
+    }
+
+    function handlePriceHighToLow() {
+        // turn off low to high 
+        setisPriceHighTolow(!isPriceHighTolow);
+    }
+
+
+    // function for filter price low to high 
+    const [isPriceLowToHigh, setisPriceLowToHigh] = useState(true)
+    // function handlefunction 
+    if (isPriceLowToHigh && products.length > 0) {  // products loaded check
+        sortedFilterProducts.sort((a, b) => {
+            const priceA = parseInt(String(a.Product_price || "0").replace(/,/g, ""));
+            const priceB = parseInt(String(b.Product_price || "0").replace(/,/g, ""));
+            return priceA - priceB; // Low to High
+        })
+    }
+
+    function handlePriceLowTohigh() {
+        // first make false function for heigh to lo 
+        setisPriceHighTolow(false)
+        setisPriceLowToHigh(!isPriceLowToHigh);
+    }
 
     return (
         <>
@@ -231,16 +277,42 @@ function FilterProductByCategoryes() {
                         Fiter
                     </button>
                 </div>
+                {/* top section after poster section that is basically contain total length of products ad A-Z and price filter section */}
 
-                <div className="left-side-buttons-filter ">
+                <div className="left-side-buttons-filter">
                     <div className="cate">
                         <p>
-                            {products.length} <span> Results</span>
+                            {type} -  {products.length}
                         </p>
+                    </div>
+
+                    <div className="filter-by-product-price-and-a-z">
+                        <div className="main-wrapper-for-filter-a-z" onClick={handleSideFilterSection}>
+                            <div className="">
+                                <div class=""><p>Select Sorting Options</p></div>
+                            </div>
+                            <div class="">
+                                <button><IoChevronDown /></button>
+                            </div>
+                        </div>
+                        <div className="main-wrapper-for-listing-A-Z">
+                            {
+                                SideFilterSection ? (
+                                    <div className="listing-total-buttons-for-filtering">
+                                        <ul>
+                                            <li className="dotted-border" onClick={handlePriceLowTohigh}>Low to High</li>
+                                            <li onClick={handlePriceHighToLow}>High to Low</li>
+
+                                        </ul>
+                                    </div>
+
+                                ) : (null)
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-
+            {/*  mobile side view filter section  */}
             <div className="side-bar-on-product-category-page">
                 {showSideBar && (
                     <div className="listing-on-categoryes">
@@ -315,36 +387,12 @@ function FilterProductByCategoryes() {
 
                             <hr className="border-1 border-red-500"></hr>
 
-                            {/* Price Filter */}
-                            {/* <div className="main-brands-category">
-                                <div className="main-heading-product-categoryes-out-border">
-                                    <div className="text">
-                                        <p>PRICE</p>
-                                    </div>
-                                </div>
-                                <ul className="pricing-listing">
-                                    {priceRanges.map((range, index) => (
-                                        <li
-                                            className="listing-products-price"
-                                            key={index}
-                                            onClick={() =>
-                                                applyFilter({
-                                                    type: "price",
-                                                    min: range.min,
-                                                    max: range.max,
-                                                })
-                                            }
-                                        >
-                                            {range.label}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div> */}
+
                         </div>
                     </div>
                 )}
             </div>
-
+            {/* mobile side view filer section ends  */}
             {/* Clear Filter Button */}
             {selectedFilter && (
                 <div className="clear-filer-section filter">
@@ -382,7 +430,7 @@ function FilterProductByCategoryes() {
                                     {Object.entries(categoryCount).map(
                                         ([category, count], index) => (
                                             <li
-                                                
+
                                                 className="cate-list-highlight"
                                                 key={index}
                                                 onClick={() =>
@@ -390,6 +438,7 @@ function FilterProductByCategoryes() {
                                                         type: "category",
                                                         value: category,
                                                     })
+
                                                 }
                                             >
                                                 {category} ({count})
@@ -429,108 +478,107 @@ function FilterProductByCategoryes() {
 
                             <hr className="border-1 border-red-500"></hr>
 
-                            {/* Price Filter */}
-                            {/* <div className="main-brands-category">
-                                <div className="main-heading-product-categoryes-out-border">
-                                    <div className="text">
-                                        <p>PRICE</p>
-                                    </div>
-                                </div>
-                                <ul className="pricing-listing">
-                                    {priceRanges.map((range, index) => (
-                                        <li
-                                            className="listing-products-price"
-                                            key={index}
-                                            onClick={() =>
-                                                applyFilter({
-                                                    type: "price",
-                                                    min: range.min,
-                                                    max: range.max,
-                                                })
-                                            }
-                                        >
-                                            {range.label}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div> */}
+
                         </div>
                     </div>
                 </div>
 
                 <div className="products-cato">
-                    {filteredProducts.length > 0 ? (
-                        filteredProducts.map((item) => (
-                            <div
-                                className="product-Categories-inside-category-folder"
-                                key={item.product_id || item._id}
-                                onClick={() =>
-                                    Navigate("/productDetails", {
-                                        state: {
-                                            ...item,
-                                            from:
-                                                location.pathname +
-                                                location.search,
-                                        },
-                                    })
-                                }
-                            >
-                                <div className="filter-product-image">
-                                    <img
-                                        src={item.image_01}
-                                        alt={item.name}
-                                        loading="lazy"
-                                        onMouseEnter={(e) =>
-                                            (e.currentTarget.src =
-                                                item.image_02)
+                    {
+                        productFilterLoading ? (<div className="loading-product-filter">
+                            <img src="https://pub-b88455fc17c04e63a0f32324fc1620df.r2.dev/animations/31b197a973fec89feda429d7ae5c1b07.gif" />
+                        </div>) :
+                            sortedFilterProducts.length > 0 ? (
+                                sortedFilterProducts.map((item) => (
+                                    <div
+                                        className="product-Categories-inside-category-folder"
+                                        key={item.product_id || item._id}
+                                        onClick={() =>
+                                            Navigate("/productDetails", {
+                                                state: {
+                                                    ...item,
+                                                    from:
+                                                        location.pathname +
+                                                        location.search,
+                                                },
+                                            })
                                         }
-                                        onMouseLeave={(e) =>
-                                            (e.currentTarget.src =
-                                                item.image_01)
-                                        }
-                                    />
+                                    >
+                                        <div className="filter-product-image">
+                                            <img
+                                                src={item.image_01}
+                                                alt={item.name}
+                                                loading="lazy"
+                                                onMouseEnter={(e) =>
+                                                (e.currentTarget.src =
+                                                    item.image_02)
+                                                }
+                                                onMouseLeave={(e) =>
+                                                (e.currentTarget.src =
+                                                    item.image_01)
+                                                }
+                                            />
 
-                                    <div className="overlay-products">
-                                        <div className="overlay-buttons">
-                                            <div className="wishlist-overlay">
-                                                <buttons
-                                                    onClick={(event) => {
-                                                        dispatch(
-                                                            addToWishlist(item)
-                                                        );
-                                                        event.stopPropagation();
-                                                        toast.success(
-                                                            ` Added to the wishlist`
-                                                        );
-                                                    }}
-                                                >
-                                                    <IoMdHeartEmpty />
-                                                </buttons>
-                                            </div>
+                                            <div className="overlay-products">
+                                                <div className="overlay-buttons">
+                                                    <div className="wishlist-overlay">
+                                                        <buttons
+                                                            onClick={(event) => {
+                                                                dispatch(
+                                                                    addToWishlist(item)
+                                                                );
+                                                                event.stopPropagation();
+                                                                toast.success(
+                                                                    ` Added to the wishlist`
+                                                                );
+                                                            }}
+                                                        >
+                                                            <IoMdHeartEmpty />
+                                                        </buttons>
+                                                    </div>
 
-                                            <div className="btn2 liquid  overlay-view-details ">
-                                                <button>View Deatils </button>
+                                                    <div className="btn2 liquid  overlay-view-details ">
+                                                        <button>View Deatils </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
 
-                                <div className="filter-product-para-text">
-                                    <div className="brand-name-p dotted-border">
-                                        <p>{item.Brand_Name}</p>
-                                    </div>
+                                        <div className="filter-product-para-text">
+                                            <div className="brand-name-p dotted-border">
 
-                                    <div className="model-name">
-                                        <p>
-                                            {item.Product_Name?.toUpperCase()}
-                                        </p>
+                                                <p>
+                                                    Model - {item.Model_number}
+                                                </p>
+                                            </div>
+                                            <div className="model-name dotted-border">
+                                                <p>
+                                                    <p>{item.Brand_Name}</p>
+                                                </p>
+                                            </div>
+
+                                            <div className="model-name dotted-border">
+                                                <p>
+                                                    {item.Product_Category
+                                                    }
+                                                </p>
+                                            </div>
+                                            <div className="model-name dotted-border">
+                                                <p>
+                                                    {item.Product_price
+
+                                                    }
+                                                </p>
+                                            </div>
+
+
+
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <p>No products found.</p>
-                    )}
+                                ))
+                            ) : (
+                                <p>No products found.</p>
+                            )}
                 </div>
             </div>
         </>
