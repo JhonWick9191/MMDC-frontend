@@ -4,6 +4,7 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import { addToWishlist } from "../Redux/Slice/WishListSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { FaIndianRupeeSign } from "react-icons/fa6";
 
 export default function OurTandingProducts() {
   const Navigate = useNavigate();
@@ -14,13 +15,13 @@ export default function OurTandingProducts() {
   const dispatch = useDispatch();
 
   const BASE_URL =
-    import.meta.env.VITE_MAIN_API_ROUTE ;
+    import.meta.env.VITE_MAIN_API_ROUTE;
 
   const buttons = [
     "Acoustic Guitars",
     "Electric Guitars",
     "Bass Guitars",
-    "MPC",    
+    "MPC",
     "Controller",
     "Keyboard",
   ];
@@ -42,7 +43,7 @@ export default function OurTandingProducts() {
           setFilteredProducts([]);
         }
         setLoading(false);
-        setFade(false); 
+        setFade(false);
       }, 1000);
     } catch (err) {
       console.error("Error fetching products:", err);
@@ -56,9 +57,9 @@ export default function OurTandingProducts() {
     setActiveIndex(index);
     fetchProductsByType(type);
     console.log(type)
-    
+
   }
-  
+
 
   useEffect(() => {
     if (buttons.length > 0) {
@@ -132,7 +133,7 @@ export default function OurTandingProducts() {
           {/* PRODUCTS SECTION */}
           {loading && (
             <p className="loading-gif-on-product-change">
-              <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1763116242/transition_dpgnur.gif"  loading="lazy"/>
+              <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1763116242/transition_dpgnur.gif" loading="lazy" />
             </p>
           )}
 
@@ -175,13 +176,29 @@ export default function OurTandingProducts() {
                     </div>
 
                     <div className="filter-product-para-text">
+                      <div className="brand-name-p dotted-border">
 
+                        <p>
+                          Model - {item.Model_number}
+                        </p>
+                      </div>
                       <div className="brand-name-p dotted-border">
                         <p>{item.Brand_Name.toUpperCase()}</p>
                       </div>
 
-                      <div className="model-name">
-                        <p>{item.Product_Name?.toUpperCase()}</p>
+
+
+                      <div className="model-name dotted-border">
+                        <p>
+                          {item.Product_Category
+                          }
+                        </p>
+                      </div>
+                      <div className="model-name model-price-cards dotted-border">
+                        <p>
+                          MRP <FaIndianRupeeSign />  {Number(item.Product_price).toLocaleString("en-IN")}
+
+                        </p>
                       </div>
 
                     </div>

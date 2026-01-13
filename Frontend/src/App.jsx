@@ -124,7 +124,7 @@ useEffect(() => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
-              <Route path="SearchproductDetails" element={<SearchProductDetails />} />
+              <Route path="SearchproductDetails" element={<SearchProductDetails/>} />
               <Route path="/productDetails" element={<ProductDeatils />} />
               <Route path="/cartDeatils" element={<CartPage />} />
               <Route path="/wishlistProduct" element={<WishList />} />

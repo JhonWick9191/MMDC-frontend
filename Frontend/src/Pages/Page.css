@@ -463,11 +463,12 @@ color: black;
    position: relative;
     border: 1px solid black;
     width: 15%;
+    border-radius: 5px;
 
 }
 
 .main-wrapper-for-listing-A-Z{ 
-    position: absolute;
+    position: absolute;  
     width: 100%;
     background-color: white;
 }
@@ -483,6 +484,24 @@ color: black;
     border: 1px solid black;
     padding: 2%;
 
+}
+
+.text-A-Z p{
+
+    font-size: 16px;
+    font-weight: 500;
+
+}
+
+.listing-total-buttons-for-filtering ul li{
+    padding: 2%;
+    font-size: 600;
+}
+.listing-total-buttons-for-filtering ul li:hover {
+
+    cursor: pointer;
+    background-color:#454242;
+    color: white;       
 }
 
 .filter button {
@@ -502,7 +521,6 @@ color: black;
     gap: 10px;
     display: flex;
     flex-direction: column;
-
 }
 
 .product-name {
@@ -1191,6 +1209,50 @@ color: black;
     color: #fff;
 }
 
+.liquid_2 {
+    background: linear-gradient(#F05624 0 0) no-repeat calc(200% - var(--p, 0%)) 100% / 200% var(--p, 0.2em);
+    border-radius: 5px;
+    border: none;
+    transition: 0.3s var(--t, 0s),
+        background-position 0.3s calc(0.3s - var(--t, 0s));
+}
+
+.main-text-and-button-for-text-button{
+    
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 95%;
+}
+
+.count-number{
+    padding: 4px;
+    background-color: #F05624;
+    color: white;
+    text-align: center;
+}
+
+.main-text-and-button-for-text-button:hover{
+    cursor: pointer;
+}
+
+.liquid_2:hover {
+    border: 1px solid white;
+    --p: 100%;
+    --t: 0.3s;
+    color: #fff;
+}
+
+
+
+.model-price-cards p{
+    display: flex;
+    align-items: center;
+    gap: 5px;    
+    
+}
 
 /*----------------------------------------------------------------------------animations------------------------------------------------------------------------------------------*/
 

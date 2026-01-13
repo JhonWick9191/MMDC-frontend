@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { RxCross1 } from "react-icons/rx";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { GoHome } from "react-icons/go";
-import { RiArrowDownSLine } from "react-icons/ri";
+import { FaIndianRupeeSign } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { addToWishlist } from "../Redux/Slice/WishListSlice";
 import { toast } from "react-toastify";
 import { IoChevronDown } from "react-icons/io5";
+import { IoChevronUp } from "react-icons/io5";
 
 
 function FilterProductByCategoryes() {
@@ -72,7 +73,7 @@ function FilterProductByCategoryes() {
 
     }
 
-   
+
 
     // handel cross butoon
     function handleCross() {
@@ -157,7 +158,7 @@ function FilterProductByCategoryes() {
     // functions for adding A-z And price high to low 
     // Price heigh to low sorting function 
 
-     // function for handleside filer section A-Z
+    // function for handleside filer section A-Z
     const [SideFilterSection, setSideFilterSection] = useState(false)
     function handleSideFilterSection() {
         setSideFilterSection(pre => !pre)
@@ -180,13 +181,15 @@ function FilterProductByCategoryes() {
     }
 
     function handlePriceHighToLow() {
-        // turn off low to high 
-        setisPriceHighTolow(!isPriceHighTolow);
+        setisPriceLowToHigh(false);   // Low OFF  
+        setisPriceHighTolow(true);    // High ON
+        setSideFilterSection(false);
+
     }
 
 
     // function for filter price low to high 
-    const [isPriceLowToHigh, setisPriceLowToHigh] = useState(true)
+    const [isPriceLowToHigh, setisPriceLowToHigh] = useState(false)
     // function handlefunction 
     if (isPriceLowToHigh && products.length > 0) {  // products loaded check
         sortedFilterProducts.sort((a, b) => {
@@ -198,8 +201,10 @@ function FilterProductByCategoryes() {
 
     function handlePriceLowTohigh() {
         // first make false function for heigh to lo 
-        setisPriceHighTolow(false)
-        setisPriceLowToHigh(!isPriceLowToHigh);
+
+        setisPriceHighTolow(false);   // High OFF
+        setisPriceLowToHigh(true);    // Low ON  
+        setSideFilterSection(false);
     }
 
     return (
@@ -213,7 +218,7 @@ function FilterProductByCategoryes() {
                     <li></li>
                     <li>{type.toUpperCase()}</li>
                 </ul>
-                <p className="path-heading">{type.toUpperCase()}</p>
+                {/* <p className="path-heading">{type.toUpperCase()}</p> */}
             </div>
 
             <hr className="color_2"></hr>
@@ -280,36 +285,59 @@ function FilterProductByCategoryes() {
                 {/* top section after poster section that is basically contain total length of products ad A-Z and price filter section */}
 
                 <div className="left-side-buttons-filter">
-                    <div className="cate">
+                    <div className="filter-by-product-price-and-a-z count-number">
                         <p>
                             {type} -  {products.length}
                         </p>
                     </div>
 
                     <div className="filter-by-product-price-and-a-z">
-                        <div className="main-wrapper-for-filter-a-z" onClick={handleSideFilterSection}>
-                            <div className="">
-                                <div class=""><p>Select Sorting Options</p></div>
+                        <div className="main-wrapper-for-filter-a-z liquid_2" onClick={handleSideFilterSection}>
+                            <div className="main-text-and-button-for-text-button">
+                                <div className="text-A-Z">
+                                    <p>
+
+                                        {isPriceLowToHigh
+                                            ? 'Price - Low to High'
+                                            : isPriceHighTolow
+                                                ? 'Price - High to Low'
+                                                : 'Select Sorting Options'
+                                        }
+                                    </p>
+                                </div>
+                                <div className="button-A-Z">
+                                 {
+                                    SideFilterSection ? (<IoChevronUp />) : (<IoChevronDown/>)
+                                 }
                             </div>
-                            <div class="">
-                                <button><IoChevronDown /></button>
                             </div>
+                            
                         </div>
+
+                        {/* Buttons same rahenge - perfect hai */}
                         <div className="main-wrapper-for-listing-A-Z">
-                            {
-                                SideFilterSection ? (
-                                    <div className="listing-total-buttons-for-filtering">
-                                        <ul>
-                                            <li className="dotted-border" onClick={handlePriceLowTohigh}>Low to High</li>
-                                            <li onClick={handlePriceHighToLow}>High to Low</li>
+                            {SideFilterSection ? (
+                                <div className="listing-total-buttons-for-filtering">
+                                    <ul>
+                                        <li
+                                            className="dotted-border"
+                                            onClick={handlePriceLowTohigh}
+                                        >
+                                            Price - Low to High
+                                        </li>
+                                        <li
 
-                                        </ul>
-                                    </div>
-
-                                ) : (null)
-                            }
+                                            onClick={handlePriceHighToLow}
+                                        >
+                                            Price - High to Low
+                                        </li>
+                                    </ul>
+                                </div>
+                            ) : null}
                         </div>
                     </div>
+
+
                 </div>
             </div>
             {/*  mobile side view filter section  */}
@@ -563,11 +591,10 @@ function FilterProductByCategoryes() {
                                                     }
                                                 </p>
                                             </div>
-                                            <div className="model-name dotted-border">
+                                            <div className="model-name model-price-cards dotted-border">
                                                 <p>
-                                                    {item.Product_price
+                                                  MRP <FaIndianRupeeSign />  {Number(item.Product_price).toLocaleString("en-IN")}
 
-                                                    }
                                                 </p>
                                             </div>
 
