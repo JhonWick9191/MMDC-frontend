@@ -9,7 +9,7 @@ import { toast, ToastContainer } from "react-toastify"
 import { FaRegEye } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa6";
 
-const BASE_URL = import.meta.env.VITE_MAIN_API_ROUTE;
+const BASE_URL ="https://musicandmore.co.in/api/v1";
 
 export default function () {
     const Navigate = useNavigate()
