@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import image_01 from "./MobileImagesPosters/1.jpeg"
-import image_02 from "./MobileImagesPosters/2.JPEG"
-import image_03 from "./MobileImagesPosters/3.JPEG"
+import image_02 from "./MobileImagesPosters/2.jpeg"
+import image_03 from "./MobileImagesPosters/3.jpeg"
 import { useNavigate } from "react-router-dom";
 import { GrPrevious } from "react-icons/gr";
 import { GrNext } from "react-icons/gr";
