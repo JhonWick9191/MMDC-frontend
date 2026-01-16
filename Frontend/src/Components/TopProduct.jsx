@@ -49,11 +49,11 @@ const catogeryesProducts = [
         name: "Harmonica",
         image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1762931660/Hermonica_q92ezh.png",
     },
-    {
-        id: 10,
-        name: "Professional Audio",
-        image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/categoriesPosters/pa.jpg",
-    },
+    // {!
+    //     id: 10,
+    //     name: "Professional Audio",
+    //     image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/categoriesPosters/pa.jpg",
+    // },
 ];
 
 
