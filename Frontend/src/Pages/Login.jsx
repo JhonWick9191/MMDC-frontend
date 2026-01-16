@@ -109,7 +109,7 @@ export default function () {
     async function signupHandler(event) {
         event.preventDefault();
         try {
-            const responce = await fetch(`${BASE_URL}/signup`, {
+            const responce = await fetch(`https://musicandmore.co.in/api/v1/signup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
