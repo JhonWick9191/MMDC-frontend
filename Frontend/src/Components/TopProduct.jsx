@@ -22,7 +22,7 @@ const catogeryesProducts = [
     {
         id: 4,
         name: "Ukuleles",
-        image: "https://res.cloudinary.com/dfilhi9ku/image/upload/v1757666737/Untitled_design_3_axzwoh.jpg",
+        image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/categoriesPosters/ukulele.jpg",
     },
     {
         id: 5,

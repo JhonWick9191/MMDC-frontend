@@ -85,8 +85,8 @@ console.log(user)
                     <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1758284448/GIFF_ayxqti.gif" alt="empty-cart" />
                   </div>
                   <div className="content-add-to-cart">
-                    <h1>Your shopping cart is empty.</h1>
-                    <p>Please add something soon, carts have feelings too.</p>
+                    <h1>Your wishlist is empty.</h1>
+                  
                   </div>
                   <div className="btn btn-add-to-cart">
                     <button onClick={() => Navigate("/")}>Shop Now</button>
