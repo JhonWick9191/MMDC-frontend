@@ -115,7 +115,7 @@ function FilterProductByCategoryes() {
     const fetchProducts = async () => {
         try {
             const res = await fetch(
-                `http://localhost:4100/api/v1/categoryProduct?type=${type}`
+                `https://api.musicandmore.co.in/api/v1/categoryProduct?type=${type}`
             );
             const data = await res.json();
             console.log("Product Category data ");

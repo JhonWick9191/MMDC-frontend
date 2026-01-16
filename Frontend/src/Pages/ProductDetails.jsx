@@ -64,7 +64,7 @@ export default function ProductDetails() {
 
   async function fetchProductById(id) {
     try {
-      const res = await fetch(`http://localhost:4100/api/v1/product/${id}`);
+      const res = await fetch(`https://api.musicandmore.co.in/api/v1/product/${id}`);
       const data = await res.json();
       if (data.success) {
         setProductDetails(data.product);
@@ -111,7 +111,7 @@ export default function ProductDetails() {
     setLoadingRecommendations(true);
     try {
       const res = await fetch(
-        `http://localhost:4100/api/v1/alsoView?category=${encodeURIComponent(category)}`
+        `https://api.musicandmore.co.in/api/v1/alsoView?category=${encodeURIComponent(category)}`
       );
       const data = await res.json();
       // 🔹 Added artificial delay of 4 seconds

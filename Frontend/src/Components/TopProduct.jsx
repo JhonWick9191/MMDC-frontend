@@ -101,7 +101,7 @@ export default function TopProducts() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch("http://localhost:4100/api/v1/newProducts");
+                const response = await fetch("https://api.musicandmore.co.in/api/v1/newProducts");
                 const data = await response.json();
                 
                 console.log("✅ API Response:", data); // Structure check karo
