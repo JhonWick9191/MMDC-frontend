@@ -19,7 +19,7 @@ export default function Home(){
     return(
         <>
 
-        {/* <ScrollToTop/> */}
+        <ScrollToTop/>
         <MainPoster/>       
         <TopProducts/>   
         <OurProducts/>  
