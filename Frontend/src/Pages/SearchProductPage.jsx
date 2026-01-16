@@ -44,16 +44,16 @@ export default function SearchProducts() {
  
 
     // Price Ranges
-    const priceRanges = [
-        { label: "1000 - 5000", min: 1000, max: 5000 },
-        { label: "5000 - 10000", min: 5000, max: 10000 },
-        { label: "10000 - 12000", min: 10000, max: 12000 },
-        { label: "12000 - 15000", min: 12000, max: 15000 },
-        { label: "15000 - 20000", min: 15000, max: 20000 },
-        { label: "20000 - 25000", min: 20000, max: 25000 },
-        { label: "25000 - 50000", min: 25000, max: 50000 },
-        { label: "More than 50000", min: 50000, max: Infinity },
-    ];
+    // const priceRanges = [
+    //     { label: "1000 - 5000", min: 1000, max: 5000 },
+    //     { label: "5000 - 10000", min: 5000, max: 10000 },
+    //     { label: "10000 - 12000", min: 10000, max: 12000 },
+    //     { label: "12000 - 15000", min: 12000, max: 15000 },
+    //     { label: "15000 - 20000", min: 15000, max: 20000 },
+    //     { label: "20000 - 25000", min: 20000, max: 25000 },
+    //     { label: "25000 - 50000", min: 25000, max: 50000 },
+    //     { label: "More than 50000", min: 50000, max: Infinity },
+    // ];
 
     // Filter products
     const filteredProducts = selectedFilter
