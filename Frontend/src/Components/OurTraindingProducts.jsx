@@ -15,7 +15,7 @@ export default function OurTandingProducts() {
   const dispatch = useDispatch();
 
   const BASE_URL =
-    import.meta.env.VITE_MAIN_API_ROUTE;
+       ;
 
   const buttons = [
     "Acoustic Guitars",
@@ -31,7 +31,7 @@ export default function OurTandingProducts() {
       setFade(true);
       setLoading(true);
 
-      const res = await fetch(`${BASE_URL}/searchProducts?q=${encodeURIComponent(type)}`);
+      const res = await fetch(`https://api.musicandmore.co.in/searchProducts?q=${encodeURIComponent(type)}`);
       const data = await res.json();
 
       // Small delay for smooth transition
