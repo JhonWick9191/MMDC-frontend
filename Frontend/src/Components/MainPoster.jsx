@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import image_01 from "./MobileImagesPosters/1.JPEG"
+import image_01 from "./MobileImagesPosters/1.jpeg"
 import image_02 from "./MobileImagesPosters/2.JPEG"
 import image_03 from "./MobileImagesPosters/3.JPEG"
 import { useNavigate } from "react-router-dom";
