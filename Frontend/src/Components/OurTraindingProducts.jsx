@@ -14,8 +14,7 @@ export default function OurTandingProducts() {
   const [fade, setFade] = useState(false);
   const dispatch = useDispatch();
 
-  const BASE_URL =
-       ;
+  
 
   const buttons = [
     "Acoustic Guitars",
