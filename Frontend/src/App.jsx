@@ -138,7 +138,7 @@ useEffect(() => {
             </Routes>
           </>
         )}
-        <TurstedByBrands />
+        {/* <TurstedByBrands /> */}
         <Footer />
       </div>
        

@@ -40,22 +40,7 @@ export default function SearchProducts() {
         return acc;
     }, {}) || {};
 
-    // loading icon while loading 
- 
-
-    // Price Ranges
-    // const priceRanges = [
-    //     { label: "1000 - 5000", min: 1000, max: 5000 },
-    //     { label: "5000 - 10000", min: 5000, max: 10000 },
-    //     { label: "10000 - 12000", min: 10000, max: 12000 },
-    //     { label: "12000 - 15000", min: 12000, max: 15000 },
-    //     { label: "15000 - 20000", min: 15000, max: 20000 },
-    //     { label: "20000 - 25000", min: 20000, max: 25000 },
-    //     { label: "25000 - 50000", min: 25000, max: 50000 },
-    //     { label: "More than 50000", min: 50000, max: Infinity },
-    // ];
-
-    // Filter products
+    
     const filteredProducts = selectedFilter
         ? searchResults.filter((item) => {
             if (selectedFilter.type === "category") return item.Product_Category === selectedFilter.value;
@@ -301,21 +286,7 @@ export default function SearchProducts() {
                                         <p>PRICE</p>
                                     </div>
                                 </div>
-                                <ul className="pricing-listing">
-                                    {priceRanges.map((range, index) => (
-                                        <li
-                                            className="listing-products-price"
-                                            key={index}
-                                            onClick={() => {
-                                                setSelectedFilter({ type: "price", min: range.min, max: range.max });
-                                                setSideBar(false); // sidebar close
-                                                document.body.style.overflow = "auto"; // page scroll enable
-                                            }}
-                                        >
-                                            {range.label}
-                                        </li>
-                                    ))}
-                                </ul>
+                              
                             </div>
 
                         </div>

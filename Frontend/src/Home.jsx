@@ -3,6 +3,7 @@ import MainPoster from "./Components/MainPoster"
 import TopProducts from "./Components/TopProduct"
 import OurProducts from "./Components/OurTraindingProducts"
 import RotatingLogo from "./Components/RoatingLogo"
+import TrustedByBrands from "./Components/TurstedByBrsnds"
 import { useLocation } from "react-router-dom"
 import { useEffect } from "react"
 export default function Home(){
@@ -23,7 +24,8 @@ export default function Home(){
         <MainPoster/>       
         <TopProducts/>   
         <OurProducts/>  
-        <RotatingLogo/> 
+         <TrustedByBrands/>
+        {/* <RotatingLogo/>  */}
        
            
         

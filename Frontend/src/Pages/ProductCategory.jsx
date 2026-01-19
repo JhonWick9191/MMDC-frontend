@@ -10,8 +10,8 @@ import { addToWishlist } from "../Redux/Slice/WishListSlice";
 import { toast } from "react-toastify";
 import { IoChevronDown } from "react-icons/io5";
 import { IoChevronUp } from "react-icons/io5";
-
-
+import { GrFormPrevious } from "react-icons/gr";
+import { MdOutlineNavigateNext } from "react-icons/md";
 function FilterProductByCategoryes() {
     const dispatch = useDispatch();
     const Navigate = useNavigate();
@@ -124,7 +124,7 @@ function FilterProductByCategoryes() {
         }
 
         try {
-            const res = await fetch(`https://api.musicandmore.co.in/api/v1/categoryProduct?${params.toString()}`);
+            const res = await fetch(`http://localhost:4100/api/v1/categoryProduct?${params.toString()}`);
             const data = await res.json();
 
             setProducts(data.message || []);
@@ -644,29 +644,53 @@ function FilterProductByCategoryes() {
                                 <p>No products found.</p>
                             )}
 
-                    <div className="pagination">
-                        <button
-                            disabled={currentPage === 1}
-                            onClick={() => fetchProducts(currentPage - 1)}
-                        >
-                            Previous
-                        </button>
 
-                        <span className="current-page">{currentPage}</span>
+                    <div className="main-pagination-wrapper">
 
-                        <button
-                            disabled={currentPage === totalPages}
-                            onClick={() => fetchProducts(currentPage + 1)}
-                        >
-                            Next
-                        </button>
+
+                        <div className="pagination">
+
+                            <div className="left-page-down-button">
+
+
+                                <button
+                                    disabled={currentPage === 1}
+                                    onClick={() => fetchProducts(currentPage - 1)}
+                                >
+                                  <GrFormPrevious/> Pre
+                                </button>
+                            </div>
+
+                            <div className="page-number">
+
+
+
+                                <span className="current-page">{currentPage}</span>
+
+                            </div>
+
+                            <div className="right-page-up-button">
+
+
+                                <button
+                                    disabled={currentPage === totalPages}
+                                    onClick={() => fetchProducts(currentPage + 1)}
+                                >
+
+                                    Next <MdOutlineNavigateNext/>
+                                    
+                                </button>
+                            </div>
+                        </div>
+
+
                     </div>
 
+
                 </div>
+
+
             </div>
-
-
-
 
         </>
     );

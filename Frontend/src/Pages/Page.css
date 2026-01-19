@@ -1459,6 +1459,49 @@ color: black;
 
 /* Smooth hover animation for cards */
 
+/* pagination css */
+.main-pagination-wrapper{
+   
+    position: absolute;
+    bottom: -10px;
+    width: 100%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    
+}
+.pagination{
+    width: 15%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left-page-down-button {
+    border: 1px solid black;
+    padding: 2%;
+    
+}
+.left-page-down-button button{
+    align-items: center;
+    justify-content: center;
+    
+    display: flex;
+}
+
+.right-page-up-button{
+    border: 1px solid black;
+    padding: 2%;
+}
+
+.right-page-up-button button{
+     align-items: center;
+    justify-content: center;
+    
+    display: flex;
+}
+
 @media screen and (min-width: 650px) and (max-width: 900px) {
     .main-category-products_2 {
         grid-template-columns: repeat(3, 1fr) !important;
@@ -1477,6 +1520,14 @@ color: black;
 }
 
 @media screen and (max-width: 600px) {
+
+    .pagination{
+        width: 30%;
+    
+    }
+    .main-pagination-wrapper {
+        bottom: 0px;
+    }
 
    .listing-on-categoryes{
     position: absolute;

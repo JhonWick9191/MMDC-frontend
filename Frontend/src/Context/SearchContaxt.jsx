@@ -16,7 +16,7 @@ export const SearchProvider = ({ children }) => {
       setLoading(true);
       // ✅ Match backend parameter name (q)
       const res = await fetch(
-        `${BASE_URL}/searchProducts?q=${encodeURIComponent(searchQuery)}`
+        `https://api.musicandmore.co.in/api/v1/searchProducts?q=${encodeURIComponent(searchQuery)}`
       );
       const data = await res.json();
 
