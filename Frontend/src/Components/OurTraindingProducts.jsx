@@ -30,7 +30,7 @@ export default function OurTandingProducts() {
       setFade(true);
       setLoading(true);
 
-      const res = await fetch(`https://api.musicandmore.co.in/api/v1searchProducts?q=${encodeURIComponent(type)}`);
+      const res = await fetch(`http://loclahost:4100/api/v1/searchProducts?q=${encodeURIComponent(type)}`);
       const data = await res.json();
 
       // Small delay for smooth transition

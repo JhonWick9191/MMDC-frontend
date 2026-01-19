@@ -25,17 +25,22 @@ function FilterProductByCategoryes() {
     const [selectedFilter, setSelectedFilter] = useState(null);
 
     // Category count
-    const categoryCount = products.reduce((acc, item) => {
-        acc[item.Product_Category] = (acc[item.Product_Category] || 0) + 1;
-        return acc;
-    }, {});
+    const [categoryCount, setCategoryCount] = useState({}); // category => count from backend
+    const [allBrands, setAllBrands] = useState([]); // array of brand names
+    const [brandCount, setBrandCount] = useState({}); // brand => count from backend
 
+
+    // toal products count 
+    const [totalProducts, setTotalProducts] = useState(0);
+    const [allCategories, setAllCategories] = useState([]); // all categories from backend
+
+
+    console.log(allCategories)
     // Brand count
-    const brandCount = products.reduce((acc, item) => {
-        acc[item.Brand_Name] = (acc[item.Brand_Name] || 0) + 1;
-        return acc;
-    }, {});
 
+    // pagination add
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
 
     const [productFilterLoading, setProductFilterLoading] = useState(false)
@@ -65,8 +70,6 @@ function FilterProductByCategoryes() {
                 params.set("priceMax", filter.max);
             }
 
-
-
             Navigate(`${location.pathname}?${params.toString()}`, { replace: false });
             setProductFilterLoading(false)
         }, 2000)
@@ -83,21 +86,7 @@ function FilterProductByCategoryes() {
     }
 
     // Filtered products
-    const filteredProducts = selectedFilter
-        ? products.filter((item) => {
-            if (selectedFilter.type === "category") {
-                return item.Product_Category === selectedFilter.value;
-            } else if (selectedFilter.type === "brand") {
-                return item.Brand_Name === selectedFilter.value;
-            } else if (selectedFilter.type === "price") {
-                const price = parseInt(
-                    String(item.Product_price || "0").replace(/,/g, "")
-                );
-                return price >= selectedFilter.min && price <= selectedFilter.max;
-            }
-            return true;
-        })
-        : products;
+
 
     const [showSideBar, setSideBar] = useState(false); // show side bar section
     function productTypeDisplay() {
@@ -108,25 +97,57 @@ function FilterProductByCategoryes() {
 
     useEffect(() => {
         if (type) {
-            fetchProducts();
+            fetchProducts(1);
         }
-    }, [type]);
+    }, [location.search]);
 
-    const fetchProducts = async () => {
+    const [isFilterMetaLoaded, setIsFilterMetaLoaded] = useState(false);
+
+
+    const fetchProducts = async (page = 1, sort = "asc") => {  // 🔹 sort param add kiya
+        setLoading(true);
+        const params = new URLSearchParams(location.search);
+        if (type) params.set("type", type);
+        params.set("page", page);
+        params.set("sort", sort); // 🔹 backend ko sort bhej rahe hain
+
+        // ✅ Send current filter to backend
+        if (selectedFilter) {
+            if (selectedFilter.type === "brand") {
+                params.set("brand", selectedFilter.value);
+            } else if (selectedFilter.type === "category") {
+                params.set("subCategory", selectedFilter.value);
+            } else if (selectedFilter.type === "price") {
+                params.set("priceMin", selectedFilter.min);
+                params.set("priceMax", selectedFilter.max);
+            }
+        }
+
         try {
-            const res = await fetch(
-                `https://api.musicandmore.co.in/api/v1/categoryProduct?type=${type}`
-            );
+            const res = await fetch(`http://localhost:4100/api/v1/categoryProduct?${params.toString()}`);
             const data = await res.json();
-            console.log("Product Category data ");
-            console.log(data);
+
             setProducts(data.message || []);
-        } catch (error) {
-            console.error("Error while fetching products", error);
+            setTotalProducts(data.totalProducts || 0);
+            if (!isFilterMetaLoaded) {
+                setAllCategories(data.totalCategories || []);
+                setCategoryCount(data.categoryCount || {});
+                setAllBrands(Object.keys(data.brandCount || {}));
+                setBrandCount(data.brandCount || {});
+                setIsFilterMetaLoaded(true);
+            }
+
+            setTotalPages(data.totalPages || 1);
+            setCurrentPage(page);
+        } catch (err) {
+            console.error(err);
         } finally {
             setLoading(false);
         }
     };
+
+
+
 
     // NEW: URL se filter read karna
     useEffect(() => {
@@ -166,11 +187,11 @@ function FilterProductByCategoryes() {
 
     }
 
-    const [isPriceHighTolow, setisPriceHighTolow] = useState(false)
+    const [isPriceHighTolow, setisPriceHighTolow] = useState(true)
 
     // filter product with sorting 
 
-    let sortedFilterProducts = [...filteredProducts]
+    let sortedFilterProducts = [...products];
 
     if (isPriceHighTolow) {
         sortedFilterProducts.sort((a, b) => {
@@ -180,16 +201,9 @@ function FilterProductByCategoryes() {
         })
     }
 
-    function handlePriceHighToLow() {
-        setisPriceLowToHigh(false);   // Low OFF  
-        setisPriceHighTolow(true);    // High ON
-        setSideFilterSection(false);
-
-    }
-
 
     // function for filter price low to high 
-    const [isPriceLowToHigh, setisPriceLowToHigh] = useState(false)
+    const [isPriceLowToHigh, setisPriceLowToHigh] = useState(true)
     // function handlefunction 
     if (isPriceLowToHigh && products.length > 0) {  // products loaded check
         sortedFilterProducts.sort((a, b) => {
@@ -199,13 +213,21 @@ function FilterProductByCategoryes() {
         })
     }
 
-    function handlePriceLowTohigh() {
-        // first make false function for heigh to lo 
+    function handlePriceHighToLow() {
+        setisPriceLowToHigh(false);   // Low OFF  
+        setisPriceHighTolow(true);    // High ON
+        setSideFilterSection(false);
+        fetchProducts(1, "desc");     // 🔹 backend se fetch karo High → Low
+    }
 
+    function handlePriceLowTohigh() {
         setisPriceHighTolow(false);   // High OFF
         setisPriceLowToHigh(true);    // Low ON  
         setSideFilterSection(false);
+        fetchProducts(1, "asc");      // 🔹 backend se fetch karo Low → High
     }
+
+
 
     return (
         <>
@@ -287,7 +309,7 @@ function FilterProductByCategoryes() {
                 <div className="left-side-buttons-filter">
                     <div className="filter-by-product-price-and-a-z count-number">
                         <p>
-                            {type} -  {products.length}
+                            {type} -  {totalProducts}
                         </p>
                     </div>
 
@@ -306,12 +328,12 @@ function FilterProductByCategoryes() {
                                     </p>
                                 </div>
                                 <div className="button-A-Z">
-                                 {
-                                    SideFilterSection ? (<IoChevronUp />) : (<IoChevronDown/>)
-                                 }
+                                    {
+                                        SideFilterSection ? (<IoChevronUp />) : (<IoChevronDown />)
+                                    }
+                                </div>
                             </div>
-                            </div>
-                            
+
                         </div>
 
                         {/* Buttons same rahenge - perfect hai */}
@@ -366,22 +388,23 @@ function FilterProductByCategoryes() {
                                     </div>
                                 </div>
                                 <ul className="lsiting-felx-class">
-                                    {Object.entries(categoryCount).map(
-                                        ([category, count], index) => (
-                                            <li
-                                                className="cate-list-highlight"
-                                                key={index}
-                                                onClick={() =>
-                                                    applyFilter({
-                                                        type: "category",
-                                                        value: category,
-                                                    })
-                                                }
-                                            >
-                                                {category} ({count})
-                                            </li>
-                                        )
-                                    )}
+                                    <ul className="lsiting-felx-class">
+                                        {allCategories.map((category, index) => {
+                                            const count = categoryCount[category] || 0; // current page me count ya 0
+                                            return (
+                                                <li
+                                                    className="cate-list-highlight"
+                                                    key={index}
+                                                    onClick={() =>
+                                                        applyFilter({ type: "category", value: category })
+                                                    }
+                                                >
+                                                    {category} ({count})
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+
                                 </ul>
                             </div>
 
@@ -431,6 +454,13 @@ function FilterProductByCategoryes() {
             )}
 
             <div className="main-category-products">
+
+                {/*---------------------------------------------------------------------------------------------------------------------------------------------------------------  */}
+                {/* ---------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
+
+                {/* ==========================================================Left side fiter  for laptop section ================================================================================== */}
+                {/*---------------------------------------------------------------------------------------------------------------------------------------------------------------  */}
+                {/* ---------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
                 <div className="filter-with-products">
                     <div className="listing-on-categoryes">
                         <div className="listing-product-category">
@@ -455,24 +485,20 @@ function FilterProductByCategoryes() {
                                     </div>
                                 </div>
                                 <ul className="lsiting-felx-class">
-                                    {Object.entries(categoryCount).map(
-                                        ([category, count], index) => (
+                                    {allCategories.map((category, index) => {
+                                        const count = categoryCount[category] || 0; // current page me count ya 0
+                                        return (
                                             <li
-
                                                 className="cate-list-highlight"
                                                 key={index}
                                                 onClick={() =>
-                                                    applyFilter({
-                                                        type: "category",
-                                                        value: category,
-                                                    })
-
+                                                    applyFilter({ type: "category", value: category })
                                                 }
                                             >
                                                 {category} ({count})
                                             </li>
-                                        )
-                                    )}
+                                        );
+                                    })}
                                 </ul>
                             </div>
 
@@ -511,6 +537,17 @@ function FilterProductByCategoryes() {
                     </div>
                 </div>
 
+
+
+                {/*---------------------------------------------------------------------------------------------------------------------------------------------------------------  */}
+                {/* ---------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
+
+                {/* ==========================================================Left side fiter ends================================================================================== */}
+                {/*---------------------------------------------------------------------------------------------------------------------------------------------------------------  */}
+                {/* ---------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
+
+
+                {/*  Right side prodcuts starts   */}
                 <div className="products-cato">
                     {
                         productFilterLoading ? (<div className="loading-product-filter">
@@ -591,12 +628,12 @@ function FilterProductByCategoryes() {
                                                     }
                                                 </p>
                                             </div>
-                                            <div className="model-name model-price-cards dotted-border">
+                                            {/* <div className="model-name model-price-cards dotted-border">
                                                 <p>
-                                                  MRP <FaIndianRupeeSign />  {Number(item.Product_price).toLocaleString("en-IN")}
+                                                    MRP <FaIndianRupeeSign />  {Number(item.Product_price).toLocaleString("en-IN")}
 
                                                 </p>
-                                            </div>
+                                            </div> */}
 
 
 
@@ -606,8 +643,31 @@ function FilterProductByCategoryes() {
                             ) : (
                                 <p>No products found.</p>
                             )}
+
+                    <div className="pagination">
+                        <button
+                            disabled={currentPage === 1}
+                            onClick={() => fetchProducts(currentPage - 1)}
+                        >
+                            Previous
+                        </button>
+
+                        <span className="current-page">{currentPage}</span>
+
+                        <button
+                            disabled={currentPage === totalPages}
+                            onClick={() => fetchProducts(currentPage + 1)}
+                        >
+                            Next
+                        </button>
+                    </div>
+
                 </div>
             </div>
+
+
+
+
         </>
     );
 }

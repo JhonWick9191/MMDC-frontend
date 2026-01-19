@@ -276,8 +276,8 @@ export default function ProductDetails() {
                MRP <FaIndianRupeeSign /> {(productDetails.Product_price * count).toLocaleString("en-IN")}
             </p>
             <p>Price incl. of all Taxes</p>
-          </div>
-          <hr />
+          </div> 
+           <hr />
           <div className="quantity">
             <div className="wrapper-main-counter">
               <div className="main-quantity">
