@@ -8,7 +8,7 @@ export default function BuyProduct() {
   // Fetch all orders
   async function fetchOrders() {
     try {
-      const response = await fetch(`${BASE_URL}/orderDetials`, {
+      const response = await fetch(`https://api.musicandmore.co.in/api/v1/orderDetials`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

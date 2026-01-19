@@ -10,7 +10,7 @@ export default function AdminNotifiaction() {
 
     const fetchPendingUsers = async () => {
         try {
-            const res = await fetch(`${BASE_URL}/pendingUsers`);
+            const res = await fetch(`https://api.musicandmore.co.in/api/v1/pendingUsers`);
             const data = await res.json();
 
             if (data.success) {

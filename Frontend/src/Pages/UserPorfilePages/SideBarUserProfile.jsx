@@ -20,7 +20,7 @@ export default function SideBadr() {
 
     try {
       // Step 1: Call backend logout API
-      const response = await fetch(`${BASE_URL}/logout`, {
+      const response = await fetch(`https://api.musicandmore.co.in/api/v1/logout`, {
         method: "POST",
         credentials: "include", // httpOnly cookie bhejne ke liye zaroori
         headers: {
