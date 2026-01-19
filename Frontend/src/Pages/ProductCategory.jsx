@@ -124,7 +124,7 @@ function FilterProductByCategoryes() {
         }
 
         try {
-            const res = await fetch(`http://localhost:4100/api/v1/categoryProduct?${params.toString()}`);
+            const res = await fetch(`https://api.musicandmore.co.in/api/v1/categoryProduct?${params.toString()}`);
             const data = await res.json();
 
             setProducts(data.message || []);
