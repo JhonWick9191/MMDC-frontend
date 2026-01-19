@@ -40,7 +40,7 @@ export default function () {
         event.preventDefault();
 
         try {
-            const responce = await fetch(`${BASE_URL}/login`, {
+            const responce = await fetch(`https://api.musicandmore.co.in/api/v1/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
@@ -109,7 +109,7 @@ export default function () {
     async function signupHandler(event) {
         event.preventDefault();
         try {
-            const responce = await fetch(`https://musicandmore.co.in/api/v1/signup`, {
+            const responce = await fetch(`https://api.musicandmore.co.in/api/v1/signup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
