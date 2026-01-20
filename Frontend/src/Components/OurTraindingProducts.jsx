@@ -182,7 +182,7 @@ export default function OurTandingProducts() {
                         </p>
                       </div>
                       <div className="brand-name-p dotted-border">
-                        <p>{item.Brand_Name.toUpperCase()}</p>
+                        <p>{item.Brand_Name}</p>
                       </div>
 
 
