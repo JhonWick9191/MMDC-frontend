@@ -616,6 +616,14 @@ function FilterProductByCategoryes() {
                                                     Model - {item.Model_number}
                                                 </p>
                                             </div>
+
+                                            <div className="brand-name-p dotted-border">
+
+                                                <p>
+                                                    Model - {item.Product_Name
+                                                    }
+                                                </p>
+                                            </div>
                                             <div className="model-name dotted-border">
                                                 <p>
                                                     <p>{item.Brand_Name}</p>
@@ -657,7 +665,7 @@ function FilterProductByCategoryes() {
                                     disabled={currentPage === 1}
                                     onClick={() => fetchProducts(currentPage - 1)}
                                 >
-                                  <GrFormPrevious/> Pre
+                                    <GrFormPrevious /> Pre
                                 </button>
                             </div>
 
@@ -677,8 +685,8 @@ function FilterProductByCategoryes() {
                                     onClick={() => fetchProducts(currentPage + 1)}
                                 >
 
-                                    Next <MdOutlineNavigateNext/>
-                                    
+                                    Next <MdOutlineNavigateNext />
+
                                 </button>
                             </div>
                         </div>
