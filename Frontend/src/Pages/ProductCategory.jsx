@@ -228,6 +228,27 @@ function FilterProductByCategoryes() {
     }
 
 
+    // handle page chage 
+
+    function scrollToTopSmooth() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+
+    function hendlePagePrivouschnage() {
+        fetchProducts(currentPage - 1)
+        scrollToTopSmooth()
+    }
+
+    function handlePageNextChange(){
+        fetchProducts(currentPage + 1)
+        scrollToTopSmooth()
+
+
+    }
 
     return (
         <>
@@ -663,7 +684,7 @@ function FilterProductByCategoryes() {
 
                                 <button
                                     disabled={currentPage === 1}
-                                    onClick={() => fetchProducts(currentPage - 1)}
+                                    onClick={hendlePagePrivouschnage}
                                 >
                                     <GrFormPrevious /> Pre
                                 </button>
@@ -682,7 +703,7 @@ function FilterProductByCategoryes() {
 
                                 <button
                                     disabled={currentPage === totalPages}
-                                    onClick={() => fetchProducts(currentPage + 1)}
+                                    onClick={handlePageNextChange}
                                 >
 
                                     Next <MdOutlineNavigateNext />
