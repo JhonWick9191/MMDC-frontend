@@ -43,7 +43,7 @@ export default function () {
             const responce = await fetch(`https://api.musicandmore.co.in/api/v1/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                credentials: "include",
+                credentials:"include",
                 body: JSON.stringify(LoginFormData),
             });
             const data = await responce.json();
@@ -54,11 +54,11 @@ export default function () {
                 toast.success(data.message);
 
                 if (data.token) {
-                    // ✅ User data safely lo
+                    // User data safely lo
                     const userData = data.isExistingUser || data.user || null;
                     console.log("User data from login:", userData);
 
-                    // ✅ Save to Redux
+                    //  Save to Redux
                     dispatch(setToken(data.token));
                     dispatch(setUser(userData));
                     console.log("You are logged in");
@@ -114,7 +114,7 @@ export default function () {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                credentials: "include",
+                credentials:"include",
                 body: JSON.stringify({ ...signupForm, role: "Vendor" })
             })
 
