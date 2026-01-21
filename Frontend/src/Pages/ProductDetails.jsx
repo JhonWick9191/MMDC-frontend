@@ -305,7 +305,7 @@ export default function ProductDetails() {
             </p>
           )}
 
-          { isLimitExceeded && (
+          {!isOutOfStock && isLimitExceeded && (
             <p style={{ color: "red", fontWeight: 600, margin: "1rem 0" }}>
               Limit reached maximum{" "}
               {productDetails.Product_Quantity} items allowed.
