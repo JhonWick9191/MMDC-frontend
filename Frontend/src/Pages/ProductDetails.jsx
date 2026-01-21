@@ -217,7 +217,7 @@ export default function ProductDetails() {
       }
 
       dispatch(add({ ...productDetails, cartImage: mainImage, quantity: count }));
-      toast.success("✅ Added to Cart!");
+      toast.success("Added to Cart!");
       setIsAdding(false);
     }, 1000);
   }
@@ -301,14 +301,14 @@ export default function ProductDetails() {
 
           {isOutOfStock && (
             <p style={{ color: "red", fontWeight: 600, margin: "1rem 0" }}>
-              Sorry, this product is currently out of stock will be restored soon .
+              Sold out — get notified when it’s back.
             </p>
           )}
 
-          {!isOutOfStock && isLimitExceeded && (
+          { isLimitExceeded && (
             <p style={{ color: "red", fontWeight: 600, margin: "1rem 0" }}>
-              Opp's! Product limit has been reached. You can only order up to{" "}
-              {productDetails.Product_Quantity} products.
+              Limit reached maximum{" "}
+              {productDetails.Product_Quantity} items allowed.
             </p>
           )}
           <hr />
