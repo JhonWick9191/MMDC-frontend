@@ -638,13 +638,13 @@ function FilterProductByCategoryes() {
                                                 </p>
                                             </div>
 
-                                            <div className="brand-name-p dotted-border">
+                                            {/* <div className="brand-name-p dotted-border">
 
                                                 <p>
                                                     Model - {item.Product_Name
                                                     }
                                                 </p>
-                                            </div>
+                                            </div> */}
                                             <div className="model-name dotted-border">
                                                 <p>
                                                     <p>{item.Brand_Name}</p>
