@@ -1038,18 +1038,14 @@ color: black;
     gap: 5px;
 }
 
-.lsiting-felx-class li {
-    font-size: 15px;
-    font-weight: bold;
-    color: #454242;
-}
 
 
 
-.brand-listing li {
-    font-size: 15px;
-    font-weight: bold;
-    color: #454242;
+
+.brand-listing li:hover{
+    cursor: pointer;
+    color: black;
+    font-weight: 600;
 }
 
 .text p {

@@ -241,6 +241,7 @@ function FilterProductByCategoryes() {
     function hendlePagePrivouschnage() {
         fetchProducts(currentPage - 1)
         scrollToTopSmooth()
+        
     }
 
     function handlePageNextChange(){
@@ -416,8 +417,9 @@ function FilterProductByCategoryes() {
                                                 <li
                                                     className="cate-list-highlight"
                                                     key={index}
-                                                    onClick={() =>
-                                                        applyFilter({ type: "category", value: category })
+                                                    onClick={() => {
+                                                        applyFilter({ type: "category", value: category }) , scrollToTopSmooth()
+                                                    }
                                                     }
                                                 >
                                                     {category} ({count})
@@ -443,11 +445,12 @@ function FilterProductByCategoryes() {
                                         ([brand, count], index) => (
                                             <li
                                                 key={index}
-                                                onClick={() =>
+                                                onClick={() => {
                                                     applyFilter({
                                                         type: "brand",
                                                         value: brand,
-                                                    })
+                                                    }) , scrollToTopSmooth()
+                                                }
                                                 }
                                             >
                                                 {brand} ({count})
@@ -512,8 +515,9 @@ function FilterProductByCategoryes() {
                                             <li
                                                 className="cate-list-highlight"
                                                 key={index}
-                                                onClick={() =>
-                                                    applyFilter({ type: "category", value: category })
+                                                onClick={() => {
+                                                    applyFilter({ type: "category", value: category }) , scrollToTopSmooth()
+                                                }
                                                 }
                                             >
                                                 {category} ({count})
@@ -538,10 +542,10 @@ function FilterProductByCategoryes() {
                                             <li
                                                 key={index}
                                                 onClick={() =>
-                                                    applyFilter({
+                                                   { applyFilter({
                                                         type: "brand",
                                                         value: brand,
-                                                    })
+                                                    }) , scrollToTopSmooth() }
                                                 }
                                             >
                                                 {brand} ({count})
