@@ -150,6 +150,8 @@
     padding: 5%;
 }
 
+
+
 .login-form input {
     width: 100%;
     padding: 2%;
@@ -1720,6 +1722,16 @@ color: black;
 
 @media only screen and (min-width: 320px) and (max-width: 375px) {
 
+   .items-buttons-for-chaging-the-screen{
+    grid-template-columns: repeat(2,2fr);
+    
+    
+
+   }
+    .items-buttons-for-chaging-the-screen button{
+        width: 97%;
+        font-size: 13px;
+    }
     .main-login-section {
         padding: 2%;
     }

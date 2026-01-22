@@ -1131,7 +1131,7 @@ ul li {
 }
 
 .items-buttons-for-chaging-the-screen button {
-    margin: 6px;
+   
     background: white;
     border: 1px solid white;
     align-items: center;
@@ -1143,6 +1143,7 @@ ul li {
     cursor: pointer;
     color: gray;
     display: flex;
+    margin: 2px;
     position: relative;
     font-size: 14px;
     font-weight: 600;
