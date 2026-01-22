@@ -1524,6 +1524,14 @@ color: black;
 }
 
 @media screen and (max-width: 600px) {
+    .loading-gif-on-product-change img {
+
+    width: 80%;
+
+}
+    .main-empty-cart-container{
+        margin: 0%;
+    }
 
     .pagination{
         width: 30%;
