@@ -281,8 +281,8 @@ export default function CartPage() {
                 <p>Please add something soon, carts have feelings too.</p>
               </div>
 
-              <div className="btn btn-add-to-cart">
-                <button onClick={() => navigate("/")}>Shop Now</button>
+              <div className="btn btn-add-to-cart" onClick={() => navigate("/")}>
+                <button >Shop Now</button>
               </div>
             </div>
           </div>

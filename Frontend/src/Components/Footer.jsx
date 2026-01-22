@@ -117,7 +117,7 @@ export default function Footer() {
                                 </div>
                                 <div className="">
                                     <h1 className="footer-heading">Need Help</h1>
-                                    <ul>
+                                    <ul className="con-footer">
                                         <li>Contact us </li>
                                         <li>FAQs </li>
                                     </ul>

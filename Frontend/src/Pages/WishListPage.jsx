@@ -5,16 +5,19 @@ import { add } from "../Redux/Slice/Slice";
 import { removeFromWishlist } from "../Redux/Slice/WishListSlice";
 import { toast } from "react-toastify";
 import { setUser } from "../Redux/Slice/AuthSlice";
+import { useNavigate } from "react-router-dom";
 export default function WishList() {
 
   const WishList = useSelector((state) => state.Wishlist)
   console.log("the products in wishlist ", WishList)
   const dispatch = useDispatch()
+  const Nevigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
 
-const token = useSelector((state) => state.auth.token);
-const user  = useSelector((state) => state.auth.user);
+  
 
-console.log(user)
+  console.log(user)
 
 
   return (
@@ -29,7 +32,7 @@ console.log(user)
               <div className="wishlist-items" key={items.product_id}>
                 <div className="wishlist-product">
                   <div className="image-product">
-                    <img src={items.image_01} loading="lazy"/>
+                    <img src={items.image_01} loading="lazy" />
 
 
                     <div className="cross-on-image">
@@ -86,10 +89,10 @@ console.log(user)
                   </div>
                   <div className="content-add-to-cart">
                     <h1>Your wishlist is empty.</h1>
-                  
+
                   </div>
-                  <div className="btn btn-add-to-cart">
-                    <button onClick={() => Navigate("/")}>Shop Now</button>
+                  <div className="btn btn-add-to-cart" onClick={() => Nevigate("/")}>
+                    <button >Shop Now</button>
                   </div>
                 </div>
               </div>

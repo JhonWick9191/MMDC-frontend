@@ -1453,6 +1453,10 @@ color: black;
     color: black;
 }
 
+.btn-add-to-cart button{
+    color: white !important;
+}
+
 /* Smooth hover animation for cards */
 
 /* pagination css */
@@ -1496,6 +1500,10 @@ color: black;
     justify-content: center;
     
     display: flex;
+}
+
+.gif-and-content{
+    height: 100vh;
 }
 
 @media screen and (min-width: 650px) and (max-width: 900px) {

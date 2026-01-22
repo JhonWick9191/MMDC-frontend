@@ -1378,7 +1378,7 @@ ul li {
 }
 
 .logo-main-footer img {
-    width: 50%;
+    width: 20%;
 }
 
 .main-footer-class {
@@ -1852,6 +1852,10 @@ ul li {
 }
 
 @media screen and (max-width: 600px) {
+    .logo-main-footer img {
+    width: 50%;
+}
+
 
     .button-oh-mobile-at-cart {
         opacity: 1;
@@ -1949,7 +1953,7 @@ ul li {
     }
 
     .items-buttons-for-chaging-the-screen {
-        width: 100%;
+        width: 97%;
     }
 
     .hide-from-mobile {
@@ -1994,11 +1998,14 @@ ul li {
     .items-buttons-for-chaging-the-screen button {
 
         width: 98%;
-        padding: 2px;
+        
+       display: flex;
+       align-items: center;
+       justify-content: center;
         border-radius: 0px;
         font-weight: 500;
-        font-size: 11px;
-        width: 85%;
+        font-size: 12px;
+    
     }
 
     .main-profile-section p {
@@ -2008,7 +2015,7 @@ ul li {
     }
 
     .main-logo .main-logo-img {
-        height: auto;
+        height: 40px;
     }
 
     .rating ul {
@@ -2055,8 +2062,7 @@ ul li {
 
     .footer-mid {
         width: 100%;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+       
         padding: 1%;
     }
 
@@ -2066,15 +2072,20 @@ ul li {
     }
 
     .catogries-nam p {
-        font-size: 13px;
+        font-size: 10px;
         margin: 2px;
     }
 
     .footer-pages-links li {
-        font-size: 13px;
+        font-size: 10px;
         margin: 2px;
 
     }
+
+   .con-footer li {
+     font-size: 10px;
+        margin: 2px;
+   }
 
     .footer-right {
         width: 100%;
@@ -2084,7 +2095,7 @@ ul li {
     }
 
     .right-content {
-
+        display: none;
         align-items: center;
         padding: 1%;
     }
@@ -2095,7 +2106,9 @@ ul li {
     }
 
     .para-content {
-        font-size: 13px;
+        text-align: justify;    
+        font-size: 10px;
+        
     }
 
     .main-copy-right-class {
@@ -2238,8 +2251,8 @@ ul li {
     }
 
     .filter-product-para-text {
-        height: 60%;
-        justify-content: center;
+        height: 40%;
+        
         gap: 2px;
     }
 
@@ -2335,7 +2348,7 @@ ul li {
   
 
     .top-right-side-section {
-        width: 35%;
+        width: 37.5%;
     }
 
     .main-profile-section p {
