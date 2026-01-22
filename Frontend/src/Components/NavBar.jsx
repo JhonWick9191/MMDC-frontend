@@ -292,12 +292,12 @@ export default function NavBar() {
                 </h1>
 
                 {moreButton && (
-                  <div className="page-lists">
-                    <ul>
-                      <li onClick={() => { handleCross(); Navigate("/"); }}>Home</li>
-                      <li>About Us</li>
-                      <li>Contact Us</li>
-                      <li>
+                  <div className="catogries-nam">
+                    
+                      <p onClick={() => { handleCross(); Navigate("/"); }}>Home</p>
+                      <p>About Us</p>
+                      <p>Contact Us</p>
+                      <p>
                         {User ? (
                           <button onClick={() => { handleCross(); Navigate("/profile"); }}>
                             My Account
@@ -307,8 +307,8 @@ export default function NavBar() {
                             Login
                           </button>
                         )}
-                      </li>
-                    </ul>
+                      </p>
+                    
                   </div>
                 )}
               </div>

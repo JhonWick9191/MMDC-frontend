@@ -17,6 +17,7 @@
     align-items: center;
     justify-content: center;
     padding: 2%;
+    height: 100vh;
 }
 
 .login-register-user-child {
