@@ -1862,9 +1862,7 @@ ul li {
 }
 
 @media screen and (max-width: 600px) {
-    .text p {
-        font-size: 1rem;
-    }
+   
 
     .cross-section-categoryes{
         
@@ -2290,8 +2288,7 @@ ul li {
     }
 
     .listing-product-category {
-        width: 90% !important;
-        gap: 1px !important;
+       
         border-top-right-radius: 20px !important;
     }
 
