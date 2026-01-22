@@ -1119,6 +1119,7 @@ ul li {
 
 
 .items-buttons-for-chaging-the-screen {
+  
     width: 98%;
     margin: auto;
     display: flex;
@@ -1377,7 +1378,7 @@ ul li {
 }
 
 .logo-main-footer img {
-    width: 20%;
+    width: 50%;
 }
 
 .main-footer-class {
@@ -1401,6 +1402,7 @@ ul li {
 }
 
 .footer-heading {
+    color: white !important;
     font-size: 1rem;
     font-weight: 800;
 }
@@ -1929,7 +1931,7 @@ ul li {
     }
 
     .top-right-side-section .main-profile-section svg {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
     }
 
     .main-sectionHeading h1 {
@@ -2006,7 +2008,7 @@ ul li {
     }
 
     .main-logo .main-logo-img {
-        height: 36px;
+        height: auto;
     }
 
     .rating ul {
@@ -2047,16 +2049,20 @@ ul li {
         justify-content: center;
         align-items: center;
     }
+    .main-footer-class{
+        width: 100%;
+    }
 
     .footer-mid {
-        width: 90%;
+        width: 100%;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        padding: 5%;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 1%;
     }
 
     .footer-heading {
-        font-size: 14px;
+        font-size: 12px;
+        font-weight: 700;
     }
 
     .catogries-nam p {
@@ -2101,7 +2107,7 @@ ul li {
     }
 
     .social-media-links ul li svg {
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 
     .social-media-links p {
@@ -2109,6 +2115,7 @@ ul li {
     }
 
     .signUp {
+        color: white;
         width: 100%;
         font-size: 11px;
         padding: 5px;
@@ -2325,12 +2332,10 @@ ul li {
 @media screen and (max-width: 400px) {
     .items-buttons-for-chaging-the-screen {}
 
-    .items-buttons-for-chaging-the-screen button {
-        width: 95%;
-    }
+  
 
     .top-right-side-section {
-        width: 45%;
+        width: 35%;
     }
 
     .main-profile-section p {
