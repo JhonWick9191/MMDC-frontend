@@ -158,9 +158,9 @@ export default function Footer() {
 
                                     <p>JOIN OUR COMMUNITY </p>
                                     <ul>
-                                        <li> <CiFacebook /> </li>
-                                        <li> <CiInstagram /> </li>
-                                        <li><CiTwitter /></li>
+                                        <li><a href="https://www.facebook.com/Musicandmoreindia"><CiFacebook /></a>  </li>
+                                        <li><a href="https://www.instagram.com/musicandmoreindia/"> <CiInstagram /> </a></li>
+                                        <li><a href="https://x.com/"><CiTwitter />  </a></li>
                                         <li><CiLinkedin /></li>
                                     </ul>
 

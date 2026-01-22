@@ -440,10 +440,10 @@ function FilterProductByCategoryes() {
                                         <p>BRANDS </p>
                                     </div>
                                 </div>
-                                <ul>
+                                <ul className="lsiting-felx-class">
                                     {Object.entries(brandCount).map(
                                         ([brand, count], index) => (
-                                            <li
+                                            <li className="cate-list-highlight"
                                                 key={index}
                                                 onClick={() => {
                                                     applyFilter({

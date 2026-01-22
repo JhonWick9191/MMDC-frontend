@@ -1527,6 +1527,10 @@ color: black;
 }
 
 @media screen and (max-width: 600px) {
+    .text p{
+        font-size: 1rem;
+    }
+
     .loading-gif-on-product-change img {
 
     width: 80%;
