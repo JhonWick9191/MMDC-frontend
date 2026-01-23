@@ -2543,6 +2543,9 @@ ul li {
 }
 
 @media only screen and (min-width: 320px) and (max-width: 375px) {
+    .mobile-navbar{
+        height: 100vh;
+    }
     .top-right-side-section {
         width: 42%;
     }
