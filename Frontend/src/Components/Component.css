@@ -242,7 +242,6 @@ button:hover {
 /* search history css for desktop  */
 .search-history {
     z-index: 1000;
-
     position: absolute;
     background-color: white;
     width: 40%;
@@ -257,28 +256,19 @@ button:hover {
 
 .search-history ul {
     list-style: none;
-
-
 }
 
 .search-history li {
     cursor: pointer;
     font-size: 1rem;
-
     padding: 2px;
     font-weight: 800;
 }
 
 .search-history li:hover {
-
-
     background-color: #E0E0E0;
     font-size: 1.2rem;
-
 }
-
-
-
 
 .blob-btn:before {
     content: "";
@@ -580,6 +570,52 @@ ul li {
 
 }
 
+
+
+.login_and_social_media{
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+    
+    width: 100%;
+    padding: 2%;    
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.login-button{
+
+    width: 20%;
+}
+
+.login-button-side-nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid red;
+    padding: 2%;
+    gap: 5px;
+    font-size: 0.8rem;
+    width: 100%
+}
+
+.login-button-side-nav:hover{
+    background-color: #F05624;
+    color: white;
+    border: none;
+}
+
+.on-side-nev ul li svg{
+
+    font-size: 1.4rem !important;
+
+}
+
+
+
 /* .main-profile-section  li img{
     width: 50%;
 } */
@@ -644,7 +680,17 @@ ul li {
     align-items: center;
     padding: 1%;
     background-color: white;
-    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+.profile-icon-on-side-nav svg{
+    font-size: 2rem;
+    font-weight: 500;
+}
+.user-profile{
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
 }
 
 .hamburger-logo {
@@ -1833,6 +1879,8 @@ ul li {
         width: 23%;
     }
 
+   
+
     .top-right-side-section {
         width: 20%;
     }
@@ -1862,7 +1910,28 @@ ul li {
 }
 
 @media screen and (max-width: 600px) {
-   
+    .login-button{
+        width: 30%;
+    }
+    .user-profile {
+        height: 35px;
+        width: 35px;
+
+    }
+    .on-side-nev{
+
+        gap: 2px;
+    }
+    .on-side-nev ul{
+        gap: 5px;
+        
+    }
+
+    .on-side-nev ul li svg{
+        
+        font-size:1rem !important;
+    }
+
 
     .cross-section-categoryes{
         

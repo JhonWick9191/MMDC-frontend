@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CgProfile } from "react-icons/cg";
+
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { VscSearch } from "react-icons/vsc";
@@ -8,6 +8,12 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useSearch } from "../Context/SearchContaxt";
+import { CiFacebook } from "react-icons/ci";
+import { CiInstagram } from "react-icons/ci";
+import { FaXTwitter } from "react-icons/fa6";
+import { CiTwitter } from "react-icons/ci";
+import { CiLinkedin } from "react-icons/ci";
+import { CgProfile } from "react-icons/cg";
 
 export default function NavBar() {
   const categoeryesProducts = [
@@ -237,9 +243,9 @@ export default function NavBar() {
       {/* Mobile Menu */}
       <div className="mobile-menu-container">
         {/* for if navbar is true then show main-class-nav-bar perfrom .show  css will do else " " */}
-        <div className={`main-class-nav-bar ${hamburger ? "show" :""}`}>
+        <div className={`main-class-nav-bar ${hamburger ? "show" : ""}`}>
           {/* in this line mobile-navbar hamburger is ture then mobile-navbar add with open css  */}
-          <div className={`mobile-navbar ${hamburger ? "open" :""}`}>
+          <div className={`mobile-navbar ${hamburger ? "open" : ""}`}>
             <div className="hamburger-top-section">
               <div className="cross-icon">
                 <button onClick={handleCross}>
@@ -293,27 +299,54 @@ export default function NavBar() {
 
                 {moreButton && (
                   <div className="catogries-nam">
-                    
-                      <p onClick={() => { handleCross(); Navigate("/"); }}>Home</p>
-                      <p>About Us</p>
-                      <p>Contact Us</p>
-                      <p>
-                        {User ? (
-                          <button onClick={() => { handleCross(); Navigate("/profile"); }}>
-                            My Account
-                          </button>
-                        ) : (
-                          <button onClick={() => { handleCross(); Navigate("/login"); }}>
-                            Login
-                          </button>
-                        )}
-                      </p>
-                    
+
+                    <p onClick={() => { handleCross(); Navigate("/"); }}>Home</p>
+                    <p>About Us</p>
+                    <p>Contact Us</p>
+
+
                   </div>
                 )}
               </div>
+
+              <div className="login_and_social_media">
+                <div className="login-button">
+
+
+                  
+                    {User ? (
+                      
+                        <img className="user-profile"
+                  onClick={() =>{handleCross(); Navigate("/profile")}}
+                  src={User.image || "https://via.placeholder.com/40"}
+                  alt="user"
+                />
+                    
+                    ) : (
+
+                      <button className="login-button-side-nav" onClick={() => { handleCross(); Navigate("/login"); }}>
+                        <CgProfile/> Login
+                      </button>
+                    )}
+                  
+                </div>
+
+
+                <div className="social-media-links on-side-nev">
+
+           
+                  <ul>
+                    <li><a href="https://www.facebook.com/Musicandmoreindia"><CiFacebook /></a>  </li>
+                    <li><a href="https://www.instagram.com/musicandmoreindia/"> <CiInstagram /> </a></li>
+                    <li><a href="https://x.com/"><CiTwitter />  </a></li>
+                    <li><CiLinkedin /></li>
+                  </ul>
+
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
 
