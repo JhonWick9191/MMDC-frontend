@@ -1912,9 +1912,7 @@ ul li {
 }
 
 @media screen and (max-width: 600px) {
-    .mobile-navbar{
-        height: 80vh;
-    }
+    
     .login-button{
         width: 30%;
     }
@@ -1976,7 +1974,7 @@ ul li {
    
     .mobile-navbar {
         width: 90%;
-        height: 100vh;
+        height: 80vh;
     }
 
     .main-listing-items-categories ul {
@@ -2439,7 +2437,7 @@ ul li {
 
 @media screen and (max-width: 400px) {
     .mobile-navbar{
-        height: 90vh;
+        height: 80vh;
     }
     .items-buttons-for-chaging-the-screen {}
 
