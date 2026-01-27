@@ -2440,7 +2440,7 @@ ul li {
 
 @media screen and (max-width: 400px) {
     .mobile-navbar{
-        height: 90vh;
+        height: 80vh;
     }
     .items-buttons-for-chaging-the-screen {}
 
