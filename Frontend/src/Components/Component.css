@@ -1913,7 +1913,7 @@ ul li {
 
 @media screen and (max-width: 600px) {
     .mobile-navbar{
-        height: 100vh;
+        height: 80vh;
     }
     .login-button{
         width: 30%;
