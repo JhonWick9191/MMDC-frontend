@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { GrPrevious } from "react-icons/gr";
 import { GrNext } from "react-icons/gr";
 
+
+
+
 const DesktopPosterImage = [
   {
     product_id: 1000,
@@ -72,10 +75,9 @@ const DesktopPosterImage = [
 ];
 
 const MobilePosterImage = [
-  { id: 1, image: image_01 },
-  { id: 2, image: image_02 },
-  { id: 3, image: image_03 },
-  { id: 4, image: image_01 },
+  { id: 1, image:"https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/Player%20II%20Modified%20Stratocaster.png" },
+  { id: 2, image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/amp.png" },
+
 ];
 
 export default function MainPoster() {
@@ -184,7 +186,7 @@ export default function MainPoster() {
             style={{ cursor: "pointer" }}  
             onClick={() => {
               if (!isMobile) {  
-                console.log("✅ Navigating with:", item);
+                console.log(" Navigating with:", item);
                 Nevigate("/productDetails", { state: item });
               }
             }}

@@ -1527,7 +1527,21 @@ color: black;
 }
 
 @media screen and (max-width: 600px) {
-
+     .main-heading-recom {
+        font-size: 20px;
+    }
+    .line-with-text{
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+   .left-line{
+    display: none;
+   }
+   .right-line{
+    display: none;
+   }
     .user-login{
         height: 100vh;
     }

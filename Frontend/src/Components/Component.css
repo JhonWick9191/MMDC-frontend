@@ -1889,9 +1889,7 @@ ul li {
         width: 20%;
     }
 
-    .main-heading-recom {
-        font-size: 1rem !important;
-    }
+    
 
     .main-display-seaction {
         grid-template-columns: repeat(3, 1fr);
@@ -1975,10 +1973,7 @@ ul li {
         color: white !important;
     }
 
-    .main-heading-recom {
-        font-size: 14px !important;
-    }
-
+   
     .mobile-navbar {
         width: 90%;
         height: 100vh;
@@ -2431,8 +2426,8 @@ ul li {
     }
 
     .dot {
-        height: 7px;
-        width: 7px;
+        height: 13px;
+        width: 13px;
     }
 }
 
@@ -2538,10 +2533,7 @@ ul li {
         text-align: justify;
     }
 
-    .main-heading-recom {
-        font-size: 15px !important;
-    }
-
+    
     .text-heading {
         width: 60%;
     }
