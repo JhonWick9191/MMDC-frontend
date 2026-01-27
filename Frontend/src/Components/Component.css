@@ -1910,6 +1910,9 @@ ul li {
 }
 
 @media screen and (max-width: 600px) {
+    .mobile-navbar{
+        height: 80vh;
+    }
     .login-button{
         width: 30%;
     }
@@ -2436,6 +2439,9 @@ ul li {
 /*---------------------------------------------------------------------------------------------------less then 340px screen size---------------------------------------------------------*/
 
 @media screen and (max-width: 400px) {
+    .mobile-navbar{
+        height: 80vh;
+    }
     .items-buttons-for-chaging-the-screen {}
 
 
@@ -2544,7 +2550,7 @@ ul li {
 
 @media only screen and (min-width: 320px) and (max-width: 375px) {
     .mobile-navbar{
-        height: 100vh;
+        height: 80vh;
     }
     .top-right-side-section {
         width: 42%;
