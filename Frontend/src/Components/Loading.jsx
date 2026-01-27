@@ -4,6 +4,7 @@ import { color } from "motion/react"
 function LoadingScreen  () {
   return (
     <div style={{
+      overflow:"hidden",
       position: 'fixed',
       top: 0, left: 0,
       width: '100%',

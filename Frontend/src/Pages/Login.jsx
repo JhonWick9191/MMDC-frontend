@@ -8,8 +8,8 @@ import { setToken, setUser } from "../Redux/Slice/AuthSlice";
 import { toast, ToastContainer } from "react-toastify"
 import { FaRegEye } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa6";
-
-const BASE_URL ="https://musicandmore.co.in/api/v1";
+import LoadingScreen from "../Components/Loading";
+const BASE_URL = "https://musicandmore.co.in/api/v1";
 
 export default function () {
     const Navigate = useNavigate()
@@ -43,7 +43,7 @@ export default function () {
             const responce = await fetch(`https://api.musicandmore.co.in/api/v1/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                credentials:"include",
+                credentials: "include",
                 body: JSON.stringify(LoginFormData),
             });
             const data = await responce.json();
@@ -114,7 +114,7 @@ export default function () {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                credentials:"include",
+                credentials: "include",
                 body: JSON.stringify({ ...signupForm, role: "Vendor" })
             })
 
@@ -148,20 +148,41 @@ export default function () {
         }
 
     }
-    function handleRegister() {
-        setRegisterToggle(true);
-        setLoginToggle(false);
+
+    // handle loading while signup and login 
+    const [toggleLoading, setToggleLoading] = useState(false);
+
+    function showLoaderThen(action) {
+        setToggleLoading(true);
+        setTimeout(() => {
+            setToggleLoading(false);
+            action();
+        }, 1000);
     }
 
-    function handleLoginToggel(){
-        setRegisterToggle(false);
-         setLoginToggle(true);
+    function handleRegister() {
+        showLoaderThen(() => {
+            setRegisterToggle(true);
+            setLoginToggle(false);
+        });
     }
+
+    // allready have an account 
+    function handleLoginToggel() {
+        showLoaderThen(() => {
+            setRegisterToggle(false);
+            setLoginToggle(true);
+        });
+    }
+
 
     function handleLogin() {
-        setRegisterToggle(false);
-        setLoginToggle(true);
+        showLoaderThen(() => {
+            setRegisterToggle(false);
+            setLoginToggle(true);
+        });
     }
+
 
     // handle eyes 
 
@@ -185,6 +206,8 @@ export default function () {
     return (
         <>
             <div className="user-login">
+
+
                 <div className="login-register-user-child">
                     <div className="buttons">
                         <button className={`btns login${loginToggle ? " color" : ""}`} onClick={handleLogin}>
@@ -386,6 +409,15 @@ export default function () {
                     ) : null}
                 </div>
             </div>
+            <div className="loding-toggle-show">
+
+            
+            {toggleLoading && (
+                <LoadingScreen/>
+            )}
+
+            </div>
+
         </>
     );
 }

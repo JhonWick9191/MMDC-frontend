@@ -419,7 +419,11 @@ ul li {
 
 /*---------------------------------------------------------------------------Nav bar css start---------------------------------------------------------------------  */
 
-
+.loding-toggle-show{
+    border: 1px solid red;
+    position: absolute;
+    top: 0px;
+}
 
 .wrapper-class-main-nav-bar {
     top: 0px;
@@ -2440,7 +2444,7 @@ ul li {
 
 @media screen and (max-width: 400px) {
     .mobile-navbar{
-        height: 100vh;
+        height: 90vh;
     }
     .items-buttons-for-chaging-the-screen {}
 
