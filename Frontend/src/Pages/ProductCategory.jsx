@@ -342,9 +342,9 @@ function FilterProductByCategoryes() {
                                     <p>
 
                                         {isPriceLowToHigh
-                                            ? 'Price - Low to High'
+                                            ? 'Low to High'
                                             : isPriceHighTolow
-                                                ? 'Price - High to Low'
+                                                ? 'High to Low'
                                                 : 'Select Sorting Options'
                                         }
                                     </p>
