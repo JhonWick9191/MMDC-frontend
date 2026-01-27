@@ -367,13 +367,13 @@ function FilterProductByCategoryes() {
                                             className="dotted-border"
                                             onClick={handlePriceLowTohigh}
                                         >
-                                            Price - Low to High
+                                            Low to High
                                         </li>
                                         <li
 
                                             onClick={handlePriceHighToLow}
                                         >
-                                            Price - High to Low
+                                        High to Low
                                         </li>
                                     </ul>
                                 </div>
