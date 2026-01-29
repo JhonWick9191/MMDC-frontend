@@ -28,21 +28,23 @@ function FilterProductByCategoryes() {
     const [categoryCount, setCategoryCount] = useState({}); // category => count from backend
     const [allBrands, setAllBrands] = useState([]); // array of brand names
     const [brandCount, setBrandCount] = useState({}); // brand => count from backend
-
-
+    // console.log(categoryCount)
+    // console.log(categoryCount)
     // toal products count 
     const [totalProducts, setTotalProducts] = useState(0);
     const [allCategories, setAllCategories] = useState([]); // all categories from backend
 
+    //  console.log(totalProducts)
 
-    console.log(allCategories)
+    // console.log("This is my all cato",allCategories)
     // Brand count
 
     // pagination add
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
-
+    const [categoryWithSubCategories, setCategoryWithSubCategories] = useState({});
+    // console.log("This is my categoryes",categoryWithSubCategories.count())
     const [productFilterLoading, setProductFilterLoading] = useState(false)
     // NEW: helper – filter state + URL update
     function applyFilter(filter) {
@@ -134,6 +136,7 @@ function FilterProductByCategoryes() {
                 setCategoryCount(data.categoryCount || {});
                 setAllBrands(Object.keys(data.brandCount || {}));
                 setBrandCount(data.brandCount || {});
+                setCategoryWithSubCategories(data.categoryWithSubCategories || {});
                 setIsFilterMetaLoaded(true);
             }
 
@@ -202,6 +205,9 @@ function FilterProductByCategoryes() {
     }
 
 
+
+
+
     // function for filter price low to high 
     const [isPriceLowToHigh, setisPriceLowToHigh] = useState(true)
     // function handlefunction 
@@ -226,6 +232,7 @@ function FilterProductByCategoryes() {
         setSideFilterSection(false);
         fetchProducts(1, "asc");      // 🔹 backend se fetch karo Low → High
     }
+    const [openCategory, setOpenCategory] = useState(null); // Track which category is open
 
 
     // handle page chage 
@@ -241,10 +248,10 @@ function FilterProductByCategoryes() {
     function hendlePagePrivouschnage() {
         fetchProducts(currentPage - 1)
         scrollToTopSmooth()
-        
+
     }
 
-    function handlePageNextChange(){
+    function handlePageNextChange() {
         fetchProducts(currentPage + 1)
         scrollToTopSmooth()
 
@@ -254,20 +261,21 @@ function FilterProductByCategoryes() {
     return (
         <>
             <div className="path-page">
-                <ul>
+                <ul className="light-weigth-ul-li flex-in-ul-li ">
                     <li>
-                        <GoHome /> /{" "}
+                        HOME /
                     </li>
-                    <li>{location.pathname.toUpperCase().replace("/", " ")} / </li>
-                    <li></li>
-                    <li>{type.toUpperCase()}</li>
+                    <li>{location.pathname.toUpperCase().replace("/", "")} /</li>
+
+
+                    <li>  {type.toUpperCase()}</li>
                 </ul>
-                {/* <p className="path-heading">{type.toUpperCase()}</p> */}
+                <p className="path-heading">{type.toUpperCase()}</p>
             </div>
 
             <hr className="color_2"></hr>
             <div className="filter-and-type-section">
-                <div className="filter btn2 liquid">
+                <div className="filter btn2 ">
                     <button onClick={productTypeDisplay}>
                         <span>
                             <svg
@@ -323,22 +331,18 @@ function FilterProductByCategoryes() {
                                 ></circle>
                             </svg>
                         </span>
-                        Fiter
+                        Filters
                     </button>
                 </div>
                 {/* top section after poster section that is basically contain total length of products ad A-Z and price filter section */}
 
                 <div className="left-side-buttons-filter">
-                    <div className="filter-by-product-price-and-a-z count-number">
-                        <p>
-                            {type} -  {totalProducts}
-                        </p>
-                    </div>
+
 
                     <div className="filter-by-product-price-and-a-z">
-                        <div className="main-wrapper-for-filter-a-z liquid_2" onClick={handleSideFilterSection}>
-                            <div className="main-text-and-button-for-text-button">
-                                <div className="text-A-Z">
+                        <div className="main-wrapper-for-filter-a-z" onClick={handleSideFilterSection}>
+                            <div className="main-text-and-button-for-text-button ">
+                                <div className="light-font">
                                     <p>
 
                                         {isPriceLowToHigh
@@ -359,21 +363,21 @@ function FilterProductByCategoryes() {
                         </div>
 
                         {/* Buttons same rahenge - perfect hai */}
-                        <div className="main-wrapper-for-listing-A-Z">
+                        <div className="main-wrapper-for-listing-A-Z ">
                             {SideFilterSection ? (
-                                <div className="listing-total-buttons-for-filtering">
+                                <div className="listing-total-buttons-for-filtering font-size">
                                     <ul>
                                         <li
-                                            className="dotted-border"
+                                            className="light-font"
                                             onClick={handlePriceLowTohigh}
                                         >
                                             Low to High
                                         </li>
                                         <li
-
+                                            className="light-font"
                                             onClick={handlePriceHighToLow}
                                         >
-                                        High to Low
+                                            High to Low
                                         </li>
                                     </ul>
                                 </div>
@@ -381,6 +385,12 @@ function FilterProductByCategoryes() {
                         </div>
                     </div>
 
+
+                    <div className="filter-by-product-price-and-a-z  font-size">
+                        <p>
+                            {totalProducts} Results
+                        </p>
+                    </div>
 
                 </div>
             </div>
@@ -391,7 +401,65 @@ function FilterProductByCategoryes() {
                         <div className="listing-product-category">
                             <div className="main-heading-product-categoryes">
                                 <div className="text">
-                                    <p>FILTER</p>
+                                    <div className="filter btn2 ">
+                                        <button onClick={handleCross}>
+                                            <span>
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="18"
+                                                    height="16"
+                                                    fill="none"
+                                                >
+                                                    <rect
+                                                        width="18"
+                                                        height="1.5"
+                                                        y="2.5"
+                                                        fill="#191A1F"
+                                                        rx=".75"
+                                                    ></rect>
+                                                    <circle
+                                                        cx="10.5"
+                                                        cy="3"
+                                                        r="1.75"
+                                                        fill="#fff"
+                                                        stroke="#191A1F"
+                                                        strokeWidth="1.5"
+                                                    ></circle>
+                                                    <rect
+                                                        width="18"
+                                                        height="1.5"
+                                                        y="7.5"
+                                                        fill="#191A1F"
+                                                        rx=".75"
+                                                    ></rect>
+                                                    <circle
+                                                        cx="5.5"
+                                                        cy="8"
+                                                        r="1.75"
+                                                        fill="#fff"
+                                                        stroke="#191A1F"
+                                                        strokeWidth="1.5"
+                                                    ></circle>
+                                                    <rect
+                                                        width="18"
+                                                        height="1.5"
+                                                        y="12.5"
+                                                        fill="#191A1F"
+                                                        rx=".75"
+                                                    ></rect>
+                                                    <circle
+                                                        cx="11.5"
+                                                        cy="13"
+                                                        r="1.75"
+                                                        fill="#fff"
+                                                        stroke="#191A1F"
+                                                        strokeWidth="1.5"
+                                                    ></circle>
+                                                </svg>
+                                            </span>
+                                            Hide Filters
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div className="cross-section-categoryes">
@@ -407,25 +475,43 @@ function FilterProductByCategoryes() {
                                 <div className="main-heading-product-categoryes-out-border">
                                     <div className="text">
                                         <p>PRODUCT CATEGORIES</p>
+
                                     </div>
                                 </div>
                                 <ul className="lsiting-felx-class">
-                                    <ul className="lsiting-felx-class">
-                                        {allCategories.map((category, index) => {
-                                            const count = categoryCount[category] || 0; // current page me count ya 0
-                                            return (
-                                                <li
-                                                    className="cate-list-highlight"
-                                                    key={index}
-                                                    onClick={() => {
-                                                        applyFilter({ type: "category", value: category }) , scrollToTopSmooth()
+                                    <ul className="lsiting-felx-class mota-weigth-ul-li ">
+                                        {Object.entries(categoryWithSubCategories).map(([category, subCats]) => (
+                                            <li key={category}>
+                                                <div
+                                                    className="category-title-toggle"
+                                                    onClick={() =>
+                                                        setOpenCategory(openCategory === category ? null : category)
                                                     }
-                                                    }
+                                                    style={{ cursor: "pointer", display: "flex", justifyContent: "space-between" }}
                                                 >
-                                                    {category} ({count})
-                                                </li>
-                                            );
-                                        })}
+                                                    <span>{category} ({categoryCount[category]})</span>
+
+                                                    <span>{openCategory === category ? "-" : "+"}</span>
+                                                </div>
+
+                                                {openCategory === category && (
+                                                    <ul className="subcategory-list">
+                                                        {subCats.map((subCat) => (
+                                                            <li
+                                                                key={subCat}
+                                                                className="cate-list-highlight"
+                                                                onClick={() => {
+                                                                    applyFilter({ type: "category", value: subCat });
+                                                                    scrollToTopSmooth();
+                                                                }}
+                                                            >
+                                                                {subCat}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                )}
+                                            </li>
+                                        ))}
                                     </ul>
 
                                 </ul>
@@ -440,7 +526,7 @@ function FilterProductByCategoryes() {
                                         <p>BRANDS </p>
                                     </div>
                                 </div>
-                                <ul className="lsiting-felx-class">
+                                <ul className="lsiting-felx-class mota-weigth-ul-li">
                                     {Object.entries(brandCount).map(
                                         ([brand, count], index) => (
                                             <li className="cate-list-highlight"
@@ -449,7 +535,7 @@ function FilterProductByCategoryes() {
                                                     applyFilter({
                                                         type: "brand",
                                                         value: brand,
-                                                    }) , scrollToTopSmooth()
+                                                    }), scrollToTopSmooth()
                                                 }
                                                 }
                                             >
@@ -460,7 +546,7 @@ function FilterProductByCategoryes() {
                                 </ul>
                             </div>
 
-                            <hr className="border-1 border-red-500"></hr>
+
 
 
                         </div>
@@ -479,88 +565,8 @@ function FilterProductByCategoryes() {
 
             <div className="main-category-products">
 
-                {/*---------------------------------------------------------------------------------------------------------------------------------------------------------------  */}
-                {/* ---------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
-
-                {/* ==========================================================Left side fiter  for laptop section ================================================================================== */}
-                {/*---------------------------------------------------------------------------------------------------------------------------------------------------------------  */}
-                {/* ---------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
-                <div className="filter-with-products">
-                    <div className="listing-on-categoryes">
-                        <div className="listing-product-category">
-                            <div className="main-heading-product-categoryes">
-                                <div className="text">
-                                    <p>FILTER</p>
-                                </div>
-
-                                <div className="cross-section-categoryes">
-                                    <button onClick={handleCross}>
-                                        <RxCross1 />
-                                    </button>
-                                </div>
-                            </div>
-                            <hr className="border-1 border-red-500"></hr>
-
-                            {/* Product Categories */}
-                            <div className="main-class-listing-list">
-                                <div className="main-heading-product-categoryes-out-border">
-                                    <div className="text">
-                                        <p>PRODUCT CATEGORIES</p>
-                                    </div>
-                                </div>
-                                <ul className="lsiting-felx-class">
-                                    {allCategories.map((category, index) => {
-                                        const count = categoryCount[category] || 0; // current page me count ya 0
-                                        return (
-                                            <li
-                                                className="cate-list-highlight"
-                                                key={index}
-                                                onClick={() => {
-                                                    applyFilter({ type: "category", value: category }) , scrollToTopSmooth()
-                                                }
-                                                }
-                                            >
-                                                {category} ({count})
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
-                            </div>
-
-                            <hr className="border-1 border-red-500"></hr>
-
-                            {/* Brands */}
-                            <div className="main-brands-category">
-                                <div className="main-heading-product-categoryes-out-border">
-                                    <div className="text">
-                                        <p>BRANDS </p>
-                                    </div>
-                                </div>
-                                <ul className="brand-listing">
-                                    {Object.entries(brandCount).map(
-                                        ([brand, count], index) => (
-                                            <li
-                                                key={index}
-                                                onClick={() =>
-                                                   { applyFilter({
-                                                        type: "brand",
-                                                        value: brand,
-                                                    }) , scrollToTopSmooth() }
-                                                }
-                                            >
-                                                {brand} ({count})
-                                            </li>
-                                        )
-                                    )}
-                                </ul>
-                            </div>
-
-                            <hr className="border-1 border-red-500"></hr>
 
 
-                        </div>
-                    </div>
-                </div>
 
 
 
@@ -655,10 +661,17 @@ function FilterProductByCategoryes() {
                                                 </p>
                                             </div>
 
-                                            <div className="model-name dotted-border">
+
+                                            {/* <div className="model-name dotted-border">
                                                 <p>
                                                     {item.Product_Category
                                                     }
+                                                </p>
+                                            </div> */}
+
+                                            <div className="model-name dotted-border">
+                                                <p>
+                                                    {item.Product_Subcategory}
                                                 </p>
                                             </div>
                                             {/* <div className="model-name model-price-cards dotted-border">

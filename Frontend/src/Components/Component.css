@@ -1,12 +1,17 @@
 /* Adii css  */
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap");
 
 @import "tailwindcss";
 
 * {
     padding: 0%;
     margin: 0%;
+    font-family: 'Montserrat', sans-serif;
 
+}
 
+.color_2{
+   border: .5px solid #EFF0F0;
 }
 
 .btn2 {
@@ -27,6 +32,8 @@
 .text-heading {
     width: 23%;
 }
+
+
 
 .decrement {
 
@@ -50,12 +57,10 @@
 .increment {
     position: absolute;
     display: flex;
-
     z-index: 9;
     right: 5%;
     align-items: center;
     justify-content: center;
-
     height: 100%;
     color: white;
 
@@ -72,9 +77,10 @@
 }
 
 .path-heading {
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     margin-top: 2%;
-    font-weight: 900;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
 }
 
 .path-page ul {
@@ -83,12 +89,7 @@
 
 }
 
-.path-page ul li {
-    font-size: 1.1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 
 
 
@@ -125,19 +126,17 @@ button:hover {
 }
 
 .brand-name-p p {
-    font-size: 15px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    
 
 }
 
 .model-name p {
-
     font-size: 13px;
     font-weight: 600;
     color: #535766;
-
-
 }
 
 .search-icon {
@@ -148,7 +147,6 @@ button:hover {
     height: 100%;
     right: 0px;
     bottom: 0px;
-
     background-color: white;
     border: 1.5px solid red;
 
@@ -385,24 +383,39 @@ button:hover {
     font-weight: 600;
 
 }
-
+.footer-pages-links li {
+    font-size: 12px;
+}
 .padding {
     padding: 2%;
 }
-
-p {
-    font-family: "Abel", sans-serif;
+.footer-right p{
+    font-size: 12px;
 }
+.con-footer li {
+    font-size: 12px;
+}
+
+/* p {
+    font-family: "Abel", sans-serif;
+} */
 
 button {
     font-weight: 600;
     font-size: 12px;
 }
 
-ul li {
+.light-weigth-ul-li li {
+    color: rgb(25, 26, 31);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: lighter;
+}
+
+/* ul li {
     font-family: "Abel", sans-serif;
 
-}
+} */
 
 .main-sectionHeading {
     text-align: center;
@@ -419,7 +432,7 @@ ul li {
 
 /*---------------------------------------------------------------------------Nav bar css start---------------------------------------------------------------------  */
 
-.loding-toggle-show{
+.loding-toggle-show {
     border: 1px solid red;
     position: absolute;
     top: 0px;
@@ -576,12 +589,12 @@ ul li {
 
 
 
-.login_and_social_media{
+.login_and_social_media {
     background-color: white;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
-    
+
     width: 100%;
-    padding: 2%;    
+    padding: 2%;
     position: absolute;
     left: 0px;
     bottom: 0px;
@@ -590,12 +603,12 @@ ul li {
     justify-content: space-between;
 }
 
-.login-button{
+.login-button {
 
     width: 20%;
 }
 
-.login-button-side-nav{
+.login-button-side-nav {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -606,13 +619,13 @@ ul li {
     width: 100%
 }
 
-.login-button-side-nav:hover{
+.login-button-side-nav:hover {
     background-color: #F05624;
     color: white;
     border: none;
 }
 
-.on-side-nev ul li svg{
+.on-side-nev ul li svg {
 
     font-size: 1.4rem !important;
 
@@ -687,11 +700,12 @@ ul li {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
 }
 
-.profile-icon-on-side-nav svg{
+.profile-icon-on-side-nav svg {
     font-size: 2rem;
     font-weight: 500;
 }
-.user-profile{
+
+.user-profile {
     height: 50px;
     width: 50px;
     border-radius: 100%;
@@ -832,10 +846,11 @@ ul li {
 }
 
 .catogries-nam p {
-    font-size: 14px;
+    font-size: 12px;
     margin-top: 5px;
     transition: all 0.4s ease-in-out;
     width: 100%;
+    font-weight: lighter;
 }
 
 .catogries-nam p:hover {
@@ -964,8 +979,8 @@ ul li {
 
 .catogries-name p {
     text-align: center;
-    margin-top: 5%;
-    font-size: 16px;
+    color: #26282D;
+    font-size: 14px;
     font-weight: 600;
 }
 
@@ -1457,8 +1472,8 @@ ul li {
 
 .footer-heading {
     color: white !important;
-    font-size: 1rem;
-    font-weight: 800;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .social-media-links ul {
@@ -1580,17 +1595,9 @@ ul li {
     width: 20%;
 }
 
-.filter-by-product-price-and-a-z {
-    border: 1px solid red;
-}
-
-
-
-
-
 .products-cato {
     position: relative;
-    width: 80%;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
@@ -1883,13 +1890,13 @@ ul li {
         width: 23%;
     }
 
-   
+
 
     .top-right-side-section {
         width: 20%;
     }
 
-    
+
 
     .main-display-seaction {
         grid-template-columns: repeat(3, 1fr);
@@ -1912,40 +1919,44 @@ ul li {
 }
 
 @media screen and (max-width: 600px) {
-    
-    .login-button{
+
+    .login-button {
         width: 30%;
     }
+
     .user-profile {
         height: 35px;
         width: 35px;
 
     }
-    .on-side-nev{
+
+    .on-side-nev {
 
         gap: 2px;
     }
-    .on-side-nev ul{
+
+    .on-side-nev ul {
         gap: 5px;
-        
+
     }
 
-    .on-side-nev ul li svg{
-        
-        font-size:1rem !important;
+    .on-side-nev ul li svg {
+
+        font-size: 1rem !important;
     }
 
 
-    .cross-section-categoryes{
-        
-        display:flex;
+    .cross-section-categoryes {
+
+        display: flex;
         align-items: center;
         justify-content: center;
 
     }
-     .cross-section-categoryes svg{
+
+    .cross-section-categoryes svg {
         font-size: 2rem;
-     }
+    }
 
     .hamburger-logo {
         width: 50%;
@@ -1971,7 +1982,7 @@ ul li {
         color: white !important;
     }
 
-   
+
     .mobile-navbar {
         width: 90%;
         height: 80vh;
@@ -2089,7 +2100,7 @@ ul li {
     }
 
     .items-buttons-for-chaging-the-screen button {
-        
+
         width: 98%;
 
         display: flex;
@@ -2166,12 +2177,12 @@ ul li {
     }
 
     .catogries-nam p {
-        font-size: 13px;
+        font-size: 12px;
         margin: 2px;
     }
 
     .footer-pages-links li {
-        font-size: 13px;
+        font-size: 12px;
         margin: 2px;
 
     }
@@ -2357,7 +2368,7 @@ ul li {
     }
 
     .listing-product-category {
-       
+
         border-top-right-radius: 20px !important;
     }
 
@@ -2436,9 +2447,10 @@ ul li {
 /*---------------------------------------------------------------------------------------------------less then 340px screen size---------------------------------------------------------*/
 
 @media screen and (max-width: 400px) {
-    .mobile-navbar{
+    .mobile-navbar {
         height: 80vh;
     }
+
     .items-buttons-for-chaging-the-screen {}
 
 
@@ -2531,7 +2543,7 @@ ul li {
         text-align: justify;
     }
 
-    
+
     .text-heading {
         width: 60%;
     }
@@ -2543,9 +2555,10 @@ ul li {
 }
 
 @media only screen and (min-width: 320px) and (max-width: 375px) {
-    .mobile-navbar{
+    .mobile-navbar {
         height: 80vh;
     }
+
     .top-right-side-section {
         width: 42%;
     }
