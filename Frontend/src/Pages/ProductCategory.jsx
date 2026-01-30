@@ -479,43 +479,56 @@ function FilterProductByCategoryes() {
 
                                     </div>
                                 </div>
-                                <ul className="lsiting-felx-class">
-                                    <ul className="lsiting-felx-class mota-weigth-ul-li ">
-                                        {Object.entries(categoryWithSubCategories).map(([category, subCats]) => (
+                                <ul className="lsiting-felx-class mota-weigth-ul-li">
+                                    {Object.entries(categoryWithSubCategories)
+                                        // 🔹 CATEGORY sort (A → Z)
+                                        .sort(([a], [b]) => a.localeCompare(b))
+                                        .map(([category, subCats]) => (
                                             <li key={category}>
                                                 <div
                                                     className="category-title-toggle"
                                                     onClick={() =>
                                                         setOpenCategory(openCategory === category ? null : category)
                                                     }
-                                                    style={{ cursor: "pointer", display: "flex", justifyContent: "space-between" }}
+                                                    style={{
+                                                        cursor: "pointer",
+                                                        display: "flex",
+                                                        justifyContent: "space-between",
+                                                    }}
                                                 >
-                                                    <span>{category} ({categoryCount[category]})</span>
+                                                    <span>
+                                                        {category} ({categoryCount[category]})
+                                                    </span>
 
-                                                    <span>{openCategory === category ? (<IoChevronUp/>) :  (<IoChevronDown/>)}</span>
+                                                    <span>
+                                                        {openCategory === category ? <IoChevronUp /> : <IoChevronDown />}
+                                                    </span>
                                                 </div>
 
                                                 {openCategory === category && (
                                                     <ul className="subcategory-list">
-                                                        {subCats.map((subCat) => (
-                                                            <li
-                                                                key={subCat}
-                                                                className="cate-list-highlight"
-                                                                onClick={() => {
-                                                                    applyFilter({ type: "category", value: subCat });
-                                                                    scrollToTopSmooth();
-                                                                }}
-                                                            >
-                                                                {subCat}
-                                                            </li>
-                                                        ))}
+                                                        {subCats
+                                                            // 🔹 SUB-CATEGORY sort (A → Z)
+                                                            .slice()
+                                                            .sort((a, b) => a.localeCompare(b))
+                                                            .map((subCat) => (
+                                                                <li
+                                                                    key={subCat}
+                                                                    className="cate-list-highlight"
+                                                                    onClick={() => {
+                                                                        applyFilter({ type: "category", value: subCat });
+                                                                        scrollToTopSmooth();
+                                                                    }}
+                                                                >
+                                                                    {subCat}
+                                                                </li>
+                                                            ))}
                                                     </ul>
                                                 )}
                                             </li>
                                         ))}
-                                    </ul>
-
                                 </ul>
+
                             </div>
 
                             <hr className="border-1 border-red-500"></hr>
@@ -583,7 +596,7 @@ function FilterProductByCategoryes() {
                 <div className="products-cato">
                     {
                         productFilterLoading ? (<div className="loading-product-filter">
-                            <LoadingScreen/>
+                            <LoadingScreen />
                         </div>) :
                             sortedFilterProducts.length > 0 ? (
                                 sortedFilterProducts.map((item) => (
