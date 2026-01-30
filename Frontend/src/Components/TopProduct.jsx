@@ -239,7 +239,7 @@ export default function TopProducts() {
 
                                             <div className="overlay-products"/>
                                             <div className="new-animations-logo">
-                                            <img src="https://pub-b88455fc17c04e63a0f32324fc1620df.r2.dev/animations/new.gif" loading="lazy"></img>
+                                            <img src="https://pub-a0eac1ac164743e8b59f1f061df1807a.r2.dev/new_logo.png" loading="lazy"></img>
                                             </div>
                                             </div>
                                             <div className="number">

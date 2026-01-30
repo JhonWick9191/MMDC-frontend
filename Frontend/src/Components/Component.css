@@ -126,16 +126,18 @@ button:hover {
 }
 
 .brand-name-p p {
-    font-size: 14px;
-    font-family: 'Montserrat', sans-serif;
+    font-size: 12.5px;
+    color: #3d3e42;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: -0.340px;
     font-weight: 600;
     
 
 }
 
 .model-name p {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 11px;
+    
     color: #535766;
 }
 
@@ -942,12 +944,11 @@ button {
 
 .new-animations-logo {
 
-    top: 5px;
-    left: 0px;
+    top: -18%;
+    left: -15%;
     position: absolute;
-    height: 100px;
-    width: 100px;
-    z-index: 6;
+    width: 70%;
+    z-index: 999;
 
 }
 
@@ -978,9 +979,10 @@ button {
 }
 
 .catogries-name p {
+    margin-top: 5%;
     text-align: center;
     color: #26282D;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
 }
 
@@ -1181,7 +1183,6 @@ button {
     color: white;
     padding: 0px;
     font-size: .8rem;
-
 }
 
 
@@ -1889,36 +1890,32 @@ button {
     .main-logo {
         width: 23%;
     }
-
-
-
     .top-right-side-section {
         width: 20%;
     }
-
-
-
     .main-display-seaction {
         grid-template-columns: repeat(3, 1fr);
     }
-
     .main-image-with-number {
         height: 100%;
     }
-
     .number p {
         top: 38%;
     }
-
     .hide-from-mobile {
         display: none;
     }
 
-
-
 }
 
 @media screen and (max-width: 600px) {
+   
+  .catogries-name p{
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: -0.32px;
+  }
+
 
     .login-button {
         width: 30%;
@@ -2438,11 +2435,18 @@ button {
         height: 13px;
         width: 13px;
     }
+    
+
+    .text-heading {
+        margin: 5% 0%;
+        width: 100%;
+    }
 }
 
 .sign-up-button-hamburger img {
     border-radius: 100%;
 }
+
 
 /*---------------------------------------------------------------------------------------------------less then 340px screen size---------------------------------------------------------*/
 
@@ -2543,18 +2547,36 @@ button {
         text-align: justify;
     }
 
+       .main-display-seaction{
+       display: flex;
+       flex-direction: column;
 
-    .text-heading {
-        width: 60%;
-    }
+       }
 
-    .catogries-name p {
-        font-size: 16px;
-    }
+       .catogries-images{
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+       }
+       .catogries-images img {
+        height: 100%;
+        width: 80%;
+        
+
+       }
+
+       
+   
 
 }
 
-@media only screen and (min-width: 320px) and (max-width: 375px) {
+@media only screen and (min-width: 320px) and (max-width: 380px) {
+        .catogries-images img{
+            height: 100%;
+            width: 95%;
+        }
     .mobile-navbar {
         height: 80vh;
     }

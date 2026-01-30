@@ -1457,7 +1457,7 @@
 
 .main-heading-recom {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
 
 }
@@ -1597,7 +1597,7 @@
         width: 100%;
     }
     .main-heading-recom {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .line-with-text {
@@ -1819,9 +1819,17 @@
     .product-image img {
         width: 100%;
     }
+    .items-buttons-for-chaging-the-screen button {
+        width: 97%;
+        font-size: 12px;        
+        font-weight: 600;
+    }
 }
 
 @media only screen and (min-width: 300px) and (max-width: 400px) {
+    .main-heading-recom{
+        font-size: 16px;
+    }
     .user-login {
         height: 80vh;
     }
@@ -1829,13 +1837,12 @@
     .items-buttons-for-chaging-the-screen {
         grid-template-columns: repeat(2, 2fr);
 
-
-
     }
 
     .items-buttons-for-chaging-the-screen button {
         width: 97%;
-        font-size: 13px;
+        font-size: 11px;        
+        font-weight: 600;
     }
 
     .main-login-section {
