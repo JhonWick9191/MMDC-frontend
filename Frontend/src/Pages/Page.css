@@ -40,10 +40,15 @@
 .mota-weigth-ul-li li{
       color: rgb(25, 26, 31);
     font-family: 'Montserrat', sans-serif;
-    font-size: 12px; 
+    font-size: 14.5px; 
     color: #191A1F;  
     font-weight: lighter;
 }
+.category-title-toggle{
+    color: black;
+}
+
+
 
 .mota-weigth-ul-li li:hover{
     text-decoration: underline;
@@ -1064,6 +1069,7 @@
 .listing-product-category::-webkit-scrollbar {
     display: none;
 }
+
 
 .cate-list-highlight:hover {
     color: black;

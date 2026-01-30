@@ -1303,8 +1303,8 @@ button {
 .loading-product-filter {
     top: 20%;
     position: absolute;
-
-    width: 100%;
+    border: 1px solid red;
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1405,11 +1405,9 @@ button {
 }
 
 .clear-filer-section {
-    border: 1px solid red;
-    width: 6%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    
+    width: 100%;
+   
     border-radius: 4px;
 
 }
@@ -1420,6 +1418,10 @@ button {
     align-items: center;
     justify-content: center;
     padding: 2%;
+}
+
+.clear-filer-section button:hover{
+    text-decoration: underline;
 }
 
 
@@ -1842,7 +1844,10 @@ button {
     font-size: 11px;
 }
 
-
+.cate-list-highlight{
+    margin-top: 2%;
+    font-size: 13px !important;
+}
 
 
 /* tursted by brands section css */
@@ -1909,7 +1914,21 @@ button {
 }
 
 @media screen and (max-width: 600px) {
-   
+    .filter-and-type-section{
+        height: 15vh;
+    }
+    .light-weigth-ul-li li{
+        font-size: 12px !important;
+    }
+    .left-side-buttons-filter{
+        gap: 0px !important;
+    }
+    .path-page{
+        margin: 10% 1%;
+    }
+   .path-heading{
+    margin-top: 5% !important;
+   }
   .catogries-name p{
     font-size: 12px;
     font-weight: 600;

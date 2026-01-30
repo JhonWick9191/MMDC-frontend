@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { RxCross1 } from "react-icons/rx";
 import { IoMdHeartEmpty } from "react-icons/io";
+import LoadingScreen from "../Components/Loading";
 import { GoHome } from "react-icons/go";
 import { FaIndianRupeeSign } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
@@ -491,7 +492,7 @@ function FilterProductByCategoryes() {
                                                 >
                                                     <span>{category} ({categoryCount[category]})</span>
 
-                                                    <span>{openCategory === category ? "-" : "+"}</span>
+                                                    <span>{openCategory === category ? (<IoChevronUp/>) :  (<IoChevronDown/>)}</span>
                                                 </div>
 
                                                 {openCategory === category && (
@@ -582,7 +583,7 @@ function FilterProductByCategoryes() {
                 <div className="products-cato">
                     {
                         productFilterLoading ? (<div className="loading-product-filter">
-                            <img src="https://pub-b88455fc17c04e63a0f32324fc1620df.r2.dev/animations/31b197a973fec89feda429d7ae5c1b07.gif" />
+                            <LoadingScreen/>
                         </div>) :
                             sortedFilterProducts.length > 0 ? (
                                 sortedFilterProducts.map((item) => (
