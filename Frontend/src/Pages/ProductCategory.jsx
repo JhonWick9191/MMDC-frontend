@@ -14,14 +14,16 @@ import { IoChevronUp } from "react-icons/io5";
 import { GrFormPrevious } from "react-icons/gr";
 import { MdOutlineNavigateNext } from "react-icons/md";
 function FilterProductByCategoryes() {
+
+
+
     const dispatch = useDispatch();
     const Navigate = useNavigate();
     const location = useLocation();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const queryParams = new URLSearchParams(location.search);
-    const type = queryParams.get("type");
+  
 
     const [selectedFilter, setSelectedFilter] = useState(null);
 
@@ -34,14 +36,19 @@ function FilterProductByCategoryes() {
     // toal products count 
     const [totalProducts, setTotalProducts] = useState(0);
     const [allCategories, setAllCategories] = useState([]); // all categories from backend
-
+     console.log(totalProducts)
     //  console.log(totalProducts)
 
     // console.log("This is my all cato",allCategories)
     // Brand count
 
     // pagination add
-    const [currentPage, setCurrentPage] = useState(1);
+        // pagination 
+    const queryParams = new URLSearchParams(location.search);
+    const pageFromUrl = Number(queryParams.get("page")) || 1;
+    const type = queryParams.get("type");
+    const [currentPage, setCurrentPage] = useState(pageFromUrl);
+    
     const [totalPages, setTotalPages] = useState(1);
 
     const [categoryWithSubCategories, setCategoryWithSubCategories] = useState({});
@@ -51,11 +58,9 @@ function FilterProductByCategoryes() {
     function applyFilter(filter) {
         setProductFilterLoading(true)
         setTimeout(() => {
-
             setSelectedFilter(filter);
             setSideBar(false);
             document.body.style.overflow = "auto";
-
             const params = new URLSearchParams(location.search);
 
             if (filter.type === "brand") {
@@ -97,12 +102,13 @@ function FilterProductByCategoryes() {
         document.body.style.overflow = "hidden";
         window.scrollTo(0, 0);
     }
-
+    
     useEffect(() => {
-        if (type) {
-            fetchProducts(1);
-        }
-    }, [location.search]);
+    if (type) {
+        fetchProducts(pageFromUrl);
+    }
+}, [location.search]);
+
 
     const [isFilterMetaLoaded, setIsFilterMetaLoaded] = useState(false);
 
@@ -184,6 +190,7 @@ function FilterProductByCategoryes() {
     // Price heigh to low sorting function 
 
     // function for handleside filer section A-Z
+
     const [SideFilterSection, setSideFilterSection] = useState(false)
     function handleSideFilterSection() {
         setSideFilterSection(pre => !pre)
@@ -246,18 +253,27 @@ function FilterProductByCategoryes() {
     }
 
 
-    function hendlePagePrivouschnage() {
-        fetchProducts(currentPage - 1)
-        scrollToTopSmooth()
+   function hendlePagePrivouschnage() {
+    
+    const prevPage = currentPage - 1;
+    const params = new URLSearchParams(location.search);
+    params.set("page", prevPage);
 
-    }
-
-    function handlePageNextChange() {
-        fetchProducts(currentPage + 1)
-        scrollToTopSmooth()
+    Navigate(`${location.pathname}?${params.toString()}`);
+    scrollToTopSmooth()
+}
 
 
-    }
+   function handlePageNextChange() {
+    
+    const nextPage = currentPage + 1;
+    const params = new URLSearchParams(location.search);
+    params.set("page", nextPage);
+
+    Navigate(`${location.pathname}?${params.toString()}`);
+    scrollToTopSmooth()
+}
+
 
     return (
         <>
@@ -730,7 +746,7 @@ function FilterProductByCategoryes() {
                             </div>
 
                             <div className="right-page-up-button">
-
+                               
 
                                 <button
                                     disabled={currentPage === totalPages}
