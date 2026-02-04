@@ -95,11 +95,9 @@ function SearchProducts() {
     }
     
     useEffect(() => {
-        const params = new URLSearchParams(location.search);
-        const currentQ = params.get("q") || contextSearchQuery || "";
-        const page = Number(params.get("page")) || 1;
+        const currentQ = queryParams.get("q") || contextSearchQuery || "";
         if (currentQ) {
-            fetchProducts(page);
+            fetchProducts(pageFromUrl);
         }
     }, [location.search]);
 
@@ -319,7 +317,7 @@ function SearchProducts() {
 
             <hr className="color_2"></hr>
             <div className="filter-and-type-section">
-                <div className="filter btn2 ">
+                <div className="filter btn2 none">
                     <button onClick={productTypeDisplay}>
                         <span>
                             <svg
