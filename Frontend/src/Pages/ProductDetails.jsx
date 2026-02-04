@@ -248,7 +248,13 @@ export default function ProductDetails() {
         <div className="left-section-our-products-section">
           <div className="main-images-products">
             <img src={mainImage} alt="Selected product" loading="lazy" />
+            <div className="upper-side-cover-image">
+            
           </div>
+
+          </div>
+
+          
           <div className="product-image-mid">
             {images.map((img, idx) => (
               <div
@@ -258,8 +264,10 @@ export default function ProductDetails() {
                 style={{ cursor: "pointer" }}
               >
                 <img src={img} alt={`Product ${idx + 1}`} />
+                   <div className="upper-side-cover-image"></div>
               </div>
             ))}
+         
           </div>
         </div>
 
