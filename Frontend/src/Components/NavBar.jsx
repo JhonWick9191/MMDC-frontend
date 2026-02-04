@@ -149,7 +149,7 @@ export default function NavBar() {
 
     handleSearch();
 
-    Navigate("/searchProducts");
+    Navigate(`/searchProducts?q=${encodeURIComponent(q)}`);
     setSearchQuery("")
   };
 

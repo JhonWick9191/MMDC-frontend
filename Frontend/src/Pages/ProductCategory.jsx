@@ -62,6 +62,7 @@ function FilterProductByCategoryes() {
             setSideBar(false);
             document.body.style.overflow = "auto";
             const params = new URLSearchParams(location.search);
+             params.set("page", 1);
 
             if (filter.type === "brand") {
                 params.set("brand", filter.value);

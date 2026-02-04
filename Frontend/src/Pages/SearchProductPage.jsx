@@ -1,73 +1,280 @@
-import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSearch } from "../Context/SearchContaxt";
-import { IoIosColorFilter } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
-import { GoHome } from "react-icons/go";
 import { IoMdHeartEmpty } from "react-icons/io";
+import LoadingScreen from "../Components/Loading";
+import { GoHome } from "react-icons/go";
+import { FaIndianRupeeSign } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+import { addToWishlist } from "../Redux/Slice/WishListSlice";
+import { toast } from "react-toastify";
+import { IoChevronDown } from "react-icons/io5";
+import { IoChevronUp } from "react-icons/io5";
+import { GrFormPrevious } from "react-icons/gr";
+import { MdOutlineNavigateNext } from "react-icons/md";
+import { useSearch } from "../Context/SearchContaxt";
 
-export default function SearchProducts() {
-    const { searchResults, searchQuery } = useSearch();
+function SearchProducts() {
+    const dispatch = useDispatch();
     const Navigate = useNavigate();
-
-    const [showSideBar, setSideBar] = useState(false);
-    const [selectedFilter, setSelectedFilter] = useState(null);
-    const [showMessage, setShowMessage] = useState(false);
+    const location = useLocation();
+    const { searchQuery: contextSearchQuery } = useSearch();
+    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const [selectedFilter, setSelectedFilter] = useState(null);
 
-   
-    // Sidebar handlers
-    const handleCross = () => {
+    // Category count
+    const [categoryCount, setCategoryCount] = useState({}); // category => count from backend
+    const [allBrands, setAllBrands] = useState([]); // array of brand names
+    const [brandCount, setBrandCount] = useState({}); // brand => count from backend
+    // toal products count 
+    const [totalProducts, setTotalProducts] = useState(0);
+    const [allCategories, setAllCategories] = useState([]); // all categories from backend
+    console.log(totalProducts)
+
+    // pagination add
+    // pagination 
+    const queryParams = new URLSearchParams(location.search);
+    const pageFromUrl = Number(queryParams.get("page")) || 1;
+    const q = queryParams.get("q") || contextSearchQuery || "";
+    const [currentPage, setCurrentPage] = useState(pageFromUrl);
+    
+    const [totalPages, setTotalPages] = useState(1);
+
+    const [categoryWithSubCategories, setCategoryWithSubCategories] = useState({});
+    const [productFilterLoading, setProductFilterLoading] = useState(false)
+    
+    // NEW: helper – filter state + URL update
+    function applyFilter(filter) {
+        setProductFilterLoading(true)
+        setTimeout(() => {
+            setSelectedFilter(filter);
+            setSideBar(false);
+            document.body.style.overflow = "auto";
+            const params = new URLSearchParams(location.search);
+            const currentQ = params.get("q") || contextSearchQuery || "";
+            params.set("page", 1);
+            if (currentQ) params.set("q", currentQ);
+
+            if (filter.type === "brand") {
+                params.set("brand", filter.value);
+                params.delete("priceMin");
+                params.delete("priceMax");
+                params.delete("subCategory");
+            } else if (filter.type === "category") {
+                params.set("subCategory", filter.value);
+                params.delete("brand");
+                params.delete("priceMin");
+                params.delete("priceMax");
+            } else if (filter.type === "price") {
+                params.set("priceMin", filter.min);
+                params.set("priceMax", filter.max);
+            }
+
+            Navigate(`${location.pathname}?${params.toString()}`, { replace: false });
+            setProductFilterLoading(false)
+        }, 2000)
+    }
+
+    // handel cross butoon
+    function handleCross() {
         setSideBar(false);
+        console.log("cross is clicked");
         document.body.style.overflow = "auto";
-    };
+    }
 
-    const openSidebar = () => {
+    // Filtered products
+
+    const [showSideBar, setSideBar] = useState(false); // show side bar section
+    function productTypeDisplay() {
         setSideBar(true);
         document.body.style.overflow = "hidden";
         window.scrollTo(0, 0);
+    }
+    
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const currentQ = params.get("q") || contextSearchQuery || "";
+        const page = Number(params.get("page")) || 1;
+        if (currentQ) {
+            fetchProducts(page);
+        }
+    }, [location.search]);
+
+    const [isFilterMetaLoaded, setIsFilterMetaLoaded] = useState(false);
+
+    const fetchProducts = async (page = 1, sort = "asc") => {  // 🔹 sort param add kiya
+        setLoading(true);
+        const params = new URLSearchParams(location.search);
+        const currentQ = params.get("q") || contextSearchQuery || "";
+        if (currentQ) params.set("q", currentQ);
+        params.set("page", page);
+        params.set("sort", sort); // 🔹 backend ko sort bhej rahe hain
+
+        // ✅ Send current filter to backend
+        if (selectedFilter) {
+            if (selectedFilter.type === "brand") {
+                params.set("brand", selectedFilter.value);
+            } else if (selectedFilter.type === "category") {
+                params.set("subCategory", selectedFilter.value);
+            } else if (selectedFilter.type === "price") {
+                params.set("priceMin", selectedFilter.min);
+                params.set("priceMax", selectedFilter.max);
+            }
+        }
+
+        try {
+            const res = await fetch(`https://api.musicandmore.co.in/api/v1/searchProducts?${params.toString()}`);
+            const data = await res.json();
+
+            setProducts(data.message || data.data || []);
+            setTotalProducts(data.totalProducts || 0);
+            if (!isFilterMetaLoaded) {
+                setAllCategories(data.totalCategories || []);
+                setCategoryCount(data.categoryCount || {});
+                setAllBrands(Object.keys(data.brandCount || {}));
+                setBrandCount(data.brandCount || {});
+                setCategoryWithSubCategories(data.categoryWithSubCategories || {});
+                setIsFilterMetaLoaded(true);
+            }
+
+            setTotalPages(data.totalPages || 1);
+            setCurrentPage(page);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
     };
 
-    // Category & Brand count
-    const categoryCount = searchResults?.reduce((acc, item) => {
-        acc[item.Product_Category] = (acc[item.Product_Category] || 0) + 1;
-        return acc;
-    }, {}) || {};
+    // NEW: URL se filter read karna
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const brand = params.get("brand");
+        const subCategory = params.get("subCategory");
+        const priceMin = params.get("priceMin");
+        const priceMax = params.get("priceMax");
 
-    const brandCount = searchResults?.reduce((acc, item) => {
-        acc[item.Brand_Name] = (acc[item.Brand_Name] || 0) + 1;
-        return acc;
-    }, {}) || {};
+        if (brand) {
+            setSelectedFilter({ type: "brand", value: brand });
+        } else if (subCategory) {
+            setSelectedFilter({ type: "category", value: subCategory });
+        } else if (priceMin && priceMax) {
+            setSelectedFilter({
+                type: "price",
+                min: +priceMin,
+                max: +priceMax,
+            });
+        } else {
+            setSelectedFilter(null);
+        }
+    }, [location.search]);
 
-    
-    const filteredProducts = selectedFilter
-        ? searchResults.filter((item) => {
-            if (selectedFilter.type === "category") return item.Product_Category === selectedFilter.value;
-            if (selectedFilter.type === "brand") return item.Brand_Name === selectedFilter.value;
-            if (selectedFilter.type === "price") {
-                const price = parseInt(String(item.Product_price || "0").replace(/,/g, ""));
-                return price >= selectedFilter.min && price <= selectedFilter.max;
-            }
-            return true;
+    // for geting location of the page
+    const searchParams = new URLSearchParams(location.search);
+    let types = searchParams.get("q") || contextSearchQuery || "";
+
+    // functions for adding A-z And price high to low 
+    // Price heigh to low sorting function 
+
+    // function for handleside filer section A-Z
+
+    const [SideFilterSection, setSideFilterSection] = useState(false)
+    function handleSideFilterSection() {
+        setSideFilterSection(pre => !pre)
+        console.log("The side Filter button is clicked")
+    }
+
+    const [isPriceHighTolow, setisPriceHighTolow] = useState(true)
+
+    // filter product with sorting 
+
+    let sortedFilterProducts = [...products];
+
+    if (isPriceHighTolow) {
+        sortedFilterProducts.sort((a, b) => {
+            const priceA = parseInt(String(a.Product_price || "0").replace(/,/g, ""));
+            const priceB = parseInt(String(b.Product_price || "0").replace(/,/g, ""));
+            return priceB - priceA; // High to Low
         })
-        : searchResults;
+    }
 
-        console.log(filteredProducts)
+    // function for filter price low to high 
+    const [isPriceLowToHigh, setisPriceLowToHigh] = useState(true)
+    // function handlefunction 
+    if (isPriceLowToHigh && products.length > 0) {  // products loaded check
+        sortedFilterProducts.sort((a, b) => {
+            const priceA = parseInt(String(a.Product_price || "0").replace(/,/g, ""));
+            const priceB = parseInt(String(b.Product_price || "0").replace(/,/g, ""));
+            return priceA - priceB; // Low to High
+        })
+    }
 
-    // Remove auto-redirect, just handle empty searchResults
-    if (loading && searchResults) setLoading(false);
+    function handlePriceHighToLow() {
+        setisPriceLowToHigh(false);   // Low OFF  
+        setisPriceHighTolow(true);    // High ON
+        setSideFilterSection(false);
+        fetchProducts(1, "desc");     // 🔹 backend se fetch karo High → Low
+    }
 
-    if (loading) return <p style={{ padding: "20px" }}>Loading search results...</p>;
+    function handlePriceLowTohigh() {
+        setisPriceHighTolow(false);   // High OFF
+        setisPriceLowToHigh(true);    // Low ON  
+        setSideFilterSection(false);
+        fetchProducts(1, "asc");      // 🔹 backend se fetch karo Low → High
+    }
+    const [openCategory, setOpenCategory] = useState(null); // Track which category is open
 
-    if (!loading && (!searchResults || searchResults.length === 0)) {
+    // handle page chage 
+
+    function scrollToTopSmooth() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+   function hendlePagePrivouschnage() {
+    
+    const prevPage = currentPage - 1;
+    const params = new URLSearchParams(location.search);
+    const currentQ = params.get("q") || contextSearchQuery || "";
+    params.set("page", prevPage);
+    if (currentQ) params.set("q", currentQ);
+
+    Navigate(`${location.pathname}?${params.toString()}`);
+    scrollToTopSmooth()
+}
+
+   function handlePageNextChange() {
+    
+    const nextPage = currentPage + 1;
+    const params = new URLSearchParams(location.search);
+    const currentQ = params.get("q") || contextSearchQuery || "";
+    params.set("page", nextPage);
+    if (currentQ) params.set("q", currentQ);
+
+    Navigate(`${location.pathname}?${params.toString()}`);
+    scrollToTopSmooth()
+}
+
+    if (loading && products.length === 0) {
+        return <LoadingScreen />;
+    }
+
+    if (!loading && (!q || q.trim() === "")) {
         return (
             <div className="no-product-found">
                 <div className="image-in-not-found">
-                    <img src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1760685581/Neutral_Aesthetic_Simple_Quote_Instagram_Post_byfeti.gif" alt="No Products" />
+                    <img
+                        src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1760685581/Neutral_Aesthetic_Simple_Quote_Instagram_Post_byfeti.gif"
+                        alt="No Products"
+                    />
                 </div>
                 <div className="text-image-not-found">
-                    <p>No products found for "{searchQuery}"</p>
+                    <p>No search query provided</p>
                 </div>
                 <div className="go-back-buttons">
                     <button onClick={() => Navigate("/")}>HOME</button>
@@ -76,155 +283,233 @@ export default function SearchProducts() {
         );
     }
 
-    // for sending the product to product details 
-
-    const searchParams = new URLSearchParams(location.search)
-    let types = searchParams.get("type")
-
-    function productTypeDisplay() {
-        setSideBar(true)
-        document.body.style.overflow = "hidden";
-        window.scrollTo(0, 0);
+    if (!loading && products.length === 0 && q) {
+        return (
+            <div className="no-product-found">
+                <div className="image-in-not-found">
+                    <img
+                        src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1760685581/Neutral_Aesthetic_Simple_Quote_Instagram_Post_byfeti.gif"
+                        alt="No Products"
+                    />
+                </div>
+                <div className="text-image-not-found">
+                    <p>No products found for "{q}"</p>
+                </div>
+                <div className="go-back-buttons">
+                    <button onClick={() => Navigate("/")}>HOME</button>
+                </div>
+            </div>
+        );
     }
 
     return (
         <>
-            {/* Poster / Banner */}
             <div className="path-page">
-                <ul>
-                    <li><GoHome /> /  </li>
-                    <li>{location.pathname.toUpperCase().replace("/", " ")} /  </li>
-                    <li></li>
-                    <li>{types}</li>
+                <ul className="light-weigth-ul-li flex-in-ul-li ">
+                    <li>
+                        HOME /
+                    </li>
+                    <li>{location.pathname.toUpperCase().replace("/", "")} /</li>
+
+
+                    <li>  {types.toUpperCase()}</li>
                 </ul>
-                <p className="path-heading">
-                    {types}
-                </p>
+                <p className="path-heading">{types.toUpperCase()}</p>
             </div>
 
             <hr className="color_2"></hr>
             <div className="filter-and-type-section">
-                <div className="filter btn2 liquid">
-                    <button onClick={productTypeDisplay}><span><svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" fill="none"><rect width="18" height="1.5" y="2.5" fill="#191A1F" rx=".75"></rect><circle cx="10.5" cy="3" r="1.75" fill="#fff" stroke="#191A1F" stroke-width="1.5"></circle><rect width="18" height="1.5" y="7.5" fill="#191A1F" rx=".75"></rect><circle cx="5.5" cy="8" r="1.75" fill="#fff" stroke="#191A1F" stroke-width="1.5"></circle><rect width="18" height="1.5" y="12.5" fill="#191A1F" rx=".75"></rect><circle cx="11.5" cy="13" r="1.75" fill="#fff" stroke="#191A1F" stroke-width="1.5"></circle></svg></span>Fiter</button>
+                <div className="filter btn2 ">
+                    <button onClick={productTypeDisplay}>
+                        <span>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="18"
+                                height="16"
+                                fill="none"
+                            >
+                                <rect
+                                    width="18"
+                                    height="1.5"
+                                    y="2.5"
+                                    fill="#191A1F"
+                                    rx=".75"
+                                ></rect>
+                                <circle
+                                    cx="10.5"
+                                    cy="3"
+                                    r="1.75"
+                                    fill="#fff"
+                                    stroke="#191A1F"
+                                    strokeWidth="1.5"
+                                ></circle>
+                                <rect
+                                    width="18"
+                                    height="1.5"
+                                    y="7.5"
+                                    fill="#191A1F"
+                                    rx=".75"
+                                ></rect>
+                                <circle
+                                    cx="5.5"
+                                    cy="8"
+                                    r="1.75"
+                                    fill="#fff"
+                                    stroke="#191A1F"
+                                    strokeWidth="1.5"
+                                ></circle>
+                                <rect
+                                    width="18"
+                                    height="1.5"
+                                    y="12.5"
+                                    fill="#191A1F"
+                                    rx=".75"
+                                ></rect>
+                                <circle
+                                    cx="11.5"
+                                    cy="13"
+                                    r="1.75"
+                                    fill="#fff"
+                                    stroke="#191A1F"
+                                    strokeWidth="1.5"
+                                ></circle>
+                            </svg>
+                        </span>
+                        Filters
+                    </button>
                 </div>
+                {/* top section after poster section that is basically contain total length of products ad A-Z and price filter section */}
 
-                <div className="left-side-buttons-filter ">
+                <div className="left-side-buttons-filter">
 
-                    <div className="cate">
-                        <p>{filteredProducts.length} <span>  Results</span></p>
+
+                    <div className="filter-by-product-price-and-a-z">
+                        <div className="main-wrapper-for-filter-a-z" onClick={handleSideFilterSection}>
+                            <div className="main-text-and-button-for-text-button ">
+                                <div className="light-font">
+                                    <p>
+
+                                        {isPriceLowToHigh
+                                            ? 'Low to High'
+                                            : isPriceHighTolow
+                                                ? 'High to Low'
+                                                : 'Select Sorting Options'
+                                        }
+                                    </p>
+                                </div>
+                                <div className="button-A-Z">
+                                    {
+                                        SideFilterSection ? (<IoChevronUp />) : (<IoChevronDown />)
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {/* Buttons same rahenge - perfect hai */}
+                        <div className="main-wrapper-for-listing-A-Z ">
+                            {SideFilterSection ? (
+                                <div className="listing-total-buttons-for-filtering font-size">
+                                    <ul>
+                                        <li
+                                            className="light-font"
+                                            onClick={handlePriceLowTohigh}
+                                        >
+                                            Low to High
+                                        </li>
+                                        <li
+                                            className="light-font"
+                                            onClick={handlePriceHighToLow}
+                                        >
+                                            High to Low
+                                        </li>
+                                    </ul>
+                                </div>
+                            ) : null}
+                        </div>
+                    </div>
+
+
+                    <div className="filter-by-product-price-and-a-z  font-size">
+                        <p>
+                            {totalProducts} Results
+                        </p>
                     </div>
 
                 </div>
-
             </div>
-
-            {/* Filter and Total */}
-           
-
-            {/* Sidebar */}
+            {/*  mobile side view filter section  */}
             <div className="side-bar-on-product-category-page">
                 {showSideBar && (
                     <div className="listing-on-categoryes">
                         <div className="listing-product-category">
                             <div className="main-heading-product-categoryes">
-                                <div className="text"><p>FILTER</p></div>
-                                <div className="cross-section-categoryes">
-                                    <button onClick={handleCross}><RxCross1 /></button>
-                                </div>
-                            </div>
-                            <hr className="border-1 border-red-500" />
-
-                            {/* Categories */}
-                            <div className="main-class-listing-list">
-                                <div className="main-heading-product-categoryes-out-border">
-                                    <div className="text"><p>PRODUCT CATEGORYES</p></div>
-                                </div>
-                                <ul className="lsiting-felx-class">
-                                    {Object.entries(categoryCount).map(([category, count], index) => (
-                                        <li
-                                            key={index}
-                                            className="cate-list-highlight"
-                                            onClick={() => {
-                                                setSelectedFilter({ type: "category", value: category });
-                                                handleCross();
-                                            }}
-                                        >
-                                            {category} ({count})
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            <hr className="border-1 border-red-500" />
-
-                            {/* Brands */}
-                            <div className="main-brands-category">
-                                <div className="main-heading-product-categoryes-out-border">
-                                    <div className="text"><p>BRANDS</p></div>
-                                </div>
-                                <ul>
-                                    {Object.entries(brandCount).map(([brand, count], index) => (
-                                        <li
-                                            key={index}
-                                            onClick={() => {
-                                                setSelectedFilter({ type: "brand", value: brand });
-                                                handleCross();
-                                            }}
-                                        >
-                                            {brand} ({count})
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            <hr className="border-1 border-red-500" />
-
-                            {/* Price */}
-                            <div className="main-brands-category">
-                                <div className="main-heading-product-categoryes-out-border">
-                                    <div className="text"><p>PRICE</p></div>
-                                </div>
-                                <ul className="pricing-listing">
-                                    {priceRanges.map((range, index) => (
-                                        <li
-                                            className="listing-products-price"
-                                            key={index}
-                                            onClick={() => {
-                                                setSelectedFilter({ type: "price", min: range.min, max: range.max });
-                                                handleCross();
-                                            }}
-                                        >
-                                            {range.label}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </div>
-
-            {/* Clear Filter */}
-            {selectedFilter && (
-                <div className="clear-filer-section filter btn liquid">
-                    <button onClick={() => setSelectedFilter(null)}>Clear Filter</button>
-                </div>
-            )}
-
-            {/* Products */}
-
-            <div className="main-category-products">
-                <div className="filter-with-products">
-                    <div className="listing-on-categoryes">
-
-                        <div className="listing-product-category">
-                            <div className="main-heading-product-categoryes">
                                 <div className="text">
-                                    <p>FILTER</p>
+                                    <div className="filter btn2 ">
+                                        <button onClick={handleCross}>
+                                            <span>
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="18"
+                                                    height="16"
+                                                    fill="none"
+                                                >
+                                                    <rect
+                                                        width="18"
+                                                        height="1.5"
+                                                        y="2.5"
+                                                        fill="#191A1F"
+                                                        rx=".75"
+                                                    ></rect>
+                                                    <circle
+                                                        cx="10.5"
+                                                        cy="3"
+                                                        r="1.75"
+                                                        fill="#fff"
+                                                        stroke="#191A1F"
+                                                        strokeWidth="1.5"
+                                                    ></circle>
+                                                    <rect
+                                                        width="18"
+                                                        height="1.5"
+                                                        y="7.5"
+                                                        fill="#191A1F"
+                                                        rx=".75"
+                                                    ></rect>
+                                                    <circle
+                                                        cx="5.5"
+                                                        cy="8"
+                                                        r="1.75"
+                                                        fill="#fff"
+                                                        stroke="#191A1F"
+                                                        strokeWidth="1.5"
+                                                    ></circle>
+                                                    <rect
+                                                        width="18"
+                                                        height="1.5"
+                                                        y="12.5"
+                                                        fill="#191A1F"
+                                                        rx=".75"
+                                                    ></rect>
+                                                    <circle
+                                                        cx="11.5"
+                                                        cy="13"
+                                                        r="1.75"
+                                                        fill="#fff"
+                                                        stroke="#191A1F"
+                                                        strokeWidth="1.5"
+                                                    ></circle>
+                                                </svg>
+                                            </span>
+                                            Hide Filters
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div className="cross-section-categoryes">
-                                    <button onClick={handleCross}><RxCross1 /></button>
+                                    <button onClick={handleCross}>
+                                        <RxCross1 />
+                                    </button>
                                 </div>
                             </div>
                             <hr className="border-1 border-red-500"></hr>
@@ -233,23 +518,60 @@ export default function SearchProducts() {
                             <div className="main-class-listing-list">
                                 <div className="main-heading-product-categoryes-out-border">
                                     <div className="text">
-                                        <p>PRODUCT CATEGORYES</p>
+                                        <p>PRODUCT CATEGORIES</p>
+
                                     </div>
                                 </div>
-                                <ul className="lsiting-felx-class">
-                                    {Object.entries(categoryCount).map(([category, count], index) => (
-                                        <li className="cate-list-highlight"
-                                            key={index}
-                                            onClick={() => {
-                                                setSelectedFilter({ type: "category", value: category });
-                                                setSideBar(false); // sidebar close
-                                                document.body.style.overflow = "auto"; // scroll wapas enable
-                                            }}
-                                        >
-                                            {category} ({count})
-                                        </li>
-                                    ))}
+                                <ul className="lsiting-felx-class mota-weigth-ul-li">
+                                    {Object.entries(categoryWithSubCategories)
+                                        // 🔹 CATEGORY sort (A → Z)
+                                        .sort(([a], [b]) => a.localeCompare(b))
+                                        .map(([category, subCats]) => (
+                                            <li key={category}>
+                                                <div
+                                                    className="category-title-toggle"
+                                                    onClick={() =>
+                                                        setOpenCategory(openCategory === category ? null : category)
+                                                    }
+                                                    style={{
+                                                        cursor: "pointer",
+                                                        display: "flex",
+                                                        justifyContent: "space-between",
+                                                    }}
+                                                >
+                                                    <span>
+                                                        {category} ({categoryCount[category]})
+                                                    </span>
+
+                                                    <span>
+                                                        {openCategory === category ? <IoChevronUp /> : <IoChevronDown />}
+                                                    </span>
+                                                </div>
+
+                                                {openCategory === category && (
+                                                    <ul className="subcategory-list">
+                                                        {subCats
+                                                            // 🔹 SUB-CATEGORY sort (A → Z)
+                                                            .slice()
+                                                            .sort((a, b) => a.localeCompare(b))
+                                                            .map((subCat) => (
+                                                                <li
+                                                                    key={subCat}
+                                                                    className="cate-list-highlight"
+                                                                    onClick={() => {
+                                                                        applyFilter({ type: "category", value: subCat });
+                                                                        scrollToTopSmooth();
+                                                                    }}
+                                                                >
+                                                                    {subCat}
+                                                                </li>
+                                                            ))}
+                                                    </ul>
+                                                )}
+                                            </li>
+                                        ))}
                                 </ul>
+
                             </div>
 
                             <hr className="border-1 border-red-500"></hr>
@@ -261,93 +583,219 @@ export default function SearchProducts() {
                                         <p>BRANDS </p>
                                     </div>
                                 </div>
-                                <ul className="brand-listing">
-                                    {Object.entries(brandCount).map(([brand, count], index) => (
-                                        <li
-                                            key={index}
-                                            onClick={() => {
-                                                setSelectedFilter({ type: "brand", value: brand });
-                                                setSideBar(false);
-                                                document.body.style.overflow = "auto";
-                                            }}
-                                        >
-                                            {brand} ({count})
-                                        </li>
-                                    ))}
+                                <ul className="lsiting-felx-class mota-weigth-ul-li">
+                                    {Object.entries(brandCount).map(
+                                        ([brand, count], index) => (
+                                            <li className="cate-list-highlight"
+                                                key={index}
+                                                onClick={() => {
+                                                    applyFilter({
+                                                        type: "brand",
+                                                        value: brand,
+                                                    }), scrollToTopSmooth()
+                                                }
+                                                }
+                                            >
+                                                {brand} ({count})
+                                            </li>
+                                        )
+                                    )}
                                 </ul>
                             </div>
 
-                            <hr className="border-1 border-red-500"></hr>
 
-                            {/* Price Filter */}
-                            <div className="main-brands-category">
-                                <div className="main-heading-product-categoryes-out-border">
-                                    <div className="text">
-                                        <p>PRICE</p>
-                                    </div>
-                                </div>
-                              
-                            </div>
+
 
                         </div>
                     </div>
+                )}
+            </div>
+            {/* mobile side view filer section ends  */}
+            {/* Clear Filter Button */}
+            {selectedFilter && (
+                <div className="clear-filer-section filter">
+                    <button onClick={() => setSelectedFilter(null)}>
+                        Clear Filter
+                    </button>
                 </div>
+            )}
+
+            <div className="main-category-products">
+
+
+
+
+
+                {/*---------------------------------------------------------------------------------------------------------------------------------------------------------------  */}
+                {/* ---------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
+
+                {/* ==========================================================Left side fiter ends================================================================================== */}
+                {/*---------------------------------------------------------------------------------------------------------------------------------------------------------------  */}
+                {/* ---------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
+
+
+                {/*  Right side prodcuts starts   */}
                 <div className="products-cato">
-                    {filteredProducts.length > 0 ? (
-                        filteredProducts.map((item) => (
-                            <div className="product-Categories-inside-category-folder"
-                                key={item.product_id || item._id}
-                                onClick={() => Navigate("/productDetails", { state: item })}>
+                    {
+                        productFilterLoading ? (<div className="loading-product-filter">
+                            <LoadingScreen />
+                        </div>) :
+                            sortedFilterProducts.length > 0 ? (
+                                sortedFilterProducts.map((item) => (
+                                    <div
+                                        className="product-Categories-inside-category-folder"
+                                        key={item.product_id || item._id}
+                                        onClick={() =>
+                                            Navigate("/productDetails", {
+                                                state: {
+                                                    ...item,
+                                                    from:
+                                                        location.pathname +
+                                                        location.search,
+                                                },
+                                            })
+                                        }
+                                    >
+                                        <div className="filter-product-image">
+                                            <img
+                                                src={item.image_01}
+                                                alt={item.name}
+                                                loading="lazy"
+                                                onMouseEnter={(e) =>
+                                                (e.currentTarget.src =
+                                                    item.image_02)
+                                                }
+                                                onMouseLeave={(e) =>
+                                                (e.currentTarget.src =
+                                                    item.image_01)
+                                                }
+                                            />
 
+                                            <div className="overlay-products">
+                                                <div className="overlay-buttons">
+                                                    <div className="wishlist-overlay">
+                                                        <buttons
+                                                            onClick={(event) => {
+                                                                dispatch(
+                                                                    addToWishlist(item)
+                                                                );
+                                                                event.stopPropagation();
+                                                                toast.success(
+                                                                    ` Added to the wishlist`
+                                                                );
+                                                            }}
+                                                        >
+                                                            <IoMdHeartEmpty />
+                                                        </buttons>
+                                                    </div>
 
-
-                                <div className="filter-product-image">
-                                    <img
-                                        src={item.image_01}
-                                        alt={item.name}
-                                        onMouseEnter={(e) => (e.currentTarget.src = item.image_02)}
-                                        onMouseLeave={(e) => (e.currentTarget.src = item.image_01)}
-                                    />
-
-                                    <div className="overlay-products">
-
-                                        <div className="overlay-buttons">
-
-                                            <div className="wishlist-overlay">
-                                                <buttons onClick={(event) => { dispatch(addToWishlist(item)); event.stopPropagation(); toast.success(` Added to the wishlist`); }}><IoMdHeartEmpty /></buttons>
-                                            </div>
-
-                                            <div className="btn2 liquid  overlay-view-details ">
-                                                <button >View Deatils </button>
+                                                    <div className="btn2 liquid  overlay-view-details ">
+                                                        <button>View Deatils </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
+                                        <div className="filter-product-para-text">
+                                            <div className="brand-name-p dotted-border">
+
+                                                <p>
+                                                    Model - {item.Model_number}
+                                                </p>
+                                            </div>
+
+                                            {/* <div className="brand-name-p dotted-border">
+
+                                                <p>
+                                                    Model - {item.Product_Name
+                                                    }
+                                                </p>
+                                            </div> */}
+                                            <div className="model-name dotted-border">
+                                                <p>
+                                                    <p>{item.Brand_Name}</p>
+                                                </p>
+                                            </div>
+
+
+                                            {/* <div className="model-name dotted-border">
+                                                <p>
+                                                    {item.Product_Category
+                                                    }
+                                                </p>
+                                            </div> */}
+
+                                            <div className="model-name dotted-border">
+                                                <p>
+                                                    {item.Product_Subcategory}
+                                                </p>
+                                            </div>
+                                            {/* <div className="model-name model-price-cards dotted-border">
+                                                <p>
+                                                    MRP <FaIndianRupeeSign />  {Number(item.Product_price).toLocaleString("en-IN")}
+
+                                                </p>
+                                            </div> */}
+
+
+
+                                        </div>
                                     </div>
+                                ))
+                            ) : (
+                                <p>No products found.</p>
+                            )}
 
-                                </div>
 
-                                <div className="filter-product-para-text">
+                    <div className="main-pagination-wrapper">
 
-                                    <div className="brand-name-p dotted-border">
-                                        <p>{item.Brand_Name}</p>
-                                    </div>
 
-                                    <div className="model-name">
-                                        <p>{item.Product_Name}</p>
-                                    </div>
+                        <div className="pagination">
 
-                                </div>
+                            <div className="left-page-down-button">
+
+
+                                <button
+                                    disabled={currentPage === 1}
+                                    onClick={hendlePagePrivouschnage}
+                                >
+                                    <GrFormPrevious /> Pre
+                                </button>
+                            </div>
+
+                            <div className="page-number">
+
+
+
+                                <span className="current-page">{currentPage}</span>
 
                             </div>
 
+                            <div className="right-page-up-button">
+                               
 
-                        ))
-                    ) : (
-                        <p>No products found.</p>
-                    )}
+                                <button
+                                    disabled={currentPage === totalPages}
+                                    onClick={handlePageNextChange}
+                                >
+
+                                    Next <MdOutlineNavigateNext />
+
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
                 </div>
+
+
             </div>
 
         </>
     );
 }
+
+export default SearchProducts;
