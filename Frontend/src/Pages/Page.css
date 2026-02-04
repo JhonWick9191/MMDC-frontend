@@ -444,6 +444,7 @@ hr{
 }
 
 .main-images-products {
+    height: 25rem;
     position: relative;
     padding: 2%;
     border: 1px solid #E5E5E5;
