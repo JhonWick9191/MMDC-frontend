@@ -40,12 +40,12 @@ function SearchProducts() {
     const pageFromUrl = Number(queryParams.get("page")) || 1;
     const q = queryParams.get("q") || contextSearchQuery || "";
     const [currentPage, setCurrentPage] = useState(pageFromUrl);
-    
+
     const [totalPages, setTotalPages] = useState(1);
 
     const [categoryWithSubCategories, setCategoryWithSubCategories] = useState({});
     const [productFilterLoading, setProductFilterLoading] = useState(false)
-    
+
     // NEW: helper – filter state + URL update
     function applyFilter(filter) {
         setProductFilterLoading(true)
@@ -93,7 +93,7 @@ function SearchProducts() {
         document.body.style.overflow = "hidden";
         window.scrollTo(0, 0);
     }
-    
+
     useEffect(() => {
         const currentQ = queryParams.get("q") || contextSearchQuery || "";
         if (currentQ) {
@@ -234,29 +234,29 @@ function SearchProducts() {
         });
     }
 
-   function hendlePagePrivouschnage() {
-    
-    const prevPage = currentPage - 1;
-    const params = new URLSearchParams(location.search);
-    const currentQ = params.get("q") || contextSearchQuery || "";
-    params.set("page", prevPage);
-    if (currentQ) params.set("q", currentQ);
+    function hendlePagePrivouschnage() {
 
-    Navigate(`${location.pathname}?${params.toString()}`);
-    scrollToTopSmooth()
-}
+        const prevPage = currentPage - 1;
+        const params = new URLSearchParams(location.search);
+        const currentQ = params.get("q") || contextSearchQuery || "";
+        params.set("page", prevPage);
+        if (currentQ) params.set("q", currentQ);
 
-   function handlePageNextChange() {
-    
-    const nextPage = currentPage + 1;
-    const params = new URLSearchParams(location.search);
-    const currentQ = params.get("q") || contextSearchQuery || "";
-    params.set("page", nextPage);
-    if (currentQ) params.set("q", currentQ);
+        Navigate(`${location.pathname}?${params.toString()}`);
+        scrollToTopSmooth()
+    }
 
-    Navigate(`${location.pathname}?${params.toString()}`);
-    scrollToTopSmooth()
-}
+    function handlePageNextChange() {
+
+        const nextPage = currentPage + 1;
+        const params = new URLSearchParams(location.search);
+        const currentQ = params.get("q") || contextSearchQuery || "";
+        params.set("page", nextPage);
+        if (currentQ) params.set("q", currentQ);
+
+        Navigate(`${location.pathname}?${params.toString()}`);
+        scrollToTopSmooth()
+    }
 
     if (loading && products.length === 0) {
         return <LoadingScreen />;
@@ -639,96 +639,99 @@ function SearchProducts() {
                             <LoadingScreen />
                         </div>) :
                             sortedFilterProducts.length > 0 ? (
-                                sortedFilterProducts.map((item) => (
-                                    <div
-                                        className="product-Categories-inside-category-folder"
-                                        key={item.product_id || item._id}
-                                        onClick={() =>
-                                            Navigate("/productDetails", {
-                                                state: {
-                                                    ...item,
-                                                    from:
-                                                        location.pathname +
-                                                        location.search,
-                                                },
-                                            })
-                                        }
-                                    >
-                                        <div className="filter-product-image">
-                                            <img
-                                                src={item.image_01}
-                                                alt={item.name}
-                                                loading="lazy"
-                                                onMouseEnter={(e) =>
-                                                (e.currentTarget.src =
-                                                    item.image_02)
-                                                }
-                                                onMouseLeave={(e) =>
-                                                (e.currentTarget.src =
-                                                    item.image_01)
-                                                }
-                                            />
+                                sortedFilterProducts.filter(
+                                    (item) =>
+                                        item.Model_number && item.Model_number.trim() !== ""
+                                ).map((item) => (
+                    <div
+                        className="product-Categories-inside-category-folder"
+                        key={item.product_id || item._id}
+                        onClick={() =>
+                            Navigate("/productDetails", {
+                                state: {
+                                    ...item,
+                                    from:
+                                        location.pathname +
+                                        location.search,
+                                },
+                            })
+                        }
+                    >
+                        <div className="filter-product-image">
+                            <img
+                                src={item.image_01}
+                                alt={item.name}
+                                loading="lazy"
+                                onMouseEnter={(e) =>
+                                (e.currentTarget.src =
+                                    item.image_02)
+                                }
+                                onMouseLeave={(e) =>
+                                (e.currentTarget.src =
+                                    item.image_01)
+                                }
+                            />
 
-                                            <div className="overlay-products">
-                                                <div className="overlay-buttons">
-                                                    <div className="wishlist-overlay">
-                                                        <buttons
-                                                            onClick={(event) => {
-                                                                dispatch(
-                                                                    addToWishlist(item)
-                                                                );
-                                                                event.stopPropagation();
-                                                                toast.success(
-                                                                    ` Added to the wishlist`
-                                                                );
-                                                            }}
-                                                        >
-                                                            <IoMdHeartEmpty />
-                                                        </buttons>
-                                                    </div>
+                            <div className="overlay-products">
+                                <div className="overlay-buttons">
+                                    <div className="wishlist-overlay">
+                                        <buttons
+                                            onClick={(event) => {
+                                                dispatch(
+                                                    addToWishlist(item)
+                                                );
+                                                event.stopPropagation();
+                                                toast.success(
+                                                    ` Added to the wishlist`
+                                                );
+                                            }}
+                                        >
+                                            <IoMdHeartEmpty />
+                                        </buttons>
+                                    </div>
 
-                                                    <div className="btn2 liquid  overlay-view-details ">
-                                                        <button>View Deatils </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div className="btn2 liquid  overlay-view-details ">
+                                        <button>View Deatils </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                                        <div className="filter-product-para-text">
-                                            <div className="brand-name-p dotted-border">
+                        <div className="filter-product-para-text">
+                            <div className="brand-name-p dotted-border">
 
-                                                <p>
-                                                    Model - {item.Model_number}
-                                                </p>
-                                            </div>
+                                <p>
+                                    Model - {item.Model_number}
+                                </p>
+                            </div>
 
-                                            {/* <div className="brand-name-p dotted-border">
+                            {/* <div className="brand-name-p dotted-border">
 
                                                 <p>
                                                     Model - {item.Product_Name
                                                     }
                                                 </p>
                                             </div> */}
-                                            <div className="model-name dotted-border">
-                                                <p>
-                                                    <p>{item.Brand_Name}</p>
-                                                </p>
-                                            </div>
+                            <div className="model-name dotted-border">
+                                <p>
+                                    <p>{item.Brand_Name}</p>
+                                </p>
+                            </div>
 
 
-                                            {/* <div className="model-name dotted-border">
+                            {/* <div className="model-name dotted-border">
                                                 <p>
                                                     {item.Product_Category
                                                     }
                                                 </p>
                                             </div> */}
 
-                                            <div className="model-name dotted-border">
-                                                <p>
-                                                    {item.Product_Subcategory}
-                                                </p>
-                                            </div>
-                                            {/* <div className="model-name model-price-cards dotted-border">
+                            <div className="model-name dotted-border">
+                                <p>
+                                    {item.Product_Subcategory}
+                                </p>
+                            </div>
+                            {/* <div className="model-name model-price-cards dotted-border">
                                                 <p>
                                                     MRP <FaIndianRupeeSign />  {Number(item.Product_price).toLocaleString("en-IN")}
 
@@ -737,11 +740,11 @@ function SearchProducts() {
 
 
 
-                                        </div>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>No products found.</p>
+                        </div>
+                    </div>
+                    ))
+                    ) : (
+                    <p>No products found.</p>
                             )}
 
 
@@ -770,7 +773,7 @@ function SearchProducts() {
                             </div>
 
                             <div className="right-page-up-button">
-                               
+
 
                                 <button
                                     disabled={currentPage === totalPages}
