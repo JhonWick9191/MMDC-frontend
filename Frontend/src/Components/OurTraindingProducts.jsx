@@ -139,7 +139,10 @@ export default function OurTandingProducts() {
           {!loading && (
             <div className={`main-category-products_2 fade-container ${fade ? "fade-out" : "fade-in"}`}>
               {filteredProducts.length > 0 ? (
-                filteredProducts.map((item) => (
+                filteredProducts.filter(
+                                    (item) =>
+                                        item.Model_number && item.Model_number.trim() !== ""
+                                ).map((item) => (
                   <div className="product-Categories-inside-category-folder"
                     key={item.product_id || item._id}
                     onClick={() => Navigate("/productDetails", { state: item })}>
