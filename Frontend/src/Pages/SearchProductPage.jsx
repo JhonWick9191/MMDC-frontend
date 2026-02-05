@@ -75,7 +75,7 @@ function SearchProducts() {
 
             Navigate(`${location.pathname}?${params.toString()}`, { replace: false });
             setProductFilterLoading(false)
-        }, 2000)
+        }, 3500)
     }
 
     // handel cross butoon
@@ -643,95 +643,95 @@ function SearchProducts() {
                                     (item) =>
                                         item.Model_number && item.Model_number.trim() !== ""
                                 ).map((item) => (
-                    <div
-                        className="product-Categories-inside-category-folder"
-                        key={item.product_id || item._id}
-                        onClick={() =>
-                            Navigate("/productDetails", {
-                                state: {
-                                    ...item,
-                                    from:
-                                        location.pathname +
-                                        location.search,
-                                },
-                            })
-                        }
-                    >
-                        <div className="filter-product-image">
-                            <img
-                                src={item.image_01}
-                                alt={item.name}
-                                loading="lazy"
-                                onMouseEnter={(e) =>
-                                (e.currentTarget.src =
-                                    item.image_02)
-                                }
-                                onMouseLeave={(e) =>
-                                (e.currentTarget.src =
-                                    item.image_01)
-                                }
-                            />
+                                    <div
+                                        className="product-Categories-inside-category-folder"
+                                        key={item.product_id || item._id}
+                                        onClick={() =>
+                                            Navigate("/productDetails", {
+                                                state: {
+                                                    ...item,
+                                                    from:
+                                                        location.pathname +
+                                                        location.search,
+                                                },
+                                            })
+                                        }
+                                    >
+                                        <div className="filter-product-image">
+                                            <img
+                                                src={item.image_01}
+                                                alt={item.name}
+                                                loading="lazy"
+                                                onMouseEnter={(e) =>
+                                                (e.currentTarget.src =
+                                                    item.image_02)
+                                                }
+                                                onMouseLeave={(e) =>
+                                                (e.currentTarget.src =
+                                                    item.image_01)
+                                                }
+                                            />
 
-                            <div className="overlay-products">
-                                <div className="overlay-buttons">
-                                    <div className="wishlist-overlay">
-                                        <buttons
-                                            onClick={(event) => {
-                                                dispatch(
-                                                    addToWishlist(item)
-                                                );
-                                                event.stopPropagation();
-                                                toast.success(
-                                                    ` Added to the wishlist`
-                                                );
-                                            }}
-                                        >
-                                            <IoMdHeartEmpty />
-                                        </buttons>
-                                    </div>
+                                            <div className="overlay-products">
+                                                <div className="overlay-buttons">
+                                                    <div className="wishlist-overlay">
+                                                        <buttons
+                                                            onClick={(event) => {
+                                                                dispatch(
+                                                                    addToWishlist(item)
+                                                                );
+                                                                event.stopPropagation();
+                                                                toast.success(
+                                                                    ` Added to the wishlist`
+                                                                );
+                                                            }}
+                                                        >
+                                                            <IoMdHeartEmpty />
+                                                        </buttons>
+                                                    </div>
 
-                                    <div className="btn2 liquid  overlay-view-details ">
-                                        <button>View Deatils </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                                    <div className="btn2 liquid  overlay-view-details ">
+                                                        <button>View Deatils </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                        <div className="filter-product-para-text">
-                            <div className="brand-name-p dotted-border">
+                                        <div className="filter-product-para-text">
+                                            <div className="brand-name-p dotted-border">
 
-                                <p>
-                                    Model - {item.Model_number}
-                                </p>
-                            </div>
+                                                <p>
+                                                    Model - {item.Model_number}
+                                                </p>
+                                            </div>
 
-                            {/* <div className="brand-name-p dotted-border">
+                                            {/* <div className="brand-name-p dotted-border">
 
                                                 <p>
                                                     Model - {item.Product_Name
                                                     }
                                                 </p>
                                             </div> */}
-                            <div className="model-name dotted-border">
-                                <p>
-                                    <p>{item.Brand_Name}</p>
-                                </p>
-                            </div>
+                                            <div className="model-name dotted-border">
+                                                <p>
+                                                    <p>{item.Brand_Name}</p>
+                                                </p>
+                                            </div>
 
 
-                            {/* <div className="model-name dotted-border">
+                                            {/* <div className="model-name dotted-border">
                                                 <p>
                                                     {item.Product_Category
                                                     }
                                                 </p>
                                             </div> */}
 
-                            <div className="model-name dotted-border">
-                                <p>
-                                    {item.Product_Subcategory}
-                                </p>
-                            </div>
-                            {/* <div className="model-name model-price-cards dotted-border">
+                                            <div className="model-name dotted-border">
+                                                <p>
+                                                    {item.Product_Subcategory}
+                                                </p>
+                                            </div>
+                                            {/* <div className="model-name model-price-cards dotted-border">
                                                 <p>
                                                     MRP <FaIndianRupeeSign />  {Number(item.Product_price).toLocaleString("en-IN")}
 
@@ -740,11 +740,11 @@ function SearchProducts() {
 
 
 
-                        </div>
-                    </div>
-                    ))
-                    ) : (
-                    <p>No products found.</p>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No products found.</p>
                             )}
 
 

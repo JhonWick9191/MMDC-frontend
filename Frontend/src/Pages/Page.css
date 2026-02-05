@@ -5,12 +5,63 @@
     padding: 0px;
     margin: 0px;
     font-family: 'Montserrat', sans-serif;
-
 }
-hr{
+
+html {
+    scrollbar-gutter: stable;
+    scroll-behavior: smooth;
+}
+
+/* ================= FILTER DRAWER ANIMATION ================= */
+.filter-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.filter-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.filter-panel {
+    position: fixed;
+    top: 0;
+    /* Slide from left like hamburger, or right? Code usually has filters on left. 
+       ProductCategory.jsx has it on left in deskop, mobile usually also left or bottom. 
+       Let's assume Left for consistency with Hamburger commonly being left, 
+       BUT wait, NavBar hamburger css says: transform: translateX(100%); right: 0; -> that is Right side.
+       ProductCategory usually has side bar on left. 
+       Let's stick to LEFT for filter as it is usually a "SideBar". 
+    */
+    left: 0;
+    width: 85%;
+    /* responsive width, increased for usability */
+    max-width: 360px;
+    height: 100vh;
+    background-color: white;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter-panel.open {
+    transform: translateX(0);
+}
+
+hr {
     border-color: #E5E5E5;
 }
-.none{
+
+.none {
     display: none;
 }
 
@@ -23,46 +74,49 @@ hr{
     font-style: normal;
 }
 
-.path p{
+.path p {
     font-size: 14px;
     letter-spacing: -0.30px;
     font-weight: 500;
     color: #2c2d32;
 }
 
-.light-font{
-     color: rgb(25, 26, 31);
+.light-font {
+    color: rgb(25, 26, 31);
     font-family: 'Montserrat', sans-serif;
-    font-size: 12px;   
+    font-size: 12px;
     font-weight: lighter;
 
 }
-.flex-in-ul-li{
-    
+
+.flex-in-ul-li {
+
     gap: 2px;
 }
 
-.light-weigth-ul-li li{
-      color: rgb(25, 26, 31);
+.light-weigth-ul-li li {
+    color: rgb(25, 26, 31);
     font-family: 'Montserrat', sans-serif;
-    font-size: 11px; 
-    color: #191A1F;  
+    font-size: 11px;
+    color: #191A1F;
     font-weight: lighter;
 }
-.mota-weigth-ul-li li{
-      color: rgb(25, 26, 31);
+
+.mota-weigth-ul-li li {
+    color: rgb(25, 26, 31);
     font-family: 'Montserrat', sans-serif;
-    font-size: 14.5px; 
-    color: #191A1F;  
+    font-size: 14.5px;
+    color: #191A1F;
     font-weight: lighter;
 }
-.category-title-toggle{
+
+.category-title-toggle {
     color: black;
 }
 
 
 
-.mota-weigth-ul-li li:hover{
+.mota-weigth-ul-li li:hover {
     text-decoration: underline;
 }
 
@@ -430,12 +484,13 @@ hr{
 
 
 .product-image-mid {
-     
+
     display: flex;
     gap: 5px;
     align-items: center;
 }
-.upper-side-cover-image{
+
+.upper-side-cover-image {
     position: absolute;
     background: rgba(49, 47, 47, 0.15);
     backdrop-filter: blur(0px) saturate(150%);
@@ -507,10 +562,7 @@ hr{
 }
 
 
-.filter {
-  
-
-}
+.filter {}
 
 
 
@@ -529,13 +581,13 @@ hr{
     position: relative;
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
 
 
 }
 
 .filter-by-product-price-and-a-z {
-    
+
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -550,7 +602,7 @@ hr{
 }
 
 .main-wrapper-for-filter-a-z {
-    
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -585,8 +637,8 @@ hr{
 .listing-total-buttons-for-filtering ul li:hover {
 
     cursor: pointer;
-     text-decoration: underline;
-    }
+    text-decoration: underline;
+}
 
 
 
@@ -624,14 +676,14 @@ hr{
 
 }
 
-.model-number{
+.model-number {
     font-size: 14px;
-    
+
 }
 
 .price svg {
-font-size: 14px;
-font-weight: 100;
+    font-size: 14px;
+    font-weight: 100;
 
 }
 
@@ -647,6 +699,7 @@ font-weight: 100;
     letter-spacing: -0.34px;
     color: #2c2d32;
 }
+
 .colors {
 
     width: 40%;
@@ -1130,16 +1183,16 @@ font-weight: 100;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
 }
 
 .cross-section-categoryes button {
-    
-    
+
+
     border-radius: 100%;
 }
 
-.cross-section-categoryes button svg{
+.cross-section-categoryes button svg {
     font-size: 1.2rem;
 }
 
@@ -1242,7 +1295,7 @@ font-weight: 100;
     width: 25%;
 }
 
-.side-bar-on-product-category-page{
+.side-bar-on-product-category-page {
     position: absolute;
     top: 0px;
     width: 30%;
@@ -1338,7 +1391,7 @@ font-weight: 100;
     margin: auto;
     justify-content: center;
     align-items: center;
-    
+
 
 }
 
@@ -1632,7 +1685,7 @@ font-weight: 100;
         grid-template-columns: repeat(3, 1fr) !important;
     }
 
-   
+
 
     .products-cato {
         grid-template-columns: repeat(2, 1fr);
@@ -1643,9 +1696,10 @@ font-weight: 100;
 }
 
 @media screen and (max-width: 600px) {
-    .side-bar-on-product-category-page{
+    .side-bar-on-product-category-page {
         width: 100%;
     }
+
     .main-heading-recom {
         font-size: 18px;
     }
@@ -1826,7 +1880,7 @@ font-weight: 100;
         z-index: 1000;
     }
 
-    
+
 
     .filter button {
         font-size: 12px;
@@ -1842,7 +1896,7 @@ font-weight: 100;
 
     }
 
-   
+
 
     .filter {
         display: flex;
@@ -1869,17 +1923,19 @@ font-weight: 100;
     .product-image img {
         width: 100%;
     }
+
     .items-buttons-for-chaging-the-screen button {
         width: 97%;
-        font-size: 12px;        
+        font-size: 12px;
         font-weight: 600;
     }
 }
 
 @media only screen and (min-width: 300px) and (max-width: 400px) {
-    .main-heading-recom{
+    .main-heading-recom {
         font-size: 16px;
     }
+
     .user-login {
         height: 80vh;
     }
@@ -1891,7 +1947,7 @@ font-weight: 100;
 
     .items-buttons-for-chaging-the-screen button {
         width: 97%;
-        font-size: 11px;        
+        font-size: 11px;
         font-weight: 600;
     }
 

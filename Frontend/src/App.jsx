@@ -17,7 +17,7 @@ import ProductDeatils from "./Pages/ProductDetails";
 import CartPage from "./Pages/CartPage";
 import WishList from "./Pages/WishListPage";
 import FilterProductByCategoryes from "./Pages/ProductCategory";
-import AdminProfile from "../src/Pages/AminProfilePages/AdminProfile"
+import AdminProfile from "./Pages/AminProfilePages/AdminProfile"
 import SearchProducts from "./Pages/SearchProductPage";
 import SearchProductDetails from "./Pages/SearchProductsDetails";
 import ContactUs from "./Pages/ContactUs";
@@ -60,46 +60,46 @@ function App() {
     setLoading(true);
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 3500);
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
   // 
 
-// ✅ Replace your existing useEffect with this ONLY
-const [meDebug, setMeDebug] = useState(null);
+  // ✅ Replace your existing useEffect with this ONLY
+  const [meDebug, setMeDebug] = useState(null);
 
 
 
-useEffect(() => {
-  let cancelled = false;
+  useEffect(() => {
+    let cancelled = false;
 
-  async function fetchMe() {
-    try {
-      const res = await fetch(`${BASE_URL}/me`, {
-        method: "GET",
-        credentials: "include",
-      });
-      const data = await res.json();
-      if (cancelled) return;
+    async function fetchMe() {
+      try {
+        const res = await fetch(`${BASE_URL}/me`, {
+          method: "GET",
+          credentials: "include",
+        });
+        const data = await res.json();
+        if (cancelled) return;
 
-      setMeDebug(data);
+        setMeDebug(data);
 
-      if (data.success && data.user) {
-        dispatch(setUser(data.user));  // reload ke baad yahi Redux fill karega
+        if (data.success && data.user) {
+          dispatch(setUser(data.user));  // reload ke baad yahi Redux fill karega
+        }
+      } catch (error) {
+        if (cancelled) return;
+        setMeDebug({ success: false, error: String(error) });
       }
-    } catch (error) {
-      if (cancelled) return;
-      setMeDebug({ success: false, error: String(error) });
     }
-  }
 
-  fetchMe();
+    fetchMe();
 
-  return () => {
-    cancelled = true;
-  };
-}, [dispatch]);
+    return () => {
+      cancelled = true;
+    };
+  }, [dispatch]);
 
 
 
@@ -109,7 +109,7 @@ useEffect(() => {
 
   return (
     <>
-      <div>  
+      <div>
 
         <ScrollToTop />
         <NavBar />
@@ -124,24 +124,24 @@ useEffect(() => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
-              <Route path="SearchproductDetails" element={<SearchProductDetails/>} />
+              <Route path="SearchproductDetails" element={<SearchProductDetails />} />
               <Route path="/productDetails" element={<ProductDeatils />} />
               <Route path="/cartDeatils" element={<CartPage />} />
               <Route path="/wishlistProduct" element={<WishList />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/isadminProfile" element={<AdminProfile />} />
-              <Route path="/isVendorProfile" element={<VendorProfile />} />        
+              <Route path="/isVendorProfile" element={<VendorProfile />} />
               <Route path="/products" element={<FilterProductByCategoryes />} />
               <Route path="/searchProducts" element={<SearchProducts />} />
-              <Route path="/contactUs" element={<ContactUs/>} />
+              <Route path="/contactUs" element={<ContactUs />} />
 
             </Routes>
           </>
         )}
-       
+
         <Footer />
       </div>
-       
+
     </>
   );
 }

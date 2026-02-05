@@ -411,11 +411,10 @@ export default function () {
             </div>
             <div className="loding-toggle-show">
 
-            
-            {toggleLoading && (
-                <LoadingScreen/>
-            )}
 
+                {toggleLoading && (
+                    <LoadingScreen />
+                )}
             </div>
 
         </>

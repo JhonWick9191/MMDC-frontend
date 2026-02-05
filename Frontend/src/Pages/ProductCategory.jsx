@@ -23,7 +23,7 @@ function FilterProductByCategoryes() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
-  
+
 
     const [selectedFilter, setSelectedFilter] = useState(null);
 
@@ -36,19 +36,19 @@ function FilterProductByCategoryes() {
     // toal products count 
     const [totalProducts, setTotalProducts] = useState(0);
     const [allCategories, setAllCategories] = useState([]); // all categories from backend
-     console.log(totalProducts)
+    console.log(totalProducts)
     //  console.log(totalProducts)
 
     // console.log("This is my all cato",allCategories)
     // Brand count
 
     // pagination add
-        // pagination 
+    // pagination 
     const queryParams = new URLSearchParams(location.search);
     const pageFromUrl = Number(queryParams.get("page")) || 1;
     const type = queryParams.get("type");
     const [currentPage, setCurrentPage] = useState(pageFromUrl);
-    
+
     const [totalPages, setTotalPages] = useState(1);
 
     const [categoryWithSubCategories, setCategoryWithSubCategories] = useState({});
@@ -62,7 +62,7 @@ function FilterProductByCategoryes() {
             setSideBar(false);
             document.body.style.overflow = "auto";
             const params = new URLSearchParams(location.search);
-             params.set("page", 1);
+            params.set("page", 1);
 
             if (filter.type === "brand") {
                 params.set("brand", filter.value);
@@ -81,7 +81,7 @@ function FilterProductByCategoryes() {
 
             Navigate(`${location.pathname}?${params.toString()}`, { replace: false });
             setProductFilterLoading(false)
-        }, 2000)
+        }, 3500)
 
     }
 
@@ -103,12 +103,12 @@ function FilterProductByCategoryes() {
         document.body.style.overflow = "hidden";
         window.scrollTo(0, 0);
     }
-    
+
     useEffect(() => {
-    if (type) {
-        fetchProducts(pageFromUrl);
-    }
-}, [location.search]);
+        if (type) {
+            fetchProducts(pageFromUrl);
+        }
+    }, [location.search]);
 
 
     const [isFilterMetaLoaded, setIsFilterMetaLoaded] = useState(false);
@@ -254,26 +254,26 @@ function FilterProductByCategoryes() {
     }
 
 
-   function hendlePagePrivouschnage() {
-    
-    const prevPage = currentPage - 1;
-    const params = new URLSearchParams(location.search);
-    params.set("page", prevPage);
+    function hendlePagePrivouschnage() {
 
-    Navigate(`${location.pathname}?${params.toString()}`);
-    scrollToTopSmooth()
-}
+        const prevPage = currentPage - 1;
+        const params = new URLSearchParams(location.search);
+        params.set("page", prevPage);
+
+        Navigate(`${location.pathname}?${params.toString()}`);
+        scrollToTopSmooth()
+    }
 
 
-   function handlePageNextChange() {
-    
-    const nextPage = currentPage + 1;
-    const params = new URLSearchParams(location.search);
-    params.set("page", nextPage);
+    function handlePageNextChange() {
 
-    Navigate(`${location.pathname}?${params.toString()}`);
-    scrollToTopSmooth()
-}
+        const nextPage = currentPage + 1;
+        const params = new URLSearchParams(location.search);
+        params.set("page", nextPage);
+
+        Navigate(`${location.pathname}?${params.toString()}`);
+        scrollToTopSmooth()
+    }
 
 
     return (
@@ -413,8 +413,12 @@ function FilterProductByCategoryes() {
                 </div>
             </div>
             {/*  mobile side view filter section  */}
-            <div className="side-bar-on-product-category-page">
-                {showSideBar && (
+            {/* MODIFIED: Used CSS class based toggling for smooth animation */}
+            <div className={`filter-overlay ${showSideBar ? "show" : ""}`} onClick={handleCross}>
+                <div
+                    className={`filter-panel ${showSideBar ? "open" : ""}`}
+                    onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside panel
+                >
                     <div className="listing-on-categoryes">
                         <div className="listing-product-category">
                             <div className="main-heading-product-categoryes">
@@ -582,7 +586,7 @@ function FilterProductByCategoryes() {
 
                         </div>
                     </div>
-                )}
+                </div>
             </div>
             {/* mobile side view filer section ends  */}
             {/* Clear Filter Button */}
@@ -612,9 +616,11 @@ function FilterProductByCategoryes() {
                 {/*  Right side prodcuts starts   */}
                 <div className="products-cato">
                     {
-                        productFilterLoading ? (<div className="loading-product-filter">
-                            <LoadingScreen />
-                        </div>) :
+                        productFilterLoading ? (
+                            <div className="loading-product-filter" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                                <LoadingScreen />
+                            </div>
+                        ) :
                             sortedFilterProducts.length > 0 ? (
                                 sortedFilterProducts.map((item) => (
                                     <div
@@ -717,6 +723,10 @@ function FilterProductByCategoryes() {
                                         </div>
                                     </div>
                                 ))
+                            ) : loading ? (
+                                <div className="loading-product-filter" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                                    <LoadingScreen />
+                                </div>
                             ) : (
                                 <p>No products found.</p>
                             )}
@@ -747,7 +757,7 @@ function FilterProductByCategoryes() {
                             </div>
 
                             <div className="right-page-up-button">
-                               
+
 
                                 <button
                                     disabled={currentPage === totalPages}

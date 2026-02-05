@@ -14,6 +14,8 @@ import { FaXTwitter } from "react-icons/fa6";
 import { CiTwitter } from "react-icons/ci";
 import { CiLinkedin } from "react-icons/ci";
 import { CgProfile } from "react-icons/cg";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function NavBar() {
   const categoeryesProducts = [
@@ -77,10 +79,23 @@ export default function NavBar() {
   const [moreButton, setMoreButton] = useState(true);
 
   // ✅ Search Context
-  const { searchQuery, setSearchQuery, handleSearch } = useSearch();
+  const {
+    searchQuery,
+    setSearchQuery,
+    handleSearch,
+    fetchSuggestions,
+    suggestions,
+    loadingSuggestions,
+    noResultsFound,
+    setNoResultsFound
+  } = useSearch();
 
-  const [searchHistory, setSearchHistory] = useState([]);
-  const [showHistory, setShowHistory] = useState(false);
+  const [searchHistory, setSearchHistory] = useState(() => {
+    const saved = localStorage.getItem("mmdc_search_history");
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
 
 
@@ -134,24 +149,67 @@ export default function NavBar() {
 
   //  Enter press search
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") handleSearchClick();
+    const totalItems = searchQuery.trim() ? suggestions.length : searchHistory.length;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev < totalItems - 1 ? prev + 1 : prev));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : 0));
+    } else if (e.key === "Enter") {
+      if (selectedIndex >= 0) {
+        const selectedValue = searchQuery.trim()
+          ? suggestions[selectedIndex]?.Brand_Name + " " + (suggestions[selectedIndex]?.Product_Name || "")
+          : searchHistory[selectedIndex];
+
+        setSearchQuery(selectedValue.trim());
+        setSelectedIndex(-1);
+        setTimeout(() => handleSearchClick(selectedValue.trim()), 0);
+      } else {
+        handleSearchClick();
+      }
+    } else if (e.key === "Escape") {
+      setShowDropdown(false);
+    }
   };
 
-  //  Searching Products Function 
-  const handleSearchClick = () => {
-    const q = searchQuery?.trim();
-    if (q) {
-      setSearchHistory(prev => {
-        const withoutDup = prev.filter(item => item !== q);
-        return [q, ...withoutDup].slice(0, 10); // max 10
+  //  Searching Products Function
+  const handleSearchClick = (queryOverride) => {
+    const q = (typeof queryOverride === "string" ? queryOverride : searchQuery)?.trim();
+
+    if (!q) {
+      toast.warn("Please enter something to search!", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
       });
+      return;
     }
 
-    handleSearch();
+    setSearchHistory(prev => {
+      const withoutDup = prev.filter(item => item !== q);
+      const newHistory = [q, ...withoutDup].slice(0, 10);
+      localStorage.setItem("mmdc_search_history", JSON.stringify(newHistory));
+      return newHistory;
+    });
 
+    handleSearch();
     Navigate(`/searchProducts?q=${encodeURIComponent(q)}`);
-    setSearchQuery("")
+    setShowDropdown(false);
+    setSelectedIndex(-1);
   };
+
+  // Debounce Suggestions
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchQuery.trim()) {
+        fetchSuggestions(searchQuery);
+      }
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
 
 
 
@@ -188,18 +246,77 @@ export default function NavBar() {
             className="search-bar-main"
             placeholder={placeholder}
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setSelectedIndex(-1);
+              setNoResultsFound(false);
+            }}
             onKeyDown={handleKeyDown}
-            onFocus={() => setShowHistory(true)}
+            onFocus={() => setShowDropdown(true)}
             onBlur={() => {
-              // thoda delay taaki click register ho jaye
-              setTimeout(() => setShowHistory(false), 150);
+              setTimeout(() => setShowDropdown(false), 200);
             }}
           />
 
           <button className="search-icon" onClick={handleSearchClick}>
             <img src="https://pub-b88455fc17c04e63a0f32324fc1620df.r2.dev/animations/mmdcSearch-icon.gif" />
           </button>
+
+          {/* Suggestions & History Dropdown */}
+          {showDropdown && (
+            <div className="mmdc-search-dropdown-container">
+              {searchQuery.trim() ? (
+                // Suggestions List
+                <div className="mmdc-suggestions-list">
+                  {loadingSuggestions ? (
+                    <div className="mmdc-loading-text">Finding...</div>
+                  ) : suggestions.length > 0 ? (
+                    suggestions.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className={`mmdc-dropdown-item ${selectedIndex === idx ? "active" : ""}`}
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => handleSearchClick(item.Brand_Name + " " + (item.Model_number || ""))}
+                      >
+                        <div className="mmdc-suggestion-info">
+                          <p className="mmdc-item-brand">{item.Brand_Name}</p>
+                          <p className="mmdc-item-model">{item.Model_number}</p>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="mmdc-no-results">Not Found</div>
+                  )}
+                </div>
+              ) : (
+                // History List
+                searchHistory.length > 0 && (
+                  <div className="mmdc-search-history-container">
+                    <p className="mmdc-history-title">Recent Searches</p>
+                    {searchHistory.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className={`mmdc-dropdown-item ${selectedIndex === idx ? "active" : ""}`}
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => handleSearchClick(item)}
+                      >
+                        <VscSearch className="mmdc-history-icon" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                )
+              )}
+            </div>
+          )}
+
+          {/* Global Error Banner for "Not Found" */}
+          {noResultsFound && (
+            <div className="mmdc-global-error-banner">
+              The product you're looking for might not be available right now.
+              <button onClick={() => setNoResultsFound(false)}>✕</button>
+            </div>
+          )}
         </div>
 
 
@@ -243,9 +360,11 @@ export default function NavBar() {
       {/* Mobile Menu */}
       <div className="mobile-menu-container">
         {/* for if navbar is true then show main-class-nav-bar perfrom .show  css will do else " " */}
-        <div className={`main-class-nav-bar ${hamburger ? "show" : ""}`}>
+        {/* MODIFIED: Added onClick to close menu when clicking outside (overlay) */}
+        <div className={`main-class-nav-bar ${hamburger ? "show" : ""}`} onClick={handleCross}>
           {/* in this line mobile-navbar hamburger is ture then mobile-navbar add with open css  */}
-          <div className={`mobile-navbar ${hamburger ? "open" : ""}`}>
+          {/* MODIFIED: Stop propagation so clicking inside menu doesn't close it */}
+          <div className={`mobile-navbar ${hamburger ? "open" : ""}`} onClick={(e) => e.stopPropagation()}>
             <div className="hamburger-top-section">
               <div className="cross-icon">
                 <button onClick={handleCross}>
@@ -313,28 +432,28 @@ export default function NavBar() {
                 <div className="login-button">
 
 
-                  
-                    {User ? (
-                      
-                        <img className="user-profile"
-                  onClick={() =>{handleCross(); Navigate("/profile")}}
-                  src={User.image || "https://via.placeholder.com/40"}
-                  alt="user"
-                />
-                    
-                    ) : (
 
-                      <button className="login-button-side-nav" onClick={() => { handleCross(); Navigate("/login"); }}>
-                        <CgProfile/> Login
-                      </button>
-                    )}
-                  
+                  {User ? (
+
+                    <img className="user-profile"
+                      onClick={() => { handleCross(); Navigate("/profile") }}
+                      src={User.image || "https://via.placeholder.com/40"}
+                      alt="user"
+                    />
+
+                  ) : (
+
+                    <button className="login-button-side-nav" onClick={() => { handleCross(); Navigate("/login"); }}>
+                      <CgProfile /> Login
+                    </button>
+                  )}
+
                 </div>
 
 
                 <div className="social-media-links on-side-nev">
 
-           
+
                   <ul>
                     <li><a href="https://www.facebook.com/Musicandmoreindia"><CiFacebook /></a>  </li>
                     <li><a href="https://www.instagram.com/musicandmoreindia/"> <CiInstagram /> </a></li>
@@ -350,24 +469,6 @@ export default function NavBar() {
         </div>
       </div>
 
-      {showHistory && searchHistory.length > 0 && (
-        <div className="search-history">
-          <ul>
-            {searchHistory.map((item, idx) => (
-              <li
-                key={idx}
-                onMouseDown={(e) => e.preventDefault()} // blur se bachane ke liye
-                onClick={() => {
-                  setSearchQuery(item);
-                  handleSearchClick();
-                }}
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
 
     </nav>
   );

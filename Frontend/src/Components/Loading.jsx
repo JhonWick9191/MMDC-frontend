@@ -1,23 +1,23 @@
 import { color } from "motion/react"
 
 // LoadingScreen.jsx
-function LoadingScreen  () {
+function LoadingScreen() {
   return (
     <div style={{
-      overflow:"hidden",
+      overflow: "hidden",
       position: 'fixed',
       top: 0, left: 0,
       width: '100%',
       height: '100%',
-      backgroundColor:"white",
+      backgroundColor: "white",
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center',  
+      alignItems: 'center',
       zIndex: 1000,
     }}>
-      <img 
-        src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1759493729/Guitar-ani_1_ilhhxa.gif" 
-        alt="Loading..." 
+      <img
+        src="https://res.cloudinary.com/dfilhi9ku/image/upload/v1759493729/Guitar-ani_1_ilhhxa.gif"
+        alt="Loading..."
         style={{ width: '300px', height: '300px' }}
         loading="lazy"
       />

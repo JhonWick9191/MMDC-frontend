@@ -249,12 +249,12 @@ export default function ProductDetails() {
           <div className="main-images-products">
             <img src={mainImage} alt="Selected product" loading="lazy" />
             <div className="upper-side-cover-image">
-            
-          </div>
+
+            </div>
 
           </div>
 
-          
+
           <div className="product-image-mid">
             {images.map((img, idx) => (
               <div
@@ -264,10 +264,10 @@ export default function ProductDetails() {
                 style={{ cursor: "pointer" }}
               >
                 <img src={img} alt={`Product ${idx + 1}`} />
-                   <div className="upper-side-cover-image"></div>
+                <div className="upper-side-cover-image"></div>
               </div>
             ))}
-         
+
           </div>
         </div>
 
@@ -276,16 +276,16 @@ export default function ProductDetails() {
             <p className="product-name">{productDetails.Product_Name}</p>
             <p className="product-brand">{productDetails.Brand_Name}</p>
             <p className="model-number">{productDetails.Model_number}</p>
-             <p className="model-number">{productDetails.Product_Category}</p>
+            <p className="model-number">{productDetails.Product_Category}</p>
           </div>
           <hr />
           <div className="price">
             <p>
-               MRP <FaIndianRupeeSign /> {(productDetails.Product_price * count).toLocaleString("en-IN")}
+              MRP <FaIndianRupeeSign /> {(productDetails.Product_price * count).toLocaleString("en-IN")}
             </p>
             <p>Price incl. of all Taxes</p>
-          </div> 
-           <hr />
+          </div>
+          <hr />
           <div className="quantity">
             <div className="wrapper-main-counter">
               <div className="main-quantity">
@@ -332,7 +332,7 @@ export default function ProductDetails() {
                 }}
               >
                 {isAdding ? (<div className="loading-on-add-to-cart">
-                 <p>Loading ... </p>
+                  <p>Loading ... </p>
                 </div>) : "Add to Cart"}
               </button>
             </div>
