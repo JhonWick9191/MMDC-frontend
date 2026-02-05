@@ -243,9 +243,11 @@ export default function NavBar() {
       {/* Mobile Menu */}
       <div className="mobile-menu-container">
         {/* for if navbar is true then show main-class-nav-bar perfrom .show  css will do else " " */}
-        <div className={`main-class-nav-bar ${hamburger ? "show" : ""}`}>
+        {/* MODIFIED: Added onClick to close menu when clicking outside (overlay) */}
+        <div className={`main-class-nav-bar ${hamburger ? "show" : ""}`} onClick={handleCross}>
           {/* in this line mobile-navbar hamburger is ture then mobile-navbar add with open css  */}
-          <div className={`mobile-navbar ${hamburger ? "open" : ""}`}>
+          {/* MODIFIED: Stop propagation so clicking inside menu doesn't close it */}
+          <div className={`mobile-navbar ${hamburger ? "open" : ""}`} onClick={(e) => e.stopPropagation()}>
             <div className="hamburger-top-section">
               <div className="cross-icon">
                 <button onClick={handleCross}>
@@ -313,28 +315,28 @@ export default function NavBar() {
                 <div className="login-button">
 
 
-                  
-                    {User ? (
-                      
-                        <img className="user-profile"
-                  onClick={() =>{handleCross(); Navigate("/profile")}}
-                  src={User.image || "https://via.placeholder.com/40"}
-                  alt="user"
-                />
-                    
-                    ) : (
 
-                      <button className="login-button-side-nav" onClick={() => { handleCross(); Navigate("/login"); }}>
-                        <CgProfile/> Login
-                      </button>
-                    )}
-                  
+                  {User ? (
+
+                    <img className="user-profile"
+                      onClick={() => { handleCross(); Navigate("/profile") }}
+                      src={User.image || "https://via.placeholder.com/40"}
+                      alt="user"
+                    />
+
+                  ) : (
+
+                    <button className="login-button-side-nav" onClick={() => { handleCross(); Navigate("/login"); }}>
+                      <CgProfile /> Login
+                    </button>
+                  )}
+
                 </div>
 
 
                 <div className="social-media-links on-side-nev">
 
-           
+
                   <ul>
                     <li><a href="https://www.facebook.com/Musicandmoreindia"><CiFacebook /></a>  </li>
                     <li><a href="https://www.instagram.com/musicandmoreindia/"> <CiInstagram /> </a></li>
