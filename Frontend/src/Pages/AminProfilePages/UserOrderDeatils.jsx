@@ -10,9 +10,10 @@ export default function BuyProduct() {
     try {
       const response = await fetch(`${BASE_URL}/allOrderProducts`, {
         method: "GET",
-        headers: { "Content-Type": "application/json",
-          
-         },
+        headers: {
+          "Content-Type": "application/json",
+
+        },
         credentials: "include",
       });
 
@@ -34,30 +35,30 @@ export default function BuyProduct() {
   }, []);
 
   // Delete product from order handler
-//   async function deleteProduct(orderId, productId) {
-//     try {
-//       const response = await fetch(`${BASE_URL}/deleteProduct`, {
-//         method: "DELETE",
-//         headers: { "Content-Type": "application/json" },
-//         credentials: "include",
-//         body: JSON.stringify({ orderId, productId }),
-//       });
-//       const data = await response.json();
-//       if (data.success) {
-//         alert("Product deleted from order");
-//         setOrders((prevOrders) =>
-//           prevOrders.map((order) =>
-//             order._id === orderId ? data.order : order
-//           )
-//         );
-//       } else {
-//         alert(data.message || "Failed to delete product");
-//       }
-//     } catch (error) {
-//       console.error(error);
-//       alert("Error deleting product");
-//     }
-//   }
+  //   async function deleteProduct(orderId, productId) {
+  //     try {
+  //       const response = await fetch(`${BASE_URL}/deleteProduct`, {
+  //         method: "DELETE",
+  //         headers: { "Content-Type": "application/json" },
+  //         credentials: "include",
+  //         body: JSON.stringify({ orderId, productId }),
+  //       });
+  //       const data = await response.json();
+  //       if (data.success) {
+  //         alert("Product deleted from order");
+  //         setOrders((prevOrders) =>
+  //           prevOrders.map((order) =>
+  //             order._id === orderId ? data.order : order
+  //           )
+  //         );
+  //       } else {
+  //         alert(data.message || "Failed to delete product");
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //       alert("Error deleting product");
+  //     }
+  //   }
 
   // Group orders by user email
   const groupedOrders = orders.reduce((acc, order) => {

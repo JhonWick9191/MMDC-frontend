@@ -2843,9 +2843,9 @@ button {
 .mmdc-admin-main {
     flex: 1;
     padding: 3rem;
-    max-width: 1200px;
+
     margin: 0 auto;
-    width: 100%;
+    width: 50%;
 }
 
 .mmdc-admin-header {
@@ -2868,6 +2868,8 @@ button {
 /* Stats Section */
 .mmdc-stats-row {
     display: grid;
+
+
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-bottom: 4rem;
@@ -2901,10 +2903,16 @@ button {
 }
 
 /* Graph Section */
+.mmdc-admin-dashboard-home {
+
+    width: 100%;
+}
+
 .mmdc-graph-section {
     background: #fff;
     padding: 2.5rem;
-    border: 1px solid #eee;
+
+
     border-radius: 12px;
 }
 
