@@ -480,7 +480,8 @@ button {
     border-radius: 8px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     z-index: 1000;
-    overflow: hidden;
+    max-height: 480px;
+    overflow-y: auto;
     animation: mmdcFadeInDown 0.3s ease-out;
 }
 
@@ -2693,11 +2694,7 @@ button {
         text-align: justify;
     }
 
-    .main-display-seaction {
-        display: flex;
-        flex-direction: column;
 
-    }
 
     .catogries-images {
 

@@ -127,8 +127,25 @@ function SearchProducts() {
             const res = await fetch(`https://api.musicandmore.co.in/api/v1/searchProducts?${params.toString()}`);
             const data = await res.json();
 
-            setProducts(data.message || data.data || []);
-            setTotalProducts(data.totalProducts || 0);
+            let productsFound = data.message || data.data || [];
+            let total = data.totalProducts || 0;
+
+            // Fallback for Product ID search
+            if (productsFound.length === 0 && currentQ && !selectedFilter) {
+                try {
+                    const idRes = await fetch(`https://api.musicandmore.co.in/api/v1/product/${encodeURIComponent(currentQ)}`);
+                    const idData = await idRes.json();
+                    if (idData.success && idData.product) {
+                        productsFound = [idData.product];
+                        total = 1;
+                    }
+                } catch (idErr) {
+                    console.error("Product ID search failed", idErr);
+                }
+            }
+
+            setProducts(productsFound);
+            setTotalProducts(total);
             if (!isFilterMetaLoaded) {
                 setAllCategories(data.totalCategories || []);
                 setCategoryCount(data.categoryCount || {});
@@ -138,7 +155,7 @@ function SearchProducts() {
                 setIsFilterMetaLoaded(true);
             }
 
-            setTotalPages(data.totalPages || 1);
+            setTotalPages(data.totalPages || (total > 0 ? 1 : 0));
             setCurrentPage(page);
         } catch (err) {
             console.error(err);

@@ -24,8 +24,40 @@ export const SearchProvider = ({ children }) => {
         `https://api.musicandmore.co.in/api/v1/searchProducts?q=${encodeURIComponent(query)}`
       );
       const data = await res.json();
-      if (data.success) {
-        setSuggestions(data.data || []);
+      if (data.success && data.data) {
+        const normalizedQuery = query.toLowerCase();
+
+        // Priority 1: Product_Subcategory
+        const subcategories = data.data
+          .map(item => item.Product_Subcategory)
+          .filter(sub => sub && sub.toLowerCase().includes(normalizedQuery));
+
+        if (subcategories.length > 0) {
+          setSuggestions([...new Set(subcategories)]);
+          return;
+        }
+
+        // Priority 2: Brand_Name
+        const brands = data.data
+          .map(item => item.Brand_Name)
+          .filter(brand => brand && brand.toLowerCase().includes(normalizedQuery));
+
+        if (brands.length > 0) {
+          setSuggestions([...new Set(brands)]);
+          return;
+        }
+
+        // Priority 3: Product ID (exact or starts-with)
+        const productIds = data.data
+          .map(item => item.product_id)
+          .filter(id => id && id.toLowerCase().startsWith(normalizedQuery));
+
+        if (productIds.length > 0) {
+          setSuggestions([...new Set(productIds)]);
+          return;
+        }
+
+        setSuggestions([]);
       } else {
         setSuggestions([]);
       }
@@ -55,6 +87,18 @@ export const SearchProvider = ({ children }) => {
         setSearchResults(data.data);
         setNoResultsFound(false);
       } else {
+        // Fallback for Product ID search
+        try {
+          const idRes = await fetch(`https://api.musicandmore.co.in/api/v1/product/${encodeURIComponent(searchQuery)}`);
+          const idData = await idRes.json();
+          if (idData.success && idData.product) {
+            setSearchResults([idData.product]);
+            setNoResultsFound(false);
+            return;
+          }
+        } catch (idErr) {
+          console.error("Product ID search fallback failed", idErr);
+        }
         setSearchResults([]);
         setNoResultsFound(true);
       }

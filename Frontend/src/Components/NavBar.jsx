@@ -160,7 +160,7 @@ export default function NavBar() {
     } else if (e.key === "Enter") {
       if (selectedIndex >= 0) {
         const selectedValue = searchQuery.trim()
-          ? suggestions[selectedIndex]?.Brand_Name + " " + (suggestions[selectedIndex]?.Product_Name || "")
+          ? suggestions[selectedIndex]
           : searchHistory[selectedIndex];
 
         setSearchQuery(selectedValue.trim());
@@ -276,16 +276,15 @@ export default function NavBar() {
                         key={idx}
                         className={`mmdc-dropdown-item ${selectedIndex === idx ? "active" : ""}`}
                         onMouseDown={(e) => e.preventDefault()}
-                        onClick={() => handleSearchClick(item.Brand_Name + " " + (item.Model_number || ""))}
+                        onClick={() => handleSearchClick(item)}
                       >
                         <div className="mmdc-suggestion-info">
-                          <p className="mmdc-item-brand">{item.Brand_Name}</p>
-                          <p className="mmdc-item-model">{item.Model_number}</p>
+                          <p className="mmdc-item-brand">{item}</p>
                         </div>
                       </div>
                     ))
                   ) : (
-                    <div className="mmdc-no-results">Not Found</div>
+                    <div className="mmdc-no-results">No product found</div>
                   )}
                 </div>
               ) : (

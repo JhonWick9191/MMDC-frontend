@@ -118,9 +118,26 @@ const DesktopPosterImage = [
 ];
 
 const MobilePosterImage = [
-  { id: 1, image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/Player%20II%20Modified%20Stratocaster.png" },
-  { id: 2, image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/amp.png" },
-
+  {
+    ...DesktopPosterImage[0],
+    banner_image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/Thump%20212xt_phone.png",
+  },
+  {
+    ...DesktopPosterImage[1],
+    banner_image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/Akai%20MPC%20XL_phone.png",
+  },
+  {
+    ...DesktopPosterImage[2],
+    banner_image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/Player%20II%20Modified%20Stratocaster%20(2).png"
+  },
+  {
+    ...DesktopPosterImage[3],
+    banner_image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/amp.png"
+  },
+  {
+    ...DesktopPosterImage[4],
+    banner_image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/Player%20II%20Modified%20Stratocaster.png"
+  }
 ];
 
 export default function MainPoster() {
@@ -222,16 +239,14 @@ export default function MainPoster() {
             <img
               key={item.id || item.product_id || index}
               className="slider-image margin-top-5"
-              src={isMobile ? item.image : item.banner_image}
+              src={item.banner_image}
               alt={`poster-${item.id || item.product_id}`}
               loading="lazy"
               draggable={false}
               style={{ cursor: "pointer" }}
               onClick={() => {
-                if (!isMobile) {
-                  console.log(" Navigating with:", item);
-                  Nevigate("/productDetails", { state: item });
-                }
+                console.log(" Navigating with:", item);
+                Nevigate("/productDetails", { state: item });
               }}
             />
           ))}
