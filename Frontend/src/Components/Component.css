@@ -2788,3 +2788,435 @@ button {
     font-size: 16px;
     text-transform: uppercase;
 }
+
+/* === Minimal Admin Dashboard Phase 1 === */
+.mmdc-admin-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #fcfcfc;
+    color: #333;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.mmdc-admin-sidebar {
+    width: 240px;
+    background: #fff;
+    border-right: 1px solid #eee;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+.mmdc-admin-logo {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #111;
+    letter-spacing: -0.025em;
+    padding: 0 0.5rem;
+}
+
+.mmdc-admin-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mmdc-admin-nav-item {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+}
+
+.mmdc-admin-nav-item.active {
+    background-color: #f5f5f5;
+    color: #111;
+}
+
+.mmdc-admin-main {
+    flex: 1;
+    padding: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.mmdc-admin-header {
+    margin-bottom: 3rem;
+}
+
+.mmdc-admin-header h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #111;
+    margin: 0;
+}
+
+.mmdc-admin-subtitle {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+/* Stats Section */
+.mmdc-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.mmdc-stat-minimal {
+    padding: 1.5rem;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mmdc-stat-minimal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.mmdc-stat-label {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.mmdc-stat-value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #111;
+}
+
+/* Graph Section */
+.mmdc-graph-section {
+    background: #fff;
+    padding: 2.5rem;
+    border: 1px solid #eee;
+    border-radius: 12px;
+}
+
+.mmdc-graph-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.mmdc-graph-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: #111;
+}
+
+.mmdc-graph-unit {
+    font-size: 0.8rem;
+    color: #999;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.mmdc-bar-graph-container {
+    width: 100%;
+    height: 320px;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.25rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #f8f8f8;
+}
+
+.mmdc-bar-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.mmdc-bar-fill {
+    width: 100%;
+    max-width: 44px;
+    border-radius: 6px 6px 0 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.mmdc-bar-fill:hover {
+    filter: brightness(1.1);
+    transform: scaleX(1.05);
+}
+
+.mmdc-bar-value-tooltip {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.2s, top 0.2s;
+    background: #111;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    pointer-events: none;
+}
+
+.mmdc-bar-fill:hover .mmdc-bar-value-tooltip {
+    opacity: 1;
+    top: -34px;
+}
+
+.mmdc-bar-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #444;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.mmdc-graph-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-style: italic;
+}
+
+.mmdc-admin-footer-btn {
+    margin-top: auto;
+    padding: 0.75rem;
+    border: 1px solid #eee;
+    background: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.mmdc-admin-footer-btn:hover {
+    background: #fdfdfd;
+    border-color: #ddd;
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+    .mmdc-stats-row {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .mmdc-admin-layout {
+        flex-direction: column;
+    }
+
+    .mmdc-admin-sidebar {
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        position: static;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .mmdc-admin-nav {
+        display: none;
+        /* Mobile menu can be added later if needed */
+    }
+
+    .mmdc-admin-main {
+        padding: 1.5rem;
+    }
+
+    .mmdc-stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    .mmdc-bar-graph-container {
+        gap: 0.5rem;
+    }
+}
+
+/* Table Styles for Admin Views */
+.mmdc-table-container {
+    background: #fff;
+    padding: 2rem;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow-x: auto;
+}
+
+.mmdc-admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.mmdc-admin-table th,
+.mmdc-admin-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.mmdc-admin-table th {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #999;
+    letter-spacing: 0.05em;
+}
+
+.mmdc-admin-table tr:hover {
+    background-color: #fcfcfc;
+}
+
+.mmdc-admin-action-btns {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.mmdc-btn-allow,
+.mmdc-btn-deny {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.mmdc-btn-allow {
+    background-color: #10b981;
+    color: white;
+}
+
+.mmdc-btn-allow:hover {
+    background-color: #059669;
+}
+
+.mmdc-btn-deny {
+    background-color: #ef4444;
+    color: white;
+}
+
+.mmdc-btn-deny:hover {
+    background-color: #dc2626;
+}
+
+/* Upload View Styles */
+.mmdc-upload-section {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.mmdc-excel-upload-container {
+    background: #fff;
+    border: 2px dashed #eee;
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    transition: border-color 0.3s;
+    cursor: pointer;
+}
+
+.mmdc-excel-upload-container:hover {
+    border-color: #F05624;
+}
+
+.mmdc-upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.mmdc-upload-icon {
+    font-size: 3rem;
+    color: #F05624;
+}
+
+.mmdc-upload-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.mmdc-upload-hint {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.mmdc-admin-upload-view .mmdc-upload-response {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.mmdc-admin-upload-view .mmdc-upload-response.success {
+    background-color: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #10b981;
+}
+
+.mmdc-admin-upload-view .mmdc-upload-response.error {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #ef4444;
+}
+
+.mmdc-upload-instructions {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f9fafb;
+    border-radius: 8px;
+    border: 1px solid #f3f4f6;
+}
+
+.mmdc-loader-simple {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #F05624;
+    border-radius: 50%;
+    animation: mmdcSpin 1s linear infinite;
+}
+
+@keyframes mmdcSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
