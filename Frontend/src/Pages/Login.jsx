@@ -86,6 +86,7 @@ export default function () {
         first_name: "",
         last_name: "",
         email: "",
+        dateOfBirth: "",
         phone_number: "",
         password: "",
         confrim_password: "",
@@ -267,6 +268,16 @@ export default function () {
                                             value={signupForm.email}
                                             onChange={signupChangeHandler}
 
+                                        />
+                                    </div>
+
+                                    <div className="confrim-password gst-number">
+                                        <input type="date"
+                                            placeholder="Date of Birth *"
+                                            name="dateOfBirth"
+                                            value={signupForm.dateOfBirth}
+                                            onChange={signupChangeHandler}
+                                            required
                                         />
                                     </div>
 
