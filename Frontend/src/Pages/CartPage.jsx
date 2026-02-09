@@ -253,7 +253,7 @@ export default function CartPage() {
 
               <div className="total-money">
                 <p>Shipping Charge</p>
-                <p>Free</p>
+                <p>As Actual</p>
               </div>
 
               <div className="total-money">
