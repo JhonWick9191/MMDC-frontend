@@ -271,14 +271,31 @@ export default function () {
                                         />
                                     </div>
 
+                                    
                                     <div className="confrim-password gst-number">
-                                        <input type="date"
-                                            placeholder="Date of Birth *"
+                                        <input type="text"
+                                            placeholder="Company *"
+                                            name="email"
+                                            value={signupForm.email}
+                                            onChange={signupChangeHandler}
+
+                                        />
+                                    </div>
+
+                                    <div className="confrim-password gst-number">
+                                        <input
+                                            type="text"
+                                            placeholder="DOB *"
                                             name="dateOfBirth"
                                             value={signupForm.dateOfBirth}
                                             onChange={signupChangeHandler}
+                                            onFocus={(e) => (e.target.type = "date")}
+                                            onBlur={(e) => {
+                                                if (!e.target.value) e.target.type = "text";
+                                            }}
                                             required
                                         />
+
                                     </div>
 
                                     <div className="signup-password-section">
@@ -301,7 +318,7 @@ export default function () {
                                         <div className="choose-password">
                                             <input
                                                 type={ConfirmpasswordEye ? "password" : "text"}
-                                                placeholder="Cofrim Password *"
+                                                placeholder="Confirm Password *"
                                                 name="confrim_password"
                                                 onChange={signupChangeHandler}
                                             />
@@ -326,7 +343,7 @@ export default function () {
                                     <div className="confrim-password mobile-number">
                                         <input type="number"
                                             className="mobile-number-inside"
-                                            placeholder="Enter  Mobile.no +91 *"
+                                            placeholder="Enter Mobile.no +91 *"
                                             onChange={signupChangeHandler}
                                             name="phone_number"
                                             value={signupForm.phone_number}

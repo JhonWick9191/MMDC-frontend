@@ -135,7 +135,7 @@ hr {
 
 .login-register-user-child {
     background-color: white;
-    padding: 2%;
+    padding: 1%;
     width: 35%;
 }
 
@@ -176,17 +176,17 @@ hr {
 .main-signup-form-form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
 }
 
 .main-login-section {
     width: 100%;
 
-    margin-top: 6%;
-    padding: 5%;
+    margin-top: 2%;
+    padding: 2%;
     background-color: #E6E7E8;
     border: 1px solid black;
-    border-radius: 5px;
+
 
 }
 
@@ -436,7 +436,7 @@ hr {
 .signup-password-section {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
 }
 
 .choose-password input {
@@ -451,7 +451,7 @@ hr {
 
     width: 100%;
     border: 1px solid black;
-    padding: 5px;
+    padding: 3px;
     background-color: white;
 
 }
