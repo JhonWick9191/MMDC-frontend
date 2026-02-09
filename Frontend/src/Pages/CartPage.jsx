@@ -150,6 +150,8 @@ export default function CartPage() {
                           <p>Quantity</p>
                         </div>
 
+                         <div className="counter-cart">
+
                         <div className="decrement-button">
                           <button
                             onClick={() => dispatch(decrementQuantity(item._id))}
@@ -181,6 +183,7 @@ export default function CartPage() {
                             <FaCirclePlus />
                           </button>
                         </div>
+                        </div>
                       </div>
                     </div>
 
@@ -194,7 +197,7 @@ export default function CartPage() {
                             toast.warn(`${item.Product_Name} deleted from cart`);
                           }}
                         >
-                          <MdDeleteForever />
+                          Remove
                         </button>
                       </div>
 

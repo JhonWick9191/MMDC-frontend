@@ -9,7 +9,7 @@ import { toast, ToastContainer } from "react-toastify"
 import { FaRegEye } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import LoadingScreen from "../Components/Loading";
-const BASE_URL = "https://musicandmore.co.in/api/v1";
+
 
 export default function () {
     const Navigate = useNavigate()

@@ -748,27 +748,35 @@ hr {
     background-color: rgb(220, 220, 178);
 }
 
-.wrapper-main-counter {
-    width: 20%;
+.main-quantity{
+    font-weight: 600;
+    color: #2c2d32;
+
+}
+.wrapper-main-counter {  
+    
     gap: 20px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     justify-items: center;
 
 
 }
-
-.quantity {
-    border-radius: 5px;
-    padding: 1%;
+.counter-cart{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 10px;
+    justify-content: center;
+
+}
+.quantity {
+    border-radius: 5px;
+
+    font-size: 12px;
 }
 
 .decrement-button {
-    padding: 5%;
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -776,7 +784,7 @@ hr {
 
 .decrement-button button {
     font-size: 1.5rem;
-    padding: 3px;
+    
 }
 
 
@@ -788,7 +796,7 @@ hr {
 
 .increment-button {
     padding: 1px;
-    width: 20%;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -796,7 +804,7 @@ hr {
 
 .increment-button button {
     font-size: 1.5rem;
-    padding: 3px;
+    
 }
 
 
@@ -910,7 +918,7 @@ hr {
     display: flex;
     gap: 10px;
     width: 90%;
-    margin: auto;
+    margin:2% auto;
 
 }
 
@@ -921,10 +929,14 @@ hr {
 }
 
 .top-class-for-add-to-cart {
-    height: 240px;
+    
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.product-details-with-heading-price{
+    font-size: 12px;
 }
 
 .main-wrapper-cart-items {
@@ -936,11 +948,10 @@ hr {
 
 .main-cart-section-image {
     position: relative;
-    background-color: #E6E7E8;
-    border-radius: 3px;
-    padding: 2%;
+    border: 1px solid gray;
+    padding: 1%;
     display: flex;
-    gap: 10px;
+    gap: 4px;
     justify-content: space-between;
     width: 100%;
 }
@@ -960,10 +971,11 @@ hr {
 }
 
 .right-side-section {
-    background-color: #EAEAEA;
+    padding: 1%;
     text-align: center;
-    border-radius: 5px;
-    width: 25%;
+    border: 1px solid black;
+    font-size: 12px;
+    width: 30%;
     height: 60%;
     position: sticky;
     top: 0%;
@@ -994,8 +1006,9 @@ hr {
 }
 
 .remove-itme {
-    border: 1px solid red;
+    border: .2px solid red;
     width: 50%;
+    padding: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1359,7 +1372,7 @@ hr {
     font-weight: 600;
     color: black;
     border: 1px solid #F05624;
-    border-radius: 8px;
+    
     cursor: pointer;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -1568,12 +1581,10 @@ hr {
 .main-wrapper-class-cart-image {
     width: 30%;
     border: 1px solid black;
-    border-radius: 10%;
+   
 }
 
-.main-wrapper-class-cart-image img {
-    border-radius: 10%;
-}
+
 
 .left-line {
     width: 41%;
