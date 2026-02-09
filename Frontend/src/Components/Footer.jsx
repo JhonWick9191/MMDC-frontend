@@ -47,7 +47,7 @@ export default function Footer() {
 
     {
       id: 9,
-      name: "PROFESSIONAL AUDIOS",
+      name: "PROFESSIONAL AUDIO",
     },
     {
       id: 10,
@@ -111,7 +111,7 @@ export default function Footer() {
 
                                         <li>Home</li>
                                         <li>About us </li>
-                                        <li>Term's And Condition's </li>
+                                        <li>Terms And Conditions</li>
                                         <li>My Account </li>
                                     </ul>
                                 </div>
