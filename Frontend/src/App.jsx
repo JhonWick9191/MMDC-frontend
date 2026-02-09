@@ -31,7 +31,7 @@ import { setUser } from "./Redux/Slice/AuthSlice";
 import { useSelector } from "react-redux";
 
 // Toast
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const BASE_URL = import.meta.env.VITE_MAIN_API_ROUTE;
 // ✅ Import Context
@@ -60,7 +60,7 @@ function App() {
     setLoading(true);
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3500);
+    }, 500);
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
@@ -113,7 +113,19 @@ function App() {
 
         <ScrollToTop />
         <NavBar />
-        <ToastContainer />
+        <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition={Slide}
+        />
         {loading && <LoadingScreen />}
 
         {/* ✅ When searching, show only Search results */}

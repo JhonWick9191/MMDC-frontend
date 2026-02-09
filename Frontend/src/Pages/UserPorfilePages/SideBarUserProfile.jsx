@@ -54,7 +54,7 @@ export default function SideBadr() {
       // Network error ya API fail hone par bhi state clear
       dispatch(setToken(null));
       dispatch(setUser(null));
-      
+
       toast.error("Logout failed. Please try again.");
       Nevigate("/login");
     }
@@ -63,44 +63,53 @@ export default function SideBadr() {
   };
 
   return (
-    <>
-      <div className="main-wrapper-for-user-profile">
-        <div className="side-bar-buttons">
-          <nav>
-            <div className="main-profile-page-user-profile">
-              <ul>
-                <li>{User?.first_name || "User"} {User?.last_name || ""}</li>
-                <hr />
-                <li>{User?.email || "user@example.com"}</li>
-                <hr />
-              </ul>
-            </div>
+    <div className="mmdc-admin-layout">
+      <aside className="mmdc-admin-sidebar">
+        <div className="mmdc-admin-logo">MMDC USER</div>
 
-            <div className="main-profile-page-user-profile">
-              <ul>
-                <li onClick={() => setActiveContent("orders")}>Orders</li>
-                <hr />
-                <li onClick={() => setActiveContent("notifications")}>Notifications</li>
-                <hr />
-                <li onClick={() => setActiveContent("faq")}>FAQ</li>
-                <hr />
-              </ul>
-            </div>
-
-            <div className="signUp mt-6">
-              <button onClick={logoutHandler} className="logout-btn">
-                Log out
-              </button>
-            </div>
-          </nav>
+        {/* User Details Section - Styled to fit sidebar */}
+        <div style={{ padding: "0 1rem", marginBottom: "1rem" }}>
+          <p style={{ fontWeight: "bold", fontSize: "0.9rem", color: "#333", margin: 0 }}>
+            {User?.first_name || "User"} {User?.last_name || ""}
+          </p>
+          <p style={{ fontSize: "0.75rem", color: "#666", margin: 0, wordBreak: "break-all" }}>
+            {User?.email || "user@example.com"}
+          </p>
         </div>
 
-        <div className="main-content-right-side-product-user">
-          {activeContent === "orders" && <BuyProduct />}
-          {activeContent === "notifications" && <h1>Notifications</h1>}
-          {activeContent === "faq" && <h1>FAQ</h1>}
-        </div>
-      </div>
-    </>
+        <nav>
+          <ul className="mmdc-admin-nav">
+            <li
+              className={`mmdc-admin-nav-item ${activeContent === "orders" ? "active" : ""}`}
+              onClick={() => setActiveContent("orders")}
+            >
+              Orders
+            </li>
+            <li
+              className={`mmdc-admin-nav-item ${activeContent === "notifications" ? "active" : ""}`}
+              onClick={() => setActiveContent("notifications")}
+            >
+              Notifications
+            </li>
+            <li
+              className={`mmdc-admin-nav-item ${activeContent === "faq" ? "active" : ""}`}
+              onClick={() => setActiveContent("faq")}
+            >
+              FAQ
+            </li>
+          </ul>
+        </nav>
+
+        <button className="mmdc-admin-footer-btn" onClick={logoutHandler}>
+          Log out
+        </button>
+      </aside>
+
+      <main className="mmdc-admin-main">
+        {activeContent === "orders" && <BuyProduct />}
+        {activeContent === "notifications" && <h1>Notifications</h1>}
+        {activeContent === "faq" && <h1>FAQ</h1>}
+      </main>
+    </div>
   );
 }
