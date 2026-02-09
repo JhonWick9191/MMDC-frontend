@@ -34,12 +34,12 @@ export default function CartPage() {
 
   async function placeOrderHandler() {
     try {
-      const response = await fetch(`${BASE_URL}/orderPlaces`,{
+      const response = await fetch(`${BASE_URL}/orderPlaces`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        
+
         credentials: "include",
         body: JSON.stringify(orderData),
       });
@@ -77,23 +77,23 @@ export default function CartPage() {
               <div className="top-class-for-add-to-cart" key={item._id}>
                 <div className="main-cart-section-image">
                   <div className="main-wrapper-class-cart-image">
-                  <div className="product-image">
-                    <img src={item.cartImage} alt={item.Product_Name} loading="lazy" />
-                  </div>
+                    <div className="product-image">
+                      <img src={item.cartImage} alt={item.Product_Name} loading="lazy" />
+                    </div>
 
                   </div>
-               
+
 
                   <div className="product-details">
                     <div className="product-details-with-heading-price">
                       <div className="d-p">
                         <div className="on-mobile-active">
-                        <div className="product-heading">
-                          <p>{item.Brand_Name}</p>
-                        </div>
-                        <div className="product-model-number">
-                          <p>{item.Model_number}</p>
-                        </div>
+                          <div className="product-heading">
+                            <p>{item.Brand_Name}</p>
+                          </div>
+                          <div className="product-model-number">
+                            <p>{item.Model_number}</p>
+                          </div>
                         </div>
                         <div className="product-model-number">
                           <p>{item.Product_Category}</p>
@@ -125,19 +125,19 @@ export default function CartPage() {
                           {/* FIXED — fallback value */}
                           <div className="main-pricing">
 
-                          <p>
-                            <span><FaIndianRupeeSign /></span>
-                            MRP - {(item.Product_price || 0).toLocaleString("en-IN")}
-                          </p>
-                       
+                            <p>
+                              <span><FaIndianRupeeSign /></span>
+                              MRP - {(item.Product_price || 0).toLocaleString("en-IN")}
+                            </p>
 
-                      
-                          <p>
-                            <span><FaIndianRupeeSign /></span>
-                            DP - {(item.Vendor_price || 0).toLocaleString("en-IN")}
-                          </p>
-                      </div>
-                      </div>
+
+
+                            <p>
+                              <span><FaIndianRupeeSign /></span>
+                              DP - {(item.Vendor_price || 0).toLocaleString("en-IN")}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
 
@@ -218,7 +218,7 @@ export default function CartPage() {
             <div className="button-oh-mobile-at-cart">
               <div className="cart-total">
                 <p className="prize-text">
-                  <span><FaIndianRupeeSign /></span> 
+                  <span><FaIndianRupeeSign /></span>
                   {(cartTotal).toLocaleString("en-IN")}
                 </p>
 
