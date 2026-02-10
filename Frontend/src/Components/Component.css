@@ -1103,7 +1103,9 @@ button {
     font-size: 12px;
     font-weight: 600;
 }
-
+.d-p{
+    width: 50%;
+}
 /*------------------------------------------------------------------------------Catogryes Section ends-----------------------------------------------------------------*/
 
 
@@ -2407,8 +2409,12 @@ button {
 
     }
 
+    .d-p{width: 100%;}
+
     .product-details {
         width: 100% !important;
+        font-size: 12px !important;
+
     }
 
     .remove-itme button svg {
