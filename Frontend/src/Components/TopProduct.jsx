@@ -104,8 +104,7 @@ export default function TopProducts() {
                 const response = await fetch("https://api.musicandmore.co.in/api/v1/newProducts");
                 const data = await response.json();
                 
-                console.log("✅ API Response:", data); // Structure check karo
-                
+
                 // ✅ SAFE ARRAY EXTRACTION
                 let productsArray = [];
                 if (data && Array.isArray(data)) {
@@ -119,7 +118,7 @@ export default function TopProducts() {
                 setTopProducts(productsArray);
                 setLoading(false);
             } catch (error) {
-                console.log("❌ Error:", error);
+                console.log("Error:", error);
                 setTopProducts([]); // Empty array fallback
                 setLoading(false);
             }

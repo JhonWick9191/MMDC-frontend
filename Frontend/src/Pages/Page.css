@@ -53,8 +53,267 @@ html {
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
+
 .filter-panel.open {
     transform: translateX(0);
+}
+
+/* ================= CONTACT US PAGE STYLES ================= */
+
+.contact-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    color: #2B2A35;
+}
+
+.flex-list li{
+
+    display: flex;
+    flex-direction: column;
+    
+}
+.contact-header {
+    
+    margin-bottom: 3rem;
+}
+
+.contact-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #2B2A35;
+}
+
+.contact-header p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.contact-content-wrapper {
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+/* --- Left Side: Contact Info --- */
+.contact-info-section {
+    
+     width: 47%;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    /* Light grey background for contrast */
+    border-radius: 8px;
+    height: fit-content;
+}
+
+.contact-info-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.info-desc {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.contact-details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.icon-box {
+    width: 40px;
+    height: 40px;
+    background-color: #F05624;
+    /* Primary Brand Color */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.contact-item .details h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    color: #2B2A35;
+}
+
+.contact-item .details p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* --- Right Side: Contact Form --- */
+.contact-form-section {
+    flex: 1.5;
+    width: 45%;
+    padding: 2rem;
+    background-color: white;
+    border: 1px solid #e5e5e5;    
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.contact-form-section h2 {
+    font-size: 14px;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-row {
+    display: flex;
+    gap: 1.2rem;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+}
+
+.required {
+    color: #F05624;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-family: 'Montserrat', sans-serif;
+    transition: border-color 0.3s;
+    background-color: white;
+    /* Ensure white bg */
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #F05624;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submit-btn {
+    padding: 5px;
+    background-color: #F05624;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background-color: #d64619;
+    /* Slightly darker shade */
+}
+
+.success-msg {
+    color: green;
+    font-weight: 500;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.error-msg {
+    color: red;
+    font-weight: 500;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* ================= RESPONSIVE STYLES ================= */
+@media (max-width: 768px) {
+    .contact-content-wrapper {
+        flex-direction: column;
+        /* Stack vertically on mobile */
+        gap: 2rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+        /* Stack name/email fields */
+        gap: 1.2rem;
+    }
+
+    .contact-header h1 {
+        font-size: 2rem;
+    }
+
+    .contact-form-section,
+    .contact-info-section {
+        padding: 1.5rem;
+        width: 100%;
+        /* Full width on mobile */
+    }
+}
+
+/* --- Google Map Section --- */
+.map-section {
+    margin-top: 4rem;
+
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.map-section iframe {
+    display: block;
+    width: 100%;
+    height: 450px;
+}
+
+@media (max-width: 768px) {
+    .map-section {
+        margin-top: 3rem;
+    }
+
+    .map-section iframe {
+        height: 300px;
+    }
 }
 
 hr {
@@ -748,13 +1007,14 @@ hr {
     background-color: rgb(220, 220, 178);
 }
 
-.main-quantity{
+.main-quantity {
     font-weight: 600;
     color: #2c2d32;
 
 }
-.wrapper-main-counter {  
-    
+
+.wrapper-main-counter {
+
     gap: 20px;
     display: flex;
     align-items: center;
@@ -762,13 +1022,15 @@ hr {
 
 
 }
-.counter-cart{
+
+.counter-cart {
     display: flex;
     align-items: center;
     gap: 10px;
     justify-content: center;
 
 }
+
 .quantity {
     border-radius: 5px;
 
@@ -776,7 +1038,7 @@ hr {
 }
 
 .decrement-button {
-    
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -784,7 +1046,7 @@ hr {
 
 .decrement-button button {
     font-size: 1.5rem;
-    
+
 }
 
 
@@ -804,7 +1066,7 @@ hr {
 
 .increment-button button {
     font-size: 1.5rem;
-    
+
 }
 
 
@@ -918,7 +1180,7 @@ hr {
     display: flex;
     gap: 10px;
     width: 90%;
-    margin:2% auto;
+    margin: 2% auto;
 
 }
 
@@ -929,13 +1191,13 @@ hr {
 }
 
 .top-class-for-add-to-cart {
-    
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.product-details-with-heading-price{
+.product-details-with-heading-price {
     font-size: 12px;
 }
 
@@ -1372,7 +1634,7 @@ hr {
     font-weight: 600;
     color: black;
     border: 1px solid #F05624;
-    
+
     cursor: pointer;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -1581,7 +1843,7 @@ hr {
 .main-wrapper-class-cart-image {
     width: 30%;
     border: 1px solid black;
-   
+
 }
 
 
@@ -1707,6 +1969,18 @@ hr {
 }
 
 @media screen and (max-width: 600px) {
+
+    .contact-info-section h2{
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    .info-desc{
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+    .contact-item .details h3{
+        font-size: 14px;
+    }
     .side-bar-on-product-category-page {
         width: 100%;
     }

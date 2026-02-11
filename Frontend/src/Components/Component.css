@@ -2039,6 +2039,8 @@ button {
 }
 
 @media screen and (max-width: 600px) {
+
+    
     .filter-and-type-section {
         height: 15vh;
     }
@@ -2131,7 +2133,7 @@ button {
 
     .mobile-navbar {
         width: 90%;
-        height: 80vh;
+        height: 100vh;
     }
 
     .main-listing-items-categories ul {
@@ -2533,6 +2535,8 @@ button {
 
     .cate-list-highlight {
         font-size: .8rem;
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
     }
 
     .pricing-listing li {
@@ -2605,7 +2609,7 @@ button {
 
 @media screen and (max-width: 410px) {
     .mobile-navbar {
-        height: 80vh;
+        height: 100vh;
     }
 
     .items-buttons-for-chaging-the-screen {}
@@ -2729,7 +2733,7 @@ button {
     }
 
     .mobile-navbar {
-        height: 80vh;
+        height: 100vh;
     }
 
     .top-right-side-section {

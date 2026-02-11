@@ -35,7 +35,7 @@ export default function OurTandingProducts() {
 
       // Small delay for smooth transition
       setTimeout(() => {
-        console.log(data)
+        // console.log(data)
         if (res.ok && data.success) {
           setFilteredProducts(data.data.slice(0, 15)); // Only 15 products
         } else {

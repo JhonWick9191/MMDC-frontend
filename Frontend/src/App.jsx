@@ -145,7 +145,7 @@ function App() {
               <Route path="/isVendorProfile" element={<VendorProfile />} />
               <Route path="/products" element={<FilterProductByCategoryes />} />
               <Route path="/searchProducts" element={<SearchProducts />} />
-              <Route path="/contactUs" element={<ContactUs />} />
+              <Route path="/ContactUs" element={<ContactUs />} />
 
             </Routes>
           </>

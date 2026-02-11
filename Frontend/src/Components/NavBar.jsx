@@ -71,7 +71,7 @@ export default function NavBar() {
   // const token = useSelector((state) => state.auth.token);
   const User = useSelector((state) => state.auth.user);
   useEffect(() => {
-    console.log("Redux user changed:", User);
+    // console.log("Redux user changed:", User);
   }, [User]);
 
   const Navigate = useNavigate();
@@ -420,7 +420,7 @@ export default function NavBar() {
 
                     <p onClick={() => { handleCross(); Navigate("/"); }}>Home</p>
                     <p>About Us</p>
-                    <p>Contact Us</p>
+                    <p onClick={() => { handleCross(); Navigate("/ContactUs"); }}>Contact Us</p>
 
 
                   </div>

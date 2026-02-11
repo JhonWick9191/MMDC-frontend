@@ -24,7 +24,7 @@ function FilterProductByCategoryes() {
     const [loading, setLoading] = useState(true);
 
 
-
+    console.log(products)
     const [selectedFilter, setSelectedFilter] = useState(null);
 
     // Category count
@@ -105,10 +105,9 @@ function FilterProductByCategoryes() {
     }
 
     useEffect(() => {
-        if (type) {
-            fetchProducts(pageFromUrl);
-        }
+        fetchProducts(pageFromUrl);
     }, [location.search]);
+
 
 
     const [isFilterMetaLoaded, setIsFilterMetaLoaded] = useState(false);
@@ -137,10 +136,10 @@ function FilterProductByCategoryes() {
             const res = await fetch(`https://api.musicandmore.co.in/api/v1/categoryProduct?${params.toString()}`);
             const data = await res.json();
 
-            setProducts(data.message || []);
+            setProducts(data.products || []);
             setTotalProducts(data.totalProducts || 0);
             if (!isFilterMetaLoaded) {
-                setAllCategories(data.totalCategories || []);
+                setAllCategories(data.products.totalCategories || []);
                 setCategoryCount(data.categoryCount || {});
                 setAllBrands(Object.keys(data.brandCount || {}));
                 setBrandCount(data.brandCount || {});
@@ -156,6 +155,19 @@ function FilterProductByCategoryes() {
             setLoading(false);
         }
     };
+
+    const groupedCategories = products.reduce((acc, item) => {
+        const category = item.Product_Category;
+        const subCategory = item.Product_Subcategory;
+
+        if (!acc[category]) {
+            acc[category] = new Set();
+        }
+
+        acc[category].add(subCategory);
+
+        return acc;
+    }, {});
 
 
 
@@ -283,12 +295,12 @@ function FilterProductByCategoryes() {
                     <li>
                         HOME /
                     </li>
-                    <li>{location.pathname.toUpperCase().replace("/", "")} /</li>
+                    <li>{location.pathname.replace("/", "")} /</li>
 
 
-                    <li>  {type.toUpperCase()}</li>
+                    <li>  {type}</li>
                 </ul>
-                <p className="path-heading">{type.toUpperCase()}</p>
+                <p className="path-heading">{type}</p>
             </div>
 
             <hr className="color_2"></hr>
@@ -501,54 +513,37 @@ function FilterProductByCategoryes() {
                                     </div>
                                 </div>
                                 <ul className="lsiting-felx-class mota-weigth-ul-li">
-                                    {Object.entries(categoryWithSubCategories)
-                                        // 🔹 CATEGORY sort (A → Z)
-                                        .sort(([a], [b]) => a.localeCompare(b))
-                                        .map(([category, subCats]) => (
-                                            <li key={category}>
-                                                <div
-                                                    className="category-title-toggle"
-                                                    onClick={() =>
-                                                        setOpenCategory(openCategory === category ? null : category)
-                                                    }
-                                                    style={{
-                                                        cursor: "pointer",
-                                                        display: "flex",
-                                                        justifyContent: "space-between",
-                                                    }}
-                                                >
-                                                    <span>
-                                                        {category} ({categoryCount[category]})
-                                                    </span>
+                                    {Object.entries(categoryWithSubCategories).map(([category, subCategories]) => (
+                                        <li key={category}>
+                                            <div
+                                                onClick={() =>
+                                                    setOpenCategory(openCategory === category ? null : category)
+                                                }
+                                                style={{ cursor: "pointer", fontWeight: "bold" }}
+                                            >
+                                                {category}
+                                            </div>
 
-                                                    <span>
-                                                        {openCategory === category ? <IoChevronUp /> : <IoChevronDown />}
-                                                    </span>
-                                                </div>
-
-                                                {openCategory === category && (
-                                                    <ul className="subcategory-list">
-                                                        {subCats
-                                                            // 🔹 SUB-CATEGORY sort (A → Z)
-                                                            .slice()
-                                                            .sort((a, b) => a.localeCompare(b))
-                                                            .map((subCat) => (
-                                                                <li
-                                                                    key={subCat}
-                                                                    className="cate-list-highlight"
-                                                                    onClick={() => {
-                                                                        applyFilter({ type: "category", value: subCat });
-                                                                        scrollToTopSmooth();
-                                                                    }}
-                                                                >
-                                                                    {subCat}
-                                                                </li>
-                                                            ))}
-                                                    </ul>
-                                                )}
-                                            </li>
-                                        ))}
+                                            {openCategory === category && (
+                                                <ul>
+                                                    {subCategories.map((subCat) => (
+                                                        <li
+                                                            key={subCat}
+                                                            className="cate-list-highlight"
+                                                            onClick={() =>
+                                                                applyFilter({ type: "category", value: subCat })
+                                                            }
+                                                        >
+                                                            {subCat}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                        </li>
+                                    ))}
                                 </ul>
+
+
 
                             </div>
 
