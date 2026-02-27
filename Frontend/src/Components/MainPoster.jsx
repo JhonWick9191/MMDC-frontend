@@ -11,18 +11,18 @@ import { GrNext } from "react-icons/gr";
 
 const DesktopPosterImage = [
   {
-    id:1,
-    Brand_Name: "Mackie",    
+    id: 1,
+    Brand_Name: "Mackie",
     banner_image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/Thump%20212xt.png",
     image_01: "https://mackie.com/img/pic_hero_desktop/Thump212_212xt_header_image.png",
 
 
   },
   {
-    id:2,
- 
+    id: 2,
+
     Brand_Name: "Akai",
-    
+
     banner_image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/Akai%20MPC%20XL%201.png",
     image_01: "https://cdn.builder.io/api/v1/image/assets%2F47c5d023e7b3451a86ac03602c65dce8%2F377e222fc51e4f9c9f1ed80d56639956?format=webp&width=2000",
     image_02: "https://cdn.builder.io/api/v1/image/assets%2F47c5d023e7b3451a86ac03602c65dce8%2Fae140207c61642489f61d7b7132a916d?format=webp&width=2000",
@@ -30,9 +30,9 @@ const DesktopPosterImage = [
 
   },
   {
-   id:3,
+    id: 3,
     Brand_Name: "Fender",
-    
+
     banner_image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/PLAYER%20II%20MODIFIED%20STRATOCASTER%20HSS.gif",
     image_01: "https://pub-219c51a1b6864520b8a85846ef9d8a5f.r2.dev/new/fender/Player%20II%20Modified%20Stratocaster%C2%AE%20HSS/Olympic%20Pearl/op.jpg",
     image_02: "https://pub-219c51a1b6864520b8a85846ef9d8a5f.r2.dev/new/fender/Player%20II%20Modified%20Stratocaster%C2%AE%20HSS/Olympic%20Pearl/02.avif",
@@ -40,8 +40,8 @@ const DesktopPosterImage = [
     image_04: "https://pub-219c51a1b6864520b8a85846ef9d8a5f.r2.dev/new/fender/Player%20II%20Modified%20Stratocaster%C2%AE%20HSS/Olympic%20Pearl/03.avif",
   },
   {
-    id: 4,    
-    Brand_Name: "Alesis",    
+    id: 4,
+    Brand_Name: "Alesis",
     banner_image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/Nitro%20pro%20amp%202.png",
     image_01: "https://pub-219c51a1b6864520b8a85846ef9d8a5f.r2.dev/new/alesis/Alesis%20Nitro%20Amp%20Pro/assets_47c5d023e7b3451a86ac03602c65dce8_92174729ec3c475fba8d20c71b6c4ab6%20(1).webp",
     image_02: "https://pub-219c51a1b6864520b8a85846ef9d8a5f.r2.dev/new/alesis/Alesis%20Nitro%20Amp%20Pro/alesis.webp",
@@ -49,9 +49,9 @@ const DesktopPosterImage = [
   },
   {
     id: 5,
-    
+
     Brand_Name: "Alesis",
-    
+
     banner_image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/banner%202%20(1).png",
     image_01: "https://pub-219c51a1b6864520b8a85846ef9d8a5f.r2.dev/new/alesis/Alesis%20Turbo%20Max%20Drum%20Kit/01.jpg",
     image_02: "https://pub-219c51a1b6864520b8a85846ef9d8a5f.r2.dev/new/alesis/Alesis%20Turbo%20Max%20Drum%20Kit/02.jpg",
@@ -155,32 +155,55 @@ export default function MainPoster() {
   const percentTranslate =
     -(currentIndex * 100) + (dragTranslate / containerWidth) * 100;
 
-    // function handle poster click 
+  // function handle poster click 
 
-    async function handlePosterclick(Brand_Name){
-      console.log("The poster is click" , Brand_Name)
-      try{
-        // getting an api 
+  async function handlePosterclick(Brand_Name) {
+    console.log("The poster is click", Brand_Name)
+    try {
+      // getting an api 
 
-        const responce  = await fetch(`https://api.musicandmore.co.in/api/v1/categoryProduct?brand=${Brand_Name}`)
-        const Product_wistBrand =await   responce.json();
-        console.log(Product_wistBrand)
-        Nevigate(`/products?brand=${Brand_Name}`);
+      const responce = await fetch(`https://api.musicandmore.co.in/api/v1/categoryProduct?brand=${Brand_Name}`)
+      const Product_wistBrand = await responce.json();
+      console.log(Product_wistBrand)
+      Nevigate(`/products?brand=${Brand_Name}`);
 
-      
-      }catch(error){
-        console.log("Getting error while calling an api ")
-        console.log(error)
-      }
-      
+
+    } catch (error) {
+      console.log("Getting error while calling an api ")
+      console.log(error)
     }
+
+  }
   return (
     <>
-    <div className="red-border">
-        <marquee scrollamount="2">
-         Trial Version
-        </marquee>
-      </div>
+      <div className="red-border">
+  <div className="marquee">
+    <div className="marquee-track">
+      <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+
+      {/* Duplicate content for seamless loop */}
+      <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+       <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+       <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+      <span>Trial Mode • </span>
+    </div>
+  </div>
+</div>
       <div
         className="slider-container"
         ref={sliderRef}
@@ -215,7 +238,7 @@ export default function MainPoster() {
               onClick={() => {
                 console.log(" Brand Name ", item.Brand_Name);
                 handlePosterclick(item.Brand_Name);
-                
+
               }}
             />
           ))}

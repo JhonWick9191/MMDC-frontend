@@ -6,16 +6,39 @@
     margin: 0px;
     font-family: 'Montserrat', sans-serif;
 }
-.red-border{
-    background-color: red;
-    padding: 5px;
-}
-.red-border marquee{
-    color: white;
-    font-weight: 700;
-    font-size: 20px;
+
+.red-border {
+  overflow: hidden;
+  background: red;
+  color: white;
+  padding: 8px 0;
+  white-space: nowrap;
 }
 
+.marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: inline-flex;
+  animation: scroll 20s linear infinite;
+}
+
+.marquee-track span {
+  margin-right: 40px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
 html {
     scrollbar-gutter: stable;
     scroll-behavior: smooth;
