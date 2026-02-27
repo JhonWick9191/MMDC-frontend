@@ -6,6 +6,15 @@
     margin: 0px;
     font-family: 'Montserrat', sans-serif;
 }
+.red-border{
+    background-color: red;
+    padding: 5px;
+}
+.red-border marquee{
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+}
 
 html {
     scrollbar-gutter: stable;

@@ -176,6 +176,11 @@ export default function MainPoster() {
     }
   return (
     <>
+    <div className="red-border">
+        <marquee scrollamount="2">
+         Trial Version
+        </marquee>
+      </div>
       <div
         className="slider-container"
         ref={sliderRef}
