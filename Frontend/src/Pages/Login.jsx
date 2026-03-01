@@ -86,6 +86,7 @@ export default function () {
         first_name: "",
         last_name: "",
         email: "",
+        company:"",
         dateOfBirth: "",
         phone_number: "",
         password: "",
@@ -252,7 +253,7 @@ export default function () {
                                         <div className="last-name-signup">
                                             <input
                                                 type="text"
-                                                placeholder="Last Name *"
+                                                placeholder="Last Name*"
                                                 name="last_name"
                                                 value={signupForm.last_name}
                                                 onChange={signupChangeHandler}
@@ -275,8 +276,8 @@ export default function () {
                                     <div className="confrim-password gst-number">
                                         <input type="text"
                                             placeholder="Company *"
-                                            name="email"
-                                            value={signupForm.email}
+                                            name="company"
+                                            value={signupForm.company}
                                             onChange={signupChangeHandler}
 
                                         />
@@ -284,7 +285,7 @@ export default function () {
 
                                     <div className="confrim-password gst-number">
                                         <input
-                                            type="text"
+                                            type="date"
                                             placeholder="DOB *"
                                             name="dateOfBirth"
                                             value={signupForm.dateOfBirth}
