@@ -84,7 +84,8 @@ const ContactUs = () => {
               <div className="icon-box"><FaPhoneAlt /></div>
               <div className="details">
                 <h3>Phone</h3>
-                <p>+91 98112 68090</p>
+                <p>+91 98112 68090 (For best Deals) </p>
+                 <p>+91 81154 48296 (Facing issue while using website) </p>
               </div>
             </div>
 
@@ -92,11 +93,13 @@ const ContactUs = () => {
               <div className="icon-box"><FaMapMarkerAlt /></div>
               <div className="details">
                 <h3>Office</h3>
-                <p>123 Music Street, Me<br /> New Delhi, India - 110001</p>
+                <p><b>Music & More Distribution Co.</b><br /> Gate.No-3, C-4 to C-11, Hosiery Complex, Block C, Noida Phase-2, Phase-2, Noida, Uttar Pradesh 201304</p>
               </div>
             </div>
           </div>
         </div>
+
+        
 
         {/* Right Side: Contact Form */}
         <div className="contact-form-section">
