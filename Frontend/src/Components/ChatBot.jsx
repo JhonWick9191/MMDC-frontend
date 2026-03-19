@@ -54,7 +54,7 @@ export default function ChatBot() {
 
     try {
       console.log("Sending query to API:", userMsg);
-      const response = await fetch("http://localhost:4100/api/v1/chatBot", {
+      const response = await fetch("https://musicandmore.co.in/api/v1/chatBot", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
