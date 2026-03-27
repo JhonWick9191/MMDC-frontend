@@ -32,15 +32,9 @@ export default function AdminDashboardHome() {
 
                 const userRes = await fetch(`${BASE_URL}/pendingUsers`);
                 const userData = await userRes.json();
-        
-
-                const totalUser = await fetch(`${BASE_URL}user-count`)
-                const totalUserResponce = await totalUser.json();
-                console.log(totalUserResponce)
 
                 setData({
                     products: statsData.totalProducts || 0,
-                    countUser :totalUserResponce.totalUserResponce,
                     brands: statsData.totalBrands || 0,
                     users: userData.users?.length || 0,
                     brandData: statsData.brandWiseCount || [],
@@ -56,8 +50,7 @@ export default function AdminDashboardHome() {
 
     const stats = [
         { label: "Total Products", value: data.products },
-        { label: "Total User", value: data. countUser},
-        { label: "Pending Users", value: data.users },
+        { label: "Total Users", value: data.users },
         { label: "Total Brands", value: data.brands },
     ];
 
@@ -96,9 +89,7 @@ export default function AdminDashboardHome() {
                     </span>
                 </div>
 
-             
-
-                {/*  scrollable container */}
+                {/* ✅ scrollable container */}
                 <div
                     className="mmdc-bar-graph-container"
                     style={{ overflowX: "auto" }}
