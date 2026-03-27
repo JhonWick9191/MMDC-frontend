@@ -11,7 +11,15 @@ import { GrNext } from "react-icons/gr";
 
 const DesktopPosterImage = [
   {
-    id: 1,
+    id:1,
+    Brand_Name: "Akai",
+    banner_image: "https://pub-7f5e5a5587874e79bb78e418bac987b9.r2.dev/mpclive/Thump%20212xt%20(1).png",
+    image_01: "https://cdn.builder.io/api/v1/image/assets%2F47c5d023e7b3451a86ac03602c65dce8%2F377e222fc51e4f9c9f1ed80d56639956?format=webp&width=2000",
+    image_02: "https://cdn.builder.io/api/v1/image/assets%2F47c5d023e7b3451a86ac03602c65dce8%2Fae140207c61642489f61d7b7132a916d?format=webp&width=2000",
+    image_03: "https://cdn.builder.io/api/v1/image/assets%2F47c5d023e7b3451a86ac03602c65dce8%2F1e709e45a3704e64a09e2550991f7203?format=webp&width=2000",
+  },
+  {
+    id: 2,
     Brand_Name: "Mackie",
     banner_image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/Thump%20212xt.png",
     image_01: "https://mackie.com/img/pic_hero_desktop/Thump212_212xt_header_image.png",
@@ -19,10 +27,8 @@ const DesktopPosterImage = [
 
   },
   {
-    id: 2,
-
+    id: 3,
     Brand_Name: "Akai",
-
     banner_image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/Akai%20MPC%20XL%201.png",
     image_01: "https://cdn.builder.io/api/v1/image/assets%2F47c5d023e7b3451a86ac03602c65dce8%2F377e222fc51e4f9c9f1ed80d56639956?format=webp&width=2000",
     image_02: "https://cdn.builder.io/api/v1/image/assets%2F47c5d023e7b3451a86ac03602c65dce8%2Fae140207c61642489f61d7b7132a916d?format=webp&width=2000",
@@ -30,7 +36,7 @@ const DesktopPosterImage = [
 
   },
   {
-    id: 3,
+    id: 4,
     Brand_Name: "Fender",
 
     banner_image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/PLAYER%20II%20MODIFIED%20STRATOCASTER%20HSS.gif",
@@ -40,7 +46,7 @@ const DesktopPosterImage = [
     image_04: "https://pub-219c51a1b6864520b8a85846ef9d8a5f.r2.dev/new/fender/Player%20II%20Modified%20Stratocaster%C2%AE%20HSS/Olympic%20Pearl/03.avif",
   },
   {
-    id: 4,
+    id: 5,
     Brand_Name: "Alesis",
     banner_image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/banners/Nitro%20pro%20amp%202.png",
     image_01: "https://pub-219c51a1b6864520b8a85846ef9d8a5f.r2.dev/new/alesis/Alesis%20Nitro%20Amp%20Pro/assets_47c5d023e7b3451a86ac03602c65dce8_92174729ec3c475fba8d20c71b6c4ab6%20(1).webp",
@@ -48,7 +54,7 @@ const DesktopPosterImage = [
     image_03: "https://pub-219c51a1b6864520b8a85846ef9d8a5f.r2.dev/new/alesis/Alesis%20Nitro%20Amp%20Pro/assets_47c5d023e7b3451a86ac03602c65dce8_7926d1e0f6ac400aa96f850920481a8d.webp",
   },
   {
-    id: 5,
+    id: 6,
 
     Brand_Name: "Alesis",
 
@@ -177,33 +183,33 @@ export default function MainPoster() {
   return (
     <>
       <div className="red-border">
-  <div className="marquee">
-    <div className="marquee-track">
-      <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
+        <div className="marquee">
+          <div className="marquee-track">
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
 
-      {/* Duplicate content for seamless loop */}
-      <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
-       <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
-       <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
-      <span>Trial Mode • </span>
-    </div>
-  </div>
-</div>
+            {/* Duplicate content for seamless loop */}
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+            <span>Trial Mode • </span>
+          </div>
+        </div>
+      </div>
       <div
         className="slider-container"
         ref={sliderRef}
