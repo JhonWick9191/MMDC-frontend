@@ -66,19 +66,19 @@ const ourCommunityVideos = [
 
     {
         id: 2,
-        video: "https://res.cloudinary.com/dfilhi9ku/video/upload/v1757676637/WhatsApp_Video_2025-09-12_at_11.59.51_b2782ad4_afv4vy.mp4"
+        video: "https://pub-0615ebb6fedb4102ac96a53079def168.r2.dev/web_video/akai/akaiMPKmini_4.mp4"
     },
 
 
     {
         id: 3,
-        video: "https://res.cloudinary.com/dfilhi9ku/video/upload/v1757925344/WhatsApp_Video_2025-09-15_at_14.04.17_83c6c3b2_ill5jz.mp4"
+        video: "https://pub-0615ebb6fedb4102ac96a53079def168.r2.dev/web_video/mackie/mackie_review.mp4"
     },
 
 
     {
         id: 4,
-        video: "https://res.cloudinary.com/dfilhi9ku/video/upload/v1757925344/WhatsApp_Video_2025-09-15_at_14.04.17_e1fdc9c0_faw8qz.mp4"
+        video: "https://pub-0615ebb6fedb4102ac96a53079def168.r2.dev/web_video/mackie/thmp_215.mp4"
     },
       {
         id: 5,
