@@ -69,7 +69,7 @@ const DesktopPosterImage = [
 const MobilePosterImage = [
   {
     ...DesktopPosterImage[0],
-    banner_image: "https://pub-d5d786d675024a039884449faea17b9e.r2.dev/Thump%20212xt_phone.png",
+    banner_image: "https://pub-7f5e5a5587874e79bb78e418bac987b9.r2.dev/mpclive/Untitled%20design%20(3).png",
   },
   {
     ...DesktopPosterImage[1],

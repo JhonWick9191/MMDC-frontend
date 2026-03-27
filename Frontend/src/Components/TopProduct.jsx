@@ -60,7 +60,7 @@ const catogeryesProducts = [
 const ourCommunityVideos = [
     {
         id: 1,
-        video: "https://res.cloudinary.com/dfilhi9ku/video/upload/v1757925345/WhatsApp_Video_2025-09-15_at_14.04.17_f724c6fd_hrrmmw.mp4"
+        video: "https://pub-7f5e5a5587874e79bb78e418bac987b9.r2.dev/mpclive/0326(2).mp4"
     },
 
 
