@@ -11,10 +11,10 @@ export default function UserQuery() {
 
       console.log("Token:", token);
 
-      const response = await fetch("https://api.musicandmore.co.in/api/v1/user-query", {
+      const response = await fetch(`https://api.musicandmore.co.in/api/v1/user-query`, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json",   
           Authorization: `Bearer ${token}`,
         },
       });
