@@ -1,67 +1,69 @@
-import { useState , useEffect} from "react"
-import { useSelector } from "react-redux"
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function UserQuery() {
-      const token = useSelector((state)=> state.auth.token)
-      console.log(token)
-    const [userQueryData, setUserQueryData] = useState([])
-    // api call 
 
-    async function gettingallUserData() {
-        try {
+  const token = useSelector((state) => state.auth.token);
+  const [userQueryData, setUserQueryData] = useState([]);
 
-            const responce = await fetch("https://api.musicandmore.co.in/api/v1/user-query", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            const data = await responce.json()
-            console.log(data)
-            setUserQueryData(data.data)
-            console.log(userQueryData)            
+  async function gettingallUserData() {
+    try {
 
-        } catch (error) {
+      console.log("Token:", token);
 
-            console.error(error)
-            console.log("getting error while getting all contect details of user ")
+      const response = await fetch("https://api.musicandmore.co.in/api/v1/user-query", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-        }
+      const data = await response.json();
+      console.log("API Response:", data);
+
+      // 🔥 SAFE SET
+      setUserQueryData(Array.isArray(data?.data) ? data.data : []);
+
+    } catch (error) {
+      console.error(error);
+      console.log("Error while fetching user query data");
     }
+  }
 
-    useEffect(()=>{
-        gettingallUserData();
-    }, [])
+  useEffect(() => {
+    if (token) {   // 🔥 important
+      gettingallUserData();
+    }
+  }, [token]);
 
-    
+  return (
+    <>
+      <div className="mmdc-admin-header">
+        <h1>User Query</h1>
+      </div>
 
-    return (
-        <>
-            
-              <div className="mmdc-admin-header">
-                <h1>User Query</h1>
-                
-            </div>
+      <div className="main-card-for-user-query">
 
-            <div className="main-card-for-user-query">
+        {
+          userQueryData.length > 0 ? (
+            userQueryData.map((item, index) => (
+              <div key={index} className="user-query-card">
 
-            {
-                userQueryData.map((data)=>(
-                    <div className="user-query-card">
+                <p>Name : {item.firstName}</p>
+                <p>Email : {item.email}</p>
+                <p>Mobile No : {item.phone}</p>
+                <p>Reason : {item.reason}</p>
+                <p>Message : {item.message}</p>
 
-                        <p>Name : {data.firstName}</p>
-                        <p>email : {data.email}</p>
-                        <p>Mobile No : {data.phone}</p>
-                        <p>Reason : {data.reason}</p>
-                        <p>Message : {data.message}</p>
+              </div>
+            ))
+          ) : (
+            <p>No user queries found</p>
+          )
+        }
 
-                    </div>
-
-                ))
-            }
-
-            </div>
-        </>
-    )
+      </div>
+    </>
+  );
 }
