@@ -22,10 +22,22 @@ const ContactUs = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+   const handleSubmit = async (e) =>  { 
     e.preventDefault();
-    // Basic Validation logic is handled by HTML5 attributes mostly, 
-    // but we can add more here if needed.
+
+    try{
+
+      const responce = await fetch("http://localhost:4100/api/v1/contact-us", {
+        method:"POST",
+        headers:{
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await responce.json()
+
+    
 
     // Simulate API call
     console.log("Submitting Form Data:", formData);
@@ -43,7 +55,13 @@ const ContactUs = () => {
       reason: '',
       message: ''
     });
-  };
+  }catch(error){
+
+    console.log(error)
+    console.log("Getting error while form submiting ")
+
+  }
+}
 
   return (
     <div className="contact-page-container">
@@ -213,5 +231,6 @@ const ContactUs = () => {
     </div>
   );
 }
+
 
 export default ContactUs;

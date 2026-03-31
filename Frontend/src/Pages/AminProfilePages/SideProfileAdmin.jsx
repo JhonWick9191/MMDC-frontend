@@ -5,6 +5,8 @@ import { setToken, setUser } from "../../Redux/Slice/AuthSlice";
 import AdminDashboardHome from "./AdminDashboardHome";
 import PendingUsersView from "./PendingUsersView";
 import AdminUploadFileView from "./AdminUploadFileView";
+import UserQuery from "./UserQuery";
+
 import { toast } from "react-toastify";
 
 export default function SideBadr() {
@@ -64,6 +66,13 @@ export default function SideBadr() {
             >
               Upload File
             </li>
+
+             <li
+              className={`mmdc-admin-nav-item ${activeTab === "User Querys" ? "active" : ""}`}
+              onClick={() => setActiveTab("UserQuery")}
+            >
+              User Querys
+            </li>
           </ul>
         </nav>
 
@@ -76,6 +85,7 @@ export default function SideBadr() {
         {activeTab === "dashboard" && <AdminDashboardHome />}
         {activeTab === "pendingUsers" && <PendingUsersView />}
         {activeTab === "uploadFile" && <AdminUploadFileView />}
+         {activeTab === "UserQuery" && <UserQuery/>}
       </main>
     </div>
   );

@@ -2002,6 +2002,16 @@ button {
     cursor: pointer;
 }
 
+.main-card-for-user-query{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+}
+.user-query-card{
+    border: 1px solid black;
+    padding: 10px;
+   
+}
 
 
 /*----------------------------------------------------------------------------------------------RESPONSIVE CSS STARTS HERE ----------------------------------------------------------------------------------------------------*/
