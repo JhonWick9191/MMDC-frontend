@@ -22,7 +22,7 @@ export default function UserQuery() {
       const data = await response.json();
       console.log("API Response:", data);
 
-      // 🔥 SAFE SET
+      // SAFE SET
       setUserQueryData(Array.isArray(data?.data) ? data.data : []);
 
     } catch (error) {
@@ -32,10 +32,10 @@ export default function UserQuery() {
   }
 
   useEffect(() => {
-    if (token) {   // 🔥 important
+    if (token) {   
       gettingallUserData();
     }
-  }, [token]);
+  }, []);
 
   return (
     <>
@@ -46,7 +46,7 @@ export default function UserQuery() {
       <div className="main-card-for-user-query">
 
         {
-          userQueryData.length < 0 ? (
+          userQueryData.length > 0 ? (
             userQueryData.map((item, index) => (
               <div key={index} className="user-query-card">
 
