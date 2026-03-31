@@ -27,7 +27,7 @@ const ContactUs = () => {
 
     try{
 
-      const responce = await fetch("https://api.musicandemore.co.in/api/v1/contact-us", {
+      const responce = await fetch("https://api.musicandmore.co.in/api/v1/contact-us", {
         method:"POST",
         headers:{
           "Content-Type": "application/json",
