@@ -46,7 +46,7 @@ export default function UserQuery() {
       <div className="main-card-for-user-query">
 
         {
-          userQueryData.length > 0 ? (
+          userQueryData.length < 0 ? (
             userQueryData.map((item, index) => (
               <div key={index} className="user-query-card">
 
