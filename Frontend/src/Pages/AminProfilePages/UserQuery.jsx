@@ -5,6 +5,7 @@ export default function UserQuery() {
 
   const token = useSelector((state) => state.auth.token);
   const [userQueryData, setUserQueryData] = useState([]);
+  console.log("This is our userquery code")
 
   async function gettingallUserData() {
     try {
