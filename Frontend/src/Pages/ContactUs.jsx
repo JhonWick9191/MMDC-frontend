@@ -27,7 +27,7 @@ const ContactUs = () => {
 
     try{
 
-      const responce = await fetch("http://localhost:4100/api/v1/contact-us", {
+      const responce = await fetch("https://api.musicandemore.co.in/api/v1/contact-us", {
         method:"POST",
         headers:{
           "Content-Type": "application/json",

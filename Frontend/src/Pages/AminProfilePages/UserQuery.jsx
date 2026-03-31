@@ -10,7 +10,7 @@ export default function UserQuery() {
     async function gettingallUserData() {
         try {
 
-            const responce = await fetch("https://musicandmore.co.in/api/v1/user-query", {
+            const responce = await fetch("https://api.musicandmore.co.in/api/v1/user-query", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
