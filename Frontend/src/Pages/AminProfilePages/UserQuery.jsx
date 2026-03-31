@@ -10,6 +10,8 @@ export default function UserQuery() {
   async function gettingallUserData() {
     try {
 
+        console.log("Getting inside of the function ")
+
       console.log("Token:", token);
 
       const response = await fetch(`https://api.musicandmore.co.in/api/v1/user-query`, {
