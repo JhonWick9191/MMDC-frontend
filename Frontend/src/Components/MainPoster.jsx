@@ -13,6 +13,7 @@ const DesktopPosterImage = [
   {
     id:1,
     Brand_Name: "Akai",
+    video:"https://pub-7a873ed9b69643f2a2859ab739e09ae3.r2.dev/0325.mp4",
     banner_image: "https://pub-7f5e5a5587874e79bb78e418bac987b9.r2.dev/mpclive/Thump%20212xt%20(1).png",
     image_01: "https://cdn.builder.io/api/v1/image/assets%2F47c5d023e7b3451a86ac03602c65dce8%2F377e222fc51e4f9c9f1ed80d56639956?format=webp&width=2000",
     image_02: "https://cdn.builder.io/api/v1/image/assets%2F47c5d023e7b3451a86ac03602c65dce8%2Fae140207c61642489f61d7b7132a916d?format=webp&width=2000",
@@ -232,22 +233,38 @@ export default function MainPoster() {
             transition: dragStart ? "none" : "transform 0.4s ease",
           }}
         >
-          {PosterImage.map((item, index) => (
-            <img
-              key={item.id || item.product_id || index}
-              className="slider-image margin-top-5"
-              src={item.banner_image}
-              alt={`poster-${item.id || item.product_id}`}
-              loading="lazy"
-              draggable={false}
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                console.log(" Brand Name ", item.Brand_Name);
-                handlePosterclick(item.Brand_Name);
-
-              }}
-            />
-          ))}
+        {PosterImage.map((item, index) =>
+  !isMobile && item.video ? (
+    <video
+      key={item.id || item.product_id || index}
+      className="slider-image margin-top-5"
+      src={item.video}
+      autoPlay
+      loop
+      muted
+      playsInline
+  
+      onClick={() => {
+        console.log(" Brand Name ", item.Brand_Name);
+        handlePosterclick(item.Brand_Name);
+      }}
+    />
+  ) : (
+    <img
+      key={item.id || item.product_id || index}
+      className="slider-image margin-top-5"
+      src={item.banner_image}
+      alt={`poster-${item.id || item.product_id}`}
+      loading="lazy"
+      draggable={false}
+    
+      onClick={() => {
+        console.log(" Brand Name ", item.Brand_Name);
+        handlePosterclick(item.Brand_Name);
+      }}
+    />
+  )
+)}
         </div>
 
         <div className="increment">
